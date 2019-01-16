@@ -111,3 +111,4 @@ buildNumber.properties
 
 # CUSTOM for Munich group
 .idea/
+*.iml
