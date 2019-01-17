@@ -11,9 +11,3 @@ Feature: Customer gets token and Merchant scans and request payment
     And after the transaction, the merchant's account has balance 300
     And the customer's account has balance 0
 
-  Scenario: Succeeding request for payment
-    Given that the merchant has a barcode containing token ID "123"
-    And that the merchant ID is "DK11111111"
-    And that the merchant wishes to register a payment of amount 100
-    When the merchant submits a request for the payment
-    Then the payment request succeeds

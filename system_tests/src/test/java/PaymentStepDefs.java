@@ -20,7 +20,6 @@ public class PaymentStepDefs {
   private String tokenId;
   private int paymentAmount;
   private Response response;
-  private String merchantId;
   // private Customer customer...
   // private token id
   // private Merchant merchant...
@@ -76,12 +75,17 @@ public class PaymentStepDefs {
   }
 
   @When("^the merchant submits a request for the payment$")
-  public void theMerchantSubmitsARequestForThePayment() throws PendingException {
+  public void theMerchantSubmitsARequestForThePayment() throws PendingException, BankServiceException_Exception {
     // STEPS
     // - Submit REST call to server
+    //BigDecimal bd = new BigDecimal(paymentAmount);
+    //String customerAccountId = bankService.getAccountByCprNumber(customer.getCprNumber()).getId();
+    //String merchantAccountId = bankService.getAccountByCprNumber(merchant.getCprNumber()).getId();
+    //bankService.transferMoneyFromTo(customerAccountId,merchantAccountId,bd, "test");
+
     throw new PendingException();
     //PaymentService ps = new PaymentService();
-    //Response response = ps.submitPayment(merchantId, this.paymentAmount, this.tokenId);
+    //Response response = ps.submitPayment(merchant.getCprNumber(), this.paymentAmount, this.tokenId);
     //this.response = response;
   }
 
@@ -112,21 +116,6 @@ public class PaymentStepDefs {
     throw new PendingException();
     //Account account = this.bankService.getAccountByCprNumber(customer.getCprNumber());
     //assertEquals(customerBalance,account.getBalance());
-  }
-
-  //  -------------------------------------- Scenario: Succeeding request for payment --------------------------------------
-  @Given("^that the merchant has a barcode containing token ID \"([^\"]*)\"$")
-  public void thatTheMerchantHasABarcodeContainingTokenID(String tokenId) {
-    // STEPS
-    // - Save token ID
-    this.tokenId = tokenId;
-  }
-
-  @And("^that the merchant ID is \"([^\"]*)\"$")
-  public void thatTheMerchantIDIs(String merchantId) {
-    // STEPS
-    // - Save Merchant ID
-    this.merchantId = merchantId;
   }
 
 }
