@@ -52,9 +52,11 @@
         <dependency>
             <groupId>io.thorntail</groupId>
             <artifactId>undertow</artifactId>
-        </dependency><dependency>
+        </dependency>
+
+        <dependency>
         <groupId>io.thorntail</groupId>
         <artifactId>jaxrs</artifactId>
-    </dependency>
+        </dependency>
     </dependencies>
 </project>

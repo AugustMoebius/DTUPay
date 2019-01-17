@@ -19,7 +19,7 @@ public class PaymentService {
     PaymentRequest body = new PaymentRequest(merchantId, paymentAmount, tokenId);
 
     // Submit request
-    Response response = r.path("payment").request().post(
+    Response response = r.path("/payment").request().post(
       Entity.entity(body, MediaType.APPLICATION_JSON),
       Response.class
     );
