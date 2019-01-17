@@ -1,78 +1,59 @@
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import payment.networking.services.PaymentService;
+
+import javax.ws.rs.core.Response;
+
+import static org.junit.Assert.assertEquals;
 
 public class PaymentStepDefs {
-  // private Customer customer...
-  // private token id
-  // private Merchant merchant...
+  private String tokenId;
+  private String merchantId;
+  private int paymentAmount;
 
-  @Given("^a registered customer with the CPR number \"([^\"]*)\"$")
-  public void aRegisteredCustomerWithTheCPRNumber(String arg0) throws Throwable {
+  private Response response;
+
+  @Given("^that the merchant has a barcode containing token ID \"([^\"]*)\"$")
+  public void thatTheMerchantHasABarcodeContainingTokenID(String tokenId) {
     // STEPS
-    // - Create dummy Customer (`new Customer()`) with CPR number
-
-
-    throw new PendingException();
+    // - Save token ID
+    this.tokenId = tokenId;
   }
 
-  @And("^the customer's name is \"([^\"]*)\"$")
-  public void theCustomerSNameIs(String arg0) throws Throwable {
+  @And("^that the merchant ID is \"([^\"]*)\"$")
+  public void thatTheMerchantIDIs(String merchantId) {
     // STEPS
-    // - Add name to customer
+    // - Save Merchant ID
 
-
-    throw new PendingException();
+    this.merchantId = merchantId;
   }
 
-  @And("^the customer has a bank account with balance (\\d+)$")
-  public void theCustomerHasABankAccountWithBalance(int arg0) {
+  @And("^that the merchant wishes to register a payment of amount (\\d+)$")
+  public void thatTheMerchantWishesToRegisterAPaymentOfAmount(int paymentAmount) {
     // STEPS
-    // - Create account in Bank
+    // - Save payment amount
+
+    this.paymentAmount = paymentAmount;
   }
 
-  @And("^the customer has a token with ID \"([^\"]*)\"$")
-  public void theCustomerHasATokenWithID(String arg0) throws Throwable {
+  @When("^the merchant submits a request for the payment$")
+  public void theMerchantSubmitsARequestForThePayment() {
     // STEPS
-    // - Store ID to this instance
+    // - Submit REST call to server
 
-    throw new PendingException();
-  }
+    PaymentService ps = new PaymentService();
+    Response response = ps.submitPayment(this.merchantId, this.paymentAmount, this.tokenId);
 
-  @And("^a registered merchant with the CVR \"([^\"]*)\" has the name \"([^\"]*)\" and a bank account with balance (\\d+)$")
-  public void aRegisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(String arg0, String arg1, int arg2) throws Throwable {
-    // STEPS
-    // - Create dummy Merchant
-    // - Create account for merchant
-
-    throw new PendingException();
-  }
-
-  @When("^the merchant scans the token with a request for a payment of (\\d+) kroner$")
-  public void theMerchantScansTheTokenWithARequestForAPaymentOfKroner(int arg0) {
-    // STEPS
-    // - Send request for payment (client -> server; REST)
+    this.response = response;
   }
 
   @Then("^the payment request succeeds$")
-  public void thePaymentSucceeds() {
+  public void thePaymentRequestSucceeds() {
     // STEPS
-    // - Verify status code in [200; 300[
-  }
+    // - Verify status code of Rest response is 200.
 
-  @And("^after the transaction, the merchant's account has balance (\\d+)$")
-  public void afterTheTransactionTheMerchantSAccountHasBalance(int arg0) {
-    // STEPS
-    // - Use SOAP call to bank to retrieve Merchant's account
-    // - Verify balance
-  }
-
-  @And("^the customer's account has balance (\\d+)$")
-  public void theCustomerSAccountHasBalance(int arg0) {
-    // STEPS
-    // - Use SOAP call to bank to retrieve Customer's account
-    // - Verify balance
+    assertEquals(200, this.response.getStatus());
   }
 }
