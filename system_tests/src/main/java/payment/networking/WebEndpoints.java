@@ -1,7 +1,7 @@
 package payment.networking;
 
 public enum WebEndpoints {
-  BASE("http://127.0.0.1:8383");
+  BASE("http://127.0.0.1:8585");
 
   public final String url;
 
