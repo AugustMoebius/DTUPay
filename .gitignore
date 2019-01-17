@@ -112,3 +112,8 @@ buildNumber.properties
 # CUSTOM for Munich group
 .idea/
 *.iml
+
+# Eclipse project files
+.classpath
+.project
+.settings/
