@@ -8,6 +8,5 @@ Feature: Customer gets token and Merchant scans and request payment
     And a registered merchant with the CVR "DK11111111" has the name "Merchant Merchantsen A/S" and a bank account with balance 200
     When the merchant scans the token with a request for a payment of 100 kroner
     Then the payment request succeeds
-    And the money is transferred from the customer's bank account to the merchant's bank account
     And after the transaction, the merchant's account has balance 300
     And the customer's account has balance 0

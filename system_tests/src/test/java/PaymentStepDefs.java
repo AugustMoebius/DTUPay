@@ -62,12 +62,6 @@ public class PaymentStepDefs {
     // - Verify status code in [200; 300[
   }
 
-  @And("^the money is transferred from the customer's bank account to the merchant's bank account$")
-  public void theMoneyIsTransferredFromTheCustomerSBankAccountToTheMerchantSBankAccount() {
-    // STEPS
-    // -
-  }
-
   @And("^after the transaction, the merchant's account has balance (\\d+)$")
   public void afterTheTransactionTheMerchantSAccountHasBalance(int arg0) {
     // STEPS
