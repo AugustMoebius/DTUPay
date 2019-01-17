@@ -47,6 +47,7 @@ public class PaymentStepDefs {
     this.customer.setFirstName(customerFirstName);
     this.customer.setLastName(customerLastName);
     this.customer.setCprNumber(customerCPR);
+
     this.bankService.createAccountWithBalance(customer,customerInitialBalance);
   }
 
@@ -75,7 +76,7 @@ public class PaymentStepDefs {
   }
 
   @When("^the merchant submits a request for the payment$")
-  public void theMerchantSubmitsARequestForThePayment() throws PendingException, BankServiceException_Exception {
+  public void theMerchantSubmitsARequestForThePayment() {
     // STEPS
     // - Submit REST call to server
     //BigDecimal bd = new BigDecimal(paymentAmount);
@@ -83,18 +84,18 @@ public class PaymentStepDefs {
     //String merchantAccountId = bankService.getAccountByCprNumber(merchant.getCprNumber()).getId();
     //bankService.transferMoneyFromTo(customerAccountId,merchantAccountId,bd, "test");
 
-    throw new PendingException();
-    //PaymentService ps = new PaymentService();
-    //Response response = ps.submitPayment(merchant.getCprNumber(), this.paymentAmount, this.tokenId);
-    //this.response = response;
+    //throw new PendingException();
+    PaymentService ps = new PaymentService();
+    Response response = ps.submitPayment(merchant.getCprNumber(), this.paymentAmount, this.tokenId);
+    this.response = response;
   }
 
   @Then("^the payment request succeeds$")
-  public void thePaymentRequestSucceeds() throws PendingException{
+  public void thePaymentRequestSucceeds() {
     // STEPS
     // - Verify status code of Rest response is 200.
-    throw new PendingException();
-    //assertEquals(200, this.response.getStatus());
+    //throw new PendingException();
+    assertEquals(200, this.response.getStatus());
   }
 
   @And("^after the transaction, the merchant's account has balance (\\d+)$")
