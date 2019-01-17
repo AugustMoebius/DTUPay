@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 public class PaymentResource {
   @GET
   public Response ping() {
-    return Response.ok().build();
+    return Response.ok("Payment request").build();
   }
 
   @POST
