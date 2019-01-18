@@ -1,5 +1,8 @@
 package networking.adapters.rest.requests;
 
+/**
+ * @author Sebastian
+ */
 public class PaymentRequest {
   public String merchantId;
   public int paymentAmount;

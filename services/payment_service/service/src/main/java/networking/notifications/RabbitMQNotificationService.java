@@ -11,10 +11,19 @@ import networking.notifications.exceptions.NotificationException;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+
+/**
+ * @author Sebastian, August
+ */
 public class RabbitMQNotificationService implements INotificationService {
-    private final static String QUEUE_NAME = "token-verification";
+    private final static String QUEUE_NAME = "payment_initialized";
     private final static String HOST_URI = "02267-munich.compute.dtu.dk";
 
+    /**
+     * @author August
+     * @param req
+     * @throws MessagePublishException
+     */
     @Override
     public void publishPaymentInitialized(PaymentRequest req) throws MessagePublishException {
         ConnectionFactory factory = new ConnectionFactory();
