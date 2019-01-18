@@ -2,6 +2,7 @@ package networking.adapters.rest.requests;
 
 public class RegisterCustomerRequest {
     private String firstName, lastName, cpr;
+    public RegisterCustomerRequest(){}
 
     /**
      * @param firstName
