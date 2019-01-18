@@ -7,7 +7,7 @@ public class TokenInfoVerified {
     private String merchantId;
     private int paymentAmount;
     private String tokenId;
-    private CPRNumber cprNumber;
+    private String cprNumber;
 
     /**
      * @author Ebbe Berthold (s125015)
@@ -20,7 +20,7 @@ public class TokenInfoVerified {
         this.merchantId = merchantId;
         this.paymentAmount = paymentAmount;
         this.tokenId = tokenId;
-        this.cprNumber = cprNumber;
+        this.cprNumber = cprNumber.toString();
     }
 
     /**
@@ -51,7 +51,7 @@ public class TokenInfoVerified {
      * @author Ebbe Berthold (s125015)
      * @return CPR Number
      */
-    public CPRNumber getCprNumber() {
+    public String getCprNumber() {
         return cprNumber;
     }
 }

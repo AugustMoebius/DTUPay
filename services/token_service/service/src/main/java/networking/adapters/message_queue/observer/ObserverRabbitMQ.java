@@ -19,7 +19,9 @@ import java.util.concurrent.TimeoutException;
 
 public class ObserverRabbitMQ implements IObserver {
 
+    //private final static String QUEUE_NAME = "payment_submit";
     private final static String QUEUE_NAME = "token";
+
     private IDataSource data;
     private TokenService tokenService;
     private NotificationRabbitMQ notificationRabbitMQ;

@@ -14,6 +14,7 @@ public class TokenServiceJUnitTest {
 
     private IDataSource data;
     private TokenService tokenService;
+    private Gson gson;
 
     /**
      * @author Esben Løvendal Kruse (s172986)
@@ -21,6 +22,7 @@ public class TokenServiceJUnitTest {
     public TokenServiceJUnitTest() {
         this.data = MockDatabase.getInstance();
         this.tokenService = new TokenService(data);
+        this.gson = new Gson();
     }
 
     /**
@@ -37,12 +39,11 @@ public class TokenServiceJUnitTest {
      * @throws InvalidFormatException
      */
     @Test
-    public void testGsonConvertion() throws InvalidFormatException {
+    public void testToJsonConvertion() throws InvalidFormatException {
         TokenInfo tokenFromPayment = new TokenInfo("DK11111111", 100, "123");
-        Gson gson = new Gson();
-        String tokenInfoJson = gson.toJson(tokenFromPayment);
+        String tokenInfoJson = this.gson.toJson(tokenFromPayment);
 
-        TokenInfo tokenFromJson = gson.fromJson(tokenInfoJson, TokenInfo.class);
+        TokenInfo tokenFromJson = this.gson.fromJson(tokenInfoJson, TokenInfo.class);
         TokenInfoVerified tokenInfoVerified =
                 new TokenInfoVerified(tokenFromJson.getMerchantId(),
                         tokenFromJson.getPaymentAmount(),
@@ -52,6 +53,24 @@ public class TokenServiceJUnitTest {
         assertEquals(tokenFromPayment.getMerchantId(), tokenInfoVerified.getMerchantId());
         assertEquals(tokenFromPayment.getPaymentAmount(), tokenInfoVerified.getPaymentAmount());
         assertEquals(tokenFromPayment.getTokenId(), tokenInfoVerified.getTokenId());
-        assertEquals(new CPRNumber("270271-2467").toString(), tokenInfoVerified.getCprNumber().toString());
+        assertEquals(new CPRNumber("270271-2467").toString(), tokenInfoVerified.getCprNumber());
+    }
+
+    /**
+     * @author Esben Løvendal Kruse (s172986)
+     * @throws InvalidFormatException
+     */
+    @Test
+    public void testFromJsonConvertion() throws InvalidFormatException {
+        TokenInfoVerified tokenInfoVerified =
+                new TokenInfoVerified("DK11111111", 100, "123", new CPRNumber("270271-2467"));
+        String toJson = this.gson.toJson(tokenInfoVerified);
+
+        TokenInfoVerified tokenFromJson = this.gson.fromJson(toJson, TokenInfoVerified.class);
+
+        assertEquals(tokenInfoVerified.getMerchantId(), tokenInfoVerified.getMerchantId());
+        assertEquals(tokenInfoVerified.getPaymentAmount(), tokenInfoVerified.getPaymentAmount());
+        assertEquals(tokenInfoVerified.getTokenId(), tokenInfoVerified.getTokenId());
+        assertEquals(tokenInfoVerified.getCprNumber(), tokenFromJson.getCprNumber());
     }
 }

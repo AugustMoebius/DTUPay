@@ -13,6 +13,7 @@ import java.util.concurrent.TimeoutException;
 public class NotificationRabbitMQ implements INotification {
 
     private final static String QUEUE_NAME = "token";
+    //private final static String QUEUE_NAME = "payment-verify";
 
     /**
      * @author Ebbe Berthold (s125015)
