@@ -1,11 +1,11 @@
-package data_access_layer;
+package data;
 
 import domain.Token;
 
 /**
  *
  */
-public interface IDataAccessLayer {
+public interface IDataSource {
 
     /**
      * @author Esben Løvendal Kruse (s172986)

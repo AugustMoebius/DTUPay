@@ -1,16 +1,16 @@
-import data_access_layer.IDataAccessLayer;
+import data.IDataSource;
 import domain.CPRNumber;
 
 public class TokenService {
 
-    private IDataAccessLayer dal;
+    private IDataSource data;
 
     /**
      * @author Esben Løvendal Kruse (s172986)
-     * @param dal
+     * @param data
      */
-    public TokenService(IDataAccessLayer dal) {
-        this.dal = dal;
+    public TokenService(IDataSource data) {
+        this.data = data;
     }
 
     /**
@@ -19,7 +19,7 @@ public class TokenService {
      * @return CPRNumber
      */
     public CPRNumber getCPRNumber(String tokenId) {
-        CPRNumber cprNumber = dal.getToken(tokenId).getCPRNumber();
+        CPRNumber cprNumber = data.getToken(tokenId).getCPRNumber();
         return cprNumber;
     }
 }
