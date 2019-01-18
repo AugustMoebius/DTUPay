@@ -1,13 +1,12 @@
+import com.google.gson.Gson;
 import com.sun.media.sound.InvalidFormatException;
 import data.IDataSource;
 import data.MockDatabase;
 import domain.CPRNumber;
-import networking.adapters.message_queue.notification.NotificationRabbitMQ;
-import networking.adapters.message_queue.observer.ObserverRabbitMQ;
+import networking.adapters.message_queue.domain.TokenInfo;
+import networking.adapters.message_queue.domain.TokenInfoVerified;
 import org.junit.Test;
-
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
+import service.TokenService;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,6 +14,7 @@ public class TokenServiceJUnitTest {
 
     private IDataSource data;
     private TokenService tokenService;
+    private Gson gson;
 
     /**
      * @author Esben Løvendal Kruse (s172986)
@@ -22,6 +22,7 @@ public class TokenServiceJUnitTest {
     public TokenServiceJUnitTest() {
         this.data = MockDatabase.getInstance();
         this.tokenService = new TokenService(data);
+        this.gson = new Gson();
     }
 
     /**
@@ -33,14 +34,43 @@ public class TokenServiceJUnitTest {
         assertEquals("270271-2467", cprNumber.toString());
     }
 
-    /*
+    /**
+     * @author Esben Løvendal Kruse (s172986)
+     * @throws InvalidFormatException
+     */
     @Test
-    public void testReceiveRabbitMQ() throws IOException, TimeoutException, InterruptedException {
-        ObserverRabbitMQ observerRabbitMQ = new ObserverRabbitMQ();
-        observerRabbitMQ.listen();
-        NotificationRabbitMQ notificationRabbitMQ = new NotificationRabbitMQ();
-        notificationRabbitMQ.sendMessage();
-        String test = "";
+    public void testToJsonConvertion() throws InvalidFormatException {
+        TokenInfo tokenFromPayment = new TokenInfo("DK11111111", 100, "123");
+        String tokenInfoJson = this.gson.toJson(tokenFromPayment);
+
+        TokenInfo tokenFromJson = this.gson.fromJson(tokenInfoJson, TokenInfo.class);
+        TokenInfoVerified tokenInfoVerified =
+                new TokenInfoVerified(tokenFromJson.getMerchantId(),
+                        tokenFromJson.getPaymentAmount(),
+                        tokenFromJson.getTokenId(),
+                        new CPRNumber("270271-2467"));
+
+        assertEquals(tokenFromPayment.getMerchantId(), tokenInfoVerified.getMerchantId());
+        assertEquals(tokenFromPayment.getPaymentAmount(), tokenInfoVerified.getPaymentAmount());
+        assertEquals(tokenFromPayment.getTokenId(), tokenInfoVerified.getTokenId());
+        assertEquals(new CPRNumber("270271-2467").toString(), tokenInfoVerified.getCprNumber());
     }
-    */
+
+    /**
+     * @author Esben Løvendal Kruse (s172986)
+     * @throws InvalidFormatException
+     */
+    @Test
+    public void testFromJsonConvertion() throws InvalidFormatException {
+        TokenInfoVerified tokenInfoVerified =
+                new TokenInfoVerified("DK11111111", 100, "123", new CPRNumber("270271-2467"));
+        String toJson = this.gson.toJson(tokenInfoVerified);
+
+        TokenInfoVerified tokenFromJson = this.gson.fromJson(toJson, TokenInfoVerified.class);
+
+        assertEquals(tokenInfoVerified.getMerchantId(), tokenInfoVerified.getMerchantId());
+        assertEquals(tokenInfoVerified.getPaymentAmount(), tokenInfoVerified.getPaymentAmount());
+        assertEquals(tokenInfoVerified.getTokenId(), tokenInfoVerified.getTokenId());
+        assertEquals(tokenInfoVerified.getCprNumber(), tokenFromJson.getCprNumber());
+    }
 }
