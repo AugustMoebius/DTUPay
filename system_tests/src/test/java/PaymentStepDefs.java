@@ -29,6 +29,9 @@ public class PaymentStepDefs {
   }
 
   //  -------------------------------------- Tear down --------------------------------------
+    /**
+     * @author Emilie
+     */
   @After("@tagPayment")
   public void after() throws BankServiceException_Exception {
     if(customer!=null) {
@@ -41,7 +44,10 @@ public class PaymentStepDefs {
   }
 
   //  -------------------------------------- Scenario: Succeeding payment --------------------------------------
-  @Given("^a registered customer with the CPR \"([^\"]*)\" has the name is \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
+    /**
+     * @author Sarah
+     */
+    @Given("^a registered customer with the CPR \"([^\"]*)\" has the name is \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
   public void aRegisteredCustomerWithTheCPRHasTheNameIsAndABankAccountWithBalance(String customerCPR, String customerFirstName, String customerLastName, BigDecimal customerInitialBalance) throws Throwable {
     this.customer = new User();
     this.customer.setFirstName(customerFirstName);
@@ -51,6 +57,9 @@ public class PaymentStepDefs {
     this.bankService.createAccountWithBalance(customer,customerInitialBalance);
   }
 
+    /**
+     * @author Sarah
+     */
   @And("^the customer has a token with ID \"([^\"]*)\"$")
   public void theCustomerHasATokenWithID(String tokenId) {
     // STEPS
@@ -58,6 +67,9 @@ public class PaymentStepDefs {
     this.tokenId = tokenId;
   }
 
+    /**
+     * @author Emilie
+     */
   @And("^a registered merchant with the CVR \"([^\"]*)\" has the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
   public void aRegisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(String merchantCVR, String merchantFirstName, String merchantLastName, BigDecimal merchantInitialBalance) throws BankServiceException_Exception {
     this.merchant = new User();
@@ -68,6 +80,9 @@ public class PaymentStepDefs {
     this.bankService.createAccountWithBalance(merchant,merchantInitialBalance);
   }
 
+    /**
+     * @author Sarah
+     */
   @And("^that the merchant wishes to register a payment of amount (\\d+)$")
   public void thatTheMerchantWishesToRegisterAPaymentOfAmount(int paymentAmount) {
     // STEPS
@@ -75,6 +90,9 @@ public class PaymentStepDefs {
     this.paymentAmount = paymentAmount;
   }
 
+    /**
+     * @author Sebastian
+     */
   @When("^the merchant submits a request for the payment$")
   public void theMerchantSubmitsARequestForThePayment() {
     // STEPS
@@ -90,6 +108,9 @@ public class PaymentStepDefs {
     this.response = response;
   }
 
+    /**
+     * @author Sebastian
+     */
   @Then("^the payment request succeeds$")
   public void thePaymentRequestSucceeds() {
     // STEPS
@@ -98,6 +119,9 @@ public class PaymentStepDefs {
     assertEquals(200, this.response.getStatus());
   }
 
+    /**
+     * @author Sarah
+     */
   @And("^after the transaction, the merchant's account has balance (\\d+)$")
   public void afterTheTransactionTheMerchantSAccountHasBalance(BigDecimal merchantBalance) throws BankServiceException_Exception {
     // STEPS
@@ -109,6 +133,9 @@ public class PaymentStepDefs {
 
   }
 
+    /**
+     * @author Emilie
+     */
   @And("^the customer's account has balance (\\d+)$")
   public void theCustomerSAccountHasBalance(BigDecimal customerBalance) throws BankServiceException_Exception {
     // STEPS

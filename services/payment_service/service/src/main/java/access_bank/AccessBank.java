@@ -6,14 +6,21 @@ import networking.ws.fastmoney.BankServiceService;
 
 import java.math.BigDecimal;
 
+
 public class AccessBank {
     BankService bank;
 
+    /**
+     * @author Sarah
+     */
     public AccessBank(){
         // access module
         bank = new BankServiceService().getBankServicePort();
     }
 
+    /**
+     * @author Emilie
+     */
     public void sendPaymentRequest(String customerCPR, String merchantCVR, int amount) throws BankServiceException_Exception {
         // SOAP call to the bank
         String customerAccountId = bank.getAccountByCprNumber(customerCPR).getId();
