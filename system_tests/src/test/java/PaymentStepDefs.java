@@ -1,4 +1,3 @@
-
 import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -20,18 +19,15 @@ public class PaymentStepDefs {
   private String tokenId;
   private int paymentAmount;
   private Response response;
-  // private Customer customer...
-  // private token id
-  // private Merchant merchant...
 
   public PaymentStepDefs(){
     this.bankService = new BankServiceService().getBankServicePort();
   }
 
   //  -------------------------------------- Tear down --------------------------------------
-    /**
-     * @author Emilie
-     */
+  /**
+   * @author Emilie
+   */
   @After("@tagPayment")
   public void after() throws BankServiceException_Exception {
     if(customer!=null) {
@@ -44,10 +40,10 @@ public class PaymentStepDefs {
   }
 
   //  -------------------------------------- Scenario: Succeeding payment --------------------------------------
-    /**
-     * @author Sarah
-     */
-    @Given("^a registered customer with the CPR \"([^\"]*)\" has the name is \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
+  /**
+   * @author Sarah
+   */
+  @Given("^a registered customer with the CPR \"([^\"]*)\" has the name is \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
   public void aRegisteredCustomerWithTheCPRHasTheNameIsAndABankAccountWithBalance(String customerCPR, String customerFirstName, String customerLastName, BigDecimal customerInitialBalance) throws Throwable {
     this.customer = new User();
     this.customer.setFirstName(customerFirstName);
@@ -57,9 +53,9 @@ public class PaymentStepDefs {
     this.bankService.createAccountWithBalance(customer,customerInitialBalance);
   }
 
-    /**
-     * @author Sarah
-     */
+  /**
+   * @author Sarah
+   */
   @And("^the customer has a token with ID \"([^\"]*)\"$")
   public void theCustomerHasATokenWithID(String tokenId) {
     // STEPS
@@ -67,9 +63,9 @@ public class PaymentStepDefs {
     this.tokenId = tokenId;
   }
 
-    /**
-     * @author Emilie
-     */
+  /**
+   * @author Emilie
+   */
   @And("^a registered merchant with the CVR \"([^\"]*)\" has the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
   public void aRegisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(String merchantCVR, String merchantFirstName, String merchantLastName, BigDecimal merchantInitialBalance) throws BankServiceException_Exception {
     this.merchant = new User();
@@ -80,9 +76,9 @@ public class PaymentStepDefs {
     this.bankService.createAccountWithBalance(merchant,merchantInitialBalance);
   }
 
-    /**
-     * @author Sarah
-     */
+  /**
+   * @author Sarah
+   */
   @And("^that the merchant wishes to register a payment of amount (\\d+)$")
   public void thatTheMerchantWishesToRegisterAPaymentOfAmount(int paymentAmount) {
     // STEPS
@@ -90,60 +86,54 @@ public class PaymentStepDefs {
     this.paymentAmount = paymentAmount;
   }
 
-    /**
-     * @author Sebastian
-     */
+  /**
+   * @author Sebastian
+   */
   @When("^the merchant submits a request for the payment$")
   public void theMerchantSubmitsARequestForThePayment() {
     // STEPS
     // - Submit REST call to server
-    //BigDecimal bd = new BigDecimal(paymentAmount);
-    //String customerAccountId = bankService.getAccountByCprNumber(customer.getCprNumber()).getId();
-    //String merchantAccountId = bankService.getAccountByCprNumber(merchant.getCprNumber()).getId();
-    //bankService.transferMoneyFromTo(customerAccountId,merchantAccountId,bd, "test");
 
-    //throw new PendingException();
     PaymentService ps = new PaymentService();
     Response response = ps.submitPayment(merchant.getCprNumber(), this.paymentAmount, this.tokenId);
     this.response = response;
   }
 
-    /**
-     * @author Sebastian
-     */
-  @Then("^the payment request succeeds$")
-  public void thePaymentRequestSucceeds() {
+  /**
+   * @author Sebastian
+   */
+  @Then("^the payment submission succeeds$")
+  public void thePaymentSubmissionSucceeds() {
     // STEPS
     // - Verify status code of Rest response is 200.
-    //throw new PendingException();
     assertEquals(200, this.response.getStatus());
   }
 
-    /**
-     * @author Sarah
-     */
+  /**
+   * @author Sarah
+   */
   @And("^after the transaction, the merchant's account has balance (\\d+)$")
   public void afterTheTransactionTheMerchantSAccountHasBalance(BigDecimal merchantBalance) throws BankServiceException_Exception {
     // STEPS
     // - Use SOAP call to bank to retrieve Merchant's account
     // - Verify balance
     throw new PendingException();
-    //Account account = this.bankService.getAccountByCprNumber(merchant.getCprNumber());
-    //assertEquals(merchantBalance,account.getBalance());
-
+    // Thread sleep to wait for bank call to complete
+    /*Account account = this.bankService.getAccountByCprNumber(merchant.getCprNumber());
+    assertEquals(merchantBalance, account.getBalance());*/
   }
 
-    /**
-     * @author Emilie
-     */
+  /**
+   * @author Emilie
+   */
   @And("^the customer's account has balance (\\d+)$")
   public void theCustomerSAccountHasBalance(BigDecimal customerBalance) throws BankServiceException_Exception {
     // STEPS
     // - Use SOAP call to bank to retrieve Customer's account
     // - Verify balance
     throw new PendingException();
-    //Account account = this.bankService.getAccountByCprNumber(customer.getCprNumber());
-    //assertEquals(customerBalance,account.getBalance());
+//    Account account = this.bankService.getAccountByCprNumber(customer.getCprNumber());
+//    assertEquals(customerBalance,account.getBalance());
   }
 
 }
