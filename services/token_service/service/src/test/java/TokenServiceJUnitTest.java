@@ -1,13 +1,11 @@
+import com.google.gson.Gson;
 import com.sun.media.sound.InvalidFormatException;
 import data.IDataSource;
 import data.MockDatabase;
 import domain.CPRNumber;
-import networking.adapters.message_queue.notification.NotificationRabbitMQ;
-import networking.adapters.message_queue.observer.ObserverRabbitMQ;
+import networking.adapters.message_queue.domain.TokenInfo;
+import networking.adapters.message_queue.domain.TokenInfoVerified;
 import org.junit.Test;
-
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -33,14 +31,39 @@ public class TokenServiceJUnitTest {
         assertEquals("270271-2467", cprNumber.toString());
     }
 
+    /**
+     * @author Esben Løvendal Kruse (s172986)
+     * @throws InvalidFormatException
+     */
+    @Test
+    public void testGsonConvertion() throws InvalidFormatException {
+        TokenInfo tokenFromPayment = new TokenInfo("DK11111111", 100, "123");
+        Gson gson = new Gson();
+        String tokenInfoJson = gson.toJson(tokenFromPayment);
+
+        TokenInfo tokenFromJson = gson.fromJson(tokenInfoJson, TokenInfo.class);
+        TokenInfoVerified tokenInfoVerified =
+                new TokenInfoVerified(tokenFromJson.getMerchantId(),
+                        tokenFromJson.getPaymentAmount(),
+                        tokenFromJson.getTokenId(),
+                        new CPRNumber("270271-2467"));
+
+        assertEquals(tokenFromPayment.getMerchantId(), tokenInfoVerified.getMerchantId());
+        assertEquals(tokenFromPayment.getPaymentAmount(), tokenInfoVerified.getPaymentAmount());
+        assertEquals(tokenFromPayment.getTokenId(), tokenInfoVerified.getTokenId());
+        assertEquals(new CPRNumber("270271-2467").toString(), tokenInfoVerified.getCprNumber().toString());
+    }
+
     /*
     @Test
-    public void testReceiveRabbitMQ() throws IOException, TimeoutException, InterruptedException {
+    public void testReceiveRabbitMQ() throws IOException, TimeoutException {
         ObserverRabbitMQ observerRabbitMQ = new ObserverRabbitMQ();
         observerRabbitMQ.listen();
+
+        TokenInfo tokenInfo = new TokenInfoVerified("DK11111111", 100, "123");
+
         NotificationRabbitMQ notificationRabbitMQ = new NotificationRabbitMQ();
-        notificationRabbitMQ.sendMessage();
-        String test = "";
+        notificationRabbitMQ.addMessage(tokenInfo);
     }
     */
 }
