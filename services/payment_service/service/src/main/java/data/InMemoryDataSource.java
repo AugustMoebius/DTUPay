@@ -6,13 +6,9 @@ package data;
 public class InMemoryDataSource implements IDataSource {
 
 
-    private InMemoryDataSource dataSource;
+    private static final InMemoryDataSource dataSource = new InMemoryDataSource();
 
     public static InMemoryDataSource getInstance(){
-        if(dataSource != null){
-            return dataSource;
-        }
-        dataSource = new InMemoryDataSource();
         return dataSource;
     }
 
