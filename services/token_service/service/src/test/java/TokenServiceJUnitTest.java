@@ -6,6 +6,7 @@ import domain.CPRNumber;
 import networking.adapters.message_queue.domain.TokenInfo;
 import networking.adapters.message_queue.domain.TokenInfoVerified;
 import org.junit.Test;
+import service.TokenService;
 
 import static org.junit.Assert.assertEquals;
 
@@ -53,17 +54,4 @@ public class TokenServiceJUnitTest {
         assertEquals(tokenFromPayment.getTokenId(), tokenInfoVerified.getTokenId());
         assertEquals(new CPRNumber("270271-2467").toString(), tokenInfoVerified.getCprNumber().toString());
     }
-
-    /*
-    @Test
-    public void testReceiveRabbitMQ() throws IOException, TimeoutException {
-        ObserverRabbitMQ observerRabbitMQ = new ObserverRabbitMQ();
-        observerRabbitMQ.listen();
-
-        TokenInfo tokenInfo = new TokenInfoVerified("DK11111111", 100, "123");
-
-        NotificationRabbitMQ notificationRabbitMQ = new NotificationRabbitMQ();
-        notificationRabbitMQ.addMessage(tokenInfo);
-    }
-    */
 }
