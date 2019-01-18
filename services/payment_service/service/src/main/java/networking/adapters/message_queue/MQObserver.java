@@ -1,5 +1,6 @@
 package networking.adapters.message_queue;
 
+import access_bank.AccessBank;
 import com.google.gson.Gson;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -21,7 +22,8 @@ public class MQObserver {
   private final static String HOST_URI = "02267-munich.compute.dtu.dk";
   private static PaymentService paymentService = new PaymentService(
           InMemoryDataSource.getInstance(),
-          new RabbitMQNotificationService());
+          new RabbitMQNotificationService(),
+          new AccessBank());
   /**
    * @author Sebastian
    * @return MQObserver

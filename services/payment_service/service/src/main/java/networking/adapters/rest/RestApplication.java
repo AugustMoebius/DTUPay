@@ -1,5 +1,6 @@
 package networking.adapters.rest;
 
+import access_bank.AccessBank;
 import data.InMemoryDataSource;
 import networking.adapters.message_queue.MQObserver;
 import networking.notifications.RabbitMQNotificationService;
@@ -14,7 +15,8 @@ import java.util.concurrent.TimeoutException;
 public class RestApplication extends Application {
     public static PaymentService paymentService = new PaymentService(
             InMemoryDataSource.getInstance(),
-            new RabbitMQNotificationService()
+            new RabbitMQNotificationService(),
+            new AccessBank()
     );
 
     public RestApplication() {

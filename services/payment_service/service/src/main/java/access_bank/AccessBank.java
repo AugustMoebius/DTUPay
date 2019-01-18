@@ -6,8 +6,8 @@ import networking.ws.fastmoney.BankServiceService;
 
 import java.math.BigDecimal;
 
-
-public class AccessBank {
+// TODO: Consider if this should be static
+public class AccessBank implements IBankService{
     BankService bank;
 
     /**
