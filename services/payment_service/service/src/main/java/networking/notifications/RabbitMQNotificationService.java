@@ -6,7 +6,6 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import networking.adapters.rest.requests.PaymentRequest;
 import networking.notifications.exceptions.MessagePublishException;
-import networking.notifications.exceptions.NotificationException;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;

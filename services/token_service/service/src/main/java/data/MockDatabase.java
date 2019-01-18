@@ -14,7 +14,7 @@ public final class MockDatabase implements IDataSource {
      * @author Esben Løvendal Kruse (s172986)
      */
     private MockDatabase() {
-        allTokens = new HashMap<String, Token>();
+        allTokens = new HashMap<>();
 
         // Adding all tokens to the database
         Token token = null;

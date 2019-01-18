@@ -17,19 +17,25 @@ import service.TokenService;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-public class ObserverRabbitMQ implements IObserver {
+public final class ObserverRabbitMQ implements IObserver {
 
-    private final static String QUEUE_NAME = "payment_submit";
+    private static final ObserverRabbitMQ observerRabbitMQ = new ObserverRabbitMQ();
+
+    private final static String QUEUE_NAME = "payment_initialized";
     //private final static String QUEUE_NAME = "token";
 
     private IDataSource data;
     private TokenService tokenService;
     private NotificationRabbitMQ notificationRabbitMQ;
 
-    public ObserverRabbitMQ() {
+    private ObserverRabbitMQ() {
         this.data = MockDatabase.getInstance();
-        this.tokenService = new TokenService(this.data);
         this.notificationRabbitMQ = new NotificationRabbitMQ();
+        this.tokenService = new TokenService(this.data, this.notificationRabbitMQ);
+    }
+
+    public static ObserverRabbitMQ getInstance() {
+        return observerRabbitMQ;
     }
 
     /**
