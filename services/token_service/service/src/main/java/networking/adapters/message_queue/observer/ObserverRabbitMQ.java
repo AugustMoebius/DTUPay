@@ -1,5 +1,6 @@
 package networking.adapters.message_queue.observer;
 
+import com.google.gson.Gson;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
