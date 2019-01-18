@@ -1,5 +1,5 @@
 
-package dtu.ws.fastmoney;
+package networking.ws.fastmoney;
 
 import java.net.MalformedURLException;
 import java.net.URL;

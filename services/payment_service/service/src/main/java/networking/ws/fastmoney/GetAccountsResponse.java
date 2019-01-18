@@ -1,5 +1,5 @@
 
-package dtu.ws.fastmoney;
+package networking.ws.fastmoney;
 
 import java.util.ArrayList;
 import java.util.List;

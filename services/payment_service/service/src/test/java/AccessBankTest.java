@@ -1,5 +1,5 @@
 import access_bank.AccessBank;
-import dtu.ws.fastmoney.*;
+import networking.ws.fastmoney.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

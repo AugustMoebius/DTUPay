@@ -1,5 +1,5 @@
 
-package dtu.ws.fastmoney;
+package networking.ws.fastmoney;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for createAccountWithBalanceResponse complex type.
+ * <p>Java class for getAccountByCprNumberResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="createAccountWithBalanceResponse">
+ * &lt;complexType name="getAccountByCprNumberResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://fastmoney.ws.dtu/}account" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,23 +27,23 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "createAccountWithBalanceResponse", propOrder = {
+@XmlType(name = "getAccountByCprNumberResponse", propOrder = {
     "_return"
 })
-public class CreateAccountWithBalanceResponse {
+public class GetAccountByCprNumberResponse {
 
     @XmlElement(name = "return")
-    protected String _return;
+    protected Account _return;
 
     /**
      * Gets the value of the return property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Account }
      *     
      */
-    public String getReturn() {
+    public Account getReturn() {
         return _return;
     }
 
@@ -52,10 +52,10 @@ public class CreateAccountWithBalanceResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Account }
      *     
      */
-    public void setReturn(String value) {
+    public void setReturn(Account value) {
         this._return = value;
     }
 

@@ -1,5 +1,5 @@
 
-package dtu.ws.fastmoney;
+package networking.ws.fastmoney;
 
 import javax.xml.ws.WebFault;
 
@@ -45,7 +45,7 @@ public class BankServiceException_Exception
     /**
      * 
      * @return
-     *     returns fault bean: dtu.ws.fastmoney.BankServiceException
+     *     returns fault bean: networking.ws.fastmoney.BankServiceException
      */
     public BankServiceException getFaultInfo() {
         return faultInfo;

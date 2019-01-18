@@ -1,8 +1,8 @@
 package access_bank;
 
-import dtu.ws.fastmoney.BankService;
-import dtu.ws.fastmoney.BankServiceException_Exception;
-import dtu.ws.fastmoney.BankServiceService;
+import networking.ws.fastmoney.BankService;
+import networking.ws.fastmoney.BankServiceException_Exception;
+import networking.ws.fastmoney.BankServiceService;
 
 import java.math.BigDecimal;
 
