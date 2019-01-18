@@ -29,6 +29,8 @@ public class RegisterCustomerResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registerCustomer(RegisterCustomerRequest req){
         System.out.println("POST: register customer");
-        return Response.ok("hej").build();
+        System.out.println(req.getFirstName()+" "+req.getLastName()+", "+req.getCpr());
+
+        return Response.ok().build();
     }
 }
