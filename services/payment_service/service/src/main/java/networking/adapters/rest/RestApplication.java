@@ -1,4 +1,4 @@
-package networking.rest_adapter;
+package networking.adapters.rest;
 
 import data.InMemoryDataSource;
 import networking.notifications.RabbitMQNotificationService;
@@ -10,7 +10,7 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("/")
 public class RestApplication extends Application {
     public static PaymentService paymentService = new PaymentService(
-            new InMemoryDataSource(),
+            InMemoryDataSource.getInstance(),
             new RabbitMQNotificationService()
     );
 }
