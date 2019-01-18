@@ -8,7 +8,7 @@ import com.rabbitmq.client.DeliverCallback;
 import data.IDataSource;
 import data.MockDatabase;
 import domain.CPRNumber;
-import networking.WebEndpoints;
+import networking.adapters.message_queue.HostMessageQueue;
 import networking.adapters.message_queue.domain.TokenInfo;
 import networking.adapters.message_queue.domain.TokenInfoVerified;
 import networking.adapters.message_queue.notification.NotificationRabbitMQ;
@@ -19,8 +19,8 @@ import java.util.concurrent.TimeoutException;
 
 public class ObserverRabbitMQ implements IObserver {
 
-    //private final static String QUEUE_NAME = "payment_submit";
-    private final static String QUEUE_NAME = "token";
+    private final static String QUEUE_NAME = "payment_submit";
+    //private final static String QUEUE_NAME = "token";
 
     private IDataSource data;
     private TokenService tokenService;
@@ -39,7 +39,7 @@ public class ObserverRabbitMQ implements IObserver {
      */
     public void listen() throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost(WebEndpoints.BASE.url);
+        factory.setHost(HostMessageQueue.BASE.url);
 
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
