@@ -1,6 +1,6 @@
-package networking.rest_adapter.resources;
+package networking.adapters.rest.resources;
 
-import networking.rest_adapter.requests.PaymentRequest;
+import networking.adapters.rest.requests.PaymentRequest;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;

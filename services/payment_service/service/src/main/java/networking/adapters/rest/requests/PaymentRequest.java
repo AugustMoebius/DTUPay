@@ -1,4 +1,4 @@
-package networking.rest_adapter.requests;
+package networking.adapters.rest.requests;
 
 public class PaymentRequest {
   public String merchantId;
