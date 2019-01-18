@@ -1,5 +1,6 @@
 package networking.adapters.rest.resources;
 
+import networking.adapters.rest.RestApplication;
 import networking.adapters.rest.requests.PaymentRequest;
 
 import javax.ws.rs.Consumes;
@@ -21,10 +22,8 @@ public class PaymentResource {
   public Response submitPayment(PaymentRequest req) {
     System.out.println("Printing payment request contents");
 
-    System.out.println(req.getMerchantId());
-    System.out.println(req.getPaymentAmount());
-    System.out.println(req.getTokenId());
-
+    // Handle payment request
+    RestApplication.paymentService.submitPaymentRequest(req);
     return Response.ok().build();
   }
 }

@@ -1,6 +1,7 @@
 package service;
 
 import data.IDataSource;
+import networking.adapters.rest.requests.PaymentRequest;
 import networking.notifications.INotificationService;
 
 public class PaymentService {
@@ -11,4 +12,10 @@ public class PaymentService {
         this.dataSource = dataSource;
         this.notificationService = notificationService;
     }
+
+    public void submitPaymentRequest(PaymentRequest req) {
+
+    }
+
+
 }
