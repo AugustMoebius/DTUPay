@@ -14,6 +14,9 @@ public class AccessBankTest {
     String customerCPR, merchantCVR;
     AccessBank accessBank;
 
+    /**
+     * @author Sarah
+     */
     @Before
     public void setup(){
         bank = new BankServiceService().getBankServicePort();
@@ -44,6 +47,9 @@ public class AccessBankTest {
         }
     }
 
+    /**
+     * @author Emilie
+     */
     @After
     public void tearDown(){
         try {
@@ -55,6 +61,9 @@ public class AccessBankTest {
     }
 
 
+    /**
+     * @author Sarah
+     */
     @Test
     public void transferMoneyTest(){
         int amount = 100;
