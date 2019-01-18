@@ -1,6 +1,7 @@
 package networking.adapters.rest;
 
 import data.InMemoryDataSource;
+import networking.adapters.message_queue.MQObserver;
 import networking.notifications.RabbitMQNotificationService;
 import service.PaymentService;
 
@@ -13,4 +14,11 @@ public class RestApplication extends Application {
             InMemoryDataSource.getInstance(),
             new RabbitMQNotificationService()
     );
+
+    public RestApplication() {
+        super();
+
+        // Instantiate `MQObserver`.
+        MQObserver.init();
+    }
 }
