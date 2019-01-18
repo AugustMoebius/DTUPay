@@ -1,23 +1,27 @@
 import com.sun.media.sound.InvalidFormatException;
-import data_access_layer.IDataAccessLayer;
-import data_access_layer.MockDatabase;
+import data.IDataSource;
+import data.MockDatabase;
 import domain.CPRNumber;
+import networking.adapters.message_queue.notification.NotificationRabbitMQ;
+import networking.adapters.message_queue.observer.ObserverRabbitMQ;
 import org.junit.Test;
+
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.assertEquals;
 
 public class TokenServiceJUnitTest {
 
-    private IDataAccessLayer dal;
+    private IDataSource data;
     private TokenService tokenService;
 
     /**
      * @author Esben Løvendal Kruse (s172986)
-     * @throws InvalidFormatException
      */
-    public TokenServiceJUnitTest() throws InvalidFormatException {
-        this.dal = new MockDatabase();
-        this.tokenService = new TokenService(dal);
+    public TokenServiceJUnitTest() {
+        this.data = MockDatabase.getInstance();
+        this.tokenService = new TokenService(data);
     }
 
     /**
@@ -28,4 +32,15 @@ public class TokenServiceJUnitTest {
         CPRNumber cprNumber = tokenService.getCPRNumber("123");
         assertEquals("270271-2467", cprNumber.toString());
     }
+
+    /*
+    @Test
+    public void testReceiveRabbitMQ() throws IOException, TimeoutException, InterruptedException {
+        ObserverRabbitMQ observerRabbitMQ = new ObserverRabbitMQ();
+        observerRabbitMQ.listen();
+        NotificationRabbitMQ notificationRabbitMQ = new NotificationRabbitMQ();
+        notificationRabbitMQ.sendMessage();
+        String test = "";
+    }
+    */
 }
