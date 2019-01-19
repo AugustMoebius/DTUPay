@@ -9,7 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("register_customer")
+@Path("registation")
 public class RegisterCustomerResource {
     /**
      * @author Emilie
@@ -17,7 +17,7 @@ public class RegisterCustomerResource {
      */
     @GET
     public Response ping() {
-        return Response.ok("Customer registration request").build();
+        return Response.ok("registation registration request").build();
     }
 
     /**

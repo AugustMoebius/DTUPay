@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 
 public class CustomerService {
     private Client client = ClientBuilder.newClient();
-    private WebTarget r = client.target(WebEndpoints.BASEC.url);
+    private WebTarget r = client.target(WebEndpoints.BASECUSTOMER.url);
 
     /**
      *
