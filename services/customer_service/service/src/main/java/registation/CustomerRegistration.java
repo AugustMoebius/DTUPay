@@ -10,7 +10,7 @@ import registation.exceptions.CustomerInvalidName;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CustomerRegistration {
+public class CustomerRegistration implements ICustomerRegistration {
     private InMemoryDataSource data;
     private Customer customer;
     public CustomerRegistration(){

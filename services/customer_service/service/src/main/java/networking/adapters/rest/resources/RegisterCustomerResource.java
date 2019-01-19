@@ -1,5 +1,6 @@
 package networking.adapters.rest.resources;
 
+import networking.adapters.rest.RestApplication;
 import networking.adapters.rest.requests.RegisterCustomerRequest;
 
 import javax.ws.rs.Consumes;
@@ -17,7 +18,7 @@ public class RegisterCustomerResource {
      */
     @GET
     public Response ping() {
-        return Response.ok("registation registration request").build();
+        return Response.ok("customer registration request").build();
     }
 
     /**
@@ -30,6 +31,8 @@ public class RegisterCustomerResource {
     public Response registerCustomer(RegisterCustomerRequest req){
         System.out.println("POST: register customer");
         System.out.println(req.getFirstName()+" "+req.getLastName()+", "+req.getCpr());
+
+        RestApplication.customerService.registerCustomer(req);
 
         return Response.ok().build();
     }
