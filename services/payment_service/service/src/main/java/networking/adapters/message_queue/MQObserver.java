@@ -11,6 +11,7 @@ import networking.notifications.RabbitMQNotificationService;
 import service.PaymentService;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -21,9 +22,10 @@ public class MQObserver {
   private final static String QUEUE_NAME = "payment_verified";
   private final static String HOST_URI = "02267-munich.compute.dtu.dk";
   private static PaymentService paymentService = new PaymentService(
-          InMemoryDataSource.getInstance(),
-          new RabbitMQNotificationService(),
-          new AccessBank());
+    InMemoryDataSource.getInstance(),
+    new RabbitMQNotificationService(),
+    new AccessBank());
+
   /**
    * @author Sebastian
    * @return MQObserver
@@ -53,13 +55,15 @@ public class MQObserver {
     factory.setHost(HOST_URI);
     Connection connection = factory.newConnection();
     Channel channel = connection.createChannel();
-    Gson gson = new Gson();
 
     channel.queueDeclare(QUEUE_NAME, false, false, false, null);
     System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
     DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-      PaymentVerifiedRequest paymentVerifiedReq = gson.fromJson(new String(delivery.getBody(), "UTF-8"), PaymentVerifiedRequest.class);
+      String body = new String(delivery.getBody(), StandardCharsets.UTF_8);
+      System.out.println("Received message on queue '" + QUEUE_NAME + "': " + body);
+
+      PaymentVerifiedRequest paymentVerifiedReq = (new Gson()).fromJson(body, PaymentVerifiedRequest.class);
       paymentService.handleVerifiedPayment(paymentVerifiedReq);
     };
     channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> { });

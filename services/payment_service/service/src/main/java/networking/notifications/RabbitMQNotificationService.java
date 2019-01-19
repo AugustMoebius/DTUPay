@@ -31,8 +31,10 @@ public class RabbitMQNotificationService implements INotificationService {
 
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {
+
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-            // Serialize payment request
+
+            // Serialize and publish payment request
             String reqJson = gson.toJson(req);
             channel.basicPublish("", QUEUE_NAME, null, reqJson.getBytes());
         } catch (TimeoutException | IOException e) {
