@@ -1,8 +1,8 @@
 package data;
 
-import com.sun.media.sound.InvalidFormatException;
 import domain.CPRNumber;
 import domain.Token;
+import exceptions.InvalidCprException;
 
 import java.util.HashMap;
 
@@ -22,7 +22,7 @@ public final class MockDatabase implements IDataSource {
         try {
             token = new Token("123", new CPRNumber("270271-2467"));
             token2 = new Token("234", new CPRNumber("270271-1234"));
-        } catch (InvalidFormatException e) {
+        } catch (InvalidCprException e) {
             e.printStackTrace();
         }
 
@@ -45,6 +45,17 @@ public final class MockDatabase implements IDataSource {
      */
     public Token getToken(String tokenId) {
         Token token = allTokens.get(tokenId);
+        return token;
+    }
+
+    /**
+     * @author Esben Løvendal Kruse (s172986)
+     * @param token
+     * @return
+     */
+    @Override
+    public Token putToken(Token token) {
+        allTokens.put(token.getId(), token);
         return token;
     }
 }

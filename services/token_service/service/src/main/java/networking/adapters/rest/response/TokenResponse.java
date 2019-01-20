@@ -1,4 +1,6 @@
-package token.networking.response;
+package networking.adapters.rest.response;
+
+import domain.Token;
 
 import java.util.List;
 
@@ -35,3 +37,4 @@ public class TokenResponse {
         return barcodes;
     }
 }
+

@@ -1,14 +1,14 @@
 package networking.adapters.rest.resources;
 
-import networking.adapters.rest.RestApplication;
+import exceptions.InvalidCprException;
 import networking.adapters.rest.requests.TokenRequest;
+import networking.adapters.rest.response.TokenResponse;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import static networking.adapters.rest.RestApplication.tokenService;
 
 @Path("token")
 public class TokenResource {
@@ -18,13 +18,22 @@ public class TokenResource {
     return Response.ok("Token request").build();
   }
 
+  /**
+   * @author Esben Løvendal Kruse (s172986)
+   * @param tokenRequest
+   * @return
+   * @throws InvalidCprException
+   */
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
-  public Response requestToken(TokenRequest tokenRequest) {
-    System.out.println("Printing payment request contents");
+  @Produces(MediaType.APPLICATION_JSON)
+  //@Produces(MediaType.TEXT_PLAIN)
+  public TokenResponse requestToken(TokenRequest tokenRequest) throws InvalidCprException {
+    System.out.println("Printing token request contents");
 
     // Handle token request
-    RestApplication.tokenService.generateTokens(tokenRequest.getCount(), tokenRequest.getCprNumber());
-    return Response.ok().build();
+    TokenResponse tokenResponse = tokenService.handleTokenRequests(tokenRequest);
+
+    return tokenResponse;
   }
 }

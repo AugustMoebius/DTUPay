@@ -14,4 +14,11 @@ public interface IDataSource {
      */
     Token getToken(String tokenID);
 
+    /**
+     * @author Esben Løvendal Kruse (s172986)
+     * @param token
+     * @return
+     */
+    Token putToken(Token token);
+
 }

@@ -3,15 +3,12 @@ import com.sun.media.sound.InvalidFormatException;
 import data.IDataSource;
 import data.MockDatabase;
 import domain.CPRNumber;
+import exceptions.InvalidCprException;
 import networking.adapters.message_queue.domain.TokenInfo;
 import networking.adapters.message_queue.domain.TokenInfoVerified;
 import networking.adapters.message_queue.notification.NotificationRabbitMQ;
-import networking.adapters.message_queue.observer.ObserverRabbitMQ;
 import org.junit.Test;
 import service.TokenService;
-
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -44,7 +41,7 @@ public class TokenServiceJUnitTest {
      * @throws InvalidFormatException
      */
     @Test
-    public void testToJsonConvertion() throws InvalidFormatException {
+    public void testToJsonConvertion() throws InvalidCprException {
         TokenInfo tokenFromPayment = new TokenInfo("DK11111111", 100, "123");
         String tokenInfoJson = this.gson.toJson(tokenFromPayment);
 
@@ -66,7 +63,7 @@ public class TokenServiceJUnitTest {
      * @throws InvalidFormatException
      */
     @Test
-    public void testFromJsonConvertion() throws InvalidFormatException {
+    public void testFromJsonConvertion() throws InvalidCprException {
         TokenInfoVerified tokenInfoVerified =
                 new TokenInfoVerified("DK11111111", 100, "123", new CPRNumber("270271-2467"));
         String toJson = this.gson.toJson(tokenInfoVerified);
