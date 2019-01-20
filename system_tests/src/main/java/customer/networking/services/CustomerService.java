@@ -27,10 +27,25 @@ public class CustomerService {
         RegisterCustomerRequest body = new RegisterCustomerRequest(firstName, lastName, cpr);
 
         // Submit request
-        Response response = r.path("register_customer").request().post(
+        Response response = r.path("customer").request().post(
                 Entity.entity(body, MediaType.APPLICATION_JSON),
                 Response.class
         );
+        return response;
+    }
+
+    /**
+     * @author Esben Løvendal Kruse (s172986)
+     * @param cpr
+     * @return
+     */
+    public Response verifyCustomer(String cpr) {
+        // Get request
+        Response response = r.path("customer/" + cpr)
+                .request()
+                .accept(MediaType.APPLICATION_JSON)
+                .get(Response.class);
+
         return response;
     }
 }

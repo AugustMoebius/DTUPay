@@ -1,23 +1,41 @@
 import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import customer.networking.services.CustomerService;
+
+import javax.ws.rs.core.Response;
+
 import static org.junit.Assert.*;
 
 public class RequestTokenStepDefs {
-  @Given("^that a user is registered as a customer$")
-  public void thatAUserIsRegisteredAsACustomer() throws PendingException {
-    assertTrue(true);
-    throw new PendingException();
+
+  private String CPRNumber;
+  private Response response;
+
+
+  @Given("^a registered customer with the CPR \"([^\"]*)\"$")
+  public void aRegisteredCustomerWithTheCPR(String CPRNumber) throws Throwable {
+    this.CPRNumber = CPRNumber;
+
+    CustomerService customerService = new CustomerService();
+    this.response = customerService.verifyCustomer(CPRNumber);
+
+    assertEquals(this.response.getStatus(), 200);
   }
 
-  @When("^the user requests (\\d+) token$")
-  public void theUserRequestsToken(int arg0) throws PendingException {
-    throw new PendingException();
+  @When("^the customer submits a request for (\\d+) token$")
+  public void theCustomerSubmitsARequestForToken(int arg0) {
+
   }
 
-  @Then("^the user receives (\\d+) token containing an ID and a barcode URL$")
-  public void theUserReceivesTokenContainingAnIDAndABarcodeURL(int arg0) throws PendingException {
-    throw new PendingException();
+  @Then("^(\\d+) token is generated and stored$")
+  public void tokenIsGeneratedAndStored(int arg0) {
+
+  }
+
+  @And("^the customer receives (\\d+) token containing an ID and a barcode URL$")
+  public void theCustomerReceivesTokenContainingAnIDAndABarcodeURL(int arg0) {
   }
 }
