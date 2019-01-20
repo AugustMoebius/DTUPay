@@ -5,8 +5,12 @@ import service.ReportService;
 
 import javax.ws.rs.ApplicationPath;
 
+
 @ApplicationPath("/")
 public class RestApplication {
+    /**
+     * @author Sarah
+     */
     public static ReportService reportService = new ReportService(
             MockDatabase.getInstance()
     );

@@ -10,13 +10,23 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+
 @Path("report")
 public class ReportResource {
+    /**
+     * @author Sarah
+     * @return Response
+     */
     @GET
     public Response ping() {
         return Response.ok("Report request").build();
     }
 
+    /**
+     * @author Sarah
+     * @param reportRequest
+     * @return Response
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response requestReport(ReportRequest reportRequest) {
