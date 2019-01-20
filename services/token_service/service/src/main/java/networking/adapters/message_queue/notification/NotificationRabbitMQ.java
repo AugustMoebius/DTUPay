@@ -9,7 +9,6 @@ import networking.adapters.message_queue.HostMessageQueue;
 import networking.adapters.message_queue.domain.TokenInfoVerified;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 public class NotificationRabbitMQ implements INotification {
