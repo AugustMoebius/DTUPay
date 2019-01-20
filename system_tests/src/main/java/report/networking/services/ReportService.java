@@ -2,7 +2,6 @@ package report.networking.services;
 
 import payment.networking.WebEndpoints;
 import report.networking.requests.ReportRequest;
-import token.networking.requests.TokenRequest;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
