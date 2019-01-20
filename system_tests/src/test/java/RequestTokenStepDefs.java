@@ -36,12 +36,14 @@ public class RequestTokenStepDefs {
 
   @When("^the customer submits a request for (\\d+) token$")
   public void theCustomerSubmitsARequestForToken(int count) {
+      throw new PendingException();
     //TokenService tokenService = new TokenService();
     //this.response = tokenService.requestTokens(count, this.cprNumber);
   }
 
   @Then("^customer receives (\\d+) token containing an ID and a barcode URL$")
   public void customerReceivesTokenContainingAnIDAndABarcodeURL(int count) {
+      throw new PendingException();
     //assertEquals(200, this.response.getStatus());
 
     /*

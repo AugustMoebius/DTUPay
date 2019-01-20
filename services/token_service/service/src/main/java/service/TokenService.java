@@ -52,4 +52,8 @@ public class TokenService {
             e.printStackTrace();
         }
     }
+
+
+    public void generateTokens(int count, String cprNumber) {
+    }
 }
