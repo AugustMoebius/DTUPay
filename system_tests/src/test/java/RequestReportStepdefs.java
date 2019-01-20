@@ -4,9 +4,9 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class RequestReportStepdefs {
+
     @Given("^a registered user with id \"([^\"]*)\"$")
-    public void aRegisteredUserWithId(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
+    public void aRegisteredUserWithId(String id) throws Throwable {
         throw new PendingException();
     }
 
