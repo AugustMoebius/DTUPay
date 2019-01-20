@@ -2,10 +2,7 @@ package networking.adapters.message_queue;
 
 import access_bank.AccessBank;
 import com.google.gson.Gson;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.DeliverCallback;
+import com.rabbitmq.client.*;
 import data.InMemoryDataSource;
 import networking.notifications.RabbitMQNotificationService;
 import service.PaymentService;
@@ -25,6 +22,8 @@ public class MQObserver {
     InMemoryDataSource.getInstance(),
     new RabbitMQNotificationService(),
     new AccessBank());
+
+  private final static String EXCHANGE_NAME = "payment_exchange";
 
   /**
    * @author Sebastian
@@ -53,19 +52,27 @@ public class MQObserver {
     // Configure MQObserver with channel, etc.
     ConnectionFactory factory = new ConnectionFactory();
     factory.setHost(HOST_URI);
+
     Connection connection = factory.newConnection();
     Channel channel = connection.createChannel();
 
-    channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+    channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
+    String queueName = channel.queueDeclare().getQueue();
+
+    // Bind queue to exchange; only subscribe to topic "payment.verified".
+    channel.queueBind(queueName, EXCHANGE_NAME, "payment.verified");
+
     System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
     DeliverCallback deliverCallback = (consumerTag, delivery) -> {
       String body = new String(delivery.getBody(), StandardCharsets.UTF_8);
-      System.out.println("Received message on queue '" + QUEUE_NAME + "': " + body);
+      System.out.println("Received message on queue '" + queueName + "': " + body);
 
       PaymentVerifiedRequest paymentVerifiedReq = (new Gson()).fromJson(body, PaymentVerifiedRequest.class);
+
       paymentService.handleVerifiedPayment(paymentVerifiedReq);
     };
-    channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> { });
+
+    channel.basicConsume(queueName, true, deliverCallback, consumerTag -> { });
   }
 }
