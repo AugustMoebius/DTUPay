@@ -1,5 +1,4 @@
 import data.InMemoryDataSource;
-import org.junit.Ignore;
 import org.junit.Test;
 import registation.CustomerRegistration;
 import registation.domain.CPRNumber;

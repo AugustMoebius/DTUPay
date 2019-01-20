@@ -22,6 +22,12 @@ public class AccessBank implements IBankService{
      * @author Emilie
      */
     public void sendPaymentRequest(String customerCPR, String merchantCVR, int amount) throws BankServiceException_Exception {
+        //Verify CPR
+
+        //Verify CVR
+
+        //Check that the amount is positive
+
         // SOAP call to the bank
         String customerAccountId = bank.getAccountByCprNumber(customerCPR).getId();
         String merchantAccountId = bank.getAccountByCprNumber(merchantCVR).getId();
