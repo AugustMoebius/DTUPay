@@ -46,17 +46,20 @@ public class PaymentStepDefs {
    * @author Sarah
    */
   @Given("^a registered customer with the CPR \"([^\"]*)\" has the name is \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
-  public void aRegisteredCustomerWithTheCPRHasTheNameIsAndABankAccountWithBalance(String customerCPR, String customerFirstName, String customerLastName, BigDecimal customerInitialBalance) throws Throwable {
+  public void aRegisteredCustomerWithTheCPRHasTheNameIsAndABankAccountWithBalance(String customerCPR, String customerFirstName, String customerLastName, BigDecimal customerInitialBalance) throws BankServiceException_Exception {
     this.customer = new User();
     this.customer.setFirstName(customerFirstName);
     this.customer.setLastName(customerLastName);
     this.customer.setCprNumber(customerCPR);
-    //List<AccountInfo> a = this.bankService.getAccounts();
-    //for(AccountInfo temp:a){
-    //  bankService.retireAccount(temp.getAccountId());
-    //}
-    this.bankService.createAccountWithBalance(customer,customerInitialBalance);
-    //a = this.bankService.getAccounts();
+
+    try {
+      this.bankService.createAccountWithBalance(customer, customerInitialBalance);
+    } catch (BankServiceException_Exception e) {
+      String customerAccountID = bankService.getAccountByCprNumber(this.customer.getCprNumber()).getId();
+      this.bankService.retireAccount(customerAccountID);
+
+      this.bankService.createAccountWithBalance(customer, customerInitialBalance);
+    }
   }
 
   /**
@@ -80,7 +83,15 @@ public class PaymentStepDefs {
     this.merchant.setLastName(merchantLastName);
     this.merchant.setCprNumber(merchantCVR);
 
-    this.bankService.createAccountWithBalance(merchant,merchantInitialBalance);
+    try {
+      this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
+    } catch (BankServiceException_Exception e) {
+      String merchantAccountId = bankService.getAccountByCprNumber(this.merchant.getCprNumber()).getId();
+      this.bankService.retireAccount(merchantAccountId);
+
+      this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
+    }
+
   }
 
   /**
@@ -160,7 +171,7 @@ public class PaymentStepDefs {
     System.out.println("Slept on this thread");
 
     Account account = this.bankService.getAccountByCprNumber(customer.getCprNumber());
-    assertEquals(customerBalance,account.getBalance());
+    assertEquals(customerBalance, account.getBalance());
   }
 
   // --------------------------------------- Refund Scenario ----------------------------------- //

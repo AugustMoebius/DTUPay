@@ -5,8 +5,11 @@ import data.IDataSource;
 import networking.adapters.rest.requests.RegisterCustomerRequest;
 import registation.ICustomerRegistration;
 import registation.domain.CPRNumber;
+import registation.domain.Customer;
 import registation.exceptions.CustomerInvalidInformation;
 import registation.exceptions.CustomerInvalidName;
+import registation.exceptions.InvalidCprException;
+import registation.exceptions.CustomerNotFoundException;
 
 public class CustomerService {
     private IDataSource dataSource;
@@ -20,13 +23,13 @@ public class CustomerService {
     public void registerCustomer(RegisterCustomerRequest req){
         try {
             customerRegistration.addCustomer(req.getFirstName(), req.getLastName(), new CPRNumber(req.getCpr()));
-        } catch (CustomerInvalidName customerInvalidName) {
-            customerInvalidName.printStackTrace();
-        } catch (CustomerInvalidInformation customerInvalidInformation) {
-            customerInvalidInformation.printStackTrace();
-        } catch (InvalidFormatException e) {
+        } catch (CustomerInvalidName | InvalidCprException | CustomerInvalidInformation | InvalidFormatException e) {
             e.printStackTrace();
         }
+    }
+
+    public Customer getCustomer(CPRNumber cprNumber) throws CustomerNotFoundException {
+        return this.dataSource.getCustomer(cprNumber);
     }
 
 }

@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 
 public class PaymentService {
   private Client client = ClientBuilder.newClient();
-  private WebTarget r = client.target(WebEndpoints.BASE.url);
+  private WebTarget r = client.target(WebEndpoints.BASEPAYMENT.url);
 
   public Response submitPayment(String merchantId, int paymentAmount, String tokenId) {
     // Build request body object
