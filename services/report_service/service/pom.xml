@@ -30,7 +30,7 @@
     </dependencyManagement>
 
     <build>
-        <finalName>token-service</finalName>
+        <finalName>report-service</finalName>
         <plugins>
             <plugin>
                 <groupId>io.thorntail</groupId>

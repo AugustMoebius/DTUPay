@@ -33,7 +33,7 @@ public class ReportResource {
         System.out.println("Printing report request contents");
 
         // Handle report request
-        RestApplication.reportService.generateReport(reportRequest.getId(), reportRequest.getPreviousDate(), reportRequest.getAfterDate());
+        RestApplication.reportService.generateReport(null, reportRequest.getId(), reportRequest.getPreviousDate(), reportRequest.getAfterDate());
         return Response.ok().build();
     }
 }

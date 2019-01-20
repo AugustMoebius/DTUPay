@@ -19,7 +19,7 @@ import java.util.concurrent.TimeoutException;
 public class RabbitMQNotificationService implements INotificationService {
     private final static String QUEUE_NAME = "payment_initialized";
     private final static String EXCHANGE_NAME = "payment_exchange";
-    private final static String HOST_URI = "02267-munich.compute.dtu.dk";
+    private final static String HOST_URI = "rabbitmq-container";
 
     /**
      * @author August
