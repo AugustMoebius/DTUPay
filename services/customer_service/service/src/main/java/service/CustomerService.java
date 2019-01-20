@@ -7,6 +7,7 @@ import registation.ICustomerRegistration;
 import registation.domain.CPRNumber;
 import registation.exceptions.CustomerInvalidInformation;
 import registation.exceptions.CustomerInvalidName;
+import registation.exceptions.InvalidCprException;
 
 public class CustomerService {
     private IDataSource dataSource;
@@ -20,11 +21,7 @@ public class CustomerService {
     public void registerCustomer(RegisterCustomerRequest req){
         try {
             customerRegistration.addCustomer(req.getFirstName(), req.getLastName(), new CPRNumber(req.getCpr()));
-        } catch (CustomerInvalidName customerInvalidName) {
-            customerInvalidName.printStackTrace();
-        } catch (CustomerInvalidInformation customerInvalidInformation) {
-            customerInvalidInformation.printStackTrace();
-        } catch (InvalidFormatException e) {
+        } catch (CustomerInvalidName | InvalidCprException | CustomerInvalidInformation | InvalidFormatException e) {
             e.printStackTrace();
         }
     }

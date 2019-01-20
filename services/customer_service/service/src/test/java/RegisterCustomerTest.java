@@ -1,5 +1,5 @@
-import com.sun.media.sound.InvalidFormatException;
 import data.InMemoryDataSource;
+import org.junit.Ignore;
 import org.junit.Test;
 import registation.CustomerRegistration;
 import registation.domain.CPRNumber;
@@ -7,6 +7,7 @@ import registation.domain.Customer;
 import registation.exceptions.CustomerInvalidInformation;
 import registation.exceptions.CustomerNotFoundException;
 import registation.exceptions.CustomerInvalidName;
+import registation.exceptions.InvalidCprException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,11 +22,12 @@ public class RegisterCustomerTest {
     }
 
     @Test
-    public void registerCustomerSucceedingTest() throws InvalidFormatException, CustomerNotFoundException, CustomerInvalidName, CustomerInvalidInformation {
+    public void registerCustomerSucceedingTest() throws InvalidCprException, CustomerNotFoundException, CustomerInvalidName, CustomerInvalidInformation {
         // Data
         String firstName = "Clara";
         String lastName = "Hansen";
         CPRNumber cprNumber = new CPRNumber("230387-4352");
+
         // register customer
         customerRegistration.addCustomer(firstName, lastName, cprNumber);
 
@@ -36,8 +38,8 @@ public class RegisterCustomerTest {
         assertEquals(cprNumber, data.getCustomer(customer.getCprNumber()).getCprNumber());
     }
 
-    @Test
-    public void registerCustomerWithInvalidNameTest() throws InvalidFormatException {
+    @Test(expected = CustomerInvalidName.class)
+    public void registerCustomerWithInvalidNameTest() throws InvalidCprException, CustomerInvalidInformation, CustomerInvalidName {
         // Data
         String firstName = "Sera8";
         String lastName = "Ha8nsen";
@@ -48,39 +50,36 @@ public class RegisterCustomerTest {
         // try to register customer
         try {
             customerRegistration.addCustomer(firstName, lastName, cprNumber);
-        } catch (CustomerInvalidName e){
+        } catch (CustomerInvalidName e) {
             assertEquals("Illegal registation: Invalid name. Recieved " + firstName + ".", e.getMessage());
-        } catch (InvalidFormatException e) {
-            e.printStackTrace();
-        } catch (CustomerInvalidInformation customerInvalidInformation) {
-            customerInvalidInformation.printStackTrace();
+
+            // Check that the customer is not added to the database
+            assertEquals(customersInDatabase, data.getAmountOfCustomers());
+
+            throw e;
         }
-        // Check that the customer is not added to the database
-        assertEquals(customersInDatabase, data.getAmountOfCustomers());
     }
 
-    @Test
-    public void registerCustomerWithInvalidCPRTest() throws InvalidFormatException {
+    @Test(expected = InvalidCprException.class)
+    public void registerCustomerWithInvalidCPRTest() throws InvalidCprException, CustomerInvalidName, CustomerInvalidInformation {
         // Data
-        String firstName = "Sera8";
-        String lastName = "Ha8nsen";
-        CPRNumber cprNumber = new CPRNumber("230387-1111");
+        String firstName = "Clara";
+        String lastName = "Hansen";
+        String cprString = "999999-9999";
 
         int customersInDatabase = data.getAmountOfCustomers();
 
-        // Try to register customer
+        // try/catch to verify error message
         try {
+            CPRNumber cprNumber = new CPRNumber(cprString);
             customerRegistration.addCustomer(firstName, lastName, cprNumber);
-        } catch (InvalidFormatException e){
-            assertEquals("Illegal registation: Invalid CPR number. Recieved " + cprNumber + ".", e.getMessage());
-        } catch (CustomerInvalidInformation customerInvalidInformation) {
-            customerInvalidInformation.printStackTrace();
-        } catch (CustomerInvalidName customerInvalidName) {
-            customerInvalidName.printStackTrace();
+        } catch (InvalidCprException e) {
+            assertEquals("Illegal registation: Invalid CPR number. Recieved " + cprString + ".", e.getMessage());
+
+            // Check that the customer is not added to the database
+            assertEquals(customersInDatabase, data.getAmountOfCustomers());
+
+            throw e;
         }
-
-        // Check that the customer is not added to the database
-        assertEquals(customersInDatabase, data.getAmountOfCustomers());
     }
-
 }

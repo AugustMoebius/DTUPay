@@ -10,7 +10,3 @@ Feature: Customer gets token and Merchant scans and request payment
     Then the payment submission succeeds
     And after the transaction, the merchant's account has balance 300
     And the customer's account has balance 0
-
-
-
-

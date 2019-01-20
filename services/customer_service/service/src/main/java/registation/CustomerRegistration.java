@@ -18,7 +18,7 @@ public class CustomerRegistration implements ICustomerRegistration {
 
     }
 
-    public void addCustomer(String firstName, String lastName, CPRNumber cprNumber) throws CustomerInvalidName, CustomerInvalidInformation, InvalidFormatException {
+    public void addCustomer(String firstName, String lastName, CPRNumber cprNumber) throws CustomerInvalidName, CustomerInvalidInformation {
         // Validate first and last name
         Pattern pattern = Pattern.compile("([a-zA-Z]+)(.*)");
         Matcher matcherFirstName = pattern.matcher(firstName);

@@ -18,7 +18,6 @@ public class NotificationRabbitMQ implements INotification {
     private final static String QUEUE_NAME = "payment_verified";
     private final static String EXCHANGE_NAME = "payment_exchange";
 
-
     /**
      * @author Ebbe Berthold (s125015)
      * @param message
