@@ -1,2 +1,4 @@
 #!/bin/bash
-./build_scripts/docker_deploy_all.sh
+pushd ./build_scripts
+./docker_deploy_all.sh
+popd
