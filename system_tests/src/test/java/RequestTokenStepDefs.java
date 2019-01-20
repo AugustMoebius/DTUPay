@@ -4,22 +4,27 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import customer.networking.services.CustomerService;
+import gherkin.deps.com.google.gson.Gson;
+import token.networking.requests.TokenRequest;
+import token.networking.response.TokenResponse;
+import token.networking.services.TokenService;
 
 import javax.ws.rs.core.Response;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
 public class RequestTokenStepDefs {
 
-  private String CPRNumber;
+  private String cprNumber;
   private Response response;
+  private TokenResponse tokenResponse;
 
 
   @Given("^a registered customer with the CPR \"([^\"]*)\"$")
-  public void aRegisteredCustomerWithTheCPR(String CPRNumber) throws Throwable {
-    this.CPRNumber = CPRNumber;
-
-    throw new PendingException();
+  public void aRegisteredCustomerWithTheCPR(String cprNumber) throws Throwable {
+    this.cprNumber = cprNumber;
 
     /*
     CustomerService customerService = new CustomerService();
@@ -30,16 +35,21 @@ public class RequestTokenStepDefs {
   }
 
   @When("^the customer submits a request for (\\d+) token$")
-  public void theCustomerSubmitsARequestForToken(int arg0) {
-
+  public void theCustomerSubmitsARequestForToken(int count) {
+    TokenService tokenService = new TokenService();
+    this.response = tokenService.requestTokens(count, this.cprNumber);
   }
 
-  @Then("^(\\d+) token is generated and stored$")
-  public void tokenIsGeneratedAndStored(int arg0) {
+  @Then("^customer receives (\\d+) token containing an ID and a barcode URL$")
+  public void customerReceivesTokenContainingAnIDAndABarcodeURL(int count) {
+    //assertEquals(200, this.response.getStatus());
 
-  }
+    /*
+    String jsonResponse = String.valueOf(this.response.getEntity());
 
-  @And("^the customer receives (\\d+) token containing an ID and a barcode URL$")
-  public void theCustomerReceivesTokenContainingAnIDAndABarcodeURL(int arg0) {
+    Gson gson = new Gson();
+    this.tokenResponse = gson.fromJson(jsonResponse, TokenResponse.class);
+    assertTrue(this.tokenResponse != null);
+    */
   }
 }
