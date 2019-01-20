@@ -18,13 +18,16 @@ public final class MockDatabase implements IDataSource {
 
         // Adding all tokens to the database
         Token token = null;
+        Token token2 = null;
         try {
             token = new Token("123", new CPRNumber("270271-2467"));
+            token2 = new Token("234", new CPRNumber("270271-1234"));
         } catch (InvalidFormatException e) {
             e.printStackTrace();
         }
 
         allTokens.put(token.getId(), token);
+        allTokens.put(token2.getId(), token2);
     }
 
     /**

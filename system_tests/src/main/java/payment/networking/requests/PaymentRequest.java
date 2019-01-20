@@ -10,16 +10,4 @@ public class PaymentRequest {
     this.paymentAmount = paymentAmount;
     this.tokenId = tokenId;
   }
-
-  public String getMerchantId() {
-    return merchantId;
-  }
-
-  public int getPaymentAmount() {
-    return paymentAmount;
-  }
-
-  public String getTokenId() {
-    return tokenId;
-  }
 }

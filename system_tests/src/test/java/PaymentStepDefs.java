@@ -1,3 +1,4 @@
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -8,6 +9,7 @@ import payment.networking.services.PaymentService;
 
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -49,8 +51,12 @@ public class PaymentStepDefs {
     this.customer.setFirstName(customerFirstName);
     this.customer.setLastName(customerLastName);
     this.customer.setCprNumber(customerCPR);
-
+    //List<AccountInfo> a = this.bankService.getAccounts();
+    //for(AccountInfo temp:a){
+    //  bankService.retireAccount(temp.getAccountId());
+    //}
     this.bankService.createAccountWithBalance(customer,customerInitialBalance);
+    //a = this.bankService.getAccounts();
   }
 
   /**
@@ -59,6 +65,7 @@ public class PaymentStepDefs {
   @And("^the customer has a token with ID \"([^\"]*)\"$")
   public void theCustomerHasATokenWithID(String tokenId) {
     // STEPS
+    // TODO: Refac to request token first when database impl is in place
     // - Store ID to this instance
     this.tokenId = tokenId;
   }
@@ -102,8 +109,8 @@ public class PaymentStepDefs {
   /**
    * @author Sebastian
    */
-  @Then("^the payment submission succeeds$")
-  public void thePaymentSubmissionSucceeds() {
+  @Then("^the submission succeeds$")
+  public void theSubmissionSucceeds() {
     // STEPS
     // - Verify status code of Rest response is 200.
     assertEquals(200, this.response.getStatus());
@@ -117,9 +124,21 @@ public class PaymentStepDefs {
     // STEPS
     // - Use SOAP call to bank to retrieve Merchant's account
     // - Verify balance
+
     System.out.println("Sleeping on this thread");
+    List<AccountInfo> a = this.bankService.getAccounts();
+    for(AccountInfo temp:a){
+      System.out.println(temp.getUser().getCprNumber()+", "+bankService.getAccount(temp.getAccountId()).getBalance());
+    }
+
     Thread.sleep(10000);
     System.out.println("Slept on this thread");
+
+    a = this.bankService.getAccounts();
+    for(AccountInfo temp:a){
+      System.out.println(temp.getUser().getCprNumber()+", "+bankService.getAccount(temp.getAccountId()).getBalance());
+    }
+
 
     // Thread sleep to wait for bank call to complete
     System.out.println("Verifying merchant account balance...");
@@ -142,6 +161,39 @@ public class PaymentStepDefs {
 
     Account account = this.bankService.getAccountByCprNumber(customer.getCprNumber());
     assertEquals(customerBalance,account.getBalance());
+  }
+
+  // --------------------------------------- Refund Scenario ----------------------------------- //
+
+  /**
+   * @author Emilie
+   * @param tokenId
+   * @param paymentAmount
+   */
+  @And("^the customer has a used token with ID \"([^\"]*)\" and an amount of (\\d+)$")
+  public void theCustomerHasAUsedTokenWithIDAndAnAmountOf(String tokenId, int paymentAmount) {
+    // Steps:
+    // - TODO: Refac to request token first when database impl is in place
+    // - Use token
+    // - (Optional) Get token to assert used
+
+    this.tokenId = tokenId;
+    this.paymentAmount = paymentAmount;
+
+    PaymentService ps = new PaymentService();
+    Response response = ps.submitPayment(merchant.getCprNumber(), paymentAmount, tokenId);
+    assertEquals(200, response.getStatus());
+  }
+
+  @When("^the merchant submits a request for the refund$")
+  public void theMerchantSubmitsARequestForTheRefund() throws Throwable {
+    // Steps:
+    // - Submit refund rest call
+    // - Save response
+    PaymentService ps = new PaymentService();
+    this.response = ps.submitRefund(tokenId);
+
+    //throw new PendingException();
   }
 
 }

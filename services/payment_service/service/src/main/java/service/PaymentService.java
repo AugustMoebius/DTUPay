@@ -2,6 +2,7 @@ package service;
 
 import access_bank.IBankService;
 import data.IDataSource;
+import domain.Transaction;
 import networking.adapters.message_queue.PaymentVerifiedRequest;
 import networking.adapters.rest.requests.PaymentRequest;
 import networking.notifications.INotificationService;
@@ -38,6 +39,21 @@ public class PaymentService {
     public void handleVerifiedPayment(PaymentVerifiedRequest req) {
         try {
             bankService.sendPaymentRequest(req.getCprNumber(), req.getMerchantId(), req.getPaymentAmount());
+        } catch (BankServiceException_Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * @author Emilie
+     * @param tokenId
+     */
+    public void refundPayment(String tokenId) {
+        Transaction transaction = dataSource.getTransaction(tokenId);
+        transaction.setRefunded(true);
+        dataSource.updateTransaction(transaction);
+        try {
+            bankService.sendPaymentRequest(transaction.getMerchantId(), transaction.getCprNumber(), transaction.getPaymentAmount());
         } catch (BankServiceException_Exception e) {
             e.printStackTrace();
         }

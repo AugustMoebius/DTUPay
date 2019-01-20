@@ -2,6 +2,7 @@ package payment.networking.services;
 
 import payment.networking.WebEndpoints;
 import payment.networking.requests.PaymentRequest;
+import payment.networking.requests.RefundRequest;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -26,4 +27,17 @@ public class PaymentService {
 
     return response;
   }
+
+    public Response submitRefund(String tokenId) {
+      // Build request body
+      RefundRequest body = new RefundRequest(tokenId);
+
+      //Submit request
+      Response response = r.path("refund").request().post(
+              Entity.entity(body,MediaType.APPLICATION_JSON),
+              Response.class
+      );
+
+    return response;
+    }
 }
