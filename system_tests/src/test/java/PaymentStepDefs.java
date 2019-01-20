@@ -1,15 +1,14 @@
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import dtu.ws.fastmoney.*;
 import payment.networking.services.PaymentService;
-import javax.ws.rs.core.Response;
 
+import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
+
 import static org.junit.Assert.assertEquals;
 
 public class PaymentStepDefs {
@@ -30,6 +29,7 @@ public class PaymentStepDefs {
    */
   @After("@tagPayment")
   public void after() throws BankServiceException_Exception {
+    System.out.println("AFTER: Removing customer and merchant accounts");
     if(customer!=null) {
       String customerAccountID = bankService.getAccountByCprNumber(customer.getCprNumber()).getId();
       this.bankService.retireAccount(customerAccountID);
@@ -113,27 +113,35 @@ public class PaymentStepDefs {
    * @author Sarah
    */
   @And("^after the transaction, the merchant's account has balance (\\d+)$")
-  public void afterTheTransactionTheMerchantSAccountHasBalance(BigDecimal merchantBalance) throws BankServiceException_Exception {
+  public void afterTheTransactionTheMerchantSAccountHasBalance(BigDecimal merchantBalance) throws BankServiceException_Exception, InterruptedException {
     // STEPS
     // - Use SOAP call to bank to retrieve Merchant's account
     // - Verify balance
-    throw new PendingException();
+    System.out.println("Sleeping on this thread");
+    Thread.sleep(10000);
+    System.out.println("Slept on this thread");
+
     // Thread sleep to wait for bank call to complete
-    /*Account account = this.bankService.getAccountByCprNumber(merchant.getCprNumber());
-    assertEquals(merchantBalance, account.getBalance());*/
+    System.out.println("Verifying merchant account balance...");
+    Account account = this.bankService.getAccountByCprNumber(merchant.getCprNumber());
+    assertEquals(merchantBalance, account.getBalance());
+    System.out.println("DONE!");
   }
 
   /**
    * @author Emilie
    */
   @And("^the customer's account has balance (\\d+)$")
-  public void theCustomerSAccountHasBalance(BigDecimal customerBalance) throws BankServiceException_Exception {
+  public void theCustomerSAccountHasBalance(BigDecimal customerBalance) throws BankServiceException_Exception, InterruptedException {
     // STEPS
     // - Use SOAP call to bank to retrieve Customer's account
     // - Verify balance
-    throw new PendingException();
-//    Account account = this.bankService.getAccountByCprNumber(customer.getCprNumber());
-//    assertEquals(customerBalance,account.getBalance());
+    System.out.println("Sleeping on this thread");
+    Thread.sleep(10000);
+    System.out.println("Slept on this thread");
+
+    Account account = this.bankService.getAccountByCprNumber(customer.getCprNumber());
+    assertEquals(customerBalance,account.getBalance());
   }
 
 }

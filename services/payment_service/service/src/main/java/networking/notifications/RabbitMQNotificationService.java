@@ -1,6 +1,7 @@
 package networking.notifications;
 
 import com.google.gson.Gson;
+import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -8,6 +9,7 @@ import networking.adapters.rest.requests.PaymentRequest;
 import networking.notifications.exceptions.MessagePublishException;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 
@@ -16,6 +18,7 @@ import java.util.concurrent.TimeoutException;
  */
 public class RabbitMQNotificationService implements INotificationService {
     private final static String QUEUE_NAME = "payment_initialized";
+    private final static String EXCHANGE_NAME = "payment_exchange";
     private final static String HOST_URI = "02267-munich.compute.dtu.dk";
 
     /**
@@ -27,16 +30,17 @@ public class RabbitMQNotificationService implements INotificationService {
     public void publishPaymentInitialized(PaymentRequest req) throws MessagePublishException {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(HOST_URI);
+
         Gson gson = new Gson();
 
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {
 
-            channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+            channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
+            String routingKey = "payment.initialized";
+            byte[] message = gson.toJson(req).getBytes(StandardCharsets.UTF_8);
 
-            // Serialize and publish payment request
-            String reqJson = gson.toJson(req);
-            channel.basicPublish("", QUEUE_NAME, null, reqJson.getBytes());
+            channel.basicPublish(EXCHANGE_NAME, routingKey, null, message);
         } catch (TimeoutException | IOException e) {
             throw new MessagePublishException(e.getLocalizedMessage());
         }

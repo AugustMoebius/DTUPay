@@ -1,10 +1,7 @@
 package networking.adapters.message_queue.observer;
 
 import com.google.gson.Gson;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.DeliverCallback;
+import com.rabbitmq.client.*;
 import data.IDataSource;
 import data.MockDatabase;
 import domain.CPRNumber;
@@ -15,6 +12,7 @@ import networking.adapters.message_queue.notification.NotificationRabbitMQ;
 import service.TokenService;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 public final class ObserverRabbitMQ implements IObserver {
@@ -22,6 +20,7 @@ public final class ObserverRabbitMQ implements IObserver {
     private static final ObserverRabbitMQ observerRabbitMQ = new ObserverRabbitMQ();
 
     private final static String QUEUE_NAME = "payment_initialized";
+    private final static String EXCHANGE_NAME = "payment_exchange";
     //private final static String QUEUE_NAME = "token";
 
     private IDataSource data;
@@ -50,11 +49,15 @@ public final class ObserverRabbitMQ implements IObserver {
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
+        String queueName = channel.queueDeclare().getQueue();
+
+        channel.queueBind(queueName, EXCHANGE_NAME, "payment.initialized");
+
         System.out.println(" [*] Waiting for messages");
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-            String responseMessage = new String(delivery.getBody(), "UTF-8");
+            String responseMessage = new String(delivery.getBody(), StandardCharsets.UTF_8);
             System.out.println(" [x] Received '" + responseMessage + "'");
 
             Gson gson = new Gson();
@@ -63,10 +66,10 @@ public final class ObserverRabbitMQ implements IObserver {
             CPRNumber cprNumber = this.tokenService.getCPRNumber(tokenInfo.getTokenId());
 
             TokenInfoVerified tokenInfoVerified =
-                    new TokenInfoVerified(tokenInfo.getMerchantId(),
-                            tokenInfo.getPaymentAmount(),
-                            tokenInfo.getTokenId(),
-                            cprNumber);
+              new TokenInfoVerified(tokenInfo.getMerchantId(),
+                tokenInfo.getPaymentAmount(),
+                tokenInfo.getTokenId(),
+                cprNumber);
 
             try {
                 notificationRabbitMQ.addMessage(tokenInfoVerified);
@@ -75,6 +78,6 @@ public final class ObserverRabbitMQ implements IObserver {
             }
         };
 
-        channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> { });
+        channel.basicConsume(queueName, true, deliverCallback, consumerTag -> { });
     }
 }

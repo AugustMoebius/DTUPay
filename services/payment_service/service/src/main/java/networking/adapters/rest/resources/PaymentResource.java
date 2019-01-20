@@ -20,8 +20,6 @@ public class PaymentResource {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   public Response submitPayment(PaymentRequest req) {
-    System.out.println("Printing payment request contents");
-
     // Handle payment request
     RestApplication.paymentService.submitPaymentRequest(req);
     return Response.ok().build();
