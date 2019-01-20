@@ -63,19 +63,7 @@ public final class ObserverRabbitMQ implements IObserver {
             Gson gson = new Gson();
             TokenInfo tokenInfo = gson.fromJson(responseMessage, TokenInfo.class);
 
-            CPRNumber cprNumber = this.tokenService.getCPRNumber(tokenInfo.getTokenId());
-
-            TokenInfoVerified tokenInfoVerified =
-              new TokenInfoVerified(tokenInfo.getMerchantId(),
-                tokenInfo.getPaymentAmount(),
-                tokenInfo.getTokenId(),
-                cprNumber);
-
-            try {
-                notificationRabbitMQ.addMessage(tokenInfoVerified);
-            } catch (TimeoutException e) {
-                e.printStackTrace();
-            }
+            this.tokenService.handleTokenInfo(tokenInfo);
         };
 
         channel.basicConsume(queueName, true, deliverCallback, consumerTag -> { });
