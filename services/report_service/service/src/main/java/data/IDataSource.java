@@ -1,4 +1,5 @@
 package data;
 
-public class IDataSource {
+public interface IDataSource {
+
 }
