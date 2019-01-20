@@ -9,7 +9,7 @@ public class ReportService {
         this.data = data;
     }
 
-    public void generateReport(String id, String previousDate, String afterDate) {
+    public void generateReport(String userType, String id, String previousDate, String afterDate) {
 
     }
 }
