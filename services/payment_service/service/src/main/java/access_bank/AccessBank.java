@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 // TODO: Consider if this should be static
 public class AccessBank implements IBankService{
     BankService bank;
+    VerifyBankRequest verifyBankRequest;
 
     /**
      * @author Sarah
@@ -16,12 +17,19 @@ public class AccessBank implements IBankService{
     public AccessBank(){
         // access module
         bank = new BankServiceService().getBankServicePort();
+        verifyBankRequest = new VerifyBankRequest();
     }
 
     /**
      * @author Emilie
      */
     public void sendPaymentRequest(String customerCPR, String merchantCVR, int amount) throws BankServiceException_Exception {
+        //Verify CPR
+        verifyBankRequest.verifyAccount(customerCPR);
+        //Verify CVR
+        verifyBankRequest.verifyAccount(merchantCVR);
+        //Check that the amount is positive
+        verifyBankRequest.verifyAmount(amount);
         // SOAP call to the bank
         String customerAccountId = bank.getAccountByCprNumber(customerCPR).getId();
         String merchantAccountId = bank.getAccountByCprNumber(merchantCVR).getId();
