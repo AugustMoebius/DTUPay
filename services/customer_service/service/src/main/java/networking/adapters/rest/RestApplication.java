@@ -2,7 +2,6 @@ package networking.adapters.rest;
 
 import data.InMemoryDataSource;
 import registation.CustomerRegistration;
-import registation.ICustomerRegistration;
 import service.CustomerService;
 
 import javax.ws.rs.ApplicationPath;

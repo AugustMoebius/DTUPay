@@ -19,10 +19,14 @@ public class RequestTokenStepDefs {
   public void aRegisteredCustomerWithTheCPR(String CPRNumber) throws Throwable {
     this.CPRNumber = CPRNumber;
 
+    throw new PendingException();
+
+    /*
     CustomerService customerService = new CustomerService();
     this.response = customerService.verifyCustomer(CPRNumber);
 
     assertEquals(this.response.getStatus(), 200);
+    */
   }
 
   @When("^the customer submits a request for (\\d+) token$")

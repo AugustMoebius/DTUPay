@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
  */
 public class MerchantService {
     private Client client = ClientBuilder.newClient();
-    private WebTarget r = client.target(WebEndpoints.BASE_MERCHANT.url);
+    private WebTarget r = client.target(WebEndpoints.BASEMERCHANT.url);
 
     /**
      *
