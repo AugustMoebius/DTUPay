@@ -5,7 +5,6 @@ import data.IDataSource;
 public class ReportService {
     private IDataSource data;
 
-
     public ReportService(IDataSource data) {
         this.data = data;
     }

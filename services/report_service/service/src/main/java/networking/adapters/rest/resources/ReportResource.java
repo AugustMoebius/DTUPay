@@ -12,16 +12,15 @@ import javax.ws.rs.core.Response;
 
 @Path("report")
 public class ReportResource {
-
     @GET
     public Response ping() {
-        return Response.ok("Token request").build();
+        return Response.ok("Report request").build();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response requestToken(ReportRequest reportRequest) {
-        System.out.println("Printing payment request contents");
+    public Response requestReport(ReportRequest reportRequest) {
+        System.out.println("Printing report request contents");
 
         // Handle report request
         RestApplication.reportService.generateReport(reportRequest.getId(), reportRequest.getPreviousDate(), reportRequest.getAfterDate());

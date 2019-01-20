@@ -4,8 +4,6 @@ import data.MockDatabase;
 import service.ReportService;
 
 import javax.ws.rs.ApplicationPath;
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
 
 @ApplicationPath("/")
 public class RestApplication {
