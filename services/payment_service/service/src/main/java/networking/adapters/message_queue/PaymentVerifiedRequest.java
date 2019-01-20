@@ -27,4 +27,8 @@ public class PaymentVerifiedRequest {
     public String getCprNumber() {
         return cprNumber;
     }
+
+    public String getTokenId() {
+        return tokenId;
+    }
 }

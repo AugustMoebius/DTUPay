@@ -11,6 +11,8 @@ public class RefundRequest {
         this.tokenId = tokenId;
     }
 
+    public RefundRequest() { }
+
     public String getTokenId() {
         return tokenId;
     }

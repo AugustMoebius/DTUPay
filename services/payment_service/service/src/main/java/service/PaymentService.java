@@ -39,6 +39,7 @@ public class PaymentService {
     public void handleVerifiedPayment(PaymentVerifiedRequest req) {
         try {
             bankService.sendPaymentRequest(req.getCprNumber(), req.getMerchantId(), req.getPaymentAmount());
+            dataSource.addTransaction(req);
         } catch (BankServiceException_Exception e) {
             e.printStackTrace();
         }

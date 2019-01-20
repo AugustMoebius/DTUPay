@@ -4,9 +4,9 @@ package networking.adapters.rest.requests;
  * @author Sebastian
  */
 public class PaymentRequest {
-  public String merchantId;
-  public int paymentAmount;
-  public String tokenId;
+  private String merchantId;
+  private int paymentAmount;
+  private String tokenId;
 
   public PaymentRequest(String merchantId, int paymentAmount, String tokenId) {
     this.merchantId = merchantId;

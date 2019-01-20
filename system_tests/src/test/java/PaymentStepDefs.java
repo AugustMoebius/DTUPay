@@ -137,18 +137,9 @@ public class PaymentStepDefs {
     // - Verify balance
 
     System.out.println("Sleeping on this thread");
-    List<AccountInfo> a = this.bankService.getAccounts();
-    for(AccountInfo temp:a){
-      System.out.println(temp.getUser().getCprNumber()+", "+bankService.getAccount(temp.getAccountId()).getBalance());
-    }
-
     Thread.sleep(10000);
     System.out.println("Slept on this thread");
 
-    a = this.bankService.getAccounts();
-    for(AccountInfo temp:a){
-      System.out.println(temp.getUser().getCprNumber()+", "+bankService.getAccount(temp.getAccountId()).getBalance());
-    }
 
 
     // Thread sleep to wait for bank call to complete
@@ -182,7 +173,7 @@ public class PaymentStepDefs {
    * @param paymentAmount
    */
   @And("^the customer has a used token with ID \"([^\"]*)\" and an amount of (\\d+)$")
-  public void theCustomerHasAUsedTokenWithIDAndAnAmountOf(String tokenId, int paymentAmount) {
+  public void theCustomerHasAUsedTokenWithIDAndAnAmountOf(String tokenId, int paymentAmount) throws InterruptedException {
     // Steps:
     // - TODO: Refac to request token first when database impl is in place
     // - Use token
@@ -194,6 +185,9 @@ public class PaymentStepDefs {
     PaymentService ps = new PaymentService();
     Response response = ps.submitPayment(merchant.getCprNumber(), paymentAmount, tokenId);
     assertEquals(200, response.getStatus());
+    System.out.println("Sleeping on this thread");
+    Thread.sleep(10000);
+    System.out.println("Slept on this thread");
   }
 
   @When("^the merchant submits a request for the refund$")
@@ -201,6 +195,7 @@ public class PaymentStepDefs {
     // Steps:
     // - Submit refund rest call
     // - Save response
+
     PaymentService ps = new PaymentService();
     this.response = ps.submitRefund(tokenId);
 

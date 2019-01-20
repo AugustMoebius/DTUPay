@@ -8,4 +8,8 @@ public class RefundRequest {
     public RefundRequest(String tokenId) {
         this.tokenId = tokenId;
     }
+
+    public String getTokenId() {
+        return tokenId;
+    }
 }
