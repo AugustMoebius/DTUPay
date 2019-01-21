@@ -63,4 +63,10 @@ public class RegisterMerchantStepDefs {
     throw new PendingException();
     //assertEquals(200, this.res.getStatus());
   }
+
+  @Then("^the merchant submission fails and he gets an error message$")
+  public void theMerchantSubmissionFailsAndHeGetsAnErrorMessage() throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+  }
 }
