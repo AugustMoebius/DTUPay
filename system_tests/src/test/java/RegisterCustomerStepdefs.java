@@ -44,7 +44,7 @@ public class RegisterCustomerStepdefs {
      */
     @Then("^a new customer is added to DTUPay$")
     public void aNewCustomerIsAddedToDTUPay() {
-        throw new PendingException();
+//        throw new PendingException();
         //assertEquals(200, response.getStatus());
     }
 }

@@ -18,9 +18,15 @@ public class RestApplication extends Application {
             new NotificationRabbitMQ()
     );
 
-    public RestApplication() throws IOException, TimeoutException {
+    public RestApplication() {
         super();
 
-        ObserverRabbitMQ.getInstance().listen();
+        try {
+            ObserverRabbitMQ.getInstance().listen();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -17,7 +17,7 @@ import java.util.concurrent.TimeoutException;
 public class MQObserver {
   private static MQObserver instance;
   private final static String QUEUE_NAME = "payment_verified";
-  private final static String HOST_URI = "02267-munich.compute.dtu.dk";
+  private final static String HOST_URI = "rabbitmq-container";
   private static PaymentService paymentService = new PaymentService(
     InMemoryDataSource.getInstance(),
     new RabbitMQNotificationService(),

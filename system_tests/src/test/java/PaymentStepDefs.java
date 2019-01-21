@@ -32,10 +32,12 @@ public class PaymentStepDefs {
   @After("@tagPayment")
   public void after() throws BankServiceException_Exception {
     System.out.println("AFTER: Removing customer and merchant accounts");
-    if(customer!=null) {
+    if (customer != null) {
       String customerAccountID = bankService.getAccountByCprNumber(customer.getCprNumber()).getId();
       this.bankService.retireAccount(customerAccountID);
+    }
 
+    if (merchant != null) {
       String merchantAccountID = bankService.getAccountByCprNumber(merchant.getCprNumber()).getId();
       this.bankService.retireAccount(merchantAccountID);
     }
@@ -63,17 +65,6 @@ public class PaymentStepDefs {
   }
 
   /**
-   * @author Sarah
-   */
-  @And("^the customer has a token with ID \"([^\"]*)\"$")
-  public void theCustomerHasATokenWithID(String tokenId) {
-    // STEPS
-    // TODO: Refac to request token first when database impl is in place
-    // - Store ID to this instance
-    this.tokenId = tokenId;
-  }
-
-  /**
    * @author Emilie
    */
   @And("^a registered merchant with the CVR \"([^\"]*)\" has the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
@@ -91,7 +82,17 @@ public class PaymentStepDefs {
 
       this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
     }
+  }
 
+  /**
+   * @author Sarah
+   */
+  @And("^the customer has a token with ID \"([^\"]*)\"$")
+  public void theCustomerHasATokenWithID(String tokenId) {
+    // STEPS
+    // TODO: Refac to request token first when database impl is in place
+    // - Store ID to this instance
+    this.tokenId = tokenId;
   }
 
   /**
@@ -185,21 +186,20 @@ public class PaymentStepDefs {
     PaymentService ps = new PaymentService();
     Response response = ps.submitPayment(merchant.getCprNumber(), paymentAmount, tokenId);
     assertEquals(200, response.getStatus());
+
     System.out.println("Sleeping on this thread");
     Thread.sleep(10000);
     System.out.println("Slept on this thread");
   }
 
   @When("^the merchant submits a request for the refund$")
-  public void theMerchantSubmitsARequestForTheRefund() throws Throwable {
+  public void theMerchantSubmitsARequestForTheRefund() {
     // Steps:
     // - Submit refund rest call
     // - Save response
 
     PaymentService ps = new PaymentService();
     this.response = ps.submitRefund(tokenId);
-
-    //throw new PendingException();
   }
 
 }
