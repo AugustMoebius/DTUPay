@@ -18,7 +18,7 @@ public class RegisterMerchantResource {
      */
     @GET
     public Response ping() {
-        return Response.ok("customer registration request").build();
+        return Response.ok("merchant registration request").build();
     }
 
     /**

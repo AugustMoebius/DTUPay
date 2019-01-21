@@ -91,7 +91,7 @@ public class PaymentStepDefs {
     this.merchant.setLastName(merchantLastName);
     this.merchant.setCprNumber(merchantCVR);
 
-    // Create Bank account for Mechant
+    // Create Bank account for Merchant
     try {
       this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
     } catch (BankServiceException_Exception e) {
