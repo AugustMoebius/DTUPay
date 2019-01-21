@@ -6,8 +6,9 @@ import java.util.UUID;
 public class Token {
     private String id;
     private CPRNumber cprNumber;
-    private String barcode;
     private boolean isUnused;
+    private String barcodeFileName;
+
     /**
      * @author Ebbe Berthold (s125015)
      * @param id
@@ -16,7 +17,6 @@ public class Token {
     public Token(String id, CPRNumber cprNumber) {
         this.id = id;
         this.cprNumber = cprNumber;
-        this.barcode = "";
         this.isUnused = true;
     }
 
@@ -27,7 +27,6 @@ public class Token {
     public Token(CPRNumber cprNumber) {
         this.cprNumber = cprNumber;
         this.id = UUID.randomUUID().toString();
-        this.barcode = "";
     }
 
     public Token() {}
@@ -48,12 +47,12 @@ public class Token {
         return cprNumber;
     }
 
-    public String getBarcode() {
-        return barcode;
+    public String getBarcodeFileName() {
+        return barcodeFileName;
     }
 
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
+    public void setBarcodeFileName(String barcode) {
+        this.barcodeFileName = barcode;
     }
 
     public boolean getIsUnused() { return isUnused;

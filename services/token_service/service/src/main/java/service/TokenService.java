@@ -11,6 +11,7 @@ import networking.adapters.message_queue.domain.TokenInfo;
 import networking.adapters.message_queue.domain.TokenInfoVerified;
 import networking.adapters.message_queue.notification.INotification;
 import networking.adapters.rest.requests.TokenRequest;
+import networking.adapters.rest.responses.TokenBarcodePair;
 import networking.adapters.rest.responses.TokenGeneratedResponse;
 
 import java.io.File;
@@ -22,8 +23,6 @@ import java.util.concurrent.TimeoutException;
 
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import networking.adapters.rest.responses.TokenGetResponse;
-
-import static networking.adapters.rest.RestApplication.tokenService;
 
 
 public class TokenService {
@@ -83,17 +82,15 @@ public class TokenService {
      * @throws InvalidCprException
      */
     public TokenGeneratedResponse handleTokenGenerateRequests(TokenRequest tokenRequest) throws InvalidCprException {
-        List<Token> tokens = tokenService.generateTokens(new CPRNumber(tokenRequest.getCprNumber()), tokenRequest.getNumberOfTokens());
-
-        List<String> tokenIds = new ArrayList<>();
-        List<String> barcodes = new ArrayList<>();
+        List<Token> tokens = this.generateTokens(new CPRNumber(tokenRequest.getCprNumber()), tokenRequest.getNumberOfTokens());
+        List<TokenBarcodePair> tokenBarcodePairs = new ArrayList<>();
 
         for (Token t : tokens) {
-            tokenIds.add(t.getId());
-            barcodes.add(t.getBarcode());
+            TokenBarcodePair tokenBarcodePair = new TokenBarcodePair(t.getId(), "/barcode/" + t.getBarcodeFileName());
+            tokenBarcodePairs.add(tokenBarcodePair);
         }
 
-        TokenGeneratedResponse tokenGeneratedResponse = new TokenGeneratedResponse(tokenIds, barcodes);
+        TokenGeneratedResponse tokenGeneratedResponse = new TokenGeneratedResponse(tokenBarcodePairs);
 
         return tokenGeneratedResponse;
     }
@@ -104,9 +101,9 @@ public class TokenService {
      * @return
      * @throws InvalidCprException
      */
-    public TokenGetResponse handleTokenGetRequests(String id) throws InvalidCprException {
+    public TokenGetResponse handleTokenGetRequests(String id) {
         Token token = data.getToken(id);
-        TokenGetResponse tokenGetResponse = new TokenGetResponse(token.getId(), token.getCprNumber(), token.getBarcode());
+        TokenGetResponse tokenGetResponse = new TokenGetResponse(token.getId(), token.getCprNumber(), token.getBarcodeFileName());
 
         return tokenGetResponse;
     }
@@ -140,7 +137,7 @@ public class TokenService {
 
         return token;
     }
-    
+
     private BitMatrix generateQRCode(Token token){
         int height = 400;
         int width = 400;
@@ -157,12 +154,11 @@ public class TokenService {
 
     private Token storeBarcode(Token token) {
         try {
-            //String filePath = "./target/images/" + token.getId() + "." + IMAGE_FORMAT;
             String filePath = token.getId() + "." + IMAGE_FORMAT;
             MatrixToImageWriter.writeToStream(generateQRCode(token), IMAGE_FORMAT,
                     new FileOutputStream(new File(filePath)));
 
-            token.setBarcode(filePath);
+            token.setBarcodeFileName(filePath);
         } catch (IOException e) {
             e.printStackTrace();
         }

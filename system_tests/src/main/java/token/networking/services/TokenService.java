@@ -9,6 +9,7 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 
 public class TokenService {
@@ -31,6 +32,15 @@ public class TokenService {
                 Entity.entity(body, MediaType.APPLICATION_JSON),
                 TokenGeneratedResponse.class
         );
+
+        return response;
+    }
+
+    public Response getBarcodeImage(String barcodeFilePath) {
+        Response response = r.path(barcodeFilePath)
+                .request()
+                .accept("image/png")
+                .get(Response.class);
 
         return response;
     }

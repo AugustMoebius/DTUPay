@@ -1,14 +1,15 @@
 package networking.adapters.rest.resources;
 
-import domain.Token;
 import exceptions.InvalidCprException;
 import networking.adapters.rest.requests.TokenRequest;
+import networking.adapters.rest.responses.TokenBarcodePair;
 import networking.adapters.rest.responses.TokenGeneratedResponse;
 import networking.adapters.rest.responses.TokenGetResponse;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.File;
 
 import static networking.adapters.rest.RestApplication.tokenService;
 
@@ -33,9 +34,6 @@ public class TokenResource {
     // Handle token request
     TokenGeneratedResponse tokenGeneratedResponse = tokenService.handleTokenGenerateRequests(tokenRequest);
 
-    System.out.println("Printing token request contents");
-    System.out.println(tokenGeneratedResponse);
-
     return tokenGeneratedResponse;
   }
 
@@ -51,15 +49,5 @@ public class TokenResource {
     TokenGetResponse tokenGetResponse = tokenService.handleTokenGetRequests(id);
 
     return tokenGetResponse;
-  }
-
-  /**
-   * @author Esben Løvendal Kruse (s172986)
-   * @return
-   */
-  @Path("barcode")
-  @GET
-  public Response pingBarcode() {
-    return Response.ok("Barcode request").build();
   }
 }
