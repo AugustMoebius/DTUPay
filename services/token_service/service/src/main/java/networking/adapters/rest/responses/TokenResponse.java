@@ -1,6 +1,4 @@
-package networking.adapters.rest.response;
-
-import domain.Token;
+package networking.adapters.rest.responses;
 
 import java.util.List;
 

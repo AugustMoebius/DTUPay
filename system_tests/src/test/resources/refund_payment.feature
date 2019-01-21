@@ -11,8 +11,3 @@ Feature: Refund payment
     Then the submission succeeds
     And the customer's account has balance 500
     And after the transaction, the merchant's account has balance 200
-
-
-
-
-

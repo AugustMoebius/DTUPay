@@ -2,7 +2,7 @@ package networking.adapters.rest.resources;
 
 import exceptions.InvalidCprException;
 import networking.adapters.rest.requests.TokenRequest;
-import networking.adapters.rest.response.TokenResponse;
+import networking.adapters.rest.responses.TokenResponse;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -27,12 +27,12 @@ public class TokenResource {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  //@Produces(MediaType.TEXT_PLAIN)
   public TokenResponse requestToken(TokenRequest tokenRequest) throws InvalidCprException {
-    System.out.println("Printing token request contents");
-
     // Handle token request
     TokenResponse tokenResponse = tokenService.handleTokenRequests(tokenRequest);
+
+    System.out.println("Printing token request contents");
+    System.out.println(tokenResponse);
 
     return tokenResponse;
   }
