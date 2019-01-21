@@ -9,4 +9,5 @@ public interface IDataSource {
     Merchant getMerchant(String merchantCVR) throws MerchantNotFoundException;
 
 
+    int getAmountOfMerchants();
 }

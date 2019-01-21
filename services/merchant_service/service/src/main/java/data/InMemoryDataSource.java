@@ -33,4 +33,9 @@ public class InMemoryDataSource implements IDataSource {
         }
         return merchant;
     }
+
+    @Override
+    public int getAmountOfMerchants() {
+        return merchants.size();
+    }
 }

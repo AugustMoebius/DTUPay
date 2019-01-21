@@ -3,6 +3,7 @@ import data.IDataSource;
 import data.InMemoryDataSource;
 import exceptions.MerchantInvalidInformation;
 import exceptions.MerchantInvalidName;
+import exceptions.MerchantNotFoundException;
 import management.domain.CVRNumber;
 import management.domain.Merchant;
 
@@ -48,8 +49,8 @@ public class MerchantManagement implements IMerchantManagement {
 
     // Read a merchant
     @Override
-    public Merchant getMerchant(String CVR) {
-        return null;
+    public Merchant getMerchant(CVRNumber cvr) throws MerchantNotFoundException {
+        return data.getMerchant(cvr.toString());
     }
 
     // Update a merchant

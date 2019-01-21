@@ -16,7 +16,7 @@ public class RegisterMerchantTest {
     private MerchantManagement merchantManagement;
 
 
-    public RegisterCustomerTest(){
+    public RegisterMerchantTest(){
         this.data = InMemoryDataSource.getInstance();
         this.merchantManagement = new MerchantManagement();
     }
@@ -31,53 +31,53 @@ public class RegisterMerchantTest {
         // register customer
         merchantManagement.registerMerchant(firstName, lastName, cvrNumber);
 
-        Merchant merchant = merchantManagement.getMerchant(cvrNumber.toString());
+        Merchant merchant = merchantManagement.getMerchant(cvrNumber);
         // check if the customer is correctly registered
         assertEquals(firstName, data.getMerchant(merchant.getCvr().toString()).getFirstName());
         assertEquals(lastName, data.getMerchant(merchant.getCvr().toString()).getLastName());
-        assertEquals(cvrNumber, data.getMerchant(merchant.getCvr().toString()).getCprNumber());
+        assertEquals(cvrNumber, data.getMerchant(merchant.getCvr().toString()).getCvr());
     }
 
-    @Test(expected = CustomerInvalidName.class)
-    public void registerCustomerWithInvalidNameTest() throws InvalidCprException, CustomerInvalidInformation, CustomerInvalidName {
+    @Test(expected = MerchantInvalidName.class)
+    public void registerCustomerWithInvalidNameTest() throws InvalidCvrException, MerchantInvalidInformation, MerchantInvalidName {
         // Data
         String firstName = "Sera8";
         String lastName = "Ha8nsen";
-        CPRNumber cprNumber = new CPRNumber("230387-4352");
+        CVRNumber cvrNumber = new CVRNumber("DK98567856");
 
-        int customersInDatabase = data.getAmountOfCustomers();
+        int customersInDatabase = data.getAmountOfMerchants();
 
         // try to register customer
         try {
-            customerRegistration.addCustomer(firstName, lastName, cprNumber);
-        } catch (CustomerInvalidName e) {
+            merchantManagement.registerMerchant(firstName, lastName, cvrNumber);
+        } catch (MerchantInvalidName e) {
             assertEquals("Illegal registation: Invalid name. Recieved " + firstName + ".", e.getMessage());
 
             // Check that the customer is not added to the database
-            assertEquals(customersInDatabase, data.getAmountOfCustomers());
+            assertEquals(customersInDatabase, data.getAmountOfMerchants());
 
             throw e;
         }
     }
 
-    @Test(expected = InvalidCprException.class)
-    public void registerCustomerWithInvalidCPRTest() throws InvalidCprException, CustomerInvalidName, CustomerInvalidInformation {
+    @Test(expected = InvalidCvrException.class)
+    public void registerCustomerWithInvalidCPRTest() throws InvalidCvrException, MerchantInvalidName, MerchantInvalidInformation {
         // Data
         String firstName = "Clara";
         String lastName = "Hansen";
-        String cprString = "999999-9999";
+        String cvrString = "DK7364842924";
 
-        int customersInDatabase = data.getAmountOfCustomers();
+        int customersInDatabase = data.getAmountOfMerchants();
 
         // try/catch to verify error message
         try {
-            CPRNumber cprNumber = new CPRNumber(cprString);
-            customerRegistration.addCustomer(firstName, lastName, cprNumber);
-        } catch (InvalidCprException e) {
-            assertEquals("Illegal registation: Invalid CPR number. Recieved " + cprString + ".", e.getMessage());
+            CVRNumber cvrNumber = new CVRNumber(cvrString);
+            merchantManagement.registerMerchant(firstName, lastName, cvrNumber);
+        } catch (InvalidCvrException e) {
+            assertEquals("Illegal registration: Invalid CVR number. Received " + cvrString + ".", e.getMessage());
 
             // Check that the customer is not added to the database
-            assertEquals(customersInDatabase, data.getAmountOfCustomers());
+            assertEquals(customersInDatabase, data.getAmountOfMerchants());
 
             throw e;
         }
