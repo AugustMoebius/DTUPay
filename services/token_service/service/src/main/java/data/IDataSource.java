@@ -21,4 +21,6 @@ public interface IDataSource {
      */
     Token putToken(Token token);
 
+
+    void deleteToken(String tokenId);
 }

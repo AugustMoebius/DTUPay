@@ -49,12 +49,23 @@ public class TokenService {
     /**
      * @author August
      * @param tokenId
-     * @return
+     * @return response
      */
     public Response getTokenById(String tokenId){
         return r.path("token/" + tokenId)
                 .request()
                 .accept(MediaType.APPLICATION_JSON)
                 .get(Response.class);
+    }
+
+    /**
+     * @author August
+     * @param tokenId
+     * @return response
+     */
+    public Response deleteToken(String tokenId) {
+        return r.path("token/" + tokenId)
+                .request()
+                .delete(Response.class);
     }
 }
