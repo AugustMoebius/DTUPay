@@ -7,6 +7,7 @@ public class TokenGetResponse {
     private String id;
     private String cprNumber;
     private String barcode;
+    private boolean isUsed;
 
     /**
      * @author Esben Løvendal Kruse (s172986)
@@ -14,10 +15,11 @@ public class TokenGetResponse {
      * @param cprNumber
      * @param barcode
      */
-    public TokenGetResponse(String id, CPRNumber cprNumber, String barcode) {
+    public TokenGetResponse(String id, CPRNumber cprNumber, String barcode, boolean isUsed) {
         this.id = id;
         this.cprNumber = cprNumber.toString();
         this.barcode = barcode;
+        this.isUsed = isUsed;
     }
 
     public TokenGetResponse() {}
@@ -46,4 +48,18 @@ public class TokenGetResponse {
         return barcode;
     }
 
+    /**
+     * @author August
+     * @param used
+     */
+    public void setUsed(boolean used) {
+        isUsed = used;
+    }
+
+    /**
+     * @author August
+     */
+    public boolean isUsed() {
+        return isUsed;
+    }
 }

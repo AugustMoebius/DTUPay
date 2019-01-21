@@ -7,6 +7,7 @@ import data.IDataSource;
 import domain.CPRNumber;
 import domain.Token;
 import exceptions.InvalidCprException;
+import exceptions.TokenAlreadyUsedException;
 import networking.adapters.message_queue.domain.TokenInfo;
 import networking.adapters.message_queue.domain.TokenInfoVerified;
 import networking.adapters.message_queue.notification.INotification;
@@ -52,13 +53,26 @@ public class TokenService {
         return cprNumber;
     }
 
+
+
+
     /**
      * @author Esben Løvendal Kruse (s172986)
      * @param tokenInfo
      */
-    public void handleTokenInfo(TokenInfo tokenInfo) {
-        CPRNumber cprNumber = this.getCPRNumber(tokenInfo.getTokenId());
+    public void handleTokenInfo(TokenInfo tokenInfo) throws TokenAlreadyUsedException {
+        CPRNumber cprNumber = getCPRNumber(tokenInfo.getTokenId());
 
+        // Check if token is already used
+        Token token = data.getToken(tokenInfo.getTokenId());
+        if (token.isUsed()){
+            throw new TokenAlreadyUsedException("Token with ID:" + tokenInfo.getTokenId() +" has already been used.");
+        }
+        // Set token used and write to DB
+        token.setUsed(true);
+        data.putToken(token);
+
+        //Build verified response
         TokenInfoVerified tokenInfoVerified =
                 new TokenInfoVerified(tokenInfo.getMerchantId(),
                         tokenInfo.getPaymentAmount(),
@@ -106,7 +120,7 @@ public class TokenService {
      */
     public TokenGetResponse handleTokenGetRequests(String id) throws InvalidCprException {
         Token token = data.getToken(id);
-        TokenGetResponse tokenGetResponse = new TokenGetResponse(token.getId(), token.getCprNumber(), token.getBarcode());
+        TokenGetResponse tokenGetResponse = new TokenGetResponse(token.getId(), token.getCprNumber(), token.getBarcode(), token.isUsed());
 
         return tokenGetResponse;
     }

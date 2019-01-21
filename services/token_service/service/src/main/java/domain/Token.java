@@ -7,7 +7,7 @@ public class Token {
     private String id;
     private CPRNumber cprNumber;
     private String barcode;
-    private boolean isUnused;
+    private boolean isUsed;
     /**
      * @author Ebbe Berthold (s125015)
      * @param id
@@ -17,7 +17,7 @@ public class Token {
         this.id = id;
         this.cprNumber = cprNumber;
         this.barcode = "";
-        this.isUnused = true;
+        this.isUsed = false;
     }
 
     /**
@@ -28,6 +28,7 @@ public class Token {
         this.cprNumber = cprNumber;
         this.id = UUID.randomUUID().toString();
         this.barcode = "";
+        this.isUsed = false;
     }
 
     public Token() {}
@@ -56,7 +57,9 @@ public class Token {
         this.barcode = barcode;
     }
 
-    public boolean getIsUnused() { return isUnused;
+    public boolean isUsed() { return isUsed; }
+
+    public void setUsed(boolean used) {
+        isUsed = used;
     }
-    public void setIsUnused(boolean state) { this.isUnused = state; }
 }
