@@ -2,7 +2,7 @@ package token.networking.services;
 
 import payment.networking.WebEndpoints;
 import token.networking.requests.TokenRequest;
-import token.networking.response.TokenResponse;
+import token.networking.response.TokenGeneratedResponse;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -22,14 +22,14 @@ public class TokenService {
      * @param numberOfTokens
      * @return
      */
-    public TokenResponse requestTokens(String cprNumber, int numberOfTokens) {
+    public TokenGeneratedResponse requestTokens(String cprNumber, int numberOfTokens) {
         // Build request body object
         TokenRequest body = new TokenRequest(cprNumber, numberOfTokens);
 
         // Submit request
-        TokenResponse response = r.path("token").request().post(
+        TokenGeneratedResponse response = r.path("token").request().post(
                 Entity.entity(body, MediaType.APPLICATION_JSON),
-                TokenResponse.class
+                TokenGeneratedResponse.class
         );
 
         return response;
