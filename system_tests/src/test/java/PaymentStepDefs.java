@@ -202,4 +202,26 @@ public class PaymentStepDefs {
     this.response = ps.submitRefund(tokenId);
   }
 
+  /**
+   * @author Ebbe (s125015)
+   * @throws Throwable
+   */
+
+  @And("^the token is identified as already used$")
+  public void theTokenIsIdentifiedAsAlreadyUsed() throws Throwable {
+
+      throw new PendingException();
+  }
+
+  /**
+   * @author Ebbe (s125015)
+   * @throws Throwable
+   */
+  @Then("^the submission fails$")
+  public void theSubmissionFails() throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+  }
+
+
 }
