@@ -7,6 +7,7 @@ import data.IDataSource;
 import domain.CPRNumber;
 import domain.Token;
 import exceptions.InvalidCprException;
+import exceptions.TokenAlreadyUsedException;
 import networking.adapters.message_queue.domain.TokenInfo;
 import networking.adapters.message_queue.domain.TokenInfoVerified;
 import networking.adapters.message_queue.notification.INotification;
@@ -23,6 +24,7 @@ import java.util.concurrent.TimeoutException;
 
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import networking.adapters.rest.responses.TokenGetResponse;
+
 
 
 public class TokenService {
@@ -55,9 +57,19 @@ public class TokenService {
      * @author Esben Løvendal Kruse (s172986)
      * @param tokenInfo
      */
-    public void handleTokenInfo(TokenInfo tokenInfo) {
-        CPRNumber cprNumber = this.getCPRNumber(tokenInfo.getTokenId());
+    public void handleTokenInfo(TokenInfo tokenInfo) throws TokenAlreadyUsedException {
+        CPRNumber cprNumber = getCPRNumber(tokenInfo.getTokenId());
 
+        // Check if token is already used
+        Token token = data.getToken(tokenInfo.getTokenId());
+        if (token.isUsed()){
+            throw new TokenAlreadyUsedException("Token with ID:" + tokenInfo.getTokenId() +" has already been used.");
+        }
+        // Set token used and write to DB
+        token.setUsed(true);
+        data.putToken(token);
+
+        //Build verified response
         TokenInfoVerified tokenInfoVerified =
                 new TokenInfoVerified(tokenInfo.getMerchantId(),
                         tokenInfo.getPaymentAmount(),
@@ -103,7 +115,7 @@ public class TokenService {
      */
     public TokenGetResponse handleTokenGetRequests(String id) {
         Token token = data.getToken(id);
-        TokenGetResponse tokenGetResponse = new TokenGetResponse(token.getId(), token.getCprNumber(), token.getBarcodeFileName());
+        TokenGetResponse tokenGetResponse = new TokenGetResponse(token.getId(), token.getCprNumber(), token.getBarcodeFileName(), token.isUsed());
 
         return tokenGetResponse;
     }
