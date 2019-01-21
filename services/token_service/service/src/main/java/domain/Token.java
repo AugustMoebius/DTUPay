@@ -2,10 +2,11 @@ package domain;
 
 import java.util.UUID;
 
+
 public class Token {
     private String id;
     private CPRNumber cprNumber;
-    private String barcodePath;
+    private String barcode;
 
     /**
      * @author Ebbe Berthold (s125015)
@@ -15,7 +16,7 @@ public class Token {
     public Token(String id, CPRNumber cprNumber) {
         this.id = id;
         this.cprNumber = cprNumber;
-        this.barcodePath = id + ".png";
+        this.barcode = "";
     }
 
     /**
@@ -25,7 +26,7 @@ public class Token {
     public Token(CPRNumber cprNumber) {
         this.cprNumber = cprNumber;
         this.id = UUID.randomUUID().toString();
-        this.barcodePath = id + ".png";
+        this.barcode = "";
     }
 
     /**
@@ -44,8 +45,11 @@ public class Token {
         return cprNumber;
     }
 
-    public String getBarcodePath() {
-        return barcodePath;
+    public String getBarcode() {
+        return barcode;
     }
 
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
 }
