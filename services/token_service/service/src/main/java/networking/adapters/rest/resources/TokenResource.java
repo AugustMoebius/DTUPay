@@ -1,8 +1,10 @@
 package networking.adapters.rest.resources;
 
+import domain.Token;
 import exceptions.InvalidCprException;
 import networking.adapters.rest.requests.TokenRequest;
-import networking.adapters.rest.response.TokenResponse;
+import networking.adapters.rest.responses.TokenGeneratedResponse;
+import networking.adapters.rest.responses.TokenGetResponse;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -27,13 +29,37 @@ public class TokenResource {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  //@Produces(MediaType.TEXT_PLAIN)
-  public TokenResponse requestToken(TokenRequest tokenRequest) throws InvalidCprException {
-    System.out.println("Printing token request contents");
-
+  public TokenGeneratedResponse requestToken(TokenRequest tokenRequest) throws InvalidCprException {
     // Handle token request
-    TokenResponse tokenResponse = tokenService.handleTokenRequests(tokenRequest);
+    TokenGeneratedResponse tokenGeneratedResponse = tokenService.handleTokenGenerateRequests(tokenRequest);
 
-    return tokenResponse;
+    System.out.println("Printing token request contents");
+    System.out.println(tokenGeneratedResponse);
+
+    return tokenGeneratedResponse;
+  }
+
+  /**
+   * @author Esben Løvendal Kruse (s172986)
+   * @param id
+   * @return
+   */
+  @GET
+  @Path("/{id}")
+  @Produces(MediaType.APPLICATION_JSON)
+  public TokenGetResponse GetToken(@PathParam("id") String id) throws InvalidCprException {
+    TokenGetResponse tokenGetResponse = tokenService.handleTokenGetRequests(id);
+
+    return tokenGetResponse;
+  }
+
+  /**
+   * @author Esben Løvendal Kruse (s172986)
+   * @return
+   */
+  @Path("barcode")
+  @GET
+  public Response pingBarcode() {
+    return Response.ok("Barcode request").build();
   }
 }

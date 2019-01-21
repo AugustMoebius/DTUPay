@@ -1,5 +1,8 @@
 package service;
 
+import com.google.zxing.*;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import data.IDataSource;
 import domain.CPRNumber;
 import domain.Token;
@@ -8,16 +11,24 @@ import networking.adapters.message_queue.domain.TokenInfo;
 import networking.adapters.message_queue.domain.TokenInfoVerified;
 import networking.adapters.message_queue.notification.INotification;
 import networking.adapters.rest.requests.TokenRequest;
-import networking.adapters.rest.response.TokenResponse;
+import networking.adapters.rest.responses.TokenGeneratedResponse;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import networking.adapters.rest.responses.TokenGetResponse;
+
 import static networking.adapters.rest.RestApplication.tokenService;
 
+
 public class TokenService {
+
+    private static final String IMAGE_FORMAT = "png";
 
     private IDataSource data;
     private INotification iNotification;
@@ -71,20 +82,33 @@ public class TokenService {
      * @return
      * @throws InvalidCprException
      */
-    public TokenResponse handleTokenRequests(TokenRequest tokenRequest) throws InvalidCprException {
+    public TokenGeneratedResponse handleTokenGenerateRequests(TokenRequest tokenRequest) throws InvalidCprException {
         List<Token> tokens = tokenService.generateTokens(new CPRNumber(tokenRequest.getCprNumber()), tokenRequest.getNumberOfTokens());
 
         List<String> tokenIds = new ArrayList<>();
-        List<String> barcodePaths = new ArrayList<>();
+        List<String> barcodes = new ArrayList<>();
 
         for (Token t : tokens) {
             tokenIds.add(t.getId());
-            barcodePaths.add(t.getBarcodePath());
+            barcodes.add(t.getBarcode());
         }
 
-        TokenResponse tokenResponse = new TokenResponse(tokenIds, barcodePaths);
+        TokenGeneratedResponse tokenGeneratedResponse = new TokenGeneratedResponse(tokenIds, barcodes);
 
-        return tokenResponse;
+        return tokenGeneratedResponse;
+    }
+
+    /**
+     * @author Esben Løvendal Kruse (s172986)
+     * @param id
+     * @return
+     * @throws InvalidCprException
+     */
+    public TokenGetResponse handleTokenGetRequests(String id) throws InvalidCprException {
+        Token token = data.getToken(id);
+        TokenGetResponse tokenGetResponse = new TokenGetResponse(token.getId(), token.getCprNumber(), token.getBarcode());
+
+        return tokenGetResponse;
     }
 
     /**
@@ -110,8 +134,43 @@ public class TokenService {
      */
     private Token generateToken(CPRNumber cprNumber) {
         Token token = new Token(cprNumber);
+
         this.data.putToken(token);
+        token = storeBarcode(token);
 
         return token;
+    }
+    
+    private BitMatrix generateQRCode(Token token){
+        int height = 400;
+        int width = 400;
+
+        BitMatrix matrix = new BitMatrix(width, height);
+        try {
+            matrix = new QRCodeWriter().encode(token.getId(), BarcodeFormat.QR_CODE, width, height);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+
+        return matrix;
+    }
+
+    private Token storeBarcode(Token token) {
+        try {
+            //String filePath = "./target/images/" + token.getId() + "." + IMAGE_FORMAT;
+            String filePath = token.getId() + "." + IMAGE_FORMAT;
+            MatrixToImageWriter.writeToStream(generateQRCode(token), IMAGE_FORMAT,
+                    new FileOutputStream(new File(filePath)));
+
+            token.setBarcode(filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return token;
+    }
+
+    public Token getTokenById(String id) {
+        return data.getToken(id);
     }
 }

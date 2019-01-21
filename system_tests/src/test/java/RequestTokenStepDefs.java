@@ -2,7 +2,7 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import token.networking.response.TokenResponse;
+import token.networking.response.TokenGeneratedResponse;
 import token.networking.services.TokenService;
 
 import static org.junit.Assert.assertTrue;
@@ -36,9 +36,9 @@ public class RequestTokenStepDefs {
   @When("^the customer submits a request for (\\d+) token/s$")
   public void theCustomerSubmitsARequestForToken(int numberOfTokens) {
     TokenService tokenService = new TokenService();
-    TokenResponse tokenResponse = tokenService.requestTokens(this.cprNumber, numberOfTokens);
+    TokenGeneratedResponse tokenGeneratedResponse = tokenService.requestTokens(this.cprNumber, numberOfTokens);
 
-    assertTrue(tokenResponse.getBarcodes().size() > 0);
+    assertTrue(tokenGeneratedResponse.getBarcodes().size() > 0);
 
       //throw new PendingException();
   }

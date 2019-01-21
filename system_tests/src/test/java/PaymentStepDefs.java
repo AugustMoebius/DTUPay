@@ -157,7 +157,6 @@ public class PaymentStepDefs {
     // - Use SOAP call to bank to retrieve Merchant's account
     // - Verify balance
 
-    // Thread sleep to wait for bank call to complete
     System.out.println("Verifying merchant account balance...");
     Account account = this.bankService.getAccountByCprNumber(merchant.getCprNumber());
     assertEquals(merchantBalance, account.getBalance());
@@ -199,8 +198,9 @@ public class PaymentStepDefs {
     assertEquals(200, response.getStatus());
 
     System.out.println("Sleeping on this thread; waiting for transaction to finish");
-    Thread.sleep(10000);
+    Thread.sleep(5000);
     System.out.println("Slept on this thread; waited for transaction to finish");
+
   }
 
   @When("^the merchant submits a request for the refund$")
@@ -216,5 +216,27 @@ public class PaymentStepDefs {
     Thread.sleep(10000);
     System.out.println("Slept on this thread; waited for refund to finish");
   }
+
+  /**
+   * @author Ebbe (s125015)
+   * @throws Throwable
+   */
+
+  @And("^the token is identified as already used$")
+  public void theTokenIsIdentifiedAsAlreadyUsed() throws Throwable {
+
+      throw new PendingException();
+  }
+
+  /**
+   * @author Ebbe (s125015)
+   * @throws Throwable
+   */
+  @Then("^the submission fails$")
+  public void theSubmissionFails() throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+  }
+
 
 }
