@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.rabbitmq.client.*;
 import data.IDataSource;
 import data.InMemoryDataSource;
+import management.MerchantManagement;
 import networking.adapters.message_queue.HostMessageQueue;
 import networking.adapters.message_queue.domain.PaymentInitializedRequest;
 import networking.adapters.message_queue.notification.INotification;
@@ -18,6 +19,7 @@ public class ObserverRabbitMQ implements IObserver{
     private final static ObserverRabbitMQ observerRabbitMQ = new ObserverRabbitMQ();
     private final static String EXCHANGE_NAME = "payment_exchange";
     private final MerchantService merchantService;
+    private final MerchantManagement merchantManagement;
     private final IDataSource data;
     private final INotification notificationRabbitMQ;
 
@@ -29,9 +31,10 @@ public class ObserverRabbitMQ implements IObserver{
      * @author Emilie
      */
     private ObserverRabbitMQ() {
+        this.merchantManagement = new MerchantManagement();
         this.data = InMemoryDataSource.getInstance();
         this.notificationRabbitMQ = new NotificationRabbitMQ();
-        this.merchantService = new MerchantService(this.data, this.notificationRabbitMQ);
+        this.merchantService = new MerchantService(this.data, this.merchantManagement, this.notificationRabbitMQ);
     }
 
 
