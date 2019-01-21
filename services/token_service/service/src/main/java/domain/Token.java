@@ -29,6 +29,8 @@ public class Token {
         this.barcode = "";
     }
 
+    public Token() {}
+
     /**
      * @author Esben Løvendal Kruse (s172986)
      * @return

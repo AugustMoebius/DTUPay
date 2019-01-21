@@ -11,7 +11,7 @@ import networking.adapters.message_queue.domain.TokenInfo;
 import networking.adapters.message_queue.domain.TokenInfoVerified;
 import networking.adapters.message_queue.notification.INotification;
 import networking.adapters.rest.requests.TokenRequest;
-import networking.adapters.rest.responses.TokenResponse;
+import networking.adapters.rest.responses.TokenGeneratedResponse;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 import com.google.zxing.client.j2se.MatrixToImageWriter;
+import networking.adapters.rest.responses.TokenGetResponse;
 
 import static networking.adapters.rest.RestApplication.tokenService;
 
@@ -81,7 +82,7 @@ public class TokenService {
      * @return
      * @throws InvalidCprException
      */
-    public TokenResponse handleTokenRequests(TokenRequest tokenRequest) throws InvalidCprException {
+    public TokenGeneratedResponse handleTokenGenerateRequests(TokenRequest tokenRequest) throws InvalidCprException {
         List<Token> tokens = tokenService.generateTokens(new CPRNumber(tokenRequest.getCprNumber()), tokenRequest.getNumberOfTokens());
 
         List<String> tokenIds = new ArrayList<>();
@@ -92,9 +93,22 @@ public class TokenService {
             barcodes.add(t.getBarcode());
         }
 
-        TokenResponse tokenResponse = new TokenResponse(tokenIds, barcodes);
+        TokenGeneratedResponse tokenGeneratedResponse = new TokenGeneratedResponse(tokenIds, barcodes);
 
-        return tokenResponse;
+        return tokenGeneratedResponse;
+    }
+
+    /**
+     * @author Esben Løvendal Kruse (s172986)
+     * @param id
+     * @return
+     * @throws InvalidCprException
+     */
+    public TokenGetResponse handleTokenGetRequests(String id) throws InvalidCprException {
+        Token token = data.getToken(id);
+        TokenGetResponse tokenGetResponse = new TokenGetResponse(token.getId(), token.getCprNumber(), token.getBarcode());
+
+        return tokenGetResponse;
     }
 
     /**
@@ -126,7 +140,7 @@ public class TokenService {
 
         return token;
     }
-
+    
     private BitMatrix generateQRCode(Token token){
         int height = 400;
         int width = 400;
@@ -154,5 +168,9 @@ public class TokenService {
         }
 
         return token;
+    }
+
+    public Token getTokenById(String id) {
+        return data.getToken(id);
     }
 }

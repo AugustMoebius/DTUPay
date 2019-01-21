@@ -2,7 +2,7 @@ package token.networking.response;
 
 import java.util.List;
 
-public class TokenResponse {
+public class TokenGeneratedResponse {
 
     private List<String> tokenIds;
     private List<String> barcodes;
@@ -12,12 +12,12 @@ public class TokenResponse {
      * @param tokenIds
      * @param barcodes
      */
-    public TokenResponse(List<String> tokenIds, List<String> barcodes) {
+    public TokenGeneratedResponse(List<String> tokenIds, List<String> barcodes) {
         this.tokenIds = tokenIds;
         this.barcodes = barcodes;
     }
 
-    public TokenResponse() {}
+    public TokenGeneratedResponse() {}
 
     /**
      * @author Esben Løvendal Kruse (s172986)
