@@ -1,7 +1,7 @@
 package data;
 
-import domain.Merchant;
 import exceptions.MerchantNotFoundException;
+import management.domain.Merchant;
 
 import java.util.HashMap;
 

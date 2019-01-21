@@ -3,12 +3,15 @@ package service;
 import data.IDataSource;
 import exceptions.MerchantNotFoundException;
 import exceptions.MessagePublishException;
+import management.IMerchantManagement;
 import networking.adapters.message_queue.domain.MerchantInfoVerified;
 import networking.adapters.message_queue.domain.PaymentInitializedRequest;
 import networking.adapters.message_queue.notification.INotification;
+import networking.adapters.rest.requests.RegisterMerchantRequest;
 
 public class MerchantService {
 
+    private final IMerchantManagement merchantManagement;
     private IDataSource data;
     private INotification iNotification;
 
@@ -18,8 +21,9 @@ public class MerchantService {
      * @param data
      * @param iNotification
      */
-    public MerchantService(IDataSource data, INotification iNotification) {
+    public MerchantService(IDataSource data, IMerchantManagement merchantManagement, INotification iNotification) {
         this.data = data;
+        this.merchantManagement = merchantManagement;
         this.iNotification = iNotification;
     }
 
@@ -44,5 +48,8 @@ public class MerchantService {
         }
 
 
+    }
+
+    public void registerMerchant(RegisterMerchantRequest req) {
     }
 }

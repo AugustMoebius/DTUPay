@@ -7,12 +7,16 @@ import cucumber.api.java.en.When;
 import customer.networking.services.CustomerService;
 import dtu.ws.fastmoney.*;
 import payment.networking.services.PaymentService;
+import token.networking.response.TokenResponse;
+import token.networking.services.TokenService;
 
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class PaymentStepDefs {
   private final BankService bankService;
@@ -176,6 +180,30 @@ public class PaymentStepDefs {
     assertEquals(customerBalance, account.getBalance());
   }
 
+  /**
+   * @authour Esben
+   */
+  @And("^the token has been used$")
+  public void theTokenHasBeenUsed() {
+    TokenService ts = new TokenService();
+    Response response = ts.getTokenById(tokenId);
+    //Assert repsponse code to ensure item was found
+    assertEquals(200, response.getStatus());
+    TokenResponse token = response.readEntity(TokenResponse.class);
+    assertTrue(token.isUsed());
+  }
+  /**
+   * @authour August
+   */
+  @And("^the token is unused$")
+  public void theTokenIsUnused() throws Throwable {
+    TokenService ts = new TokenService();
+    Response response = ts.getTokenById(tokenId);
+    //Assert repsponse code to ensure item was found
+    assertEquals(200, response.getStatus());
+    TokenResponse token = response.readEntity(TokenResponse.class);
+    assertFalse(token.isUsed());
+  }
   // --------------------------------------- Refund Scenario ----------------------------------- //
 
   /**

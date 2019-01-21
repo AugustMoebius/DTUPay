@@ -5,6 +5,7 @@ import com.rabbitmq.client.*;
 import data.IDataSource;
 import data.MockDatabase;
 import domain.CPRNumber;
+import exceptions.TokenAlreadyUsedException;
 import networking.adapters.message_queue.HostMessageQueue;
 import networking.adapters.message_queue.domain.TokenInfo;
 import networking.adapters.message_queue.domain.TokenInfoVerified;
@@ -63,7 +64,11 @@ public final class ObserverRabbitMQ implements IObserver {
             Gson gson = new Gson();
             TokenInfo tokenInfo = gson.fromJson(responseMessage, TokenInfo.class);
 
-            this.tokenService.handleTokenInfo(tokenInfo);
+            try {
+                this.tokenService.handleTokenInfo(tokenInfo);
+            } catch (TokenAlreadyUsedException e) {
+                e.printStackTrace();
+            }
         };
 
         channel.basicConsume(queueName, true, deliverCallback, consumerTag -> { });

@@ -3,6 +3,7 @@ package token.networking.services;
 import payment.networking.WebEndpoints;
 import token.networking.requests.TokenRequest;
 import token.networking.response.TokenGeneratedResponse;
+import token.networking.response.TokenResponse;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -43,5 +44,17 @@ public class TokenService {
                 .get(Response.class);
 
         return response;
+    }
+
+    /**
+     * @author August
+     * @param tokenId
+     * @return
+     */
+    public Response getTokenById(String tokenId){
+        return r.path("token/" + tokenId)
+                .request()
+                .accept(MediaType.APPLICATION_JSON)
+                .get(Response.class);
     }
 }
