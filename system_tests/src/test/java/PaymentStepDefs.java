@@ -218,8 +218,37 @@ public class PaymentStepDefs {
     TokenResponse token = response.readEntity(TokenResponse.class);
     assertFalse(token.isUsed());
   }
+    /**
+     * @authour August
+     */
+    @And("^the customer has a used token$")
+    public void theCustomerHasAUsedToken() throws InterruptedException {
+      // Create and retrieve token
+      TokenService tokenService = new TokenService();
+      List<TokenBarcodePair> tokenBarcodePair = tokenService.requestTokens(customer.getCprNumber(), 1).getTokenBarcodePairs();
+      assertEquals("Expected to receive one token/barcode pair", tokenBarcodePair.size(), 1);
+      this.tokenId = tokenBarcodePair.get(0).getTokenId();
+
+      // Submit a zero payment to use token
+      PaymentService ps = new PaymentService();
+      Response response = ps.submitPayment(merchant.getCprNumber(), 0, tokenId); //
+      assertEquals(200, response.getStatus());
+
+      System.out.println("Sleeping on this thread; waiting for transaction to finish");
+      Thread.sleep(5000);
+      System.out.println("Slept on this thread; waited for transaction to finish");
+
+      // Assert token is not used
+      Response tokenResponse = tokenService.getTokenById(tokenId);
+      assertEquals(200, tokenResponse.getStatus());
+      TokenResponse token = tokenResponse.readEntity(TokenResponse.class);
+      assertTrue(token.isUsed());
+    }
   // --------------------------------------- Refund Scenario ----------------------------------- //
 
+  /**
+   * @authour August
+   */
   @When("^the merchant submits a request for the refund$")
   public void theMerchantSubmitsARequestForTheRefund() throws InterruptedException {
     // Steps:
@@ -242,7 +271,7 @@ public class PaymentStepDefs {
   @And("^the token is identified as already used$")
   public void theTokenIsIdentifiedAsAlreadyUsed() throws Throwable {
 
-      throw new PendingException();
+    throw new PendingException();
   }
 
   /**
@@ -256,27 +285,31 @@ public class PaymentStepDefs {
   }
 
 
-    /**
-     * @author Emilie
-     * @param paymentAmount
-     */
-    @And("^the customer has a used token with a transaction amount of (\\d+)$")
-    public void theCustomerHasAUsedTokenWithATransactionAmountOf(int paymentAmount) throws Throwable {
-        // Steps:
-        // - Use token
-        // - (Optional) Get token to assert used
-        TokenService tokenService = new TokenService();
-        List<TokenBarcodePair> tokenBarcodePair = tokenService.requestTokens(customer.getCprNumber(), 1).getTokenBarcodePairs();
-        assertEquals("Expected to receive one token/barcode pair", tokenBarcodePair.size(), 1);
-        this.tokenId = tokenBarcodePair.get(0).getTokenId();
-        this.paymentAmount = paymentAmount;
+  /**
+   * @author Emilie
+   * @param paymentAmount
+   */
+  @And("^the customer has a used token with a transaction amount of (\\d+)$")
+  public void theCustomerHasAUsedTokenWithATransactionAmountOf(int paymentAmount) throws InterruptedException {
+    // Steps:
+    // - Use token
+    // - (Optional) Get token to assert used
+    TokenService tokenService = new TokenService();
+    List<TokenBarcodePair> tokenBarcodePair = tokenService.requestTokens(customer.getCprNumber(), 1).getTokenBarcodePairs();
+    assertEquals("Expected to receive one token/barcode pair", tokenBarcodePair.size(), 1);
+    this.tokenId = tokenBarcodePair.get(0).getTokenId();
+    this.paymentAmount = paymentAmount;
 
-        PaymentService ps = new PaymentService();
-        Response response = ps.submitPayment(merchant.getCprNumber(), paymentAmount, tokenId);
-        assertEquals(200, response.getStatus());
+    PaymentService ps = new PaymentService();
+    Response response = ps.submitPayment(merchant.getCprNumber(), paymentAmount, tokenId);
+    assertEquals(200, response.getStatus());
 
-        System.out.println("Sleeping on this thread; waiting for transaction to finish");
-        Thread.sleep(5000);
-        System.out.println("Slept on this thread; waited for transaction to finish");
-    }
+    System.out.println("Sleeping on this thread; waiting for transaction to finish");
+    Thread.sleep(5000);
+    System.out.println("Slept on this thread; waited for transaction to finish");
+
+
+
+  }
+
 }
