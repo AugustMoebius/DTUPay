@@ -37,6 +37,15 @@ public class TokenService {
         return response;
     }
 
+    public Response getBarcodeImage(String barcodeFilePath) {
+        Response response = r.path(barcodeFilePath)
+                .request()
+                .accept("image/png")
+                .get(Response.class);
+
+        return response;
+    }
+
     /**
      * @author August
      * @param tokenId

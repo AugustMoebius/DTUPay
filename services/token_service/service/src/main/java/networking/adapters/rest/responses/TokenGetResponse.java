@@ -62,4 +62,15 @@ public class TokenGetResponse {
     public boolean isUsed() {
         return isUsed;
     }
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setCprNumber(String cprNumber) {
+        this.cprNumber = cprNumber;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
 }
