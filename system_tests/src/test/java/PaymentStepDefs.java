@@ -202,4 +202,9 @@ public class PaymentStepDefs {
     this.response = ps.submitRefund(tokenId);
   }
 
+  @And("^the token has been used$")
+  public void theTokenHasBeenUsed() throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+  }
 }
