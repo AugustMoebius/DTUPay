@@ -138,7 +138,7 @@ public class PaymentStepDefs {
     // - Verify balance
 
     System.out.println("Sleeping on this thread");
-    Thread.sleep(10000);
+    Thread.sleep(5000);
     System.out.println("Slept on this thread");
 
 
@@ -159,7 +159,7 @@ public class PaymentStepDefs {
     // - Use SOAP call to bank to retrieve Customer's account
     // - Verify balance
     System.out.println("Sleeping on this thread");
-    Thread.sleep(10000);
+    Thread.sleep(5000);
     System.out.println("Slept on this thread");
 
     Account account = this.bankService.getAccountByCprNumber(customer.getCprNumber());
@@ -188,7 +188,7 @@ public class PaymentStepDefs {
     assertEquals(200, response.getStatus());
 
     System.out.println("Sleeping on this thread");
-    Thread.sleep(10000);
+    Thread.sleep(5000);
     System.out.println("Slept on this thread");
   }
 
