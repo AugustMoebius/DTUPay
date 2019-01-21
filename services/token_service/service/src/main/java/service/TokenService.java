@@ -178,7 +178,22 @@ public class TokenService {
         return token;
     }
 
-    public Token getTokenById(String id) {
-        return data.getToken(id);
+    /**
+     * @author August
+     * @param tokenId
+     * @return token
+     */
+    public Token getTokenById(String tokenId) {
+        return data.getToken(tokenId);
+    }
+
+    /**
+     * @author August
+     * @param tokenId
+     */
+    public void deleteToken(String tokenId) {
+        // TODO: Delete barcode img file
+        // Deletes database reference
+        data.deleteToken(tokenId);
     }
 }
