@@ -24,7 +24,7 @@ public class NotificationRabbitMQ implements INotification {
      * @param merchantInfoVerified
      */
     @Override
-    public void publishMessage(MerchantInfoVerified merchantInfoVerified, boolean isVerified) throws MessagePublishException {
+    public void publishMessage(MerchantInfoVerified merchantInfoVerified) throws MessagePublishException {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(HostMessageQueue.BASE.url);
 
@@ -32,10 +32,7 @@ public class NotificationRabbitMQ implements INotification {
             Channel channel = connection.createChannel()){
 
             channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
-            String routingKey = "payment.merchant.not_verified";
-            if (isVerified){
-                routingKey = "payment.merchant.verified";
-            }
+            String routingKey = "payment.verified";
 
             Gson gson = new Gson();
             String merchantInfoVerifiedJson = gson.toJson(merchantInfoVerified);

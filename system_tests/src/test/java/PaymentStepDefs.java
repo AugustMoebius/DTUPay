@@ -217,6 +217,7 @@ public class PaymentStepDefs {
     System.out.println("Slept on this thread; waited for refund to finish");
   }
 
+  // --------------------------------------- token already used ----------------------------------- //
   /**
    * @author Ebbe (s125015)
    * @throws Throwable
@@ -238,5 +239,26 @@ public class PaymentStepDefs {
     throw new PendingException();
   }
 
+  // --------------------------------------- Unregistered Merchant ----------------------------------- //
+    @And("^a unregistered merchant with the CVR \"([^\"]*)\" has the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
+    public void aUnregisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(String merchantCVR, String merchantFirstName, String merchantLastName, BigDecimal merchantInitialBalance) throws Throwable {
+      // Create merchant
+      this.merchant = new User();
+      this.merchant.setFirstName(merchantFirstName);
+      this.merchant.setLastName(merchantLastName);
+      this.merchant.setCprNumber(merchantCVR);
 
+      // Create Bank account for Mechant
+      try {
+        this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
+      } catch (BankServiceException_Exception e) {
+        String merchantAccountId = bankService.getAccountByCprNumber(this.merchant.getCprNumber()).getId();
+        this.bankService.retireAccount(merchantAccountId);
+
+        this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
+      }
+
+      // Will not be registered
+
+    }
 }

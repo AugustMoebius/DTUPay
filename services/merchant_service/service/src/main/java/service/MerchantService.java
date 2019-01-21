@@ -29,25 +29,18 @@ public class MerchantService {
      */
     public void handlePaymentInitialized(PaymentInitializedRequest paymentInitializedRequest) {
         String merchantCVR = paymentInitializedRequest.getMerchantId();
-        boolean isVerified = false;
         try {
             data.getMerchant(merchantCVR);
-            isVerified = true;
-        } catch (MerchantNotFoundException e) {
+            MerchantInfoVerified merchantInfoVerified =
+                    new MerchantInfoVerified(
+                            paymentInitializedRequest.getMerchantId(),
+                            paymentInitializedRequest.getPaymentAmount(),
+                            paymentInitializedRequest.getTokenId(),
+                            paymentInitializedRequest.getCustomerId());
+
+            iNotification.publishMessage(merchantInfoVerified);
+        } catch (MerchantNotFoundException | MessagePublishException e) {
            e.printStackTrace();
-        }
-
-        MerchantInfoVerified merchantInfoVerified =
-                new MerchantInfoVerified(
-                        paymentInitializedRequest.getMerchantId(),
-                        paymentInitializedRequest.getPaymentAmount(),
-                        paymentInitializedRequest.getTokenId(),
-                        paymentInitializedRequest.getCustomerId());
-
-        try {
-            iNotification.publishMessage(merchantInfoVerified, isVerified);
-        } catch (MessagePublishException e) {
-            e.printStackTrace();
         }
 
 
