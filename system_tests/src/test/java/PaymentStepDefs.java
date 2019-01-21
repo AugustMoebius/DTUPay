@@ -6,12 +6,16 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import dtu.ws.fastmoney.*;
 import payment.networking.services.PaymentService;
+import token.networking.response.TokenResponse;
+import token.networking.services.TokenService;
 
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class PaymentStepDefs {
   private final BankService bankService;
@@ -92,6 +96,7 @@ public class PaymentStepDefs {
     // STEPS
     // TODO: Refac to request token first when database impl is in place
     // - Store ID to this instance
+
     this.tokenId = tokenId;
   }
 
@@ -138,7 +143,7 @@ public class PaymentStepDefs {
     // - Verify balance
 
     System.out.println("Sleeping on this thread");
-    Thread.sleep(5000);
+    Thread.sleep(1000);
     System.out.println("Slept on this thread");
 
 
@@ -159,13 +164,37 @@ public class PaymentStepDefs {
     // - Use SOAP call to bank to retrieve Customer's account
     // - Verify balance
     System.out.println("Sleeping on this thread");
-    Thread.sleep(5000);
+    Thread.sleep(10000);
     System.out.println("Slept on this thread");
 
     Account account = this.bankService.getAccountByCprNumber(customer.getCprNumber());
     assertEquals(customerBalance, account.getBalance());
   }
 
+  /**
+   * @authour Esben
+   */
+  @And("^the token has been used$")
+  public void theTokenHasBeenUsed() {
+    TokenService ts = new TokenService();
+    Response response = ts.getTokenById(tokenId);
+    //Assert repsponse code to ensure item was found
+    assertEquals(200, response.getStatus());
+    TokenResponse token = response.readEntity(TokenResponse.class);
+    assertTrue(token.isUsed());
+  }
+  /**
+   * @authour August
+   */
+  @And("^the token is unused$")
+  public void theTokenIsUnused() throws Throwable {
+    TokenService ts = new TokenService();
+    Response response = ts.getTokenById(tokenId);
+    //Assert repsponse code to ensure item was found
+    assertEquals(200, response.getStatus());
+    TokenResponse token = response.readEntity(TokenResponse.class);
+    assertFalse(token.isUsed());
+  }
   // --------------------------------------- Refund Scenario ----------------------------------- //
 
   /**
@@ -188,7 +217,7 @@ public class PaymentStepDefs {
     assertEquals(200, response.getStatus());
 
     System.out.println("Sleeping on this thread");
-    Thread.sleep(5000);
+    Thread.sleep(1000);
     System.out.println("Slept on this thread");
   }
 
@@ -202,9 +231,4 @@ public class PaymentStepDefs {
     this.response = ps.submitRefund(tokenId);
   }
 
-  @And("^the token has been used$")
-  public void theTokenHasBeenUsed() throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
 }

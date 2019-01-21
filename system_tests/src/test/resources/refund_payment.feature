@@ -1,4 +1,4 @@
-@tagRefund
+@tagPayment
 Feature: Refund payment
 
   Scenario: Customers want a refund for a token
