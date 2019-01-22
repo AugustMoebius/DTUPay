@@ -2,8 +2,8 @@ package networking.adapters.rest.resources;
 
 import data.exceptions.TokenNotFoundException;
 import exceptions.InvalidCprException;
+import exceptions.TooManyUnusedTokensException;
 import networking.adapters.rest.requests.TokenRequest;
-import networking.adapters.rest.responses.TokenBarcodePair;
 import networking.adapters.rest.responses.TokenGeneratedResponse;
 import networking.adapters.rest.responses.TokenGetResponse;
 import service.exceptions.TokenGenerationFailedException;
@@ -11,9 +11,9 @@ import service.exceptions.TokenGenerationFailedException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.File;
 
 import static networking.adapters.rest.RestApplication.tokenService;
+
 
 @Path("token")
 public class TokenResource {
@@ -37,7 +37,7 @@ public class TokenResource {
     TokenGeneratedResponse res;
     try {
       res = tokenService.handleTokenGenerateRequests(tokenRequest);
-    } catch (TokenGenerationFailedException e) {
+    } catch (TokenGenerationFailedException | TooManyUnusedTokensException e) {
       return Response.status(Response.Status.BAD_REQUEST)
         .entity(e.getMessage()).build();
     }

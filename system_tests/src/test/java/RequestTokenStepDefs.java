@@ -1,3 +1,4 @@
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -12,7 +13,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
 
 public class RequestTokenStepDefs {
   private String cprNumber;
@@ -90,13 +91,14 @@ public class RequestTokenStepDefs {
     }
   }
 
-  @And("^that customer has already been assigned (\\d+) token$")
+  @And("^that customer has already been assigned (\\d+) unused token/s$")
   public void thatCustomerHasAlreadyBeenAssignedToken(int numberOfTokens) {
     // Request tokens to assign to user ahead of main request.
     this.existingTokens = tokenService
       .requestTokens(this.cprNumber, numberOfTokens)
       .readEntity(TokenGeneratedResponse.class);
   }
+
 
   // ERROR SCENARIOS
 
