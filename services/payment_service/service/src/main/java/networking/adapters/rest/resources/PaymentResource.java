@@ -21,10 +21,12 @@ public class PaymentResource {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   public Response submitPayment(PaymentRequest req) {
+    System.out.println("POST: Payment submit: " + req.getPaymentAmount() +", " + req.getMerchantId() + ", " + req.getTokenId());
     // Handle payment request
     try {
       RestApplication.paymentService.submitPaymentRequest(req);
     } catch (InvalidPaymentAmountException e) {
+      e.printStackTrace();
       return Response.status(Response.Status.BAD_REQUEST).build();
     }
     return Response.ok().build();

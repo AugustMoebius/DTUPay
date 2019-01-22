@@ -26,10 +26,12 @@ public class PaymentService {
      * @param req
      */
     public void submitPaymentRequest(PaymentRequest req) throws InvalidPaymentAmountException {
+        System.out.println("Paymentservice.submitPaymentRequest");
         validatePaymentReqeust(req);
 
         try {
             notificationService.publishPaymentInitialized(req);
+            System.out.println("Pushed notification for: " + req.getMerchantId());
         } catch (NotificationException e) {
             e.printStackTrace();
         }

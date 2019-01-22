@@ -1,6 +1,7 @@
 import com.google.gson.Gson;
 import data.IDataSource;
 import data.MockDatabase;
+import data.exceptions.TokenNotFoundException;
 import domain.CPRNumber;
 import exceptions.InvalidCprException;
 import networking.adapters.message_queue.domain.TokenInfo;
@@ -30,7 +31,7 @@ public class TokenServiceJUnitTest {
      * @author Ebbe Berthold (s125015)
      */
     @Test
-    public void testSavedToken() {
+    public void testSavedToken() throws TokenNotFoundException {
         CPRNumber cprNumber = tokenService.getCPRNumber("123");
         assertEquals("270271-2467", cprNumber.toString());
     }

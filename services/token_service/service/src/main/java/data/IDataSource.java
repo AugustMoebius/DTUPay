@@ -1,5 +1,6 @@
 package data;
 
+import data.exceptions.TokenNotFoundException;
 import domain.Token;
 
 /**
@@ -12,7 +13,7 @@ public interface IDataSource {
      * @param tokenID
      * @return
      */
-    Token getToken(String tokenID);
+    Token getToken(String tokenID) throws TokenNotFoundException;
 
     /**
      * @author Esben Løvendal Kruse (s172986)

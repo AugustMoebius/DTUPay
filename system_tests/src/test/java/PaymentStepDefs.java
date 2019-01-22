@@ -341,8 +341,8 @@ public class PaymentStepDefs {
     this.paymentAmount = paymentAmount;
 
     PaymentService ps = new PaymentService();
-    Response response = ps.submitPayment(merchant.getCprNumber(), paymentAmount, tokenId);
-    assertEquals(200, response.getStatus());
+    Response submissionResponse = ps.submitPayment(merchant.getCprNumber(), paymentAmount, tokenId);
+    assertEquals(200, submissionResponse.getStatus());
 
     System.out.println("Sleeping on this thread; waiting for transaction to finish");
     Thread.sleep(5000);

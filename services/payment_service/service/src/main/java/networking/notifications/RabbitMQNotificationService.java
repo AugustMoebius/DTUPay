@@ -39,9 +39,10 @@ public class RabbitMQNotificationService implements INotificationService {
             channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
             String routingKey = "payment.initialized";
             byte[] message = gson.toJson(req).getBytes(StandardCharsets.UTF_8);
-
             channel.basicPublish(EXCHANGE_NAME, routingKey, null, message);
+            System.out.println(" [Initialized] Sent '" + req.getMerchantId() + "'");
         } catch (TimeoutException | IOException e) {
+            e.printStackTrace();
             throw new MessagePublishException(e.getLocalizedMessage());
         }
     }

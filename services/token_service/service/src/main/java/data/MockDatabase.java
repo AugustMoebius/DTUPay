@@ -1,5 +1,6 @@
 package data;
 
+import data.exceptions.TokenNotFoundException;
 import domain.CPRNumber;
 import domain.Token;
 import exceptions.InvalidCprException;
@@ -43,8 +44,11 @@ public final class MockDatabase implements IDataSource {
      * @param tokenId
      * @return token
      */
-    public Token getToken(String tokenId) {
+    public Token getToken(String tokenId) throws TokenNotFoundException {
         Token token = allTokens.get(tokenId);
+        if(token == null){
+            throw new TokenNotFoundException("Token with id: " + tokenId +" was not found");
+        }
         return token;
     }
 

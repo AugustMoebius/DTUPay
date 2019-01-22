@@ -4,6 +4,7 @@ import com.google.zxing.*;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import data.IDataSource;
+import data.exceptions.TokenNotFoundException;
 import domain.CPRNumber;
 import domain.Token;
 import exceptions.InvalidCprException;
@@ -49,16 +50,16 @@ public class TokenService {
      * @param tokenId
      * @return CPRNumber
      */
-    public CPRNumber getCPRNumber(String tokenId) {
-        CPRNumber cprNumber = data.getToken(tokenId).getCprNumber();
-        return cprNumber;
+    public CPRNumber getCPRNumber(String tokenId) throws TokenNotFoundException {
+        Token token = data.getToken(tokenId);
+        return token.getCprNumber();
     }
 
     /**
      * @author Esben Løvendal Kruse (s172986)
      * @param tokenInfo
      */
-    public void handleTokenInfo(TokenInfo tokenInfo) throws TokenAlreadyUsedException {
+    public void handleTokenInfo(TokenInfo tokenInfo) throws TokenAlreadyUsedException, TokenNotFoundException {
         CPRNumber cprNumber = getCPRNumber(tokenInfo.getTokenId());
 
         // Check if token is already used
@@ -128,7 +129,7 @@ public class TokenService {
      * @return
      * @throws InvalidCprException
      */
-    public TokenGetResponse handleTokenGetRequests(String id) {
+    public TokenGetResponse handleTokenGetRequests(String id) throws TokenNotFoundException {
         Token token = data.getToken(id);
         TokenGetResponse tokenGetResponse = new TokenGetResponse(token.getId(), token.getCprNumber(), token.getBarcodeFileName(), token.isUsed());
 
@@ -198,7 +199,7 @@ public class TokenService {
      * @param tokenId
      * @return token
      */
-    public Token getTokenById(String tokenId) {
+    public Token getTokenById(String tokenId) throws TokenNotFoundException {
         return data.getToken(tokenId);
     }
 

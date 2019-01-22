@@ -1,5 +1,6 @@
 package networking.adapters.rest.resources;
 
+import data.exceptions.TokenNotFoundException;
 import exceptions.InvalidCprException;
 import networking.adapters.rest.requests.TokenRequest;
 import networking.adapters.rest.responses.TokenBarcodePair;
@@ -53,7 +54,12 @@ public class TokenResource {
   @Path("/{id}")
   @Produces(MediaType.APPLICATION_JSON)
   public TokenGetResponse GetToken(@PathParam("id") String id) {
-    TokenGetResponse tokenGetResponse = tokenService.handleTokenGetRequests(id);
+    TokenGetResponse tokenGetResponse = null;
+    try {
+      tokenGetResponse = tokenService.handleTokenGetRequests(id);
+    } catch (TokenNotFoundException e) {
+      e.printStackTrace();
+    }
 
     return tokenGetResponse;
   }
