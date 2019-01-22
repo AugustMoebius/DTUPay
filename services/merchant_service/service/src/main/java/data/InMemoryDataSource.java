@@ -1,7 +1,9 @@
 package data;
 
 import exceptions.MerchantNotFoundException;
+import management.domain.CVRNumber;
 import management.domain.Merchant;
+import management.exceptions.InvalidCvrException;
 
 import java.util.HashMap;
 
@@ -14,8 +16,13 @@ public class InMemoryDataSource implements IDataSource {
 
     public InMemoryDataSource(){
         merchants = new HashMap<String, Merchant>();
-        Merchant merchant = new Merchant("Merchant", "DK11111111");
-        merchants.put(merchant.getId(),merchant);
+        Merchant merchant = null;
+        try {
+            merchant = new Merchant("Merchant", "A/S", new CVRNumber("DK11111111"));
+            merchants.put(merchant.getCvr().getCvrNumber(),merchant);
+        } catch (InvalidCvrException e) {
+            e.printStackTrace();
+        }
     }
 
     public static IDataSource getInstance() {
@@ -24,12 +31,12 @@ public class InMemoryDataSource implements IDataSource {
 
     @Override
     public void registerMerchant(Merchant merchant) {
-        merchants.put(merchant.getCvr().toString(), merchant);
+        merchants.put(merchant.getCvr().getCvrNumber(), merchant);
     }
 
     @Override
-    public Merchant getMerchant(String merchantCVR) throws MerchantNotFoundException {
-        Merchant merchant = merchants.get(merchantCVR);
+    public Merchant getMerchant(CVRNumber merchantCVR) throws MerchantNotFoundException {
+        Merchant merchant = merchants.get(merchantCVR.getCvrNumber());
         if (merchant==null){
             throw new MerchantNotFoundException();
         }

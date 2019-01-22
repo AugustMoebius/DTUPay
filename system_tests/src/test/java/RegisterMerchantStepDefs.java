@@ -54,28 +54,24 @@ public class RegisterMerchantStepDefs {
   @When("^the merchant submits a request to register$")
   public void theMerchantSubmitsARequestToRegister() {
     // Build request object
-<<<<<<< HEAD
-    //throw new PendingException();
 
-=======
->>>>>>> 639431f7462b12e78471b09c450d7df59c152442
+    //throw new PendingException();
     MerchantService ms = new MerchantService();
     this.res = ms.registerMerchant(this.firstName, this.lastName, this.cvrNumber);
   }
 
-<<<<<<< HEAD
 
   @Then("^the registration submission succeeds$")
   public void theRegistrationSubmissionSucceeds() {
     //throw new PendingException();
 
     assertEquals(200, this.res.getStatus());
-=======
+  }
+
   @Then("^the registration submission succeeds and the merchant is registered$")
   public void theRegistrationSubmissionSucceedsAndTheMerchantIsRegistered() throws Throwable {
     throw new PendingException();
     //assertEquals(200, this.res.getStatus());
->>>>>>> 639431f7462b12e78471b09c450d7df59c152442
   }
 
 

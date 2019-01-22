@@ -7,10 +7,12 @@ import exceptions.MerchantNotFoundException;
 import exceptions.MessagePublishException;
 import management.IMerchantManagement;
 import management.domain.CVRNumber;
+import management.domain.Merchant;
 import management.exceptions.InvalidCvrException;
 import networking.adapters.message_queue.domain.MerchantInfoVerified;
 import networking.adapters.message_queue.domain.PaymentInitializedRequest;
 import networking.adapters.message_queue.notification.INotification;
+import networking.adapters.rest.requests.GetMerchantRequest;
 import networking.adapters.rest.requests.RegisterMerchantRequest;
 
 public class MerchantService {
@@ -38,7 +40,7 @@ public class MerchantService {
     public void handlePaymentInitialized(PaymentInitializedRequest paymentInitializedRequest) {
         String merchantCVR = paymentInitializedRequest.getMerchantId();
         try {
-            data.getMerchant(merchantCVR);
+            data.getMerchant(new CVRNumber(merchantCVR));
             MerchantInfoVerified merchantInfoVerified =
                     new MerchantInfoVerified(
                             paymentInitializedRequest.getMerchantId(),
@@ -47,7 +49,7 @@ public class MerchantService {
                             paymentInitializedRequest.getCustomerId());
 
             iNotification.publishMessage(merchantInfoVerified);
-        } catch (MerchantNotFoundException | MessagePublishException e) {
+        } catch (MerchantNotFoundException | MessagePublishException | InvalidCvrException e) {
            e.printStackTrace();
         }
 
@@ -60,5 +62,14 @@ public class MerchantService {
         } catch (MerchantInvalidInformation | MerchantInvalidName | InvalidCvrException e) {
             e.printStackTrace();
         }
+    }
+
+    public Merchant getMerchant(String cvr) {
+        try {
+            return merchantManagement.getMerchant(new CVRNumber(cvr));
+        } catch (MerchantNotFoundException | InvalidCvrException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

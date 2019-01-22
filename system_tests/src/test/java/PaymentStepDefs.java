@@ -91,22 +91,8 @@ public class PaymentStepDefs {
    * @author Emilie
    */
   @And("^a registered merchant with the CVR \"([^\"]*)\" has the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
-  public void aRegisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(String merchantCVR, String merchantFirstName, String merchantLastName, BigDecimal merchantInitialBalance) throws BankServiceException_Exception {
-    // Create merchant
-    this.merchant = new User();
-    this.merchant.setFirstName(merchantFirstName);
-    this.merchant.setLastName(merchantLastName);
-    this.merchant.setCprNumber(merchantCVR);
-
-    // Create Bank account for Merchant
-    try {
-      this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
-    } catch (BankServiceException_Exception e) {
-      String merchantAccountId = bankService.getAccountByCprNumber(this.merchant.getCprNumber()).getId();
-      this.bankService.retireAccount(merchantAccountId);
-
-      this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
-    }
+  public void aRegisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(String merchantCVR, String merchantFirstName, String merchantLastName, BigDecimal merchantInitialBalance) throws Throwable {
+    aUnregisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(merchantCVR,merchantFirstName,merchantLastName,merchantInitialBalance);
 
     // TODO: Register Merchant
   }
@@ -249,7 +235,6 @@ public class PaymentStepDefs {
   /**
    * @authour August
    */
-<<<<<<< HEAD
   @And("^the customer has a used token with ID \"([^\"]*)\" and an amount of (\\d+)$")
   public void theCustomerHasAUsedTokenWithIDAndAnAmountOf(String tokenId, int paymentAmount) throws InterruptedException {
     // Steps:
@@ -270,8 +255,6 @@ public class PaymentStepDefs {
 
   }
 
-=======
->>>>>>> 639431f7462b12e78471b09c450d7df59c152442
   @When("^the merchant submits a request for the refund$")
   public void theMerchantSubmitsARequestForTheRefund() throws InterruptedException {
     // Steps:
@@ -309,7 +292,9 @@ public class PaymentStepDefs {
   }
 
   // --------------------------------------- Unregistered Merchant ----------------------------------- //
-    @And("^a unregistered merchant with the CVR \"([^\"]*)\" has the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
+
+
+  @And("^a unregistered merchant with the CVR \"([^\"]*)\" has the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
     public void aUnregisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(String merchantCVR, String merchantFirstName, String merchantLastName, BigDecimal merchantInitialBalance) throws Throwable {
       // Create merchant
       this.merchant = new User();
@@ -327,11 +312,9 @@ public class PaymentStepDefs {
         this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
       }
 
-<<<<<<< HEAD
       // Will not be registered
-
     }
-=======
+
   /**
    * @author Emilie
    * @param paymentAmount
@@ -359,5 +342,4 @@ public class PaymentStepDefs {
 
   }
 
->>>>>>> 639431f7462b12e78471b09c450d7df59c152442
 }

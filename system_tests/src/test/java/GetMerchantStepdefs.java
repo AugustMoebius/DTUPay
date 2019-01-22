@@ -17,8 +17,8 @@ public class GetMerchantStepdefs {
         throw new PendingException();
     }
 
-    @Given("^a unregistered merchant with the CVR \"([^\"]*)\" has the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
-    public void aUnregisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(String arg0, String arg1, String arg2, int arg3) throws Throwable {
+    @Given("^a unregistered merchant with the CVR \"([^\"]*)\" and the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
+    public void aUnregisteredMerchantWithTheCVRAndTheNameAndABankAccountWithBalance(String arg0, String arg1, String arg2, int arg3) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
