@@ -2,6 +2,8 @@ package networking.adapters.rest.resources;
 
 import management.domain.Merchant;
 import networking.adapters.rest.RestApplication;
+import networking.adapters.rest.responses.GetMerchantResponse;
+import org.apache.tools.ant.taskdefs.Get;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -17,9 +19,8 @@ public class GetMerchantResource {
      */
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
-    public Merchant getMerchant(@PathParam("id") String id){
+    public GetMerchantResponse getMerchant(@PathParam("id") String id){
         System.out.println("GET: get merchant");
-
         return RestApplication.merchantService.getMerchant(id);
     }
 

@@ -98,7 +98,7 @@ public class PaymentStepDefs {
     this.merchant.setLastName(merchantLastName);
     this.merchant.setCprNumber(merchantCVR);
 
-    // Create Bank account for Merchant
+    // Create Bank account for GetMerchantResponse
     try {
       this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
     } catch (BankServiceException_Exception e) {
@@ -108,7 +108,7 @@ public class PaymentStepDefs {
       this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
     }
 
-    // TODO: Register Merchant
+    // TODO: Register GetMerchantResponse
   }
 
     /**
@@ -172,7 +172,7 @@ public class PaymentStepDefs {
   @And("^after the transaction, the merchant's account has balance (\\d+)$")
   public void afterTheTransactionTheMerchantSAccountHasBalance(BigDecimal merchantBalance) throws BankServiceException_Exception {
     // STEPS
-    // - Use SOAP call to bank to retrieve Merchant's account
+    // - Use SOAP call to bank to retrieve GetMerchantResponse's account
     // - Verify balance
 
     System.out.println("Verifying merchant account balance...");

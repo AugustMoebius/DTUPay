@@ -61,7 +61,7 @@ public class RegisterMerchantStepDefs {
   @Then("^the registration submission succeeds and the merchant is registered$")
   public void theRegistrationSubmissionSucceedsAndTheMerchantIsRegistered() throws Throwable {
     //throw new PendingException();
-    assertEquals(200, this.res.getStatus());
+    assertTrue(200 <= this.res.getStatus() && this.res.getStatus() < 300);
   }
 
 

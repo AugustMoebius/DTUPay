@@ -11,6 +11,7 @@ import networking.adapters.message_queue.domain.PaymentInitializedRequest;
 import networking.adapters.message_queue.notification.INotification;
 import networking.adapters.rest.requests.GetMerchantRequest;
 import networking.adapters.rest.requests.RegisterMerchantRequest;
+import networking.adapters.rest.responses.GetMerchantResponse;
 
 public class MerchantService {
 
@@ -68,9 +69,10 @@ public class MerchantService {
         }
     }
 
-    public Merchant getMerchant(String cvr) {
+    public GetMerchantResponse getMerchant(String cvr) {
         try {
-            return merchantManagement.getMerchant(new CVRNumber(cvr));
+            Merchant merchant = merchantManagement.getMerchant(new CVRNumber(cvr));
+            return new GetMerchantResponse(merchant.getFirstName(), merchant.getLastName(), merchant.getCvr().getCvrNumber());
         } catch (MerchantNotFoundException | InvalidCvrException e) {
             e.printStackTrace();
         }

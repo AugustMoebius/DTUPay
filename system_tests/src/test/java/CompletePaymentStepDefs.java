@@ -2,7 +2,7 @@ public class CompletePaymentStepDefs {
   // private Customer customer...
 
   // private token id
-  // private Merchant merchant...
+  // private GetMerchantResponse merchant...
 
 //  @Given("^a registered customer with the CPR number \"([^\"]*)\"$")
 //  public void aRegisteredCustomerWithTheCPRNumber(String arg0) throws Throwable {
@@ -38,7 +38,7 @@ public class CompletePaymentStepDefs {
 //  @And("^a registered merchant with the CVR \"([^\"]*)\" has the name \"([^\"]*)\" and a bank account with balance (\\d+)$")
 //  public void aRegisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(String arg0, String arg1, int arg2) throws Throwable {
 //    // STEPS
-//    // - Create dummy Merchant
+//    // - Create dummy GetMerchantResponse
 //    // - Create account for merchant
 //
 //    throw new PendingException();
@@ -59,7 +59,7 @@ public class CompletePaymentStepDefs {
 //  @And("^after the transaction, the merchant's account has balance (\\d+)$")
 //  public void afterTheTransactionTheMerchantSAccountHasBalance(int arg0) {
 //    // STEPS
-//    // - Use SOAP call to bank to retrieve Merchant's account
+//    // - Use SOAP call to bank to retrieve GetMerchantResponse's account
 //    // - Verify balance
 //  }
 //
