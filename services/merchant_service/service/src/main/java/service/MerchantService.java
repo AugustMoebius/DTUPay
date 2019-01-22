@@ -63,7 +63,7 @@ public class MerchantService {
     public void registerMerchant(RegisterMerchantRequest req) throws MerchantRegistrationException {
         try{
             merchantManagement.registerMerchant(req.getFirstName(), req.getLastName(), new CVRNumber(req.getCvr()));
-        } catch (MerchantInvalidInformation | MerchantInvalidName | InvalidCvrException e) {
+        } catch (MerchantInvalidInformation | MerchantInvalidName | MerchantAlreadyExistException | InvalidCvrException e) {
             throw new MerchantRegistrationException(e.getMessage());
         }
     }
