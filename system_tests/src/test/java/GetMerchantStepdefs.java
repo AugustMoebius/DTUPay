@@ -18,13 +18,13 @@ public class GetMerchantStepdefs {
     private String firstName, lastName, cvrNumber;
     private Response res;
 
-    public GetMerchantStepdefs(){
+    public GetMerchantStepdefs() {
         this.registerMerchantStepDefs = new RegisterMerchantStepDefs();
         this.merchantService = new MerchantService();
     }
 
-    @Given("^a unregistered merchant with the CVR \"([^\"]*)\" has the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
-    public void aUnregisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(String firstName, String lastName, String cvrNumber, int merchantBalance) throws Throwable {
+    @Given("^a registered merchant with the CVR \"([^\"]*)\" and has the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
+    public void aRegisteredMerchantWithTheCVRAndHasTheNameAndABankAccountWithBalance(String firstName, String lastName, String cvrNumber, int merchantBalance) throws Throwable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.cvrNumber = cvrNumber;

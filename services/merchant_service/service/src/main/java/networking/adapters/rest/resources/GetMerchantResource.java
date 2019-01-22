@@ -1,15 +1,15 @@
 package networking.adapters.rest.resources;
 
-import management.domain.Merchant;
+import management.exceptions.MerchantServiceException;
 import networking.adapters.rest.RestApplication;
 import networking.adapters.rest.responses.GetMerchantResponse;
-import org.apache.tools.ant.taskdefs.Get;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("merchant/{id}")
 public class GetMerchantResource {
@@ -19,9 +19,17 @@ public class GetMerchantResource {
      */
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
-    public GetMerchantResponse getMerchant(@PathParam("id") String id){
+    public Response getMerchant(@PathParam("id") String id){
         System.out.println("GET: get merchant");
-        return RestApplication.merchantService.getMerchant(id);
+        GetMerchantResponse merchantResponse;
+        try {
+            merchantResponse = RestApplication.merchantService.getMerchant(id);
+        } catch (MerchantServiceException e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(e.getMessage()).build();
+        }
+
+        return Response.status(Response.Status.ACCEPTED).entity(merchantResponse).build();
     }
 
 
