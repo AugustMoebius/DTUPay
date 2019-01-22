@@ -38,7 +38,7 @@ public class RequestTokenStepDefs {
    * @author Esben Løvendal Kruse (s172986)
    * @param numberOfTokens
    */
-  @When("^the customer submits a request for (\\d+) token/s$")
+  @When("^the customer submits a request for (-?\\d+) token/s$")
   public void theCustomerSubmitsARequestForToken(int numberOfTokens) {
     this.tokenService = new TokenService();
     this.tokenGeneratedResponse = tokenService.requestTokens(this.cprNumber, numberOfTokens);
@@ -58,5 +58,11 @@ public class RequestTokenStepDefs {
     for (TokenBarcodePair pair : this.tokenGeneratedResponse.getTokenBarcodePairs()) {
       assertEquals(200, this.tokenService.getBarcodeImage(pair.getBarcodeRelativePath()).getStatus());
     }
+  }
+
+  @Then("^customer receives and error message \"([^\"]*)\"$")
+  public void customerReceivesAndErrorMessage(String errorMessage) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
   }
 }

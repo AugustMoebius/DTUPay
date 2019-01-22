@@ -28,3 +28,8 @@ Feature: Request token
     When the customer submits a request for 5 token/s
     Then customer receives 5 token/s containing an ID and a barcode URL
     And customer can access the barcode via the URL
+
+  Scenario: Customer requests tokens success scenario
+    Given a registered customer with the CPR "130291-1253"
+    When the customer submits a request for -1 token/s
+    Then customer receives and error message "Must request between 1-5 tokens"
