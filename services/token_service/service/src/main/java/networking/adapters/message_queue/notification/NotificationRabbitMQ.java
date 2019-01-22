@@ -32,15 +32,18 @@ public class NotificationRabbitMQ implements INotification {
              Channel channel = connection.createChannel()) {
 
             channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
-            String routingKey = "payment.verified";
+            String routingKeyMerchant = "payment.signed";
 
             // Serialize message
             Gson gson = new Gson();
             String tokenInfoVerfiedJson = gson.toJson(message);
 
-            channel.basicPublish(EXCHANGE_NAME, routingKey, null, tokenInfoVerfiedJson.getBytes());
+            channel.basicPublish(EXCHANGE_NAME,
+                    routingKeyMerchant,
+                    null,
+                    tokenInfoVerfiedJson.getBytes());
 
-            System.out.println(" [x] Sent '" + tokenInfoVerfiedJson + "'");
+            System.out.println(" [signed] Sent '" + tokenInfoVerfiedJson + "'");
         }
     }
 }

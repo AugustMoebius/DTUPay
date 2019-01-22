@@ -10,6 +10,7 @@ public class Merchant {
         this.cvr = cvr;
     }
 
+
     public String getFirstName() {
         return firstName;
     }

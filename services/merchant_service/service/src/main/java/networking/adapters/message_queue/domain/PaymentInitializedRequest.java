@@ -7,13 +7,13 @@ public class PaymentInitializedRequest {
     private String merchantId;
     private int paymentAmount;
     private String tokenId;
-    private String customerId;
+    private String cprNumber;
 
     public PaymentInitializedRequest(){
         this.merchantId = merchantId;
         this.paymentAmount = paymentAmount;
         this.tokenId = tokenId;
-        this.customerId = customerId;
+        this.cprNumber = cprNumber;
     }
 
     public String getMerchantId() {
@@ -28,7 +28,7 @@ public class PaymentInitializedRequest {
         return tokenId;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public String getCprNumber() {
+        return cprNumber;
     }
 }

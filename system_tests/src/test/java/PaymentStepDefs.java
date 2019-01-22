@@ -6,6 +6,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import customer.networking.services.CustomerService;
 import dtu.ws.fastmoney.*;
+import merchant.networking.services.MerchantService;
+import org.junit.Assert;
 import payment.networking.services.PaymentService;
 import token.networking.response.TokenBarcodePair;
 import token.networking.response.TokenResponse;
@@ -77,8 +79,8 @@ public class PaymentStepDefs {
 
     // Register Customer
     CustomerService customerService = new CustomerService();
-    Response response = customerService.registerCustomer(customerFirstName, customerLastName, customerCPR);
-    assertEquals(200,response.getStatus());
+    Response res = customerService.registerCustomer(customerFirstName, customerLastName, customerCPR);
+    assertEquals(200,res.getStatus());
 
     System.out.println("Sleeping on this thread; Registering Customer");
     Thread.sleep(1000);
@@ -89,24 +91,17 @@ public class PaymentStepDefs {
    * @author Emilie
    */
   @And("^a registered merchant with the CVR \"([^\"]*)\" has the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
-  public void aRegisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(String merchantCVR, String merchantFirstName, String merchantLastName, BigDecimal merchantInitialBalance) throws BankServiceException_Exception {
-    // Create merchant
-    this.merchant = new User();
-    this.merchant.setFirstName(merchantFirstName);
-    this.merchant.setLastName(merchantLastName);
-    this.merchant.setCprNumber(merchantCVR);
+  public void aRegisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(String merchantCVR, String merchantFirstName, String merchantLastName, BigDecimal merchantInitialBalance) throws Throwable {
+    aUnregisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(merchantCVR,merchantFirstName,merchantLastName,merchantInitialBalance);
 
-    // Create Bank account for Merchant
-    try {
-      this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
-    } catch (BankServiceException_Exception e) {
-      String merchantAccountId = bankService.getAccountByCprNumber(this.merchant.getCprNumber()).getId();
-      this.bankService.retireAccount(merchantAccountId);
+    // Register Merchant
+    MerchantService ms = new MerchantService();
+    Response res = ms.registerMerchant(merchantFirstName, merchantLastName, merchantCVR);
+    assertEquals(200,res.getStatus());
 
-      this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
-    }
-
-    // TODO: Register Merchant
+    System.out.println("Sleeping on this thread; Registering Merchant");
+    Thread.sleep(1000);
+    System.out.println("Slept on this thread; Registering Merchant");
   }
 
     /**
@@ -192,6 +187,9 @@ public class PaymentStepDefs {
     assertEquals(customerBalance, account.getBalance());
   }
 
+
+//  -------------------------------------- Scenario:Failing payment because of already used token --------------------------------------
+
   /**
    * @authour Esben
    */
@@ -272,6 +270,26 @@ public class PaymentStepDefs {
   /**
    * @authour August
    */
+  @And("^the customer has a used token with ID \"([^\"]*)\" and an amount of (\\d+)$")
+  public void theCustomerHasAUsedTokenWithIDAndAnAmountOf(String tokenId, int paymentAmount) throws InterruptedException {
+    // Steps:
+    // - TODO: Refac to request token first when database impl is in place
+    // - Use token
+    // - (Optional) Get token to assert used
+
+    this.tokenId = tokenId;
+    this.paymentAmount = paymentAmount;
+
+    PaymentService ps = new PaymentService();
+    Response response = ps.submitPayment(merchant.getCprNumber(), paymentAmount, tokenId);
+    assertEquals(200, response.getStatus());
+
+    System.out.println("Sleeping on this thread; waiting for transaction to finish");
+    Thread.sleep(10000);
+    System.out.println("Slept on this thread; waited for transaction to finish");
+
+  }
+
   @When("^the merchant submits a request for the refund$")
   public void theMerchantSubmitsARequestForTheRefund() throws InterruptedException {
     // Steps:
@@ -286,6 +304,7 @@ public class PaymentStepDefs {
     System.out.println("Slept on this thread; waited for refund to finish");
   }
 
+  // --------------------------------------- token already used ----------------------------------- //
   /**
    * @author Emilie
    * @param paymentAmount
@@ -309,5 +328,30 @@ public class PaymentStepDefs {
     Thread.sleep(5000);
     System.out.println("Slept on this thread; waited for transaction to finish");
   }
+
+  // --------------------------------------- Unregistered Merchant ----------------------------------- //
+
+
+  @And("^a unregistered merchant with the CVR \"([^\"]*)\" has the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
+    public void aUnregisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(String merchantCVR, String merchantFirstName, String merchantLastName, BigDecimal merchantInitialBalance) throws Throwable {
+      // Create merchant
+      this.merchant = new User();
+      this.merchant.setFirstName(merchantFirstName);
+      this.merchant.setLastName(merchantLastName);
+      this.merchant.setCprNumber(merchantCVR);
+
+      // Create Bank account for Mechant
+      try {
+        this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
+      } catch (BankServiceException_Exception e) {
+        String merchantAccountId = bankService.getAccountByCprNumber(this.merchant.getCprNumber()).getId();
+        this.bankService.retireAccount(merchantAccountId);
+
+        this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
+      }
+
+      // Will not be registered
+    }
+
 
 }

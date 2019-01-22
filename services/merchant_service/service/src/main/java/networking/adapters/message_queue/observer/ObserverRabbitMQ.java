@@ -59,7 +59,7 @@ public class ObserverRabbitMQ implements IObserver{
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String responseMessage = new String(delivery.getBody(), StandardCharsets.UTF_8);
-            System.out.println(" [x] Received '" + responseMessage + "'");
+            System.out.println(" [signed] Received '" + responseMessage + "'");
 
             Gson gson = new Gson();
             PaymentInitializedRequest paymentInitializedRequest = gson.fromJson(responseMessage, PaymentInitializedRequest.class);

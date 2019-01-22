@@ -4,5 +4,5 @@ import exceptions.MessagePublishException;
 import networking.adapters.message_queue.domain.MerchantInfoVerified;
 
 public interface INotification {
-    void publishMessage(MerchantInfoVerified merchantInfoVerified, boolean isVerified) throws MessagePublishException;
+    void publishMessage(MerchantInfoVerified merchantInfoVerified) throws MessagePublishException;
     }
