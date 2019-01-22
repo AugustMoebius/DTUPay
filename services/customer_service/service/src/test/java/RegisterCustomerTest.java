@@ -64,7 +64,7 @@ public class RegisterCustomerTest {
         // Data
         String firstName = "Clara";
         String lastName = "Hansen";
-        String cprString = "999999-9999";
+        String cprString = "999999-999";
 
         int customersInDatabase = data.getAmountOfCustomers();
 

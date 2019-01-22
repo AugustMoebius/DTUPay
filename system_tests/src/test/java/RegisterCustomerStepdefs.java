@@ -3,6 +3,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import customer.networking.services.CustomerService;
+import services.CprService;
 
 import javax.ws.rs.core.Response;
 
@@ -21,11 +22,12 @@ public class RegisterCustomerStepdefs {
      * @param cpr
      * @author Emilie
      */
-    @Given("^a name \"([^\"]*)\" \"([^\"]*)\" and CPR \"([^\"]*)\"$")
-    public void aNameAndCPR(String firstName, String lastName, String cpr) {
+    @Given("^a name \"([^\"]*)\" \"([^\"]*)\"$")
+    public void aNameAndCPR(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.cpr = cpr;
+
+        this.cpr = CprService.generateCpr();
     }
 
     /**

@@ -24,6 +24,8 @@ import java.util.concurrent.TimeoutException;
 
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import networking.adapters.rest.responses.TokenGetResponse;
+import service.exceptions.InvalidTokenCountException;
+import service.exceptions.TokenGenerationFailedException;
 
 
 public class TokenService {
@@ -90,10 +92,24 @@ public class TokenService {
      * @author Esben Løvendal Kruse (s172986)
      * @param tokenRequest
      * @return
-     * @throws InvalidCprException
+     * @throws TokenGenerationFailedException
      */
-    public TokenGeneratedResponse handleTokenGenerateRequests(TokenRequest tokenRequest) throws InvalidCprException {
-        List<Token> tokens = this.generateTokens(new CPRNumber(tokenRequest.getCprNumber()), tokenRequest.getNumberOfTokens());
+    public TokenGeneratedResponse handleTokenGenerateRequests(TokenRequest tokenRequest) throws TokenGenerationFailedException {
+        // Extract and validate CPR
+        CPRNumber cpr;
+        try {
+            cpr = new CPRNumber(tokenRequest.getCprNumber());
+        } catch (InvalidCprException e) {
+            throw new TokenGenerationFailedException(e.getMessage());
+        }
+
+        // Extract and validate no. of tokens requested
+        int tokenCount = tokenRequest.getNumberOfTokens();
+        if (tokenCount < 1 || tokenCount > 5) {
+            throw new InvalidTokenCountException();
+        }
+
+        List<Token> tokens = this.generateTokens(cpr, tokenRequest.getNumberOfTokens());
         List<TokenBarcodePair> tokenBarcodePairs = new ArrayList<>();
 
         for (Token t : tokens) {
@@ -149,7 +165,7 @@ public class TokenService {
         return token;
     }
 
-    private BitMatrix generateQRCode(Token token){
+    private BitMatrix generateQRCode(Token token) {
         int height = 400;
         int width = 400;
 

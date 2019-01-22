@@ -1,6 +1,6 @@
 Feature: Register a customer in DTUPay
 
   Scenario: Register a correct customer in DTUPay
-    Given a name "Peter" "Hansen" and CPR "120245-2525"
+    Given a name "Peter" "Hansen"
     When registering a customer
     Then a new customer is added to DTUPay

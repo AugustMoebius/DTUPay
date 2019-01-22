@@ -9,7 +9,9 @@ import dtu.ws.fastmoney.*;
 import merchant.networking.services.MerchantService;
 import org.junit.Assert;
 import payment.networking.services.PaymentService;
+import services.CprService;
 import token.networking.response.TokenBarcodePair;
+import token.networking.response.TokenGeneratedResponse;
 import token.networking.response.TokenResponse;
 import token.networking.services.TokenService;
 
@@ -59,13 +61,16 @@ public class PaymentStepDefs {
   /**
    * @author Sarah
    */
-  @Given("^a registered customer with the CPR \"([^\"]*)\" has the name is \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
-  public void aRegisteredCustomerWithTheCPRHasTheNameIsAndABankAccountWithBalance(String customerCPR, String customerFirstName, String customerLastName, BigDecimal customerInitialBalance) throws BankServiceException_Exception, InterruptedException {
+  @Given("^a registered customer whose name is \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
+  public void aRegisteredCustomerWhoseNameIsAndABankAccountWithBalance(String customerFirstName, String customerLastName, BigDecimal customerInitialBalance) throws Throwable {
     // Create Customer
     this.customer = new User();
     this.customer.setFirstName(customerFirstName);
     this.customer.setLastName(customerLastName);
-    this.customer.setCprNumber(customerCPR);
+
+    // Generate CPR number
+    String customerCpr = CprService.generateCpr();
+    this.customer.setCprNumber(customerCpr);
 
     // Create Bank account for Customer
     try {
@@ -79,8 +84,8 @@ public class PaymentStepDefs {
 
     // Register Customer
     CustomerService customerService = new CustomerService();
-    Response res = customerService.registerCustomer(customerFirstName, customerLastName, customerCPR);
-    assertEquals(200,res.getStatus());
+    Response res = customerService.registerCustomer(customerFirstName, customerLastName, customerCpr);
+    assertEquals(200, res.getStatus());
 
     System.out.println("Sleeping on this thread; Registering Customer");
     Thread.sleep(1000);
@@ -116,7 +121,11 @@ public class PaymentStepDefs {
       // - Set token ID with response.
       // Request single token to use in following steps
       TokenService tokenService = new TokenService();
-      List<TokenBarcodePair> tokenBarcodePair = tokenService.requestTokens(customer.getCprNumber(), 1).getTokenBarcodePairs();
+      Response res = tokenService.requestTokens(customer.getCprNumber(), 1);
+      List<TokenBarcodePair> tokenBarcodePair = res
+        .readEntity(TokenGeneratedResponse.class)
+        .getTokenBarcodePairs();
+
       assertEquals("Expected to receive one token/barcode pair", tokenBarcodePair.size(), 1);
       this.tokenId = tokenBarcodePair.get(0).getTokenId();
 
@@ -214,16 +223,21 @@ public class PaymentStepDefs {
     TokenResponse token = response.readEntity(TokenResponse.class);
     assertFalse(token.isUsed());
   }
-    /**
-     * @authour August
-     */
+  /**
+   * @authour August
+   */
   @And("^the customer has a used token$")
   public void theCustomerHasAUsedToken() throws InterruptedException {
     // Create and retrieve token
     TokenService tokenService = new TokenService();
-    List<TokenBarcodePair> tokenBarcodePair = tokenService.requestTokens(customer.getCprNumber(), 1).getTokenBarcodePairs();
-    assertEquals("Expected to receive one token/barcode pair", tokenBarcodePair.size(), 1);
-    this.tokenId = tokenBarcodePair.get(0).getTokenId();
+
+    Response res = tokenService.requestTokens(customer.getCprNumber(), 1);
+    List<TokenBarcodePair> tokenBarcodePairs = res
+      .readEntity(TokenGeneratedResponse.class)
+      .getTokenBarcodePairs();
+
+    assertEquals("Expected to receive one token/barcode pair", tokenBarcodePairs.size(), 1);
+    this.tokenId = tokenBarcodePairs.get(0).getTokenId();
 
     // Submit a zero payment to use token
     PaymentService ps = new PaymentService();
@@ -280,6 +294,7 @@ public class PaymentStepDefs {
     this.tokenId = tokenId;
     this.paymentAmount = paymentAmount;
 
+    // Submit payment to use token and create initial transaction
     PaymentService ps = new PaymentService();
     Response response = ps.submitPayment(merchant.getCprNumber(), paymentAmount, tokenId);
     assertEquals(200, response.getStatus());
@@ -315,7 +330,12 @@ public class PaymentStepDefs {
     // - Use token
     // - (Optional) Get token to assert used
     TokenService tokenService = new TokenService();
-    List<TokenBarcodePair> tokenBarcodePair = tokenService.requestTokens(customer.getCprNumber(), 1).getTokenBarcodePairs();
+
+    Response res = tokenService.requestTokens(customer.getCprNumber(), 1);
+    List<TokenBarcodePair> tokenBarcodePair = res
+      .readEntity(TokenGeneratedResponse.class)
+      .getTokenBarcodePairs();
+
     assertEquals("Expected to receive one token/barcode pair", tokenBarcodePair.size(), 1);
     this.tokenId = tokenBarcodePair.get(0).getTokenId();
     this.paymentAmount = paymentAmount;
@@ -333,25 +353,23 @@ public class PaymentStepDefs {
 
 
   @And("^a unregistered merchant with the CVR \"([^\"]*)\" has the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
-    public void aUnregisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(String merchantCVR, String merchantFirstName, String merchantLastName, BigDecimal merchantInitialBalance) throws Throwable {
-      // Create merchant
-      this.merchant = new User();
-      this.merchant.setFirstName(merchantFirstName);
-      this.merchant.setLastName(merchantLastName);
-      this.merchant.setCprNumber(merchantCVR);
+  public void aUnregisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(String merchantCVR, String merchantFirstName, String merchantLastName, BigDecimal merchantInitialBalance) throws Throwable {
+    // Create merchant
+    this.merchant = new User();
+    this.merchant.setFirstName(merchantFirstName);
+    this.merchant.setLastName(merchantLastName);
+    this.merchant.setCprNumber(merchantCVR);
 
-      // Create Bank account for Mechant
-      try {
-        this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
-      } catch (BankServiceException_Exception e) {
-        String merchantAccountId = bankService.getAccountByCprNumber(this.merchant.getCprNumber()).getId();
-        this.bankService.retireAccount(merchantAccountId);
+    // Create Bank account for Mechant
+    try {
+      this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
+    } catch (BankServiceException_Exception e) {
+      String merchantAccountId = bankService.getAccountByCprNumber(this.merchant.getCprNumber()).getId();
+      this.bankService.retireAccount(merchantAccountId);
 
-        this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
-      }
-
-      // Will not be registered
+      this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
     }
 
-
+    // Will not be registered
+  }
 }
