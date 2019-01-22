@@ -10,7 +10,6 @@ import merchant.networking.services.MerchantService;
 import org.junit.Assert;
 import payment.networking.services.PaymentService;
 import token.networking.response.TokenBarcodePair;
-import token.networking.response.TokenGeneratedResponse;
 import token.networking.response.TokenResponse;
 import token.networking.services.TokenService;
 
@@ -218,29 +217,54 @@ public class PaymentStepDefs {
     /**
      * @authour August
      */
-    @And("^the customer has a used token$")
-    public void theCustomerHasAUsedToken() throws InterruptedException {
-      // Create and retrieve token
-      TokenService tokenService = new TokenService();
-      List<TokenBarcodePair> tokenBarcodePair = tokenService.requestTokens(customer.getCprNumber(), 1).getTokenBarcodePairs();
-      assertEquals("Expected to receive one token/barcode pair", tokenBarcodePair.size(), 1);
-      this.tokenId = tokenBarcodePair.get(0).getTokenId();
+  @And("^the customer has a used token$")
+  public void theCustomerHasAUsedToken() throws InterruptedException {
+    // Create and retrieve token
+    TokenService tokenService = new TokenService();
+    List<TokenBarcodePair> tokenBarcodePair = tokenService.requestTokens(customer.getCprNumber(), 1).getTokenBarcodePairs();
+    assertEquals("Expected to receive one token/barcode pair", tokenBarcodePair.size(), 1);
+    this.tokenId = tokenBarcodePair.get(0).getTokenId();
 
-      // Submit a zero payment to use token
-      PaymentService ps = new PaymentService();
-      Response response = ps.submitPayment(merchant.getCprNumber(), 0, tokenId); //
-      assertEquals(200, response.getStatus());
+    // Submit a zero payment to use token
+    PaymentService ps = new PaymentService();
+    Response response = ps.submitPayment(merchant.getCprNumber(), 0, tokenId); //
+    assertEquals(200, response.getStatus());
 
-      System.out.println("Sleeping on this thread; waiting for transaction to finish");
-      Thread.sleep(5000);
-      System.out.println("Slept on this thread; waited for transaction to finish");
+    System.out.println("Sleeping on this thread; waiting for transaction to finish");
+    Thread.sleep(5000);
+    System.out.println("Slept on this thread; waited for transaction to finish");
 
-      // Assert token is not used
-      Response tokenResponse = tokenService.getTokenById(tokenId);
-      assertEquals(200, tokenResponse.getStatus());
-      TokenResponse token = tokenResponse.readEntity(TokenResponse.class);
-      assertTrue(token.isUsed());
-    }
+    // Assert token is not used
+    Response tokenResponse = tokenService.getTokenById(tokenId);
+    assertEquals(200, tokenResponse.getStatus());
+    TokenResponse token = tokenResponse.readEntity(TokenResponse.class);
+    assertTrue(token.isUsed());
+  }
+
+  @And("^the customer has an unknown token$")
+  public void theCustomerHasAnUnknownToken() throws Throwable {
+    // Set token ID to a token not known to token service.
+    this.tokenId = "Invalid_TokenId";
+  }
+
+  /**
+   * @authour Ebbe
+   * @param negativeAmount
+   * @throws Throwable
+   */
+  @And("^that the merchant wishes to register a payment of negative amount ([-]?\\d+)$")
+  public void   thatTheMerchantWishesToRegisterAPaymentOfNegativeAmount(int negativeAmount) {
+    this.paymentAmount = negativeAmount;
+  }
+
+  /**
+   * @author August
+   * @throws Throwable
+   */
+  @Then("^the merchant receives a failure response$")
+  public void theMerchantReceivesAFailureResponse() throws Throwable {
+    assertEquals(400, response.getStatus());
+  }
   // --------------------------------------- Refund Scenario ----------------------------------- //
 
   /**
@@ -281,27 +305,6 @@ public class PaymentStepDefs {
   }
 
   // --------------------------------------- token already used ----------------------------------- //
-  /**
-   * @author Ebbe (s125015)
-   * @throws Throwable
-   */
-
-  @And("^the token is identified as already used$")
-  public void theTokenIsIdentifiedAsAlreadyUsed() throws Throwable {
-
-    throw new PendingException();
-  }
-
-  /**
-   * @author Ebbe (s125015)
-   * @throws Throwable
-   */
-  @Then("^the submission fails$")
-  public void theSubmissionFails() throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
-  }
-
   /**
    * @author Emilie
    * @param paymentAmount
