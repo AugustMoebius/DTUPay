@@ -23,7 +23,7 @@ Feature: Customer gets token and Merchant scans and request payment
 
     Scenario: Failing payment because of unknown token
       Given a registered customer with the CPR "270271-1234" has the name is "Hans" "Hansen" and a bank account with balance 500
-      And a registered merchant with the CVR "DK11111111" has the name "Merchant" "Merchantsen A/S" and a bank account with balance 200
+      And a registered merchant with the CVR "DK11111114" has the name "Merchant" "Merchantsen" and a bank account with balance 200
       And the customer has an unknown token
       And that the merchant wishes to register a payment of amount 100
       When the merchant submits a request for the payment
@@ -33,7 +33,7 @@ Feature: Customer gets token and Merchant scans and request payment
 
    Scenario: Failing payment because of negative payment amount
       Given a registered customer with the CPR "270271-1234" has the name is "Hans" "Hansen" and a bank account with balance 500
-      And a registered merchant with the CVR "DK11111111" has the name "Merchant" "Merchantsen A/S" and a bank account with balance 200
+      And a registered merchant with the CVR "DK11111115" has the name "Merchant" "Merchantsen" and a bank account with balance 200
       And the customer has an unknown token
       And that the merchant wishes to register a payment of negative amount -100
       When the merchant submits a request for the payment
@@ -44,7 +44,7 @@ Feature: Customer gets token and Merchant scans and request payment
 
     Scenario: Failing payment because of unregistered merchant
       Given a registered customer with the CPR "270271-1234" has the name is "Hans" "Hansen" and a bank account with balance 500
-      And a unregistered merchant with the CVR "DK11111114" has the name "Merchant" "Merchantsen" and a bank account with balance 200
+      And a unregistered merchant with the CVR "DK11111116" has the name "Merchant" "Merchantsen" and a bank account with balance 200
       And the customer has a token
       And that the merchant wishes to register a payment of amount 30
       When the merchant submits a request for the payment
