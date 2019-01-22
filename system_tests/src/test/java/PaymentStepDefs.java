@@ -1,4 +1,3 @@
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -7,9 +6,9 @@ import cucumber.api.java.en.When;
 import customer.networking.services.CustomerService;
 import dtu.ws.fastmoney.*;
 import merchant.networking.services.MerchantService;
-import org.junit.Assert;
 import payment.networking.services.PaymentService;
 import services.CprService;
+import services.CvrService;
 import token.networking.response.TokenBarcodePair;
 import token.networking.response.TokenGeneratedResponse;
 import token.networking.response.TokenResponse;
@@ -19,9 +18,7 @@ import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class PaymentStepDefs {
   private final BankService bankService;
@@ -95,19 +92,37 @@ public class PaymentStepDefs {
   /**
    * @author Emilie
    */
-  @And("^a registered merchant with the CVR \"([^\"]*)\" has the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
-  public void aRegisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(String merchantCVR, String merchantFirstName, String merchantLastName, BigDecimal merchantInitialBalance) throws Throwable {
-    aUnregisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(merchantCVR,merchantFirstName,merchantLastName,merchantInitialBalance);
+  @And("^a registered merchant has a CVR, the name \"([^\"]*)\" \"([^\"]*)\", and a bank account with balance (\\d+)$")
+  public void aRegisteredMerchantHasACVRTheNameAndABankAccountWithBalance(String merchantFirstName, String merchantLastName, BigDecimal merchantInitialBalance) throws InterruptedException, BankServiceException_Exception {
+    // Create merchant
+    this.merchant = new User();
+    this.merchant.setFirstName(merchantFirstName);
+    this.merchant.setLastName(merchantLastName);
+
+    String merchantCVR = CvrService.generateCvr();
+    this.merchant.setCprNumber(merchantCVR);
+
+    // Create Bank account for Merchant
+    try {
+      this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
+    } catch (BankServiceException_Exception e) {
+      String merchantAccountId = bankService.getAccountByCprNumber(this.merchant.getCprNumber()).getId();
+      this.bankService.retireAccount(merchantAccountId);
+
+      this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
+    }
 
     // Register Merchant
     MerchantService ms = new MerchantService();
     Response res = ms.registerMerchant(merchantFirstName, merchantLastName, merchantCVR);
-    assertEquals(200,res.getStatus());
+
+    assertEquals(200, res.getStatus());
 
     System.out.println("Sleeping on this thread; Registering Merchant");
     Thread.sleep(1000);
     System.out.println("Slept on this thread; Registering Merchant");
   }
+
 
     /**
      * A request for a single token is sent to the token service.
@@ -358,6 +373,30 @@ public class PaymentStepDefs {
     this.merchant = new User();
     this.merchant.setFirstName(merchantFirstName);
     this.merchant.setLastName(merchantLastName);
+    this.merchant.setCprNumber(merchantCVR);
+
+    // Create Bank account for Mechant
+    try {
+      this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
+    } catch (BankServiceException_Exception e) {
+      String merchantAccountId = bankService.getAccountByCprNumber(this.merchant.getCprNumber()).getId();
+      this.bankService.retireAccount(merchantAccountId);
+
+      this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
+    }
+
+    // Will not be registered
+  }
+
+
+  @And("^a unregistered merchant has a CVR, the name \"([^\"]*)\" \"([^\"]*)\", and a bank account with balance (\\d+)$")
+  public void aUnregisteredMerchantHasACVRTheNameAndABankAccountWithBalance(String merchantFirstName, String merchantLastName, BigDecimal merchantInitialBalance) throws Throwable {
+    // Create merchant
+    this.merchant = new User();
+    this.merchant.setFirstName(merchantFirstName);
+    this.merchant.setLastName(merchantLastName);
+
+    String merchantCVR = CvrService.generateCvr();
     this.merchant.setCprNumber(merchantCVR);
 
     // Create Bank account for Mechant

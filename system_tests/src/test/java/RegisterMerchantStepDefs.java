@@ -9,6 +9,7 @@ import dtu.ws.fastmoney.BankServiceException_Exception;
 import dtu.ws.fastmoney.BankServiceService;
 import dtu.ws.fastmoney.User;
 import merchant.networking.services.MerchantService;
+import services.CvrService;
 
 import static org.junit.Assert.*;
 
@@ -23,23 +24,39 @@ public class RegisterMerchantStepDefs {
   private Response res;
   private BankService bankService;
 
-  public RegisterMerchantStepDefs(){
+  public RegisterMerchantStepDefs() {
     this.bankService = new BankServiceService().getBankServicePort();
   }
 
   /**
    * @author Sarah
+   * @param firstName
+   * @param lastName
+   * @throws Throwable
+   */
+  @Given("^a merchant with a CVR number and the name \"([^\"]*)\" \"([^\"]*)\"$")
+  public void aMerchantWithACVRNumberAndTheName(String firstName, String lastName) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    this.firstName = firstName;
+    this.lastName = lastName;
+
+    this.cvrNumber = CvrService.generateCvr();
+  }
+
+  /**
+   * @author Sebastian
    * @param cvrNumber
    * @param firstName
    * @param lastName
    * @throws Throwable
    */
-  @Given("^a merchant with the CVR number \"([^\"]*)\", with the name \"([^\"]*)\" \"([^\"]*)\"$")
-  public void aMerchantWithTheCVRNumberWithTheName(String cvrNumber, String firstName, String lastName) throws Throwable {
+  @Given("^a merchant with the invalid CVR number \"([^\"]*)\" and the name \"([^\"]*)\" \"([^\"]*)\"$")
+  public void aMerchantWithTheInvalidCVRNumberAndTheName(String cvrNumber, String firstName, String lastName) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
-    this.cvrNumber = cvrNumber;
     this.firstName = firstName;
     this.lastName = lastName;
+
+    this.cvrNumber = cvrNumber;
   }
 
   /**
@@ -106,6 +123,18 @@ public class RegisterMerchantStepDefs {
     // Receives a 400 status code and a message in a body?
     assertEquals(400, this.res.getStatus());
     assertEquals(errorMessage, res.readEntity(String.class));
-    //throw new PendingException();
   }
+
+  @Then("^the merchant submission fails and he gets an error message where _cvr_ is merchant CVR: \"([^\"]*)\"$")
+  public void theMerchantSubmissionFailsAndHeGetsAnErrorMessageWhere_cvr_IsMerchantCVR(String errorMsg) {
+    assertEquals(400, this.res.getStatus());
+
+    // Build expected string
+    String expErrorMsg = errorMsg.replace("_cvr_", this.cvrNumber);
+    String actErrorMsg = this.res.readEntity(String.class);
+
+    assertEquals(expErrorMsg, actErrorMsg);
+  }
+
+
 }
