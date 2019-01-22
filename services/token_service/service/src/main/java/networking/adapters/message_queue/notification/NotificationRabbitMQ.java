@@ -42,7 +42,7 @@ public class NotificationRabbitMQ implements INotification {
             //channel.basicPublish(EXCHANGE_NAME, routingKey, null, tokenInfoVerfiedJson.getBytes());
             channel.basicPublish(EXCHANGE_NAME, routingKeyMerchant, null, tokenInfoVerfiedJson.getBytes());
 
-            System.out.println(" [x] Sent '" + tokenInfoVerfiedJson + "'");
+            System.out.println(" [signed] Sent '" + tokenInfoVerfiedJson + "'");
         }
     }
 }

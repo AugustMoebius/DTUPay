@@ -100,9 +100,9 @@ public class PaymentStepDefs {
     Response res = ms.registerMerchant(merchantFirstName, merchantLastName, merchantCVR);
     assertEquals(200,res.getStatus());
 
-    System.out.println("Sleeping on this thread; Registering Customer");
+    System.out.println("Sleeping on this thread; Registering Merchant");
     Thread.sleep(1000);
-    System.out.println("Slept on this thread; Registering Customer");
+    System.out.println("Slept on this thread; Registering Merchant");
   }
 
     /**

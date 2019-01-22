@@ -38,6 +38,7 @@ public class NotificationRabbitMQ implements INotification {
             String merchantInfoVerifiedJson = gson.toJson(merchantInfoVerified);
 
             channel.basicPublish(EXCHANGE_NAME,routingKey,null,merchantInfoVerifiedJson.getBytes());
+            System.out.println(" [verified] Sent '" + merchantInfoVerifiedJson + "'");
 
         } catch (TimeoutException | IOException e) {
             throw new MessagePublishException(e.getLocalizedMessage());
