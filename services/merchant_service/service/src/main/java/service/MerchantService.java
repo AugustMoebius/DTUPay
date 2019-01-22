@@ -7,10 +7,12 @@ import exceptions.MerchantNotFoundException;
 import exceptions.MessagePublishException;
 import management.IMerchantManagement;
 import management.domain.CVRNumber;
+import management.domain.Merchant;
 import management.exceptions.InvalidCvrException;
 import networking.adapters.message_queue.domain.MerchantInfoVerified;
 import networking.adapters.message_queue.domain.PaymentInitializedRequest;
 import networking.adapters.message_queue.notification.INotification;
+import networking.adapters.rest.requests.GetMerchantRequest;
 import networking.adapters.rest.requests.RegisterMerchantRequest;
 
 public class MerchantService {
@@ -39,10 +41,10 @@ public class MerchantService {
         String merchantCVR = paymentInitializedRequest.getMerchantId();
         boolean isVerified = false;
         try {
-            data.getMerchant(merchantCVR);
+            data.getMerchant(new CVRNumber(merchantCVR));
             isVerified = true;
-        } catch (MerchantNotFoundException e) {
-           e.printStackTrace();
+        } catch (MerchantNotFoundException | InvalidCvrException e) {
+            e.printStackTrace();
         }
 
         MerchantInfoVerified merchantInfoVerified =
@@ -67,5 +69,14 @@ public class MerchantService {
         } catch (MerchantInvalidInformation | MerchantInvalidName | InvalidCvrException e) {
             e.printStackTrace();
         }
+    }
+
+    public Merchant getMerchant(String cvr) {
+        try {
+            return merchantManagement.getMerchant(new CVRNumber(cvr));
+        } catch (MerchantNotFoundException | InvalidCvrException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -33,9 +33,9 @@ public class RegisterMerchantTest {
 
         Merchant merchant = merchantManagement.getMerchant(cvrNumber);
         // check if the customer is correctly registered
-        assertEquals(firstName, data.getMerchant(merchant.getCvr().toString()).getFirstName());
-        assertEquals(lastName, data.getMerchant(merchant.getCvr().toString()).getLastName());
-        assertEquals(cvrNumber, data.getMerchant(merchant.getCvr().toString()).getCvr());
+        assertEquals(firstName, data.getMerchant(merchant.getCvr()).getFirstName());
+        assertEquals(lastName, data.getMerchant(merchant.getCvr()).getLastName());
+        assertEquals(cvrNumber, data.getMerchant(merchant.getCvr()).getCvr());
     }
 
     @Test(expected = MerchantInvalidName.class)

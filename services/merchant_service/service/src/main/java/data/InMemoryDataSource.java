@@ -1,6 +1,7 @@
 package data;
 
 import exceptions.MerchantNotFoundException;
+import management.domain.CVRNumber;
 import management.domain.Merchant;
 
 import java.util.HashMap;
@@ -26,7 +27,7 @@ public class InMemoryDataSource implements IDataSource {
     }
 
     @Override
-    public Merchant getMerchant(String merchantCVR) throws MerchantNotFoundException {
+    public Merchant getMerchant(CVRNumber merchantCVR) throws MerchantNotFoundException {
         Merchant merchant = merchants.get(merchantCVR);
         if (merchant==null){
             throw new MerchantNotFoundException();
