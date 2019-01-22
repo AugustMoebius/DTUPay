@@ -1,5 +1,4 @@
 import com.google.gson.Gson;
-import com.sun.media.sound.InvalidFormatException;
 import data.IDataSource;
 import data.MockDatabase;
 import domain.CPRNumber;
@@ -38,10 +37,10 @@ public class TokenServiceJUnitTest {
 
     /**
      * @author Esben Løvendal Kruse (s172986)
-     * @throws InvalidFormatException
+     * @throws InvalidCprException
      */
     @Test
-    public void testToJsonConvertion() throws InvalidCprException {
+    public void testToJsonConversion() throws InvalidCprException {
         TokenInfo tokenFromPayment = new TokenInfo("DK11111111", 100, "123");
         String tokenInfoJson = this.gson.toJson(tokenFromPayment);
 
@@ -60,10 +59,10 @@ public class TokenServiceJUnitTest {
 
     /**
      * @author Esben Løvendal Kruse (s172986)
-     * @throws InvalidFormatException
+     * @throws InvalidCprException
      */
     @Test
-    public void testFromJsonConvertion() throws InvalidCprException {
+    public void testFromJsonConversion() throws InvalidCprException {
         TokenInfoVerified tokenInfoVerified =
                 new TokenInfoVerified("DK11111111", 100, "123", new CPRNumber("270271-2467"));
         String toJson = this.gson.toJson(tokenInfoVerified);

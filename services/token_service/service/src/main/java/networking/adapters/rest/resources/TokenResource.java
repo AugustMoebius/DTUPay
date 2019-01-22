@@ -5,6 +5,8 @@ import networking.adapters.rest.requests.TokenRequest;
 import networking.adapters.rest.responses.TokenBarcodePair;
 import networking.adapters.rest.responses.TokenGeneratedResponse;
 import networking.adapters.rest.responses.TokenGetResponse;
+import service.exceptions.TokenGenerationFailedException;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -29,11 +31,17 @@ public class TokenResource {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public TokenGeneratedResponse requestToken(TokenRequest tokenRequest) throws InvalidCprException {
+  public Response requestToken(TokenRequest tokenRequest) {
     // Handle token request
-    TokenGeneratedResponse tokenGeneratedResponse = tokenService.handleTokenGenerateRequests(tokenRequest);
+    TokenGeneratedResponse res;
+    try {
+      res = tokenService.handleTokenGenerateRequests(tokenRequest);
+    } catch (TokenGenerationFailedException e) {
+      return Response.status(Response.Status.BAD_REQUEST)
+        .entity(e.getMessage()).build();
+    }
 
-    return tokenGeneratedResponse;
+    return Response.ok(res).build();
   }
 
   /**

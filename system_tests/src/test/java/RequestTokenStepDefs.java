@@ -1,5 +1,5 @@
-import cucumber.api.java.After;
 import cucumber.api.PendingException;
+import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -8,17 +8,20 @@ import token.networking.response.TokenBarcodePair;
 import token.networking.response.TokenGeneratedResponse;
 import token.networking.services.TokenService;
 
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class RequestTokenStepDefs {
-
   private String cprNumber;
   private TokenGeneratedResponse existingTokens;
-  private TokenGeneratedResponse tokenGeneratedResponse;
+  private TokenGeneratedResponse generatedTokens;
   private TokenService tokenService;
+
+  private Response tokenGeneratedResponse;
+
 
   public RequestTokenStepDefs() {
     this.tokenService = new TokenService();
@@ -26,7 +29,8 @@ public class RequestTokenStepDefs {
 
   @After("@tagToken")
   public void after() {
-    this.deleteTokensFromResponse(this.tokenGeneratedResponse);
+    // Extract tokens from response
+    this.deleteTokensFromResponse(this.generatedTokens);
     this.deleteTokensFromResponse(this.existingTokens);
   }
 
@@ -64,18 +68,26 @@ public class RequestTokenStepDefs {
     this.tokenGeneratedResponse = tokenService.requestTokens(this.cprNumber, numberOfTokens);
   }
 
+  @Then("^the request succeeds$")
+  public void theRequestSucceeds() {
+    // Assertion on status code
+    assertEquals(200, this.tokenGeneratedResponse.getStatus());
+  }
+
   /**
    * @author Esben Løvendal Kruse (s172986)
    * @param numberOfTokens
    */
   @Then("^customer receives (\\d+) token/s containing an ID and a barcode URL$")
   public void customerReceivesTokenContainingAnIDAndABarcodeURL(int numberOfTokens) {
-    assertEquals(numberOfTokens, this.tokenGeneratedResponse.getTokenBarcodePairs().size());
+    this.generatedTokens = this.tokenGeneratedResponse.readEntity(TokenGeneratedResponse.class);
+
+    assertEquals(numberOfTokens, this.generatedTokens.getTokenBarcodePairs().size());
   }
 
   @And("^customer can access the barcode via the URL$")
   public void customerCanAccessTheBarcodeViaTheURL() {
-    for (TokenBarcodePair pair : this.tokenGeneratedResponse.getTokenBarcodePairs()) {
+    for (TokenBarcodePair pair : this.generatedTokens.getTokenBarcodePairs()) {
       assertEquals(200, this.tokenService.getBarcodeImage(pair.getBarcodeRelativePath()).getStatus());
     }
   }
@@ -83,12 +95,22 @@ public class RequestTokenStepDefs {
   @And("^that customer has already been assigned (\\d+) token$")
   public void thatCustomerHasAlreadyBeenAssignedToken(int numberOfTokens) {
     // Request tokens to assign to user ahead of main request.
-    this.existingTokens = tokenService.requestTokens(this.cprNumber, numberOfTokens);
+    this.existingTokens = tokenService
+      .requestTokens(this.cprNumber, numberOfTokens)
+      .readEntity(TokenGeneratedResponse.class);
   }
 
-  @Then("^customer receives and error message \"([^\"]*)\"$")
-  public void customerReceivesAndErrorMessage(String errorMessage) throws Throwable {
-    // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
+  // ERROR SCENARIOS
+
+  @Then("^the customer receives an error response$")
+  public void theCustomerReceivesAnErrorResponse() {
+    assertEquals(400, this.tokenGeneratedResponse.getStatus());
+  }
+
+  @And("^the response contains the error message \"([^\"]*)\"$")
+  public void theResponseContainsTheErrorMessage(String expErrorMsg) {
+    String actErrorMsg = this.tokenGeneratedResponse.readEntity(String.class);
+
+    assertEquals(expErrorMsg, actErrorMsg);
   }
 }

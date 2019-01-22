@@ -123,7 +123,11 @@ public class PaymentStepDefs {
       // - Set token ID with response.
       // Request single token to use in following steps
       TokenService tokenService = new TokenService();
-      List<TokenBarcodePair> tokenBarcodePair = tokenService.requestTokens(customer.getCprNumber(), 1).getTokenBarcodePairs();
+      Response res = tokenService.requestTokens(customer.getCprNumber(), 1);
+      List<TokenBarcodePair> tokenBarcodePair = res
+        .readEntity(TokenGeneratedResponse.class)
+        .getTokenBarcodePairs();
+
       assertEquals("Expected to receive one token/barcode pair", tokenBarcodePair.size(), 1);
       this.tokenId = tokenBarcodePair.get(0).getTokenId();
 
@@ -225,7 +229,12 @@ public class PaymentStepDefs {
     public void theCustomerHasAUsedToken() throws InterruptedException {
       // Create and retrieve token
       TokenService tokenService = new TokenService();
-      List<TokenBarcodePair> tokenBarcodePair = tokenService.requestTokens(customer.getCprNumber(), 1).getTokenBarcodePairs();
+
+      Response res = tokenService.requestTokens(customer.getCprNumber(), 1);
+      List<TokenBarcodePair> tokenBarcodePair = res
+        .readEntity(TokenGeneratedResponse.class)
+        .getTokenBarcodePairs();
+
       assertEquals("Expected to receive one token/barcode pair", tokenBarcodePair.size(), 1);
       this.tokenId = tokenBarcodePair.get(0).getTokenId();
 
@@ -295,7 +304,12 @@ public class PaymentStepDefs {
     // - Use token
     // - (Optional) Get token to assert used
     TokenService tokenService = new TokenService();
-    List<TokenBarcodePair> tokenBarcodePair = tokenService.requestTokens(customer.getCprNumber(), 1).getTokenBarcodePairs();
+
+    Response res = tokenService.requestTokens(customer.getCprNumber(), 1);
+    List<TokenBarcodePair> tokenBarcodePair = res
+      .readEntity(TokenGeneratedResponse.class)
+      .getTokenBarcodePairs();
+
     assertEquals("Expected to receive one token/barcode pair", tokenBarcodePair.size(), 1);
     this.tokenId = tokenBarcodePair.get(0).getTokenId();
     this.paymentAmount = paymentAmount;

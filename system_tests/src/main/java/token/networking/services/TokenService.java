@@ -24,15 +24,15 @@ public class TokenService {
      * @param numberOfTokens
      * @return
      */
-    public TokenGeneratedResponse requestTokens(String cprNumber, int numberOfTokens) {
+    public Response requestTokens(String cprNumber, int numberOfTokens) {
         // Build request body object
         TokenRequest body = new TokenRequest(cprNumber, numberOfTokens);
 
         // Submit request
-        TokenGeneratedResponse response = r.path("token").request().post(
-                Entity.entity(body, MediaType.APPLICATION_JSON),
-                TokenGeneratedResponse.class
-        );
+        Response response = r
+          .path("token")
+          .request()
+          .post(Entity.entity(body, MediaType.APPLICATION_JSON));
 
         return response;
     }
