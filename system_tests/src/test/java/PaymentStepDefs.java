@@ -254,7 +254,7 @@ public class PaymentStepDefs {
    * @param negativeAmount
    * @throws Throwable
    */
-  @And("^that the merchant wishes to register a payment of negative amount -([-]?\\d+)$")
+  @And("^that the merchant wishes to register a payment of negative amount ([-]?\\d+)$")
   public void   thatTheMerchantWishesToRegisterAPaymentOfNegativeAmount(int negativeAmount) {
     this.paymentAmount = negativeAmount;
   }
