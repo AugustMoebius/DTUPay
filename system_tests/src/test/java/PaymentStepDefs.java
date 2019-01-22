@@ -254,8 +254,8 @@ public class PaymentStepDefs {
    * @param negativeAmount
    * @throws Throwable
    */
-  @And("^that the merchant wishes to register a payment of negative amount -(\\d+)$")
-  public void thatTheMerchantWishesToRegisterAPaymentOfNegativeAmount(int negativeAmount) {
+  @And("^that the merchant wishes to register a payment of negative amount -([-]?\\d+)$")
+  public void   thatTheMerchantWishesToRegisterAPaymentOfNegativeAmount(int negativeAmount) {
     this.paymentAmount = negativeAmount;
   }
 
@@ -265,7 +265,7 @@ public class PaymentStepDefs {
    */
   @Then("^the merchant receives a failure response$")
   public void theMerchantReceivesAFailureResponse() throws Throwable {
-    assertEquals(response.getStatus(), 400);
+    assertEquals(400, response.getStatus());
   }
   // --------------------------------------- Refund Scenario ----------------------------------- //
 

@@ -2,6 +2,7 @@ package networking.adapters.rest.resources;
 
 import networking.adapters.rest.RestApplication;
 import networking.adapters.rest.requests.PaymentRequest;
+import service.exceptions.InvalidPaymentAmountException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -21,7 +22,11 @@ public class PaymentResource {
   @Consumes(MediaType.APPLICATION_JSON)
   public Response submitPayment(PaymentRequest req) {
     // Handle payment request
-    RestApplication.paymentService.submitPaymentRequest(req);
+    try {
+      RestApplication.paymentService.submitPaymentRequest(req);
+    } catch (InvalidPaymentAmountException e) {
+      return Response.status(Response.Status.BAD_REQUEST).build();
+    }
     return Response.ok().build();
   }
 }

@@ -8,6 +8,7 @@ import networking.adapters.rest.requests.PaymentRequest;
 import networking.notifications.INotificationService;
 import networking.notifications.exceptions.NotificationException;
 import networking.ws.fastmoney.BankServiceException_Exception;
+import service.exceptions.InvalidPaymentAmountException;
 
 public class PaymentService {
     private IDataSource dataSource;
@@ -24,13 +25,16 @@ public class PaymentService {
      * @author August
      * @param req
      */
-    public void submitPaymentRequest(PaymentRequest req) {
+    public void submitPaymentRequest(PaymentRequest req) throws InvalidPaymentAmountException {
+        validatePaymentReqeust(req);
+
         try {
             notificationService.publishPaymentInitialized(req);
         } catch (NotificationException e) {
             e.printStackTrace();
         }
     }
+
 
     /**
      * @author Sebastian
@@ -57,6 +61,16 @@ public class PaymentService {
             bankService.sendPaymentRequest(transaction.getMerchantId(), transaction.getCprNumber(), transaction.getPaymentAmount());
         } catch (BankServiceException_Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * @author Ebbe
+     */
+    private void validatePaymentReqeust(PaymentRequest req) throws InvalidPaymentAmountException {
+        // Negative payment
+        if (req.getPaymentAmount() < 0){
+            throw new InvalidPaymentAmountException("Amount cannot be negative. Amount was: " + req.getPaymentAmount());
         }
     }
 }
