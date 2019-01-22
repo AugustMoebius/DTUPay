@@ -1,12 +1,10 @@
 package networking.adapters.rest.resources;
 
+import exceptions.MerchantRegistrationException;
 import networking.adapters.rest.requests.RegisterMerchantRequest;
 import networking.adapters.rest.RestApplication;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -31,7 +29,11 @@ public class RegisterMerchantResource {
     public Response registerMerchant(RegisterMerchantRequest req){
         System.out.println("POST: register merchant");
 
-        RestApplication.merchantService.registerMerchant(req);
+        try {
+            RestApplication.merchantService.registerMerchant(req);
+        } catch (MerchantRegistrationException e){
+            throw new BadRequestException(e.getMessage());
+        }
 
         return Response.ok("ok").build();
     }
