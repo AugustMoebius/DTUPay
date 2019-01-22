@@ -69,6 +69,8 @@ public class RegisterMerchantStepDefs {
   public void theMerchantSubmissionFailsAndHeGetsAnErrorMessage(String errorMessage) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     // Receives a 400 status code and a message in a body?
+    /*assertEquals(400, this.res.getStatus());
+    assertEquals(errorMessage, res.readEntity(String.class));*/
     throw new PendingException();
   }
 }
