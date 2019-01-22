@@ -6,6 +6,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import customer.networking.services.CustomerService;
 import dtu.ws.fastmoney.*;
+import merchant.networking.services.MerchantService;
 import org.junit.Assert;
 import payment.networking.services.PaymentService;
 import token.networking.response.TokenBarcodePair;
@@ -79,8 +80,8 @@ public class PaymentStepDefs {
 
     // Register Customer
     CustomerService customerService = new CustomerService();
-    Response response = customerService.registerCustomer(customerFirstName, customerLastName, customerCPR);
-    assertEquals(200,response.getStatus());
+    Response res = customerService.registerCustomer(customerFirstName, customerLastName, customerCPR);
+    assertEquals(200,res.getStatus());
 
     System.out.println("Sleeping on this thread; Registering Customer");
     Thread.sleep(1000);
@@ -94,7 +95,14 @@ public class PaymentStepDefs {
   public void aRegisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(String merchantCVR, String merchantFirstName, String merchantLastName, BigDecimal merchantInitialBalance) throws Throwable {
     aUnregisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(merchantCVR,merchantFirstName,merchantLastName,merchantInitialBalance);
 
-    // TODO: Register Merchant
+    // Register Merchant
+    MerchantService ms = new MerchantService();
+    Response res = ms.registerMerchant(merchantFirstName, merchantLastName, merchantCVR);
+    assertEquals(200,res.getStatus());
+
+    System.out.println("Sleeping on this thread; Registering Customer");
+    Thread.sleep(1000);
+    System.out.println("Slept on this thread; Registering Customer");
   }
 
     /**
