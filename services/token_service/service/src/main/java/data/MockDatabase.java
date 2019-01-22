@@ -58,4 +58,13 @@ public final class MockDatabase implements IDataSource {
         allTokens.put(token.getId(), token);
         return token;
     }
+
+    /**
+     * @author August
+     * @param tokenId
+     */
+    @Override
+    public void deleteToken(String tokenId) {
+        allTokens.remove(tokenId);
+    }
 }

@@ -2,14 +2,11 @@ package networking.adapters.rest.resources;
 
 import exceptions.InvalidCprException;
 import networking.adapters.rest.requests.TokenRequest;
-import networking.adapters.rest.responses.TokenBarcodePair;
 import networking.adapters.rest.responses.TokenGeneratedResponse;
 import networking.adapters.rest.responses.TokenGetResponse;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.File;
 
 import static networking.adapters.rest.RestApplication.tokenService;
 
@@ -45,9 +42,24 @@ public class TokenResource {
   @GET
   @Path("/{id}")
   @Produces(MediaType.APPLICATION_JSON)
-  public TokenGetResponse GetToken(@PathParam("id") String id) throws InvalidCprException {
+  public TokenGetResponse GetToken(@PathParam("id") String id) {
+    System.out.println("test test");
     TokenGetResponse tokenGetResponse = tokenService.handleTokenGetRequests(id);
 
     return tokenGetResponse;
   }
+
+  /**
+   * @author August
+   * @param id
+   */
+  @DELETE
+  @Path("/{id}")
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response DeleteToken(@PathParam("id") String id)  {
+    tokenService.deleteToken(id);
+    return Response.ok("Token deletion request").build();
+  }
+
+
 }

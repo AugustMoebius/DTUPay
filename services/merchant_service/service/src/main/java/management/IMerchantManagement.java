@@ -1,12 +1,19 @@
 package management;
+import exceptions.MerchantInvalidInformation;
+import exceptions.MerchantInvalidName;
+import exceptions.MerchantNotFoundException;
+import management.domain.CVRNumber;
 import management.domain.Merchant;
 
 
 public interface IMerchantManagement {
 
     // CRUD operations
-    void registerMerchant(String firstName, String lastName, String cvr);
-    Merchant getMerchant(String cvr);
+    void registerMerchant(String firstName, String lastName, CVRNumber cvr) throws MerchantInvalidName, MerchantInvalidInformation;
+
+    // Read a merchant
+    Merchant getMerchant(CVRNumber cvr) throws MerchantNotFoundException;
+
     void updateMerchant(String companyName);
     void deleteMerchant(String cvr);
 

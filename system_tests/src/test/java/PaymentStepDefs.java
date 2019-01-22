@@ -6,7 +6,10 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import customer.networking.services.CustomerService;
 import dtu.ws.fastmoney.*;
+import org.junit.Assert;
 import payment.networking.services.PaymentService;
+import token.networking.response.TokenBarcodePair;
+import token.networking.response.TokenGeneratedResponse;
 import token.networking.response.TokenResponse;
 import token.networking.services.TokenService;
 
@@ -46,6 +49,10 @@ public class PaymentStepDefs {
       String merchantAccountID = bankService.getAccountByCprNumber(merchant.getCprNumber()).getId();
       this.bankService.retireAccount(merchantAccountID);
     }
+
+    // Remove token from db
+    TokenService ts = new TokenService();
+    ts.deleteToken(tokenId);
   }
 
   //  -------------------------------------- Scenario: Succeeding payment --------------------------------------
@@ -91,7 +98,7 @@ public class PaymentStepDefs {
     this.merchant.setLastName(merchantLastName);
     this.merchant.setCprNumber(merchantCVR);
 
-    // Create Bank account for Mechant
+    // Create Bank account for Merchant
     try {
       this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
     } catch (BankServiceException_Exception e) {
@@ -104,15 +111,22 @@ public class PaymentStepDefs {
     // TODO: Register Merchant
   }
 
-  /**
-   * @author Sarah
-   */
-  @And("^the customer has a token with ID \"([^\"]*)\"$")
-  public void theCustomerHasATokenWithID(String tokenId) {
-    // STEPS
-    // TODO: Refac to request token first when database impl is in place
-    // - Store ID to this instance
-    this.tokenId = tokenId;
+    /**
+     * A request for a single token is sent to the token service.
+     * This request returns a new token and its' ID will be used in the rest of the steps.
+     * @author August
+     */
+  @And("^the customer has a token$")
+  public void theCustomerHasAToken() {
+      // STEPS
+      // - Reqeust new token
+      // - Set token ID with response.
+      // Request single token to use in following steps
+      TokenService tokenService = new TokenService();
+      List<TokenBarcodePair> tokenBarcodePair = tokenService.requestTokens(customer.getCprNumber(), 1).getTokenBarcodePairs();
+      assertEquals("Expected to receive one token/barcode pair", tokenBarcodePair.size(), 1);
+      this.tokenId = tokenBarcodePair.get(0).getTokenId();
+
   }
 
   /**
@@ -204,13 +218,38 @@ public class PaymentStepDefs {
     TokenResponse token = response.readEntity(TokenResponse.class);
     assertFalse(token.isUsed());
   }
+    /**
+     * @authour August
+     */
+    @And("^the customer has a used token$")
+    public void theCustomerHasAUsedToken() throws InterruptedException {
+      // Create and retrieve token
+      TokenService tokenService = new TokenService();
+      List<TokenBarcodePair> tokenBarcodePair = tokenService.requestTokens(customer.getCprNumber(), 1).getTokenBarcodePairs();
+      assertEquals("Expected to receive one token/barcode pair", tokenBarcodePair.size(), 1);
+      this.tokenId = tokenBarcodePair.get(0).getTokenId();
+
+      // Submit a zero payment to use token
+      PaymentService ps = new PaymentService();
+      Response response = ps.submitPayment(merchant.getCprNumber(), 0, tokenId); //
+      assertEquals(200, response.getStatus());
+
+      System.out.println("Sleeping on this thread; waiting for transaction to finish");
+      Thread.sleep(5000);
+      System.out.println("Slept on this thread; waited for transaction to finish");
+
+      // Assert token is not used
+      Response tokenResponse = tokenService.getTokenById(tokenId);
+      assertEquals(200, tokenResponse.getStatus());
+      TokenResponse token = tokenResponse.readEntity(TokenResponse.class);
+      assertTrue(token.isUsed());
+    }
   // --------------------------------------- Refund Scenario ----------------------------------- //
 
   /**
-   * @author Emilie
-   * @param tokenId
-   * @param paymentAmount
+   * @authour August
    */
+<<<<<<< HEAD
   @And("^the customer has a used token with ID \"([^\"]*)\" and an amount of (\\d+)$")
   public void theCustomerHasAUsedTokenWithIDAndAnAmountOf(String tokenId, int paymentAmount) throws InterruptedException {
     // Steps:
@@ -231,6 +270,8 @@ public class PaymentStepDefs {
 
   }
 
+=======
+>>>>>>> 639431f7462b12e78471b09c450d7df59c152442
   @When("^the merchant submits a request for the refund$")
   public void theMerchantSubmitsARequestForTheRefund() throws InterruptedException {
     // Steps:
@@ -254,7 +295,7 @@ public class PaymentStepDefs {
   @And("^the token is identified as already used$")
   public void theTokenIsIdentifiedAsAlreadyUsed() throws Throwable {
 
-      throw new PendingException();
+    throw new PendingException();
   }
 
   /**
@@ -286,7 +327,37 @@ public class PaymentStepDefs {
         this.bankService.createAccountWithBalance(merchant, merchantInitialBalance);
       }
 
+<<<<<<< HEAD
       // Will not be registered
 
     }
+=======
+  /**
+   * @author Emilie
+   * @param paymentAmount
+   */
+  @And("^the customer has a used token with a transaction amount of (\\d+)$")
+  public void theCustomerHasAUsedTokenWithATransactionAmountOf(int paymentAmount) throws InterruptedException {
+    // Steps:
+    // - Use token
+    // - (Optional) Get token to assert used
+    TokenService tokenService = new TokenService();
+    List<TokenBarcodePair> tokenBarcodePair = tokenService.requestTokens(customer.getCprNumber(), 1).getTokenBarcodePairs();
+    assertEquals("Expected to receive one token/barcode pair", tokenBarcodePair.size(), 1);
+    this.tokenId = tokenBarcodePair.get(0).getTokenId();
+    this.paymentAmount = paymentAmount;
+
+    PaymentService ps = new PaymentService();
+    Response response = ps.submitPayment(merchant.getCprNumber(), paymentAmount, tokenId);
+    assertEquals(200, response.getStatus());
+
+    System.out.println("Sleeping on this thread; waiting for transaction to finish");
+    Thread.sleep(5000);
+    System.out.println("Slept on this thread; waited for transaction to finish");
+
+
+
+  }
+
+>>>>>>> 639431f7462b12e78471b09c450d7df59c152442
 }
