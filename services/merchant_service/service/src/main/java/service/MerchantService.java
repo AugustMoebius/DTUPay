@@ -9,7 +9,6 @@ import management.exceptions.InvalidCvrException;
 import networking.adapters.message_queue.domain.MerchantInfoVerified;
 import networking.adapters.message_queue.domain.PaymentInitializedRequest;
 import networking.adapters.message_queue.notification.INotification;
-import networking.adapters.rest.requests.GetMerchantRequest;
 import networking.adapters.rest.requests.RegisterMerchantRequest;
 
 public class MerchantService {
@@ -43,7 +42,7 @@ public class MerchantService {
                             paymentInitializedRequest.getMerchantId(),
                             paymentInitializedRequest.getPaymentAmount(),
                             paymentInitializedRequest.getTokenId(),
-                            paymentInitializedRequest.getCustomerId());
+                            paymentInitializedRequest.getCprNumber());
 
             iNotification.publishMessage(merchantInfoVerified);
         } catch (MerchantNotFoundException | MessagePublishException | InvalidCvrException e) {

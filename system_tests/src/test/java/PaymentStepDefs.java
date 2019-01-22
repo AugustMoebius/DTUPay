@@ -188,6 +188,9 @@ public class PaymentStepDefs {
     assertEquals(customerBalance, account.getBalance());
   }
 
+
+//  -------------------------------------- Scenario:Failing payment because of already used token --------------------------------------
+
   /**
    * @authour Esben
    */
@@ -299,6 +302,30 @@ public class PaymentStepDefs {
     throw new PendingException();
   }
 
+  /**
+   * @author Emilie
+   * @param paymentAmount
+   */
+  @And("^the customer has a used token with a transaction amount of (\\d+)$")
+  public void theCustomerHasAUsedTokenWithATransactionAmountOf(int paymentAmount) throws InterruptedException {
+    // Steps:
+    // - Use token
+    // - (Optional) Get token to assert used
+    TokenService tokenService = new TokenService();
+    List<TokenBarcodePair> tokenBarcodePair = tokenService.requestTokens(customer.getCprNumber(), 1).getTokenBarcodePairs();
+    assertEquals("Expected to receive one token/barcode pair", tokenBarcodePair.size(), 1);
+    this.tokenId = tokenBarcodePair.get(0).getTokenId();
+    this.paymentAmount = paymentAmount;
+
+    PaymentService ps = new PaymentService();
+    Response response = ps.submitPayment(merchant.getCprNumber(), paymentAmount, tokenId);
+    assertEquals(200, response.getStatus());
+
+    System.out.println("Sleeping on this thread; waiting for transaction to finish");
+    Thread.sleep(5000);
+    System.out.println("Slept on this thread; waited for transaction to finish");
+  }
+
   // --------------------------------------- Unregistered Merchant ----------------------------------- //
 
 
@@ -323,31 +350,5 @@ public class PaymentStepDefs {
       // Will not be registered
     }
 
-  /**
-   * @author Emilie
-   * @param paymentAmount
-   */
-  @And("^the customer has a used token with a transaction amount of (\\d+)$")
-  public void theCustomerHasAUsedTokenWithATransactionAmountOf(int paymentAmount) throws InterruptedException {
-    // Steps:
-    // - Use token
-    // - (Optional) Get token to assert used
-    TokenService tokenService = new TokenService();
-    List<TokenBarcodePair> tokenBarcodePair = tokenService.requestTokens(customer.getCprNumber(), 1).getTokenBarcodePairs();
-    assertEquals("Expected to receive one token/barcode pair", tokenBarcodePair.size(), 1);
-    this.tokenId = tokenBarcodePair.get(0).getTokenId();
-    this.paymentAmount = paymentAmount;
-
-    PaymentService ps = new PaymentService();
-    Response response = ps.submitPayment(merchant.getCprNumber(), paymentAmount, tokenId);
-    assertEquals(200, response.getStatus());
-
-    System.out.println("Sleeping on this thread; waiting for transaction to finish");
-    Thread.sleep(5000);
-    System.out.println("Slept on this thread; waited for transaction to finish");
-
-
-
-  }
 
 }

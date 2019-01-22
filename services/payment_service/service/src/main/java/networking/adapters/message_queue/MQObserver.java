@@ -68,6 +68,7 @@ public class MQObserver {
       String body = new String(delivery.getBody(), StandardCharsets.UTF_8);
       System.out.println("Received message on queue '" + queueName + "': " + body);
 
+
       PaymentVerifiedRequest paymentVerifiedReq = (new Gson()).fromJson(body, PaymentVerifiedRequest.class);
 
       paymentService.handleVerifiedPayment(paymentVerifiedReq);
