@@ -1,3 +1,4 @@
+@tagToken
 Feature: Request token
   Scenario: Customer requests tokens success scenario
     Given a registered customer with the CPR "120245-2525"

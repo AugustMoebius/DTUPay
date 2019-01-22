@@ -6,6 +6,7 @@ import exceptions.MerchantInvalidName;
 import exceptions.MerchantNotFoundException;
 import management.domain.CVRNumber;
 import management.domain.Merchant;
+import management.exceptions.InvalidCvrException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,7 +51,7 @@ public class MerchantManagement implements IMerchantManagement {
     // Read a merchant
     @Override
     public Merchant getMerchant(CVRNumber cvr) throws MerchantNotFoundException {
-        return data.getMerchant(cvr.toString());
+        return data.getMerchant(cvr);
     }
 
     // Update a merchant
