@@ -29,4 +29,4 @@ Feature: Register a merchant in DTUPay
     And the merchant has an account in the DTU bank with a balance at 200
     When the merchant submits a request to register
     And the merchant submits a request to register
-    Then the merchant submission fails and he gets an error message "Illegal registration: Merchant already exists. Received DK11111112."
+    Then the merchant submission fails and he gets an error message "Illegal registration: Merchant already exists. Received DK11111188."

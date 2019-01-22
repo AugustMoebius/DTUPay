@@ -8,4 +8,28 @@ public class GetMerchantResponse {
         this.lastName = lastName;
         this.cvr = cvr;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getCvr() {
+        return cvr;
+    }
+
+    public void setCvr(String cvr) {
+        this.cvr = cvr;
+    }
 }

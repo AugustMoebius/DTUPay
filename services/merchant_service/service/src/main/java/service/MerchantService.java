@@ -64,6 +64,7 @@ public class MerchantService {
 
     public GetMerchantResponse getMerchant(String cvr) throws MerchantServiceException {
         try {
+            System.out.println(cvr);
             Merchant merchant = merchantManagement.getMerchant(new CVRNumber(cvr));
             return new GetMerchantResponse(merchant.getFirstName(), merchant.getLastName(), merchant.getCvr().getCvrNumber());
         } catch (MerchantNotFoundException | InvalidCvrException e) {

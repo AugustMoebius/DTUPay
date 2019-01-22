@@ -27,12 +27,13 @@ public class RegisterMerchantResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registerMerchant(RegisterMerchantRequest req){
-        System.out.println("POST: register merchant");
+        System.out.println("POST: register merchant '"+req.getCvr()+"'");
 
         try {
             RestApplication.merchantService.registerMerchant(req);
         } catch (MerchantRegistrationException e){
             //throw new BadRequestException(e.getMessage());
+            e.printStackTrace();
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage()).build();
         }

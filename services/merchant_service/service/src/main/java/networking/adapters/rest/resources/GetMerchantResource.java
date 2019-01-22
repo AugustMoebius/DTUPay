@@ -21,16 +21,18 @@ public class GetMerchantResource {
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     public Response getMerchant(@PathParam("id") String id){
-        System.out.println("GET: get merchant");
+        System.out.println("GET: get merchant "+id);
         GetMerchantResponse merchantResponse;
         try {
             merchantResponse = RestApplication.merchantService.getMerchant(id);
         } catch (MerchantServiceException e) {
+            e.printStackTrace();
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage()).build();
         }
         Gson gson = new Gson();
         String merchantResponseJson = gson.toJson(merchantResponse);
+
         return Response.status(Response.Status.ACCEPTED).entity(merchantResponseJson).build();
     }
 

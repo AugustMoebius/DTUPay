@@ -11,7 +11,6 @@ import merchant.networking.responses.GetMerchantResponse;
 import merchant.networking.services.MerchantService;
 
 
-import javax.json.Json;
 import javax.ws.rs.core.Response;
 
 import java.math.BigDecimal;
@@ -40,7 +39,7 @@ public class GetMerchantStepdefs {
      * @throws Throwable
      */
     @Given("^a registered merchant with the CVR \"([^\"]*)\" and has the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
-    public void aRegisteredMerchantWithTheCVRAndHasTheNameAndABankAccountWithBalance(String firstName, String lastName, String cvrNumber, int merchantBalance) throws Throwable {
+    public void aRegisteredMerchantWithTheCVRAndHasTheNameAndABankAccountWithBalance(String cvrNumber, String firstName, String lastName, int merchantBalance) throws Throwable {
         this.merchant = new User();
         this.merchant.setFirstName(firstName);
         this.merchant.setLastName(lastName);
@@ -77,7 +76,9 @@ public class GetMerchantStepdefs {
     @Then("^the get submission succeeds and the merchant gets the information$")
     public void theGetSubmissionSucceedsAndTheMerchantGetsTheInformation() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        assertTrue(200 <= res.getStatus() && res.getStatus() < 300);
+        System.out.println(res.getStatus());
+        assertTrue(200 <= res.getStatus());
+        assertTrue(res.getStatus() < 300);
 
         String getMerchantResponseJson = res.readEntity(String.class);
         Gson gson = new Gson();
@@ -89,7 +90,7 @@ public class GetMerchantStepdefs {
         assertEquals(merchant.getLastName(), merchantResponse.getLastName());
         assertEquals(merchant.getCprNumber(), merchantResponse.getCvr());
 
-        throw new PendingException();
+        //throw new PendingException();
     }
 
 }
