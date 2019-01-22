@@ -32,7 +32,9 @@ public class RegisterMerchantResource {
         try {
             RestApplication.merchantService.registerMerchant(req);
         } catch (MerchantRegistrationException e){
-            throw new BadRequestException(e.getMessage());
+            //throw new BadRequestException(e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(e.getMessage()).build();
         }
 
         return Response.ok("ok").build();

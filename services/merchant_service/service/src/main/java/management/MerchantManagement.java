@@ -1,6 +1,7 @@
 package management;
 import data.IDataSource;
 import data.InMemoryDataSource;
+import exceptions.MerchantAlreadyExistException;
 import exceptions.MerchantInvalidInformation;
 import exceptions.MerchantInvalidName;
 import exceptions.MerchantNotFoundException;
@@ -24,7 +25,7 @@ public class MerchantManagement implements IMerchantManagement {
 
     // Create a merchant
     @Override
-    public void registerMerchant(String firstName, String lastName, CVRNumber CVR) throws MerchantInvalidName, MerchantInvalidInformation {
+    public void registerMerchant(String firstName, String lastName, CVRNumber CVR) throws MerchantInvalidName, MerchantInvalidInformation, MerchantAlreadyExistException {
         // validate first and last name
         Pattern pattern = Pattern.compile("([a-zA-Z]+)(.*)");
         Matcher matcherFirstName = pattern.matcher(firstName);
@@ -44,8 +45,14 @@ public class MerchantManagement implements IMerchantManagement {
         }
 
         merchant = new Merchant(firstName, lastName, CVR);
-        // Add customer to the database
-        data.registerMerchant(merchant);
+        // Add merchant to the database
+        // check if the merchant already exists.
+        try {
+            data.getMerchant(merchant.getCvr());
+            throw new MerchantAlreadyExistException(CVR);
+        } catch (MerchantNotFoundException e) {
+            data.registerMerchant(merchant);
+        }
     }
 
     // Read a merchant

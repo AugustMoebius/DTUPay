@@ -1,5 +1,6 @@
 import data.IDataSource;
 import data.InMemoryDataSource;
+import exceptions.MerchantAlreadyExistException;
 import exceptions.MerchantInvalidInformation;
 import exceptions.MerchantInvalidName;
 import exceptions.MerchantNotFoundException;
@@ -22,7 +23,7 @@ public class RegisterMerchantTest {
     }
 
     @Test
-    public void registerCustomerSucceedingTest() throws InvalidCvrException, MerchantInvalidInformation, MerchantInvalidName, MerchantNotFoundException {
+    public void registerMerchantSucceedingTest() throws InvalidCvrException, MerchantInvalidInformation, MerchantInvalidName, MerchantNotFoundException, MerchantAlreadyExistException {
         // Data
         String firstName = "Clara";
         String lastName = "Hansen";
@@ -39,7 +40,7 @@ public class RegisterMerchantTest {
     }
 
     @Test(expected = MerchantInvalidName.class)
-    public void registerCustomerWithInvalidNameTest() throws InvalidCvrException, MerchantInvalidInformation, MerchantInvalidName {
+    public void registerMerchantWithInvalidNameTest() throws InvalidCvrException, MerchantInvalidInformation, MerchantInvalidName, MerchantAlreadyExistException {
         // Data
         String firstName = "Sera8";
         String lastName = "Ha8nsen";
@@ -51,7 +52,7 @@ public class RegisterMerchantTest {
         try {
             merchantManagement.registerMerchant(firstName, lastName, cvrNumber);
         } catch (MerchantInvalidName e) {
-            assertEquals("Illegal registation: Invalid name. Recieved " + firstName + ".", e.getMessage());
+            assertEquals("Illegal registration: Invalid name. Received " + firstName + ".", e.getMessage());
 
             // Check that the customer is not added to the database
             assertEquals(customersInDatabase, data.getAmountOfMerchants());
@@ -61,7 +62,7 @@ public class RegisterMerchantTest {
     }
 
     @Test(expected = InvalidCvrException.class)
-    public void registerCustomerWithInvalidCPRTest() throws InvalidCvrException, MerchantInvalidName, MerchantInvalidInformation {
+    public void registerMerchantWithInvalidCPRTest() throws InvalidCvrException, MerchantInvalidName, MerchantInvalidInformation, MerchantAlreadyExistException {
         // Data
         String firstName = "Clara";
         String lastName = "Hansen";
@@ -78,6 +79,30 @@ public class RegisterMerchantTest {
 
             // Check that the customer is not added to the database
             assertEquals(customersInDatabase, data.getAmountOfMerchants());
+
+            throw e;
+        }
+    }
+
+    @Test(expected = MerchantAlreadyExistException.class)
+    public void registerMerchantAlreadyExistsTest() throws MerchantAlreadyExistException, MerchantInvalidInformation, MerchantInvalidName, InvalidCvrException {
+        String firstName = "Clara";
+        String lastName = "Hansen";
+        String cvrString = "DK73648292";
+
+        int customersInDatabase = data.getAmountOfMerchants();
+
+        CVRNumber cvrNumber = new CVRNumber(cvrString);
+
+        // try/catch to verify error message
+        try {
+            merchantManagement.registerMerchant(firstName, lastName, cvrNumber);
+            merchantManagement.registerMerchant(firstName, lastName, cvrNumber);
+        } catch (MerchantAlreadyExistException e) {
+            assertEquals("Illegal registration: Merchant already exists. Received " + cvrString + ".", e.getMessage());
+
+            // Check that the customer is not added to the database
+            assertEquals(customersInDatabase+1, data.getAmountOfMerchants());
 
             throw e;
         }
