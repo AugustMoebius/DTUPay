@@ -23,12 +23,12 @@ public class InMemoryDataSource implements IDataSource {
 
     @Override
     public void registerMerchant(Merchant merchant) {
-        merchants.put(merchant.getCvr().toString(), merchant);
+        merchants.put(merchant.getCvr().getCvrNumber(), merchant);
     }
 
     @Override
     public Merchant getMerchant(CVRNumber merchantCVR) throws MerchantNotFoundException {
-        Merchant merchant = merchants.get(merchantCVR);
+        Merchant merchant = merchants.get(merchantCVR.getCvrNumber());
         if (merchant==null){
             throw new MerchantNotFoundException();
         }
