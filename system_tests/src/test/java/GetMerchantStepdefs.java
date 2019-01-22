@@ -1,4 +1,5 @@
 import cucumber.api.PendingException;
+import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -9,6 +10,7 @@ import dtu.ws.fastmoney.User;
 import gherkin.deps.com.google.gson.Gson;
 import merchant.networking.responses.GetMerchantResponse;
 import merchant.networking.services.MerchantService;
+import services.CvrService;
 
 
 import javax.ws.rs.core.Response;
@@ -34,16 +36,18 @@ public class GetMerchantStepdefs {
      * @author Sarah
      * @param firstName
      * @param lastName
-     * @param cvrNumber
      * @param merchantBalance
      * @throws Throwable
      */
-    @Given("^a registered merchant with the CVR \"([^\"]*)\" and has the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
-    public void aRegisteredMerchantWithTheCVRAndHasTheNameAndABankAccountWithBalance(String cvrNumber, String firstName, String lastName, int merchantBalance) throws Throwable {
+    @Given("^a registered merchant with a CVR, the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
+    public void aRegisteredMerchantWithACVRTheNameAndABankAccountWithBalance(String firstName, String lastName, int merchantBalance) throws BankServiceException_Exception {
         this.merchant = new User();
         this.merchant.setFirstName(firstName);
         this.merchant.setLastName(lastName);
+
+        String cvrNumber = CvrService.generateCvr();
         this.merchant.setCprNumber(cvrNumber);
+
         // Register the merchant in the bank
         try {
             this.bankService.createAccountWithBalance(merchant, new BigDecimal(merchantBalance));
@@ -85,19 +89,8 @@ public class GetMerchantStepdefs {
         GetMerchantResponse merchantResponse = gson.fromJson(getMerchantResponseJson, GetMerchantResponse.class);
         //GetMerchantResponse merchantResponse = res.readEntity(GetMerchantResponse.class);
 
-
         assertEquals(merchant.getFirstName(), merchantResponse.getFirstName());
         assertEquals(merchant.getLastName(), merchantResponse.getLastName());
         assertEquals(merchant.getCprNumber(), merchantResponse.getCvr());
-
-        //throw new PendingException();
     }
-
-   /* @Given("^a unregistered merchant with the CVR \"([^\"]*)\" with the name \"([^\"]*)\" \"([^\"]*)\"$")
-    public void aUnregisteredMerchantWithTheCVRWithTheName(String cvrNumber, String firstName, String lastName) throws Throwable {
-        this.merchant = new User();
-        this.merchant.setFirstName(firstName);
-        this.merchant.setLastName(lastName);
-        this.merchant.setCprNumber(cvrNumber);
-    }*/
 }

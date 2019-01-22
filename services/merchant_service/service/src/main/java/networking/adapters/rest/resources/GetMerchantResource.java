@@ -35,6 +35,4 @@ public class GetMerchantResource {
 
         return Response.status(Response.Status.ACCEPTED).entity(merchantResponseJson).build();
     }
-
-
 }

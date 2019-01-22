@@ -1,7 +1,8 @@
+@tagGetMerchant
 Feature: Get merchant
 
   Scenario: Get merchant, who is in the system, successfully
-    Given a registered merchant with the CVR "DK11119222" and has the name "Lars" "Larsen" and a bank account with balance 400
+    Given a registered merchant with a CVR, the name "Lars" "Larsen" and a bank account with balance 400
     When the merchant submits a request to get the user information
     Then the get submission succeeds and the merchant gets the information
 
