@@ -4,7 +4,10 @@ import domain.CPRNumber;
 import domain.Token;
 import exceptions.InvalidCprException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public final class MockDatabase implements IDataSource {
     private static final MockDatabase mockDatabase = new MockDatabase();
@@ -46,6 +49,19 @@ public final class MockDatabase implements IDataSource {
     public Token getToken(String tokenId) {
         Token token = allTokens.get(tokenId);
         return token;
+    }
+
+    @Override
+    public List<Token> getTokensByCustomer(CPRNumber cprNumber) {
+        List<Token> tokensForCustomer = new ArrayList<>();
+
+        for(Map.Entry<String, Token> element: allTokens.entrySet()) {
+            if (element.getValue().getCprNumber().toString().equals(cprNumber.toString())) {
+                tokensForCustomer.add(element.getValue());
+            }
+        }
+
+        return tokensForCustomer;
     }
 
     /**

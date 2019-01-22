@@ -8,6 +8,7 @@ import domain.CPRNumber;
 import domain.Token;
 import exceptions.InvalidCprException;
 import exceptions.TokenAlreadyUsedException;
+import exceptions.TooManyUnusedTokensException;
 import networking.adapters.message_queue.domain.TokenInfo;
 import networking.adapters.message_queue.domain.TokenInfoVerified;
 import networking.adapters.message_queue.notification.INotification;
@@ -94,7 +95,7 @@ public class TokenService {
      * @return
      * @throws TokenGenerationFailedException
      */
-    public TokenGeneratedResponse handleTokenGenerateRequests(TokenRequest tokenRequest) throws TokenGenerationFailedException {
+    public TokenGeneratedResponse handleTokenGenerateRequests(TokenRequest tokenRequest) throws TokenGenerationFailedException, TooManyUnusedTokensException {
         // Extract and validate CPR
         CPRNumber cpr;
         try {
@@ -105,8 +106,14 @@ public class TokenService {
 
         // Extract and validate no. of tokens requested
         int tokenCount = tokenRequest.getNumberOfTokens();
+
         if (tokenCount < 1 || tokenCount > 5) {
             throw new InvalidTokenCountException();
+        }
+
+        int numberOfUnusedTokens = getNumberOfUnusedTokens(getTokensByCustomer(cpr));
+        if (numberOfUnusedTokens > 1) {
+            throw new TooManyUnusedTokensException();
         }
 
         List<Token> tokens = this.generateTokens(cpr, tokenRequest.getNumberOfTokens());
@@ -210,5 +217,21 @@ public class TokenService {
         // TODO: Delete barcode img file
         // Deletes database reference
         data.deleteToken(tokenId);
+    }
+
+    private List<Token> getTokensByCustomer(CPRNumber cprNumber) {
+        return this.data.getTokensByCustomer(cprNumber);
+    }
+
+    private int getNumberOfUnusedTokens(List<Token> tokens) {
+        int unusedTokens = 0;
+
+        for (Token t : tokens) {
+            if (!t.isUsed()) {
+                unusedTokens += 1;
+            }
+        }
+
+        return unusedTokens;
     }
 }
