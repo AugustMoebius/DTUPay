@@ -93,4 +93,11 @@ public class GetMerchantStepdefs {
         //throw new PendingException();
     }
 
+   /* @Given("^a unregistered merchant with the CVR \"([^\"]*)\" with the name \"([^\"]*)\" \"([^\"]*)\"$")
+    public void aUnregisteredMerchantWithTheCVRWithTheName(String cvrNumber, String firstName, String lastName) throws Throwable {
+        this.merchant = new User();
+        this.merchant.setFirstName(firstName);
+        this.merchant.setLastName(lastName);
+        this.merchant.setCprNumber(cvrNumber);
+    }*/
 }
