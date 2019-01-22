@@ -26,7 +26,6 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import networking.adapters.rest.responses.TokenGetResponse;
 
 
-
 public class TokenService {
 
     private static final String IMAGE_FORMAT = "png";

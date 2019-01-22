@@ -60,8 +60,8 @@ public class RegisterMerchantStepDefs {
 
   @Then("^the registration submission succeeds and the merchant is registered$")
   public void theRegistrationSubmissionSucceedsAndTheMerchantIsRegistered() throws Throwable {
-    throw new PendingException();
-    //assertEquals(200, this.res.getStatus());
+    //throw new PendingException();
+    assertEquals(200, this.res.getStatus());
   }
 
 
@@ -69,6 +69,8 @@ public class RegisterMerchantStepDefs {
   public void theMerchantSubmissionFailsAndHeGetsAnErrorMessage(String errorMessage) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     // Receives a 400 status code and a message in a body?
-    throw new PendingException();
+    assertEquals(400, this.res.getStatus());
+    assertEquals(errorMessage, res.readEntity(String.class));
+    //throw new PendingException();
   }
 }

@@ -1,4 +1,5 @@
 import cucumber.api.java.After;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -10,6 +11,7 @@ import token.networking.services.TokenService;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class RequestTokenStepDefs {
 
@@ -57,7 +59,7 @@ public class RequestTokenStepDefs {
    * @author Esben Løvendal Kruse (s172986)
    * @param numberOfTokens
    */
-  @When("^the customer submits a request for (\\d+) token/s$")
+  @When("^the customer submits a request for (-?\\d+) token/s$")
   public void theCustomerSubmitsARequestForToken(int numberOfTokens) {
     this.tokenGeneratedResponse = tokenService.requestTokens(this.cprNumber, numberOfTokens);
   }
@@ -82,5 +84,11 @@ public class RequestTokenStepDefs {
   public void thatCustomerHasAlreadyBeenAssignedToken(int numberOfTokens) {
     // Request tokens to assign to user ahead of main request.
     this.existingTokens = tokenService.requestTokens(this.cprNumber, numberOfTokens);
+  }
+
+  @Then("^customer receives and error message \"([^\"]*)\"$")
+  public void customerReceivesAndErrorMessage(String errorMessage) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
   }
 }

@@ -9,6 +9,20 @@ public class RegisterMerchantRequest {
         this.cvr = cvr;
     }
 
+    public RegisterMerchantRequest() {}
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setCvr(String cvr) {
+        this.cvr = cvr;
+    }
+
     public String getFirstName() {
         return firstName;
     }

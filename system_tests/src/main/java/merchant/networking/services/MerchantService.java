@@ -39,4 +39,11 @@ public class MerchantService {
         return response;
     }
 
+    public Response getMerchant(String cvr){
+        return r.path("merchant/" + cvr)
+                .request()
+                .accept(MediaType.APPLICATION_JSON)
+                .get(Response.class);
+    }
+
 }

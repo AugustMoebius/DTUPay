@@ -1,10 +1,7 @@
 package service;
 
 import data.IDataSource;
-import exceptions.MerchantInvalidInformation;
-import exceptions.MerchantInvalidName;
-import exceptions.MerchantNotFoundException;
-import exceptions.MessagePublishException;
+import exceptions.*;
 import management.IMerchantManagement;
 import management.domain.CVRNumber;
 import management.domain.Merchant;
@@ -63,11 +60,11 @@ public class MerchantService {
 
     }
 
-    public void registerMerchant(RegisterMerchantRequest req) {
+    public void registerMerchant(RegisterMerchantRequest req) throws MerchantRegistrationException {
         try{
             merchantManagement.registerMerchant(req.getFirstName(), req.getLastName(), new CVRNumber(req.getCvr()));
-        } catch (MerchantInvalidInformation | MerchantInvalidName | InvalidCvrException e) {
-            e.printStackTrace();
+        } catch (MerchantInvalidInformation | MerchantInvalidName | MerchantAlreadyExistException | InvalidCvrException e) {
+            throw new MerchantRegistrationException(e.getMessage());
         }
     }
 
