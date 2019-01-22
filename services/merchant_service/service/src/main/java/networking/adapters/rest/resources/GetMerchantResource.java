@@ -1,5 +1,6 @@
 package networking.adapters.rest.resources;
 
+import com.google.gson.Gson;
 import management.exceptions.MerchantServiceException;
 import networking.adapters.rest.RestApplication;
 import networking.adapters.rest.responses.GetMerchantResponse;
@@ -28,8 +29,9 @@ public class GetMerchantResource {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage()).build();
         }
-
-        return Response.status(Response.Status.ACCEPTED).entity(merchantResponse).build();
+        Gson gson = new Gson();
+        String merchantResponseJson = gson.toJson(merchantResponse);
+        return Response.status(Response.Status.ACCEPTED).entity(merchantResponseJson).build();
     }
 
 

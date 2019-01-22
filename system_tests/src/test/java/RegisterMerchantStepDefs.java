@@ -27,6 +27,13 @@ public class RegisterMerchantStepDefs {
     this.bankService = new BankServiceService().getBankServicePort();
   }
 
+  /**
+   * @author Sarah
+   * @param cvrNumber
+   * @param firstName
+   * @param lastName
+   * @throws Throwable
+   */
   @Given("^a merchant with the CVR number \"([^\"]*)\", with the name \"([^\"]*)\" \"([^\"]*)\"$")
   public void aMerchantWithTheCVRNumberWithTheName(String cvrNumber, String firstName, String lastName) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
@@ -35,6 +42,11 @@ public class RegisterMerchantStepDefs {
     this.lastName = lastName;
   }
 
+  /**
+   * @author Sarah
+   * @param merchantBalance
+   * @throws Throwable
+   */
   @And("^the merchant has an account in the DTU bank with a balance at (\\d+)$")
   public void theMerchantHasAnAccountInTheDTUBankWithABalanceAt(int merchantBalance) throws Throwable {
     this.merchant = new User();
@@ -51,6 +63,9 @@ public class RegisterMerchantStepDefs {
     }
   }
 
+  /**
+   * @author Sarah
+   */
   @When("^the merchant submits a request to register$")
   public void theMerchantSubmitsARequestToRegister() {
     // Build request object
@@ -60,7 +75,9 @@ public class RegisterMerchantStepDefs {
     this.res = ms.registerMerchant(this.firstName, this.lastName, this.cvrNumber);
   }
 
-
+  /**
+   * @author Sarah
+   */
   @Then("^the registration submission succeeds$")
   public void theRegistrationSubmissionSucceeds() {
     //throw new PendingException();
@@ -68,13 +85,21 @@ public class RegisterMerchantStepDefs {
     assertEquals(200, this.res.getStatus());
   }
 
+  /**
+   * @author Sarah
+   * @throws Throwable
+   */
   @Then("^the registration submission succeeds and the merchant is registered$")
   public void theRegistrationSubmissionSucceedsAndTheMerchantIsRegistered() throws Throwable {
     //throw new PendingException();
     assertTrue(200 <= this.res.getStatus() && this.res.getStatus() < 300);
   }
 
-
+  /**
+   * @author Sarah
+   * @param errorMessage
+   * @throws Throwable
+   */
   @Then("^the merchant submission fails and he gets an error message \"([^\"]*)\"$")
   public void theMerchantSubmissionFailsAndHeGetsAnErrorMessage(String errorMessage) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
