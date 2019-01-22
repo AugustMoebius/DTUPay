@@ -226,7 +226,7 @@ public class PaymentStepDefs {
     assertEquals(200, response.getStatus());
 
     System.out.println("Sleeping on this thread; waiting for transaction to finish");
-    Thread.sleep(5000);
+    Thread.sleep(10000);
     System.out.println("Slept on this thread; waited for transaction to finish");
 
   }

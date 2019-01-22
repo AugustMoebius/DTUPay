@@ -14,6 +14,8 @@ public class InMemoryDataSource implements IDataSource {
 
     public InMemoryDataSource(){
         merchants = new HashMap<String, Merchant>();
+        Merchant merchant = new Merchant("Merchant", "DK11111111");
+        merchants.put(merchant.getId(),merchant);
     }
 
     public static IDataSource getInstance() {

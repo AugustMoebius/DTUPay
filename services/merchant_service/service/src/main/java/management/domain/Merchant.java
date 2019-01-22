@@ -8,4 +8,8 @@ public class Merchant {
         this.companyName = companyName;
         this.cvr = cvr;
     }
+
+    public String getId() {
+        return cvr;
+    }
 }

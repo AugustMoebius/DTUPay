@@ -1,7 +1,7 @@
 package payment.networking;
 
 public enum WebEndpoints {
-  
+
   //Linux Docker Machine IPs
   BASEPAYMENT("http://127.0.0.1:8585"),
   BASECUSTOMER("http://127.0.0.1:8686"),
