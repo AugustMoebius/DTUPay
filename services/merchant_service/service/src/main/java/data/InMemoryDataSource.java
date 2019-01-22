@@ -3,6 +3,7 @@ package data;
 import exceptions.MerchantNotFoundException;
 import management.domain.CVRNumber;
 import management.domain.Merchant;
+import management.exceptions.InvalidCvrException;
 
 import java.util.HashMap;
 
@@ -15,6 +16,13 @@ public class InMemoryDataSource implements IDataSource {
 
     public InMemoryDataSource(){
         merchants = new HashMap<String, Merchant>();
+        Merchant merchant = null;
+        try {
+            merchant = new Merchant("Merchant", "A/S", new CVRNumber("DK11111111"));
+            merchants.put(merchant.getCvr().getCvrNumber(),merchant);
+        } catch (InvalidCvrException e) {
+            e.printStackTrace();
+        }
     }
 
     public static IDataSource getInstance() {

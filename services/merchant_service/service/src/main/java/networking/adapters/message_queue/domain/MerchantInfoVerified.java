@@ -7,13 +7,13 @@ public class MerchantInfoVerified {
     private String merchantId;
     private int paymentAmount;
     private String tokenId;
-    private String customerId;
+    private String cprNumber;
 
     public MerchantInfoVerified(String merchantId, int paymentAmount, String tokenId, String customerId) {
         this.merchantId = merchantId;
         this.paymentAmount = paymentAmount;
         this.tokenId = tokenId;
-        this.customerId = customerId;
+        this.cprNumber = customerId;
     }
 
     public String getMerchantId() {
@@ -28,7 +28,7 @@ public class MerchantInfoVerified {
         return tokenId;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public String getCprNumber() {
+        return cprNumber;
     }
 }

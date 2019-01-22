@@ -9,7 +9,6 @@ import management.exceptions.InvalidCvrException;
 import networking.adapters.message_queue.domain.MerchantInfoVerified;
 import networking.adapters.message_queue.domain.PaymentInitializedRequest;
 import networking.adapters.message_queue.notification.INotification;
-import networking.adapters.rest.requests.GetMerchantRequest;
 import networking.adapters.rest.requests.RegisterMerchantRequest;
 import networking.adapters.rest.responses.GetMerchantResponse;
 
@@ -37,25 +36,18 @@ public class MerchantService {
      */
     public void handlePaymentInitialized(PaymentInitializedRequest paymentInitializedRequest) {
         String merchantCVR = paymentInitializedRequest.getMerchantId();
-        boolean isVerified = false;
         try {
             data.getMerchant(new CVRNumber(merchantCVR));
-            isVerified = true;
-        } catch (MerchantNotFoundException | InvalidCvrException e) {
-            e.printStackTrace();
-        }
+            MerchantInfoVerified merchantInfoVerified =
+                    new MerchantInfoVerified(
+                            paymentInitializedRequest.getMerchantId(),
+                            paymentInitializedRequest.getPaymentAmount(),
+                            paymentInitializedRequest.getTokenId(),
+                            paymentInitializedRequest.getCprNumber());
 
-        MerchantInfoVerified merchantInfoVerified =
-                new MerchantInfoVerified(
-                        paymentInitializedRequest.getMerchantId(),
-                        paymentInitializedRequest.getPaymentAmount(),
-                        paymentInitializedRequest.getTokenId(),
-                        paymentInitializedRequest.getCustomerId());
-
-        try {
-            iNotification.publishMessage(merchantInfoVerified, isVerified);
-        } catch (MessagePublishException e) {
-            e.printStackTrace();
+            iNotification.publishMessage(merchantInfoVerified);
+        } catch (MerchantNotFoundException | MessagePublishException | InvalidCvrException e) {
+           e.printStackTrace();
         }
 
 
