@@ -10,12 +10,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Esben s172986, Ebbe s125015
+ */
 public final class MockDatabase implements IDataSource {
     private static final MockDatabase mockDatabase = new MockDatabase();
     private HashMap<String, Token> allTokens;
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben s172986
      */
     private MockDatabase() {
         allTokens = new HashMap<>();
@@ -35,7 +38,7 @@ public final class MockDatabase implements IDataSource {
     }
 
     /**
-     * @author Ebbe Berthold (s125015)
+     * @author Ebbe s125015
      * @return instance of mock database
      */
     public static MockDatabase getInstance() {
@@ -43,7 +46,7 @@ public final class MockDatabase implements IDataSource {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben s172986
      * @param tokenId
      * @return token
      */
@@ -56,7 +59,7 @@ public final class MockDatabase implements IDataSource {
     }
 
     /**
-     * @author Sebastian
+     * @author Sebastian s144071
      * @param cprNumber
      * @return list of tokens
      */
@@ -74,7 +77,7 @@ public final class MockDatabase implements IDataSource {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben s172986
      * @param token
      * @return token
      */
@@ -85,7 +88,7 @@ public final class MockDatabase implements IDataSource {
     }
 
     /**
-     * @author August
+     * @author August s144461
      * @param tokenId
      */
     @Override

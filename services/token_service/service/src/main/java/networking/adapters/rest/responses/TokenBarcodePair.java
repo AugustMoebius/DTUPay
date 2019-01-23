@@ -6,7 +6,7 @@ public class TokenBarcodePair {
     private String barcodeRelativePath;
 
     /**
-     * @author August
+     * @author August s144461
      * @param tokenId
      * @param barcodeRelativePath
      */

@@ -5,13 +5,16 @@ import exceptions.InvalidCprException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author Ebbe s125015, Esben 172986
+ */
 public class CPRNumber {
     private static final Pattern pattern = Pattern.compile("[0-9]{6}-[0-9]{4}");
 
     private String cprNumber;
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben 172986
      * @param cprNumber
      * @throws InvalidCprException
      */
@@ -25,7 +28,7 @@ public class CPRNumber {
     }
 
     /**
-     * @author Ebbe Berthold (s125015)
+     * @author Ebbe s125015
      * @return cprNumber
      */
     public String toString() {

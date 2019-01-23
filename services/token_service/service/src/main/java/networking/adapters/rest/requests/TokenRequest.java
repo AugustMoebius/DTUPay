@@ -1,11 +1,14 @@
 package networking.adapters.rest.requests;
 
+/**
+ * @author Esben s172986
+ */
 public class TokenRequest {
     private String cprNumber;
     private int numberOfTokens;
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben s172986
      * @param cprNumber
      * @param numberOfTokens
      */
@@ -17,16 +20,16 @@ public class TokenRequest {
     public TokenRequest() {}
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
-     * @return
+     * @author Esben s172986
+     * @return a string of the CPR number
      */
     public String getCprNumber() {
         return cprNumber;
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
-     * @return
+     * @author Esben s172986
+     * @return an integer of the number of tokens
      */
     public int getNumberOfTokens() {
         return numberOfTokens;
