@@ -17,7 +17,7 @@ public class RegisterCustomerRequest {
     }
 
     /**
-     * @athor Emilie
+     * @author Emilie
      * @return firstName
      */
     public String getFirstName() {

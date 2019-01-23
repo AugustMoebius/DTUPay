@@ -29,7 +29,7 @@ public class VerifyRequestTest {
     }
 
     /**
-     * @auhtor Sebastian
+     * @author Sebastian
      */
     @Before
     public void setup(){

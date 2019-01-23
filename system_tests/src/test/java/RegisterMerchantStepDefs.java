@@ -110,7 +110,7 @@ public class RegisterMerchantStepDefs {
   }
 
   /**
-   * @author Sarah
+   *
    * @param errorMessage
    */
   @Then("^the merchant submission fails and he gets an error message \"([^\"]*)\"$")
