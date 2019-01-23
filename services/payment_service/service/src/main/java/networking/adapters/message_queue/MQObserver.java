@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 /**
- * @author : August (s144461), Sebastian (s144071)
+ * @author August (s144461), Sebastian (s144071)
  */
 public class MQObserver {
   private static MQObserver instance;

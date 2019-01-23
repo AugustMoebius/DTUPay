@@ -8,6 +8,9 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * @author Sarah (s153659), Emilie (s153762)
+ */
 public class AccessBankTest {
     BankService bank;
     String customerAccountId, merchantAccountId;

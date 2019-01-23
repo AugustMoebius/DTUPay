@@ -19,6 +19,9 @@ import java.math.BigDecimal;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
+/**
+ * @author Emilie (s153762), Sarah (s153659), August (s144461)
+ */
 public class RefundPaymentTest {
     private final PaymentService paymentService;
     private BankService bank;

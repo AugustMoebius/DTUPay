@@ -24,7 +24,7 @@ public class RabbitMQNotificationService implements INotificationService {
     /**
      * This method handles a payment request and publishes a payment initialised.
      * @author August (s144461)
-     * @param req
+     * @param req the PaymentRequest instance
      * @throws MessagePublishException
      */
     @Override

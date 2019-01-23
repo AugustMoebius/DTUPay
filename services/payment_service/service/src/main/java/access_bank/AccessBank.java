@@ -6,13 +6,16 @@ import networking.ws.fastmoney.BankServiceService;
 
 import java.math.BigDecimal;
 
+/**
+ * @author Sarah (s153659),
+ */
 // TODO: Consider if this should be static
 public class AccessBank implements IBankService{
     BankService bank;
     VerifyBankRequest verifyBankRequest;
 
     /**
-     * @author Sarah (s153659)
+     * @author Sarah (s153659), Emilie (s153762)
      */
     public AccessBank(){
         // access module

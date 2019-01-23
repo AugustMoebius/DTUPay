@@ -2,7 +2,7 @@ package domain;
 
 
 /**
- * @author August (s144461)
+ * @author August (s144461), Sebastian (s144071)
  */
 public class Transaction {
     private String merchantId;
@@ -13,10 +13,10 @@ public class Transaction {
 
     /**
      * @author Sebastian (s144071)
-     * @param merchantId
-     * @param paymentAmount
-     * @param tokenId
-     * @param cprNumber
+     * @param merchantId the identification of the merchant
+     * @param paymentAmount the payment amount
+     * @param tokenId the identification of the token
+     * @param cprNumber the CPR number of the customer
      */
     public Transaction(String merchantId, int paymentAmount, String tokenId, String cprNumber) {
         this.merchantId = merchantId;
@@ -52,7 +52,7 @@ public class Transaction {
 
     /**
      * @author Sebastian (s144071)
-     * @param refunded
+     * @param refunded the refund-state of a transaction
      */
     public void setRefunded(boolean refunded) {
         isRefunded = refunded;

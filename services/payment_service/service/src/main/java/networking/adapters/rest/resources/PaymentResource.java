@@ -11,6 +11,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ *  @author August (s144461), Sebastian (s144071)
+ */
 @Path("payment")
 public class PaymentResource {
   /**
@@ -26,7 +29,7 @@ public class PaymentResource {
   /**
    * This method consumes a post request and sends the call to payment service.
    * @author Sebastian (s144071)
-   * @param req
+   * @param req the PaymentRequest instance
    * @return response
    */
   @POST

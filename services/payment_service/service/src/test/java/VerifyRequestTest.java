@@ -13,6 +13,9 @@ import java.math.BigDecimal;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * @author August (s144461), Sebastian (s144071), Emilie (s153762)
+ */
 public class VerifyRequestTest {
     private InMemoryDataSource data;
     private VerifyBankRequest verifyBankRequest;

@@ -10,12 +10,17 @@ import networking.ws.fastmoney.BankServiceService;
 public class VerifyBankRequest {
     BankService bank;
 
+
     public VerifyBankRequest(){
         // access module
         bank = new BankServiceService().getBankServicePort();
     }
 
-
+    /**
+     * @author August (s144461)
+     * @param id the identification of the account
+     * @return TRUE or FALSE
+     */
     public boolean verifyAccount(String id) {
         try {
             bank.getAccountByCprNumber(id);
@@ -25,6 +30,11 @@ public class VerifyBankRequest {
         return true;
     }
 
+    /**
+     * @author August (s144461)
+     * @param amount the amount to be verified
+     * @return amount as an integer
+     */
     public boolean verifyAmount(int amount) {
         return amount > 0;
     }
