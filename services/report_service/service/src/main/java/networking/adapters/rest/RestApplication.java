@@ -5,13 +5,13 @@ import service.ReportService;
 
 import javax.ws.rs.ApplicationPath;
 
-
+/**
+ * @author Sarah (s153659)
+ */
 @ApplicationPath("/")
 public class RestApplication {
     public RestApplication(){super();}
-    /**
-     * @author Sarah (s153659)
-     */
+
     public static ReportService reportService = new ReportService(
             MockDatabase.getInstance()
     );

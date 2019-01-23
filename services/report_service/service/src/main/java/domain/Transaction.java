@@ -1,5 +1,8 @@
 package domain;
 
+/**
+ * @author Sarah (s153659)
+ */
 public class Transaction {
     private String timestamp;
     private int amount;
@@ -8,10 +11,10 @@ public class Transaction {
 
     /**
      * @author Sarah (s153659)
-     * @param timestamp
-     * @param amount
-     * @param customerID
-     * @param merchantID
+     * @param timestamp timestamp for when the transaction has happened
+     * @param amount the amount of ??
+     * @param customerID the Id of the customer
+     * @param merchantID the Id of the merchant
      */
     public Transaction(String timestamp, int amount, String customerID, String merchantID){
         this.timestamp = timestamp;

@@ -10,7 +10,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-
+/**
+ * @author Sarah (s153659)
+ */
 @Path("report")
 public class ReportResource {
     /**
@@ -26,7 +28,7 @@ public class ReportResource {
     /**
      * This method consumes a post request and calls reportService to generate a report.
      * @author Sarah (s153659)
-     * @param reportRequest
+     * @param reportRequest an instance of the ReportRequest class
      * @return Response
      */
     @POST

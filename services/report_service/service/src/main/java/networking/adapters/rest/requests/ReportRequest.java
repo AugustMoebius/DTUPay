@@ -1,6 +1,8 @@
 package networking.adapters.rest.requests;
 
-
+/**
+ * @author Sarah (s153659)
+ */
 public class ReportRequest {
     private String id;
     private String startDate;
@@ -8,9 +10,9 @@ public class ReportRequest {
 
     /**
      * @author Sarah (s153659)
-     * @param id
-     * @param startDate
-     * @param endDate
+     * @param id the Id of ??
+     * @param startDate the start date
+     * @param endDate the end date
      */
     public ReportRequest(String id, String startDate, String endDate){
         this.id = id;
@@ -18,27 +20,9 @@ public class ReportRequest {
         this.endDate = endDate;
     }
 
-    /**
-     * @author Sarah (s153659)
-     * @return id
-     */
-    public String getId() {
-        return id;
-    }
+    public String getId() { return id; }
 
-    /**
-     * @author Sarah (s153659)
-     * @return startDate
-     */
-    public String getStartDate() {
-        return startDate;
-    }
+    public String getStartDate() { return startDate; }
 
-    /**
-     * @author Sarah (s153659)
-     * @return endDate
-     */
-    public String getEndDate() {
-        return endDate;
-    }
+    public String getEndDate() { return endDate; }
 }
