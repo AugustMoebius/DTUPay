@@ -218,7 +218,7 @@ public class PaymentStepDefs {
 //  -------------------------------------- Scenario:Failing payment because of already used token --------------------------------------
 
   /**
-   * @authour Esben (s172986)
+   * @author Esben (s172986)
    */
   @And("^the token has been used$")
   public void theTokenHasBeenUsed() {
@@ -230,7 +230,7 @@ public class PaymentStepDefs {
     assertTrue(token.isUsed());
   }
   /**
-   * @authour August (s144461)
+   * @author August (s144461)
    */
   @And("^the token is unused$")
   public void theTokenIsUnused() throws Throwable {
@@ -242,7 +242,7 @@ public class PaymentStepDefs {
     assertFalse(token.isUsed());
   }
   /**
-   * @authour August (s144461)
+   * @author August (s144461)
    */
   @And("^the customer has a used token$")
   public void theCustomerHasAUsedToken() throws InterruptedException {
@@ -283,7 +283,7 @@ public class PaymentStepDefs {
   }
 
   /**
-   * @authour Ebbe (s125015)
+   * @author Ebbe (s125015)
    * @param negativeAmount
    */
   @And("^that the merchant wishes to register a payment of negative amount ([-]?\\d+)$")
@@ -301,7 +301,7 @@ public class PaymentStepDefs {
   // --------------------------------------- Refund Scenario ----------------------------------- //
 
   /**
-   * @authour August (s144461)
+   * @author August (s144461)
    */
   @And("^the customer has a used token with ID \"([^\"]*)\" and an amount of (\\d+)$")
   public void theCustomerHasAUsedTokenWithIDAndAnAmountOf(String tokenId, int paymentAmount) throws InterruptedException {

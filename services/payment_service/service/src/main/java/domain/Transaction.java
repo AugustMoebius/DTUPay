@@ -1,5 +1,9 @@
 package domain;
 
+
+/**
+ * @author August
+ */
 public class Transaction {
     private String merchantId;
     private int paymentAmount;
