@@ -10,7 +10,7 @@ public class ReportRequest {
 
     /**
      * @author Sarah (s153659)
-     * @param id the Id of ??
+     * @param id the Id of the user; can be customer, merchant or manager
      * @param startDate the start date
      * @param endDate the end date
      */

@@ -12,7 +12,7 @@ public class Transaction {
     /**
      * @author Sarah (s153659)
      * @param timestamp timestamp for when the transaction has happened
-     * @param amount the amount of ??
+     * @param amount the price of the product bought
      * @param customerID the Id of the customer
      * @param merchantID the Id of the merchant
      */
