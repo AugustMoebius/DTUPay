@@ -11,6 +11,9 @@ import domain.Merchant;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author Sarah (s153659)
+ */
 public class MerchantManagement implements IMerchantManagement {
     private IDataSource data;
     private Merchant merchant;
@@ -27,9 +30,9 @@ public class MerchantManagement implements IMerchantManagement {
     /**
      * This method registers a merchant in the database after validating the input.
      * @author Sarah (s153659)
-     * @param firstName
-     * @param lastName
-     * @param CVR
+     * @param firstName the first name of the merchant
+     * @param lastName the last name of the merchant
+     * @param CVR the CVR number of the mechant
      * @throws MerchantInvalidName
      * @throws MerchantInvalidInformation
      * @throws MerchantAlreadyExistException
@@ -69,8 +72,8 @@ public class MerchantManagement implements IMerchantManagement {
 
     /**
      * @author Sarah (s153659)
-     * @param cvr
-     * @return
+     * @param cvr the CVR number of the mechant
+     * @return a merchant
      * @throws MerchantNotFoundException
      */
     @Override

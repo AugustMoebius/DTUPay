@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * * @author Emilie (s153762), Sarah (s153659)
+ */
 public class ObserverRabbitMQ implements IObserver{
     private final static ObserverRabbitMQ observerRabbitMQ = new ObserverRabbitMQ();
     private final static String EXCHANGE_NAME = "payment_exchange";

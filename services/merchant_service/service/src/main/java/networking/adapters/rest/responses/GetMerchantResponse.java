@@ -1,13 +1,16 @@
 package networking.adapters.rest.responses;
 
+/**
+ * Sarah (s153659)
+ */
 public class GetMerchantResponse {
     private String firstName, lastName, cvr;
 
     /**
      * @author Sarah (s153659)
-     * @param firstName
-     * @param lastName
-     * @param cvr
+     * @param firstName the first name of the merchant
+     * @param lastName the last name of the merchant
+     * @param cvr the CVR number of the merchant
      */
     public GetMerchantResponse(String firstName, String lastName, String cvr){
         this.firstName = firstName;
@@ -15,51 +18,15 @@ public class GetMerchantResponse {
         this.cvr = cvr;
     }
 
-    /**
-     * @author Sarah (s153659)
-     * @return firstName
-     */
-    public String getFirstName() {
-        return firstName;
-    }
+    public String getFirstName() { return firstName; }
 
-    /**
-     * @author Sarah (s153659)
-     * @param firstName
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
 
-    /**
-     * @author Sarah (s153659)
-     * @return lastName
-     */
-    public String getLastName() {
-        return lastName;
-    }
+    public String getLastName() { return lastName; }
 
-    /**
-     * @author Sarah (s153659)
-     * @param lastName
-     */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    public void setLastName(String lastName) { this.lastName = lastName; }
 
-    /**
-     * @author Sarah (s153659)
-     * @return cvr
-     */
-    public String getCvr() {
-        return cvr;
-    }
+    public String getCvr() { return cvr; }
 
-    /**
-     * @author Sarah (s153659)
-     * @param cvr
-     */
-    public void setCvr(String cvr) {
-        this.cvr = cvr;
-    }
+    public void setCvr(String cvr) { this.cvr = cvr; }
 }

@@ -11,6 +11,9 @@ import javax.ws.rs.core.Application;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * @author Sarah (s153659), Emilie (s153762)
+ */
 @ApplicationPath("/")
 public class RestApplication extends Application {
     /**

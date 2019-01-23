@@ -1,5 +1,8 @@
 package networking.adapters.message_queue.domain;
 
+/**
+ * @author Emilie (s153762)
+ */
 public class MerchantInfoVerified {
     private String merchantId;
     private int paymentAmount;
@@ -8,10 +11,10 @@ public class MerchantInfoVerified {
 
     /**
      * @author Emilie (s153762)
-     * @param merchantId
-     * @param paymentAmount
-     * @param tokenId
-     * @param customerId
+     * @param merchantId the Id of the merchant
+     * @param paymentAmount the payment amount
+     * @param tokenId the id of the token
+     * @param customerId the Id of the customer
      */
     public MerchantInfoVerified(String merchantId, int paymentAmount, String tokenId, String customerId) {
         this.merchantId = merchantId;

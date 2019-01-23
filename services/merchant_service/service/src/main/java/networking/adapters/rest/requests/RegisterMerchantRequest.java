@@ -5,9 +5,9 @@ public class RegisterMerchantRequest {
 
     /**
      * @author Sarah (s153659)
-     * @param firstName
-     * @param lastName
-     * @param cvr
+     * @param firstName the first name of the merchant
+     * @param lastName the last name of the merchant
+     * @param cvr the CVR number of the merchant
      */
     public RegisterMerchantRequest(String firstName, String lastName, String cvr) {
         this.firstName = firstName;
@@ -15,55 +15,26 @@ public class RegisterMerchantRequest {
         this.cvr = cvr;
     }
 
-    /**
-     * @author Sarag
-     */
     public RegisterMerchantRequest() {}
 
-    /**
-     * @author Sarah (s153659)
-     * @param firstName
-     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    /**
-     * @author
-     * @param lastName
-     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    /**
-     * @author
-     * @param cvr
-     */
     public void setCvr(String cvr) {
         this.cvr = cvr;
     }
 
-    /**
-     * @author
-     * @return firstName
-     */
-    public String getFirstName() {
-        return firstName;
-    }
+    public    String getFirstName() {return firstName; }
 
-    /**
-     * @author Sarah (s153659)
-     * @return lastName
-     */
     public String getLastName() {
         return lastName;
     }
 
-    /**
-     * @author Sarah (s153659)
-     * @return cvr
-     */
     public String getCvr() {
         return cvr;
     }

@@ -8,6 +8,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * @author Sarah (s153659)
+ */
 @Path("merchant")
 public class RegisterMerchantResource {
     /**
@@ -22,7 +25,7 @@ public class RegisterMerchantResource {
     /**
      * This method consumes a post request to register the merchant and sends an appropriate message and status code back.
      * @author Sarah (s153659)
-     * @param req
+     * @param req an instance of the RegisterMerchantRequest
      * @return Response
      */
     @POST

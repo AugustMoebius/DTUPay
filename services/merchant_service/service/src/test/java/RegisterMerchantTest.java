@@ -12,6 +12,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * @author Sarah (s153659)
+ */
 public class RegisterMerchantTest {
     private IDataSource data;
     private MerchantManagement merchantManagement;

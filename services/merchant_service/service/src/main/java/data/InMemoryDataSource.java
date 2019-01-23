@@ -8,7 +8,7 @@ import exceptions.InvalidCvrException;
 import java.util.HashMap;
 
 /**
- * @author Sarah (s153659)
+ * @author Sarah (s153659), Ebbe (125015)
  */
 public class InMemoryDataSource implements IDataSource {
     private static InMemoryDataSource inMemoryDataSource = new InMemoryDataSource();
@@ -29,11 +29,21 @@ public class InMemoryDataSource implements IDataSource {
         return inMemoryDataSource;
     }
 
+    /**
+     * @author Ebbe (125015)
+     * @param merchant an instance of the merchant class
+     */
     @Override
     public void registerMerchant(Merchant merchant) {
         merchants.put(merchant.getCvr().getCvrNumber(), merchant);
     }
 
+    /**
+     * @author Sarah (s153659)
+     * @param merchantCVR the CVR number of the merchant
+     * @return
+     * @throws MerchantNotFoundException
+     */
     @Override
     public Merchant getMerchant(CVRNumber merchantCVR) throws MerchantNotFoundException {
         Merchant merchant = merchants.get(merchantCVR.getCvrNumber());
