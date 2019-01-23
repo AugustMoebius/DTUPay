@@ -12,13 +12,18 @@ public class BarcodeResource {
 
     /**
      * @author Esben Løvendal Kruse (s172986)
-     * @return
+     * @return response
      */
     @GET
     public Response pingBarcode() {
         return Response.ok("Barcode request").build();
     }
 
+    /**
+     * @author August
+     * @param barcodePath
+     * @return response
+     */
     @GET
     @Path("/{barcodePath}")
     @Produces("image/png")
