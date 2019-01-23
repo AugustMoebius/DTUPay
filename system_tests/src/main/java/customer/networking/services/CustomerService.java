@@ -15,7 +15,7 @@ public class CustomerService {
     private WebTarget r = client.target(WebEndpoints.BASECUSTOMER.url);
 
     /**
-     *
+     * @author Sarah
      * @param firstName
      * @param lastName
      * @param cpr

@@ -48,16 +48,32 @@ public class Token {
         return cprNumber;
     }
 
+    /**
+     * @author August
+     * @return
+     */
     public String getBarcodeFileName() {
         return barcodeFileName;
     }
 
+    /**
+     * @author Sebastian
+     * @param barcode
+     */
     public void setBarcodeFileName(String barcode) {
         this.barcodeFileName = barcode;
     }
 
+    /**
+     * @author August
+     * @return
+     */
     public boolean isUsed() { return isUsed; }
 
+    /**
+     * @author Sebastian
+     * @param used
+     */
     public void setUsed(boolean used) {
         isUsed = used;
     }

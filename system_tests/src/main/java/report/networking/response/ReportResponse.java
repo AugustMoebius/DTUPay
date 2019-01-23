@@ -2,6 +2,9 @@ package report.networking.response;
 
 import java.util.List;
 
+/**
+ * @author Emilie
+ */
 public class ReportResponse {
     private String id;
     private List<String> transactionList;

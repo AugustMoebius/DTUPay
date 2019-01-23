@@ -1,5 +1,8 @@
 package report.networking.requests;
 
+/**
+ * @author Sarah
+ */
 public class ReportRequest {
     private String id;
     private String previousDate;

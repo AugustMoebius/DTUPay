@@ -12,14 +12,13 @@ import networking.adapters.message_queue.domain.MerchantInfoVerified;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-/**
- * @autor Sarah
- */
+
 public class NotificationRabbitMQ implements INotification {
     public NotificationRabbitMQ(){}
     private final static String EXCHANGE_NAME = "payment_exchange";
 
     /**
+     * This method publishes that the merchant is verified to the message queue.
      * @author Emilie
      * @param merchantInfoVerified
      */
@@ -43,7 +42,6 @@ public class NotificationRabbitMQ implements INotification {
         } catch (TimeoutException | IOException e) {
             throw new MessagePublishException(e.getLocalizedMessage());
         }
-
     }
 
 

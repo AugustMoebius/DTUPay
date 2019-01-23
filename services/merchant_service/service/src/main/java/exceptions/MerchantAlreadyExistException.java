@@ -1,8 +1,11 @@
 package exceptions;
 
-import management.domain.CVRNumber;
+import domain.CVRNumber;
 
-public class MerchantAlreadyExistException extends Throwable {
+/**
+ * @author Sarah
+ */
+public class MerchantAlreadyExistException extends MerchantServiceException {
     public MerchantAlreadyExistException(CVRNumber cvr) {
         super("Illegal registration: Merchant already exists. Received " + cvr.getCvrNumber() + ".");
     }

@@ -32,10 +32,9 @@ public class RegisterMerchantStepDefs {
    * @author Sarah
    * @param firstName
    * @param lastName
-   * @throws Throwable
    */
   @Given("^a merchant with a CVR number and the name \"([^\"]*)\" \"([^\"]*)\"$")
-  public void aMerchantWithACVRNumberAndTheName(String firstName, String lastName) throws Throwable {
+  public void aMerchantWithACVRNumberAndTheName(String firstName, String lastName) {
     // Write code here that turns the phrase above into concrete actions
     this.firstName = firstName;
     this.lastName = lastName;
@@ -48,10 +47,9 @@ public class RegisterMerchantStepDefs {
    * @param cvrNumber
    * @param firstName
    * @param lastName
-   * @throws Throwable
    */
   @Given("^a merchant with the invalid CVR number \"([^\"]*)\" and the name \"([^\"]*)\" \"([^\"]*)\"$")
-  public void aMerchantWithTheInvalidCVRNumberAndTheName(String cvrNumber, String firstName, String lastName) throws Throwable {
+  public void aMerchantWithTheInvalidCVRNumberAndTheName(String cvrNumber, String firstName, String lastName) {
     // Write code here that turns the phrase above into concrete actions
     this.firstName = firstName;
     this.lastName = lastName;
@@ -104,10 +102,9 @@ public class RegisterMerchantStepDefs {
 
   /**
    * @author Sarah
-   * @throws Throwable
    */
   @Then("^the registration submission succeeds and the merchant is registered$")
-  public void theRegistrationSubmissionSucceedsAndTheMerchantIsRegistered() throws Throwable {
+  public void theRegistrationSubmissionSucceedsAndTheMerchantIsRegistered() {
     //throw new PendingException();
     assertTrue(200 <= this.res.getStatus() && this.res.getStatus() < 300);
   }
@@ -115,16 +112,19 @@ public class RegisterMerchantStepDefs {
   /**
    * @author Sarah
    * @param errorMessage
-   * @throws Throwable
    */
   @Then("^the merchant submission fails and he gets an error message \"([^\"]*)\"$")
-  public void theMerchantSubmissionFailsAndHeGetsAnErrorMessage(String errorMessage) throws Throwable {
+  public void theMerchantSubmissionFailsAndHeGetsAnErrorMessage(String errorMessage) {
     // Write code here that turns the phrase above into concrete actions
     // Receives a 400 status code and a message in a body?
     assertEquals(400, this.res.getStatus());
     assertEquals(errorMessage, res.readEntity(String.class));
   }
 
+  /**
+   * @author Emilie
+   * @param errorMsg
+   */
   @Then("^the merchant submission fails and he gets an error message where _cvr_ is merchant CVR: \"([^\"]*)\"$")
   public void theMerchantSubmissionFailsAndHeGetsAnErrorMessageWhere_cvr_IsMerchantCVR(String errorMsg) {
     assertEquals(400, this.res.getStatus());

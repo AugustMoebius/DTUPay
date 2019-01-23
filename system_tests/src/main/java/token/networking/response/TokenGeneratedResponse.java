@@ -14,12 +14,23 @@ public class TokenGeneratedResponse {
         this.tokenBarcodePairs = tokenBarcodePairs;
     }
 
+    /**
+     * @author Sebastian
+     */
     public TokenGeneratedResponse() {}
 
+    /**
+     * @author August
+     * @return token barcode pair
+     */
     public List<TokenBarcodePair> getTokenBarcodePairs() {
         return tokenBarcodePairs;
     }
 
+    /**
+     * @author Sebastian
+     * @param tokenBarcodePairs
+     */
     public void setTokenBarcodePairs(List<TokenBarcodePair> tokenBarcodePairs) {
         this.tokenBarcodePairs = tokenBarcodePairs;
     }

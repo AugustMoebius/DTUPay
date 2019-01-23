@@ -55,6 +55,11 @@ public final class MockDatabase implements IDataSource {
         return token;
     }
 
+    /**
+     * @author Sebastian
+     * @param cprNumber
+     * @return list of tokens
+     */
     @Override
     public List<Token> getTokensByCustomer(CPRNumber cprNumber) {
         List<Token> tokensForCustomer = new ArrayList<>();
@@ -71,7 +76,7 @@ public final class MockDatabase implements IDataSource {
     /**
      * @author Esben Løvendal Kruse (s172986)
      * @param token
-     * @return
+     * @return token
      */
     @Override
     public Token putToken(Token token) {

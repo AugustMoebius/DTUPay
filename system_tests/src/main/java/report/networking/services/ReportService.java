@@ -10,6 +10,9 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * @author Sarah
+ */
 public class ReportService {
     private Client client = ClientBuilder.newClient();
     private WebTarget r = client.target(WebEndpoints.BASEREPORT.url);

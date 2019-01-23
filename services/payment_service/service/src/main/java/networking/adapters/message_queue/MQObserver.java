@@ -39,6 +39,11 @@ public class MQObserver {
     return MQObserver.instance;
   }
 
+  /**
+   * @author Sebastian
+   * @throws IOException
+   * @throws TimeoutException
+   */
   public static void init() throws IOException, TimeoutException {
     MQObserver.instance = new MQObserver();
   }

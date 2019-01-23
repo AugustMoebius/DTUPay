@@ -13,12 +13,18 @@ import java.util.concurrent.TimeoutException;
 
 @ApplicationPath("/")
 public class RestApplication extends Application {
+    /**
+     * @author Sarah
+     */
     public static MerchantService merchantService = new MerchantService(
             InMemoryDataSource.getInstance(),
             new MerchantManagement(),
             new NotificationRabbitMQ()
     );
 
+    /**
+     * @author Emilie
+     */
     public RestApplication(){
         super();
 

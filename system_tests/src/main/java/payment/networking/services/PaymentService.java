@@ -15,6 +15,14 @@ public class PaymentService {
   private Client client = ClientBuilder.newClient();
   private WebTarget r = client.target(WebEndpoints.BASEPAYMENT.url);
 
+  /**
+   * This method submits a request for payment.
+   * @author Emilie
+   * @param merchantId
+   * @param paymentAmount
+   * @param tokenId
+   * @return response
+   */
   public Response submitPayment(String merchantId, int paymentAmount, String tokenId) {
     // Build request body object
     PaymentRequest body = new PaymentRequest(merchantId, paymentAmount, tokenId);
@@ -28,6 +36,12 @@ public class PaymentService {
     return response;
   }
 
+  /**
+   * This method send a request for a refund.
+   * @author August
+   * @param tokenId
+   * @return response
+   */
     public Response submitRefund(String tokenId) {
       // Build request body
       RefundRequest body = new RefundRequest(tokenId);

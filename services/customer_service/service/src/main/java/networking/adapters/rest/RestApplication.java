@@ -7,6 +7,9 @@ import service.CustomerService;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
+/**
+ * @author Sarah
+ */
 @ApplicationPath("/")
 public class RestApplication extends Application {
     public static CustomerService customerService = new CustomerService(

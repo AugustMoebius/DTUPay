@@ -3,10 +3,12 @@ import exceptions.MerchantAlreadyExistException;
 import exceptions.MerchantInvalidInformation;
 import exceptions.MerchantInvalidName;
 import exceptions.MerchantNotFoundException;
-import management.domain.CVRNumber;
-import management.domain.Merchant;
+import domain.CVRNumber;
+import domain.Merchant;
 
-
+/**
+ * @author Emilie
+ */
 public interface IMerchantManagement {
 
     // CRUD operations
@@ -15,7 +17,7 @@ public interface IMerchantManagement {
     // Read a merchant
     Merchant getMerchant(CVRNumber cvr) throws MerchantNotFoundException;
 
-    void updateMerchant(String companyName);
-    void deleteMerchant(String cvr);
+    /*void updateMerchant(String companyName);
+    void deleteMerchant(String cvr);*/
 
 }

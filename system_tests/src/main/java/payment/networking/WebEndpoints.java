@@ -1,5 +1,8 @@
 package payment.networking;
 
+/**
+ * @author Sebastian
+ */
 public enum WebEndpoints {
 
   //Linux Docker Machine IPs

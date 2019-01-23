@@ -1,7 +1,10 @@
-package management.domain;
+package domain;
 
-import management.exceptions.InvalidCvrException;
+import exceptions.InvalidCvrException;
 
+/**
+ * @author Sarah
+ */
 public class CVRNumber {
     private String cvr;
     public CVRNumber(String cvr) throws InvalidCvrException {

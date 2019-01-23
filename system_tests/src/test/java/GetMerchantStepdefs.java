@@ -1,5 +1,3 @@
-import cucumber.api.PendingException;
-import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -27,6 +25,9 @@ public class GetMerchantStepdefs {
     private User merchant;
     private BankService bankService;
 
+    /**
+     * @author Emilie
+     */
     public GetMerchantStepdefs() {
         this.merchantService = new MerchantService();
         this.bankService = new BankServiceService().getBankServicePort();
@@ -37,7 +38,7 @@ public class GetMerchantStepdefs {
      * @param firstName
      * @param lastName
      * @param merchantBalance
-     * @throws Throwable
+
      */
     @Given("^a registered merchant with a CVR, the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
     public void aRegisteredMerchantWithACVRTheNameAndABankAccountWithBalance(String firstName, String lastName, int merchantBalance) throws BankServiceException_Exception {
@@ -63,10 +64,9 @@ public class GetMerchantStepdefs {
 
     /**
      * @author Sarah
-     * @throws Throwable
      */
     @When("^the merchant submits a request to get the user information$")
-    public void theMerchantSubmitsARequestToGetTheUserInformation() throws Throwable {
+    public void theMerchantSubmitsARequestToGetTheUserInformation()  {
         // Write code here that turns the phrase above into concrete actions
         // Sends get request to get the merchant
         this.res = merchantService.getMerchant(merchant.getCprNumber());
@@ -75,10 +75,9 @@ public class GetMerchantStepdefs {
 
     /**
      * @author Sarah
-     * @throws Throwable
      */
     @Then("^the get submission succeeds and the merchant gets the information$")
-    public void theGetSubmissionSucceedsAndTheMerchantGetsTheInformation() throws Throwable {
+    public void theGetSubmissionSucceedsAndTheMerchantGetsTheInformation()  {
         // Write code here that turns the phrase above into concrete actions
         System.out.println(res.getStatus());
         assertTrue(200 <= res.getStatus());

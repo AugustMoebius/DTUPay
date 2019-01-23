@@ -16,11 +16,22 @@ import javax.ws.rs.core.Response;
  */
 @Path("refund")
 public class RefundResource {
+    /**
+     * This method is for test purposes, so you can see the response on localhost
+     * @author August
+     * @return response
+     */
     @GET
     public Response ping() {
         return Response.ok("Refund request").build();
     }
 
+    /**
+     * This method consumes a post request and sends the call to payment service.
+     * @author August
+     * @param req
+     * @return response
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response submitRefund(RefundRequest req) {

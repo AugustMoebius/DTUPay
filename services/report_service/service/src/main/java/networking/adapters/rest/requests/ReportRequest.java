@@ -3,22 +3,23 @@ package networking.adapters.rest.requests;
 
 public class ReportRequest {
     private String id;
-    private String previousDate;
-    private String afterDate;
+    private String startDate;
+    private String endDate;
 
     /**
      * @author Sarah
      * @param id
-     * @param previousDate
-     * @param afterDate
+     * @param startDate
+     * @param endDate
      */
-    public ReportRequest(String id, String previousDate, String afterDate){
+    public ReportRequest(String id, String startDate, String endDate){
         this.id = id;
-        this.previousDate = previousDate;
-        this.afterDate = afterDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     /**
+     * @author Sarah
      * @return id
      */
     public String getId() {
@@ -26,18 +27,18 @@ public class ReportRequest {
     }
 
     /**
-     *
-     * @return previousDate
+     * @author Sarah
+     * @return startDate
      */
-    public String getPreviousDate() {
-        return previousDate;
+    public String getStartDate() {
+        return startDate;
     }
 
     /**
-     *
-     * @return afterDate
+     * @author Sarah
+     * @return endDate
      */
-    public String getAfterDate() {
-        return afterDate;
+    public String getEndDate() {
+        return endDate;
     }
 }

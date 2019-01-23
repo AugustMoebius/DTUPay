@@ -26,10 +26,16 @@ public class RefundPaymentTest {
     private AccessBank accessBank;
     private String customerAccountId, merchantAccountId;
 
+    /**
+     * @author Emilie
+     */
     public RefundPaymentTest(){
         paymentService = new PaymentService(InMemoryDataSource.getInstance(), new RabbitMQNotificationService(), new AccessBank());
     }
 
+    /**
+     * @author Sarah
+     */
     @Before
     public void setup(){
         bank = new BankServiceService().getBankServicePort();
@@ -74,7 +80,9 @@ public class RefundPaymentTest {
     }
 
 
-    
+    /**
+     * @author August
+     */
     @Test
     public void RefundMoneyTest(){
         int paymentAmount = 100;

@@ -1,9 +1,9 @@
 package data;
 
 import exceptions.MerchantNotFoundException;
-import management.domain.CVRNumber;
-import management.domain.Merchant;
-import management.exceptions.InvalidCvrException;
+import domain.CVRNumber;
+import domain.Merchant;
+import exceptions.InvalidCvrException;
 
 import java.util.HashMap;
 
@@ -38,7 +38,7 @@ public class InMemoryDataSource implements IDataSource {
     public Merchant getMerchant(CVRNumber merchantCVR) throws MerchantNotFoundException {
         Merchant merchant = merchants.get(merchantCVR.getCvrNumber());
         if (merchant==null){
-            throw new MerchantNotFoundException();
+            throw new MerchantNotFoundException(merchantCVR.getCvrNumber());
         }
         return merchant;
     }

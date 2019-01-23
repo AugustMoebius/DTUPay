@@ -1,5 +1,8 @@
-package management.domain;
+package domain;
 
+/**
+ * @author Emilie
+ */
 public class Merchant {
     private String firstName, lastName;
     private CVRNumber cvr;

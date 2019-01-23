@@ -16,26 +16,50 @@ public class RegisterCustomerRequest {
         this.cpr = cpr;
     }
 
+    /**
+     * @athor Emilie
+     * @return firstName
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * @author Emilie
+     * @param firstName
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * @author Emilie
+     * @return lastName
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * @author Emilie
+     * @param lastName
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * @author Emilie
+     * @return cpr
+     */
     public String getCpr() {
         return cpr;
     }
 
+    /**
+     * @author Emilie
+     * @param cpr
+     */
     public void setCpr(String cpr) {
         this.cpr = cpr;
     }

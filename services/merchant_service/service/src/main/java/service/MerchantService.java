@@ -3,10 +3,10 @@ package service;
 import data.IDataSource;
 import exceptions.*;
 import management.IMerchantManagement;
-import management.domain.CVRNumber;
-import management.domain.Merchant;
-import management.exceptions.InvalidCvrException;
-import management.exceptions.MerchantServiceException;
+import domain.CVRNumber;
+import domain.Merchant;
+import exceptions.InvalidCvrException;
+import exceptions.MerchantServiceException;
 import networking.adapters.message_queue.domain.MerchantInfoVerified;
 import networking.adapters.message_queue.domain.PaymentInitializedRequest;
 import networking.adapters.message_queue.notification.INotification;
@@ -32,6 +32,7 @@ public class MerchantService {
     }
 
     /**
+     * This method verifies the merchant, when receiving the request and then it publishes the verification.
      * @author Emilie
      * @param paymentInitializedRequest
      */
@@ -54,6 +55,12 @@ public class MerchantService {
 
     }
 
+    /**
+     * This method calls merchant management and registers the merchant.
+     * @author Sarah
+     * @param req
+     * @throws MerchantRegistrationException
+     */
     public void registerMerchant(RegisterMerchantRequest req) throws MerchantRegistrationException {
         try{
             merchantManagement.registerMerchant(req.getFirstName(), req.getLastName(), new CVRNumber(req.getCvr()));
@@ -62,6 +69,13 @@ public class MerchantService {
         }
     }
 
+    /**
+     * This method calls merchant management and gets the merchant with the given cvr.
+     * @author Sarah
+     * @param cvr
+     * @return
+     * @throws MerchantServiceException
+     */
     public GetMerchantResponse getMerchant(String cvr) throws MerchantServiceException {
         try {
             System.out.println(cvr);

@@ -5,15 +5,16 @@ import networking.adapters.message_queue.PaymentVerifiedRequest;
 
 import java.util.HashMap;
 
-/**
- * @author : August, Sebastian
- */
 public class InMemoryDataSource implements IDataSource {
 
 
     private static final InMemoryDataSource dataSource = new InMemoryDataSource();
     private HashMap<String, Transaction> transactions = new HashMap<>();
 
+    /**
+     * @author August
+     * @return
+     */
     public static InMemoryDataSource getInstance(){
         return dataSource;
     }
@@ -22,7 +23,7 @@ public class InMemoryDataSource implements IDataSource {
     }
 
     /**
-     * @authour Emilie
+     * @author Emilie
      * @param tokenId
      * @return transaction
      */
@@ -41,6 +42,10 @@ public class InMemoryDataSource implements IDataSource {
         transactions.put(transaction.getTokenId(), transaction);
     }
 
+    /**
+     * @author Sebastian
+     * @param req
+     */
     @Override
     public void addTransaction(PaymentVerifiedRequest req) {
         Transaction newTransaction = new Transaction(req.getMerchantId(),req.getPaymentAmount(),req.getTokenId(),req.getCprNumber());

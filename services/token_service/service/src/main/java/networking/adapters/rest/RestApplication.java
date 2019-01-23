@@ -10,6 +10,9 @@ import javax.ws.rs.core.Application;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * @author Sebastian
+ */
 @ApplicationPath("/")
 public class RestApplication extends Application {
 

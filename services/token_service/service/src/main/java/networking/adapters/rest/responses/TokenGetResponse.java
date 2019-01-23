@@ -58,18 +58,32 @@ public class TokenGetResponse {
 
     /**
      * @author August
+     * @return isUsed
      */
     public boolean isUsed() {
         return isUsed;
     }
+
+    /**
+     * @author August
+     * @param id
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * @author Sebastian
+     * @param cprNumber
+     */
     public void setCprNumber(String cprNumber) {
         this.cprNumber = cprNumber;
     }
 
+    /**
+     * @author August
+     * @param barcode
+     */
     public void setBarcode(String barcode) {
         this.barcode = barcode;
     }

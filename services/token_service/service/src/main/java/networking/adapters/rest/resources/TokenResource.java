@@ -26,7 +26,7 @@ public class TokenResource {
   /**
    * @author Esben Løvendal Kruse (s172986)
    * @param tokenRequest
-   * @return
+   * @return response
    * @throws InvalidCprException
    */
   @POST
@@ -48,7 +48,7 @@ public class TokenResource {
   /**
    * @author Esben Løvendal Kruse (s172986)
    * @param id
-   * @return
+   * @return token resposne
    */
   @GET
   @Path("/{id}")
@@ -67,6 +67,7 @@ public class TokenResource {
   /**
    * @author August
    * @param id
+   * @return response
    */
   @DELETE
   @Path("/{id}")

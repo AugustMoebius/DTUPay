@@ -29,6 +29,9 @@ public final class ObserverRabbitMQ implements IObserver {
     private TokenService tokenService;
     private NotificationRabbitMQ notificationRabbitMQ;
 
+    /**
+     * @author August
+     */
     private ObserverRabbitMQ() {
         this.data = MockDatabase.getInstance();
         this.notificationRabbitMQ = new NotificationRabbitMQ();

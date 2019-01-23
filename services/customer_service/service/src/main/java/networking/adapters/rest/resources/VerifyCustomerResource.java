@@ -15,6 +15,14 @@ import javax.ws.rs.core.Response;
 @Path("customer")
 public class VerifyCustomerResource {
 
+    /**
+     * This method verifies a customer with a get request.
+     * @author Esben
+     * @param cprNumber
+     * @return
+     * @throws InvalidCprException
+     * @throws CustomerNotFoundException
+     */
     @GET
     @Path("/{id}")
     public Response verifyCustomer(@PathParam("id") String cprNumber) throws InvalidCprException, CustomerNotFoundException {

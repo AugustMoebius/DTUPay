@@ -91,9 +91,10 @@ public class TokenService {
     }
 
     /**
+     * This method handles the generation of tokens after verifying the request data.
      * @author Esben Løvendal Kruse (s172986)
      * @param tokenRequest
-     * @return
+     * @return token generation response
      * @throws TokenGenerationFailedException
      */
     public TokenGeneratedResponse handleTokenGenerateRequests(TokenRequest tokenRequest) throws TokenGenerationFailedException, TooManyUnusedTokensException {
@@ -133,7 +134,7 @@ public class TokenService {
     /**
      * @author Esben Løvendal Kruse (s172986)
      * @param id
-     * @return
+     * @return token get response
      * @throws InvalidCprException
      */
     public TokenGetResponse handleTokenGetRequests(String id) throws TokenNotFoundException {
@@ -147,7 +148,7 @@ public class TokenService {
      * @author Esben Løvendal Kruse (s172986)
      * @param numberOfTokens
      * @param cprNumber
-     * @return
+     * @return a list of tokens
      */
     public List<Token> generateTokens(CPRNumber cprNumber, int numberOfTokens) {
         List<Token> tokens = new ArrayList<>();
@@ -162,7 +163,7 @@ public class TokenService {
     /**
      * @author Esben Løvendal Kruse (s172986)
      * @param cprNumber
-     * @return
+     * @return token
      */
     private Token generateToken(CPRNumber cprNumber) {
         Token token = new Token(cprNumber);
@@ -173,6 +174,11 @@ public class TokenService {
         return token;
     }
 
+    /**
+     * @suthor August
+     * @param token
+     * @return a barcode
+     */
     private BitMatrix generateQRCode(Token token) {
         int height = 400;
         int width = 400;
@@ -187,6 +193,11 @@ public class TokenService {
         return matrix;
     }
 
+    /**
+     * @author Sebastian
+     * @param token
+     * @return token
+     */
     private Token storeBarcode(Token token) {
         try {
             String filePath = token.getId() + "." + IMAGE_FORMAT;
@@ -220,10 +231,20 @@ public class TokenService {
         data.deleteToken(tokenId);
     }
 
+    /**
+     * @author Sebastian
+     * @param cprNumber
+     * @return a list of tokens
+     */
     private List<Token> getTokensByCustomer(CPRNumber cprNumber) {
         return this.data.getTokensByCustomer(cprNumber);
     }
 
+    /**
+     * @author Sebastian
+     * @param tokens
+     * @return amount of unused tokens
+     */
     private int getNumberOfUnusedTokens(List<Token> tokens) {
         int unusedTokens = 0;
 
