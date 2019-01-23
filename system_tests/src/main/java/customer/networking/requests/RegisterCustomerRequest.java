@@ -4,7 +4,7 @@ public class RegisterCustomerRequest {
     private String firstName, lastName, cpr;
 
     /**
-     *
+     * @author Sarah
      * @param firstName
      * @param lastName
      * @param cpr

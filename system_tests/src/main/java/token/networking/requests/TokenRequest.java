@@ -16,7 +16,7 @@ public class TokenRequest {
 
     /**
      * @author Esben Løvendal Kruse (s172986)
-     * @return
+     * @return cpr number
      */
     public String getCprNumber() {
         return cprNumber;
@@ -24,7 +24,7 @@ public class TokenRequest {
 
     /**
      * @author Esben Løvendal Kruse (s172986)
-     * @return
+     * @return amount of tokens
      */
     public int getNumberOfTokens() {
         return numberOfTokens;

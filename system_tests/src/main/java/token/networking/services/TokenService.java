@@ -37,6 +37,11 @@ public class TokenService {
         return response;
     }
 
+    /**
+     * @author Esben Løvendal Kruse (s172986)
+     * @param barcodeFilePath
+     * @return
+     */
     public Response getBarcodeImage(String barcodeFilePath) {
         Response response = r.path(barcodeFilePath)
                 .request()

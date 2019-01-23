@@ -19,7 +19,7 @@ public class MerchantService {
     private WebTarget r = client.target(WebEndpoints.BASEMERCHANT.url);
 
     /**
-     *
+     * This method sends a request to register a merchant.
      * @param firstName
      * @param lastName
      * @param cvr
@@ -39,6 +39,11 @@ public class MerchantService {
         return response;
     }
 
+    /**
+     * @author Sarah
+     * @param cvr
+     * @return response
+     */
     public Response getMerchant(String cvr){
         return r.path("merchant/" + cvr)
                 .request()
