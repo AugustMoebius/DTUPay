@@ -8,6 +8,7 @@ import javax.ws.rs.ApplicationPath;
 
 @ApplicationPath("/")
 public class RestApplication {
+    public RestApplication(){super();}
     /**
      * @author Sarah (s153659)
      */
