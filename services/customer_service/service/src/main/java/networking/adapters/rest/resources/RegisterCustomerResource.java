@@ -10,6 +10,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * @author Emilie (s153762), Sarah (s153659)
+ */
 @Path("customer")
 public class RegisterCustomerResource {
     /**
@@ -24,7 +27,7 @@ public class RegisterCustomerResource {
     /**
      * This method consumes a post request and registers the customer.
      * @author Sarah (s153659)
-     * @param req
+     * @param req an instance of the RegisterCustomerRequest class
      * @return Response
      */
     @POST

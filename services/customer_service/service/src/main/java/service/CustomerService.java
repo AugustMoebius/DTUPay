@@ -11,14 +11,17 @@ import registation.exceptions.CustomerInvalidName;
 import registation.exceptions.InvalidCprException;
 import registation.exceptions.CustomerNotFoundException;
 
+/**
+ * @author Emilie (s153762), Sarah (s153659), Esben (s172986)
+ */
 public class CustomerService {
     private IDataSource dataSource;
     private ICustomerRegistration customerRegistration;
 
     /**
      * @author Emilie (s153762)
-     * @param dataSource
-     * @param customerRegistration
+     * @param dataSource the interface of the datasource
+     * @param customerRegistration the interface of the customerregistration
      */
     public CustomerService(IDataSource dataSource, ICustomerRegistration customerRegistration) {
         this.dataSource = dataSource;
@@ -27,7 +30,7 @@ public class CustomerService {
 
     /**
      * @author Sarah (s153659)
-     * @param req
+     * @param req an instance of the RegisterCustomerRequest class
      */
     public void registerCustomer(RegisterCustomerRequest req){
         try {
@@ -38,8 +41,8 @@ public class CustomerService {
     }
 
     /**
-     * @author Esben
-     * @param cprNumber
+     * @author Esben (s172986)
+     * @param cprNumber the CPR number of a customer
      * @return customer
      * @throws CustomerNotFoundException
      */

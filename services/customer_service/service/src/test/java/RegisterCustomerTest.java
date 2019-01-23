@@ -10,6 +10,9 @@ import registation.exceptions.InvalidCprException;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * @author Emilie (s153762), Sarah (s153659)
+ */
 public class RegisterCustomerTest {
     private InMemoryDataSource data;
     private CustomerRegistration customerRegistration;

@@ -1,13 +1,16 @@
 package networking.adapters.rest.requests;
 
+/**
+ * @author Emilie (s153762)
+ */
 public class RegisterCustomerRequest {
     private String firstName, lastName, cpr;
     public RegisterCustomerRequest(){}
 
     /**
-     * @param firstName
-     * @param lastName
-     * @param cpr
+     * @param firstName the first name of the customer
+     * @param lastName the first name of the customer
+     * @param cpr the CPR number of the customer
      * @author Emilie (s153762)
      */
     public RegisterCustomerRequest(String firstName, String lastName, String cpr) {
@@ -26,7 +29,7 @@ public class RegisterCustomerRequest {
 
     /**
      * @author Emilie (s153762)
-     * @param firstName
+     * @param firstName the first name of the customer
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -42,7 +45,7 @@ public class RegisterCustomerRequest {
 
     /**
      * @author Emilie (s153762)
-     * @param lastName
+     * @param lastName the last name of the customer
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
@@ -58,7 +61,7 @@ public class RegisterCustomerRequest {
 
     /**
      * @author Emilie (s153762)
-     * @param cpr
+     * @param cpr the CPR number of the customer
      */
     public void setCpr(String cpr) {
         this.cpr = cpr;

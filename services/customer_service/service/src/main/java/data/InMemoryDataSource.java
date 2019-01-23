@@ -7,7 +7,9 @@ import registation.exceptions.InvalidCprException;
 
 import java.util.HashMap;
 
-
+/**
+ * @author Sarah (s153659), Emilie (s153762)
+ */
 public class InMemoryDataSource implements IDataSource {
     private static final InMemoryDataSource dataSource = new InMemoryDataSource();
     private HashMap<String, Customer> allCustomers;
@@ -42,7 +44,7 @@ public class InMemoryDataSource implements IDataSource {
 
     /**
      * @author Emilie (s153762)
-     * @param customer
+     * @param customer an instance of the Customer class
      */
     public void addCustomer(Customer customer) {
         allCustomers.put(customer.getCprNumber().toString(), customer);
@@ -50,7 +52,7 @@ public class InMemoryDataSource implements IDataSource {
 
     /**
      * @author Emilie (s153762)
-     * @param cprNumber
+     * @param cprNumber the CPR number of the customer
      * @return customer
      * @throws CustomerNotFoundException
      */
