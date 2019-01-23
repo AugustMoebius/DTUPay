@@ -12,14 +12,16 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-
+/**
+ * @author Esben (s172986), August (s144461)
+ */
 public class TokenService {
 
     private Client client = ClientBuilder.newClient();
     private WebTarget r = client.target(WebEndpoints.BASETOKEN.url);
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @param cprNumber
      * @param numberOfTokens
      * @return
@@ -38,7 +40,7 @@ public class TokenService {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @param barcodeFilePath
      * @return
      */
@@ -52,7 +54,7 @@ public class TokenService {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      * @param tokenId
      * @return response
      */
@@ -64,7 +66,7 @@ public class TokenService {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      * @param tokenId
      * @return response
      */

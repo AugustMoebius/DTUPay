@@ -1,14 +1,16 @@
 package customer.networking.requests;
 
+/**
+ * @author Sarah (s153659), Emilie (s153762)
+ */
 public class RegisterCustomerRequest {
     private String firstName, lastName, cpr;
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param firstName
      * @param lastName
      * @param cpr
-     * @author Emilie
      */
     public RegisterCustomerRequest(String firstName, String lastName, String cpr){
         this.firstName = firstName;
@@ -17,7 +19,7 @@ public class RegisterCustomerRequest {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @return firstName
      */
     public String getFirstName() {
@@ -25,7 +27,7 @@ public class RegisterCustomerRequest {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @return lastName
      */
     public String getLastName() {
@@ -33,7 +35,7 @@ public class RegisterCustomerRequest {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @return cpr
      */
     public String getCpr() {

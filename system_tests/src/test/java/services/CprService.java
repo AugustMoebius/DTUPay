@@ -3,7 +3,7 @@ package services;
 import com.mifmif.common.regex.Generex;
 
 /**
- * @author Sebastian Frelle Koch (s144071)
+ * @author Sebastian (s144071)
  */
 public class CprService {
   public static String generateCpr() {

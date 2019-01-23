@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 
 /**
  * Emulate client side for REST requests to merchant service.
- * @author Sebastian
+ * @author Sebastian (s144071), Sarah (s153659)
  */
 public class MerchantService {
     private Client client = ClientBuilder.newClient();
@@ -24,7 +24,7 @@ public class MerchantService {
      * @param lastName
      * @param cvr
      * @return response
-     * @author Sebastian
+     * @author Sebastian (s144071)
      */
     public Response registerMerchant(String firstName, String lastName, String cvr) {
         // Build request body object
@@ -40,7 +40,7 @@ public class MerchantService {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param cvr
      * @return response
      */

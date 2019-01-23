@@ -18,6 +18,9 @@ import java.math.BigDecimal;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * @author Emilie (s153762), Sarah (s153659)
+ */
 public class GetMerchantStepdefs {
 
     private final MerchantService merchantService;
@@ -26,7 +29,7 @@ public class GetMerchantStepdefs {
     private BankService bankService;
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      */
     public GetMerchantStepdefs() {
         this.merchantService = new MerchantService();
@@ -34,7 +37,7 @@ public class GetMerchantStepdefs {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param firstName
      * @param lastName
      * @param merchantBalance
@@ -63,7 +66,7 @@ public class GetMerchantStepdefs {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      */
     @When("^the merchant submits a request to get the user information$")
     public void theMerchantSubmitsARequestToGetTheUserInformation()  {
@@ -74,7 +77,7 @@ public class GetMerchantStepdefs {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      */
     @Then("^the get submission succeeds and the merchant gets the information$")
     public void theGetSubmissionSucceedsAndTheMerchantGetsTheInformation()  {

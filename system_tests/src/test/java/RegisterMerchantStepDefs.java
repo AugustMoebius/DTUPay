@@ -24,12 +24,15 @@ public class RegisterMerchantStepDefs {
   private Response res;
   private BankService bankService;
 
+  /**
+   * @author Sarah (s153659), Sebastian (s144071), Emilie (s153762)
+   */
   public RegisterMerchantStepDefs() {
     this.bankService = new BankServiceService().getBankServicePort();
   }
 
   /**
-   * @author Sarah
+   * @author Sarah (s153659)
    * @param firstName
    * @param lastName
    */
@@ -43,7 +46,7 @@ public class RegisterMerchantStepDefs {
   }
 
   /**
-   * @author Sebastian
+   * @author Sebastian (s144071)
    * @param cvrNumber
    * @param firstName
    * @param lastName
@@ -58,7 +61,7 @@ public class RegisterMerchantStepDefs {
   }
 
   /**
-   * @author Sarah
+   * @author Sarah (s153659)
    * @param merchantBalance
    * @throws Throwable
    */
@@ -79,7 +82,7 @@ public class RegisterMerchantStepDefs {
   }
 
   /**
-   * @author Sarah
+   * @author Sarah (s153659)
    */
   @When("^the merchant submits a request to register$")
   public void theMerchantSubmitsARequestToRegister() {
@@ -101,7 +104,7 @@ public class RegisterMerchantStepDefs {
   }
 
   /**
-   * @author Sarah
+   * @author Sarah (s153659)
    */
   @Then("^the registration submission succeeds and the merchant is registered$")
   public void theRegistrationSubmissionSucceedsAndTheMerchantIsRegistered() {
@@ -110,7 +113,7 @@ public class RegisterMerchantStepDefs {
   }
 
   /**
-   * @author Sarah
+   * @author Sarah (s153659)
    * @param errorMessage
    */
   @Then("^the merchant submission fails and he gets an error message \"([^\"]*)\"$")
@@ -122,7 +125,7 @@ public class RegisterMerchantStepDefs {
   }
 
   /**
-   * @author Emilie
+   * @author Emilie (s153762)
    * @param errorMsg
    */
   @Then("^the merchant submission fails and he gets an error message where _cvr_ is merchant CVR: \"([^\"]*)\"$")

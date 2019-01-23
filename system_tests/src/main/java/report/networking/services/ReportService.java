@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * @author Sarah
+ * @author Sarah (s153659)
  */
 public class ReportService {
     private Client client = ClientBuilder.newClient();

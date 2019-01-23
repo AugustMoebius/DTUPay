@@ -1,7 +1,7 @@
 package merchant.networking.responses;
 
 /**
- * @author Sarah
+ * @author Sarah (s153659)
  */
 public class GetMerchantResponse {
     private String firstName, lastName;

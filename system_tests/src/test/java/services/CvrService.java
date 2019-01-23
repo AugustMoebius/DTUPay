@@ -3,7 +3,7 @@ package services;
 import com.mifmif.common.regex.Generex;
 
 /**
- * @author Sebastian
+ * @author Sebastian (s144071)
  */
 public class CvrService {
   public static String generateCvr() {

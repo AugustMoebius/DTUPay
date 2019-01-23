@@ -14,7 +14,9 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-
+/**
+ * @author Esben (s172986), Sebastian (s144071), Ebbe (s125015),
+ */
 public class RequestTokenStepDefs {
   private String cprNumber;
   private TokenGeneratedResponse existingTokens;
@@ -24,14 +26,14 @@ public class RequestTokenStepDefs {
   private Response tokenGeneratedResponse;
 
   /**
-   * @author Esben Løvendal Kruse (s172986)
+   * @author Esben (s172986)
    */
   public RequestTokenStepDefs() {
     this.tokenService = new TokenService();
   }
 
   /**
-   * @author Sebastian
+   * @author Sebastian (s144071)
    */
   @After("@tagToken")
   public void after() {
@@ -41,7 +43,7 @@ public class RequestTokenStepDefs {
   }
 
   /**
-   * @author Ebbe
+   * @author Ebbe (s125015)
    * @param res
    */
   private void deleteTokensFromResponse(TokenGeneratedResponse res) {
@@ -60,7 +62,7 @@ public class RequestTokenStepDefs {
   }
 
   /**
-   * @author Esben Løvendal Kruse (s172986)
+   * @author Esben (s172986)
    */
   @Given("^a registered customer$")
   public void aRegisteredCustomerWithTheCPR() {
@@ -68,7 +70,7 @@ public class RequestTokenStepDefs {
   }
 
   /**
-   * @author Esben Løvendal Kruse (s172986)
+   * @author Esben (s172986)
    * @param numberOfTokens
    */
   @When("^the customer submits a request for (-?\\d+) token/s$")
@@ -76,6 +78,9 @@ public class RequestTokenStepDefs {
     this.tokenGeneratedResponse = tokenService.requestTokens(this.cprNumber, numberOfTokens);
   }
 
+  /**
+   * @author Esben (s172986)
+   */
   @Then("^the request succeeds$")
   public void theRequestSucceeds() {
     // Assertion on status code
@@ -83,7 +88,7 @@ public class RequestTokenStepDefs {
   }
 
   /**
-   * @author Esben Løvendal Kruse (s172986)
+   * @author Esben (s172986)
    * @param numberOfTokens
    */
   @Then("^customer receives (\\d+) token/s containing an ID and a barcode URL$")
@@ -94,7 +99,7 @@ public class RequestTokenStepDefs {
   }
 
   /**
-   * @author Sebastian
+   * @author Sebastian (s144071)
    */
   @And("^customer can access the barcode via the URL$")
   public void customerCanAccessTheBarcodeViaTheURL() {
@@ -104,7 +109,7 @@ public class RequestTokenStepDefs {
   }
 
   /**
-   * @author Ebbe
+   * @author Ebbe (s125015)
    * @param numberOfTokens
    */
   @And("^that customer has already been assigned (\\d+) unused token/s$")
@@ -119,7 +124,7 @@ public class RequestTokenStepDefs {
   // ERROR SCENARIOS
 
   /**
-   * @author Ebbe
+   * @author Ebbe (s125015)
    */
   @Then("^the customer receives an error response$")
   public void theCustomerReceivesAnErrorResponse() {
@@ -127,7 +132,7 @@ public class RequestTokenStepDefs {
   }
 
   /**
-   * @author Ebbe
+   * @author Ebbe (s125015)
    * @param expErrorMsg
    */
   @And("^the response contains the error message \"([^\"]*)\"$")

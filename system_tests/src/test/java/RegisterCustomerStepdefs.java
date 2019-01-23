@@ -8,6 +8,9 @@ import javax.ws.rs.core.Response;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * @author Emilie (s153762), Sarah (s153659)
+ */
 public class RegisterCustomerStepdefs {
     private String firstName;
     private String lastName;
@@ -17,7 +20,7 @@ public class RegisterCustomerStepdefs {
     /**
      * @param firstName
      * @param lastName
-     * @author Emilie
+     * @author Emilie (s153762)
      */
     @Given("^a name \"([^\"]*)\" \"([^\"]*)\"$")
     public void aNameAndCPR(String firstName, String lastName) {
@@ -28,7 +31,7 @@ public class RegisterCustomerStepdefs {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      */
     @When("^registering a customer$")
     public void registeringACustomer() {
@@ -37,7 +40,7 @@ public class RegisterCustomerStepdefs {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      */
     @Then("^a new customer is added to DTUPay$")
     public void aNewCustomerIsAddedToDTUPay() {

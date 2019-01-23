@@ -1,5 +1,8 @@
 package token.networking.response;
 
+/**
+ * @author Ebbe (s125015)
+ */
 public class TokenResponse {
     private String id;
     private String cprNumber;
@@ -11,7 +14,7 @@ public class TokenResponse {
     }
 
     /**
-     * @author Ebbe
+     * @author Ebbe (s125015)
      * @param id
      * @param cprNumber
      * @param barcode
@@ -25,7 +28,7 @@ public class TokenResponse {
     }
 
     /**
-     * @author Ebbe
+     * @author Ebbe (s125015)
      * @return id
      */
     public String getId() {
@@ -33,7 +36,7 @@ public class TokenResponse {
     }
 
     /**
-     * @author Ebbe
+     * @author Ebbe (s125015)
      * @param id
      */
     public void setId(String id) {
@@ -41,7 +44,7 @@ public class TokenResponse {
     }
 
     /**
-     * @author Ebbe
+     * @author Ebbe (s125015)
      * @return cpr number
      */
     public String getCprNumber() {
@@ -49,7 +52,7 @@ public class TokenResponse {
     }
 
     /**
-     * @author Ebbe
+     * @author Ebbe (s125015)
      * @param cprNumber
      */
     public void setCprNumber(String cprNumber) {
@@ -57,7 +60,7 @@ public class TokenResponse {
     }
 
     /**
-     * @author Ebbe
+     * @author Ebbe (s125015)
      * @return barcode
      */
     public String getBarcode() {
@@ -65,7 +68,7 @@ public class TokenResponse {
     }
 
     /**
-     * @author Ebbe
+     * @author Ebbe (s125015)
      * @param barcode
      */
     public void setBarcode(String barcode) {
@@ -73,7 +76,7 @@ public class TokenResponse {
     }
 
     /**
-     * @author Ebbe
+     * @author Ebbe (s125015)
      * @return isUsed
      */
     public boolean isUsed() {
@@ -81,7 +84,7 @@ public class TokenResponse {
     }
 
     /**
-     * @author Ebbe
+     * @author Ebbe (s125015)
      * @param used
      */
     public void setUsed(boolean used) {
