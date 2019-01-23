@@ -15,6 +15,12 @@ public class PaymentService {
     private INotificationService notificationService;
     private IBankService bankService;
 
+    /**
+     * @author Emilie
+     * @param dataSource
+     * @param notificationService
+     * @param bankService
+     */
     public PaymentService(IDataSource dataSource, INotificationService notificationService, IBankService bankService) {
         this.dataSource = dataSource;
         this.notificationService = notificationService;
@@ -27,7 +33,7 @@ public class PaymentService {
      */
     public void submitPaymentRequest(PaymentRequest req) throws InvalidPaymentAmountException {
         System.out.println("Paymentservice.submitPaymentRequest");
-        validatePaymentReqeust(req);
+        validatePaymentRequest(req);
 
         try {
             notificationService.publishPaymentInitialized(req);
@@ -69,7 +75,7 @@ public class PaymentService {
     /**
      * @author Ebbe
      */
-    private void validatePaymentReqeust(PaymentRequest req) throws InvalidPaymentAmountException {
+    private void validatePaymentRequest(PaymentRequest req) throws InvalidPaymentAmountException {
         // Negative payment
         if (req.getPaymentAmount() < 0){
             throw new InvalidPaymentAmountException("Amount cannot be negative. Amount was: " + req.getPaymentAmount());

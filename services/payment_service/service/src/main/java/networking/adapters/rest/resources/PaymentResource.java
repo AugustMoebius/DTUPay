@@ -13,11 +13,22 @@ import javax.ws.rs.core.Response;
 
 @Path("payment")
 public class PaymentResource {
+  /**
+   * This method is for testing purposes, so you can see the response on local host.
+   * @author August
+   * @return response
+   */
   @GET
   public Response ping() {
     return Response.ok("Payment request").build();
   }
 
+  /**
+   * This method consumes a post request and sends the call to payment service.
+   * @author Sebastian
+   * @param req
+   * @return response
+   */
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   public Response submitPayment(PaymentRequest req) {

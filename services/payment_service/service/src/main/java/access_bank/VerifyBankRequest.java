@@ -1,10 +1,12 @@
 package access_bank;
 
-import networking.ws.fastmoney.Account;
 import networking.ws.fastmoney.BankService;
 import networking.ws.fastmoney.BankServiceException_Exception;
 import networking.ws.fastmoney.BankServiceService;
 
+/**
+ * @author August
+ */
 public class VerifyBankRequest {
     BankService bank;
 

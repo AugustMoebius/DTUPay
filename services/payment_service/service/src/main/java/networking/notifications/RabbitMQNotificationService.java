@@ -22,6 +22,7 @@ public class RabbitMQNotificationService implements INotificationService {
     private final static String HOST_URI = "rabbitmq-container";
 
     /**
+     * This method handles a payment request and publishes a payment initialised.
      * @author August
      * @param req
      * @throws MessagePublishException

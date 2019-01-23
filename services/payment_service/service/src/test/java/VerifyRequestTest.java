@@ -1,7 +1,5 @@
-import access_bank.AccessBank;
 import access_bank.VerifyBankRequest;
 import data.InMemoryDataSource;
-import networking.adapters.message_queue.PaymentVerifiedRequest;
 import networking.ws.fastmoney.BankService;
 import networking.ws.fastmoney.BankServiceException_Exception;
 import networking.ws.fastmoney.BankServiceService;
@@ -22,11 +20,17 @@ public class VerifyRequestTest {
     String customerAccountId, merchantAccountId;
     String customerCPR, merchantCVR;
 
+    /**
+     * @author August
+     */
     public VerifyRequestTest(){
         data = InMemoryDataSource.getInstance();
         verifyBankRequest = new VerifyBankRequest();
     }
 
+    /**
+     * @auhtor Sebastian
+     */
     @Before
     public void setup(){
         bank = new BankServiceService().getBankServicePort();
@@ -56,7 +60,9 @@ public class VerifyRequestTest {
         }
     }
 
-
+    /**
+     * @author August
+     */
     @After
     public void tearDown(){
         try {
@@ -67,6 +73,9 @@ public class VerifyRequestTest {
         }
     }
 
+    /**
+     * @author Emilie
+     */
     @Test
     public void verifyRequestSucceedingTest(){
         int amount = 100;
@@ -75,6 +84,9 @@ public class VerifyRequestTest {
         assertTrue(verifyBankRequest.verifyAmount(amount));
     }
 
+    /**
+     * @author August
+     */
     @Test
     public void verifyCPRFailingTest(){
         String CPR = "111113-2222";
@@ -85,6 +97,9 @@ public class VerifyRequestTest {
 
     }
 
+    /**
+     * @author Sebastian
+     */
     @Test
     public void verifyCVRFailingTest(){
         String CVR = "DK52424526";
@@ -94,6 +109,9 @@ public class VerifyRequestTest {
         assertTrue(verifyBankRequest.verifyAmount(amount));
     }
 
+    /**
+     * @author Emilie
+     */
     @Test
     public void verifyAmountFailingTest(){
         int amount = -100;
