@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 @Path("customer")
 public class RegisterCustomerResource {
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @return Response
      */
     @GET
@@ -23,7 +23,7 @@ public class RegisterCustomerResource {
 
     /**
      * This method consumes a post request and registers the customer.
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param req
      * @return Response
      */

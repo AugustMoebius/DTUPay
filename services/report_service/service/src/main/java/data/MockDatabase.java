@@ -5,7 +5,7 @@ import domain.Transaction;
 import java.util.HashMap;
 
 /**
- * @author Sarah
+ * @author Sarah (s153659)
  */
 public class MockDatabase implements IDataSource {
     private static final MockDatabase mockDatabase = new MockDatabase();

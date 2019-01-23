@@ -4,7 +4,7 @@ public class RegisterMerchantRequest {
     private String firstName, lastName, cvr;
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param firstName
      * @param lastName
      * @param cvr
@@ -21,7 +21,7 @@ public class RegisterMerchantRequest {
     public RegisterMerchantRequest() {}
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param firstName
      */
     public void setFirstName(String firstName) {
@@ -53,7 +53,7 @@ public class RegisterMerchantRequest {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @return lastName
      */
     public String getLastName() {
@@ -61,7 +61,7 @@ public class RegisterMerchantRequest {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @return cvr
      */
     public String getCvr() {

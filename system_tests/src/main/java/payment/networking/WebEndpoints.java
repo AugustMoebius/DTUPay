@@ -1,7 +1,7 @@
 package payment.networking;
 
 /**
- * @author Sebastian
+ * @author Sebastian (s144071)
  */
 public enum WebEndpoints {
 

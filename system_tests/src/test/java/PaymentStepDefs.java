@@ -20,6 +20,9 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author Emilie (s153762), Sarah (s153659), August (s144461), Sebastian (s144071), Esben (s172986), Ebbe (s125015)
+ */
 public class PaymentStepDefs {
   private final BankService bankService;
   private User customer;
@@ -34,7 +37,7 @@ public class PaymentStepDefs {
 
   //  -------------------------------------- Tear down --------------------------------------
   /**
-   * @author Emilie
+   * @author Emilie (s153762)
    */
   @After("@tagPayment")
   public void after() throws BankServiceException_Exception {
@@ -56,7 +59,7 @@ public class PaymentStepDefs {
 
   //  -------------------------------------- Scenario: Succeeding payment --------------------------------------
   /**
-   * @author Sarah
+   * @author Sarah (s153659)
    */
   @Given("^a registered customer whose name is \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
   public void aRegisteredCustomerWhoseNameIsAndABankAccountWithBalance(String customerFirstName, String customerLastName, BigDecimal customerInitialBalance) throws Throwable {
@@ -90,7 +93,7 @@ public class PaymentStepDefs {
   }
 
   /**
-   * @author Emilie
+   * @author Emilie (s153762)
    */
   @And("^a registered merchant has a CVR, the name \"([^\"]*)\" \"([^\"]*)\", and a bank account with balance (\\d+)$")
   public void aRegisteredMerchantHasACVRTheNameAndABankAccountWithBalance(String merchantFirstName, String merchantLastName, BigDecimal merchantInitialBalance) throws InterruptedException, BankServiceException_Exception {
@@ -127,7 +130,7 @@ public class PaymentStepDefs {
     /**
      * A request for a single token is sent to the token service.
      * This request returns a new token and its' ID will be used in the rest of the steps.
-     * @author August
+     * @author August (s144461)
      */
   @And("^the customer has a token$")
   public void theCustomerHasAToken() {
@@ -147,7 +150,7 @@ public class PaymentStepDefs {
   }
 
   /**
-   * @author Sarah
+   * @author Sarah (s153659)
    */
   @And("^that the merchant wishes to register a payment of amount (\\d+)$")
   public void thatTheMerchantWishesToRegisterAPaymentOfAmount(int paymentAmount) {
@@ -157,7 +160,7 @@ public class PaymentStepDefs {
   }
 
   /**
-   * @author Sebastian
+   * @author Sebastian (s144071)
    */
   @When("^the merchant submits a request for the payment$")
   public void theMerchantSubmitsARequestForThePayment() {
@@ -170,7 +173,7 @@ public class PaymentStepDefs {
   }
 
   /**
-   * @author Sebastian
+   * @author Sebastian (s144071)
    */
   @Then("^the submission succeeds$")
   public void theSubmissionSucceeds() throws InterruptedException {
@@ -184,7 +187,7 @@ public class PaymentStepDefs {
   }
 
   /**
-   * @author Sarah
+   * @author Sarah (s153659)
    */
   @And("^after the transaction, the merchant's account has balance (\\d+)$")
   public void afterTheTransactionTheMerchantSAccountHasBalance(BigDecimal merchantBalance) throws BankServiceException_Exception {
@@ -199,7 +202,7 @@ public class PaymentStepDefs {
   }
 
   /**
-   * @author Emilie
+   * @author Emilie (s153762)
    */
   @And("^the customer's account has balance (\\d+)$")
   public void theCustomerSAccountHasBalance(BigDecimal customerBalance) throws BankServiceException_Exception, InterruptedException {
@@ -215,7 +218,7 @@ public class PaymentStepDefs {
 //  -------------------------------------- Scenario:Failing payment because of already used token --------------------------------------
 
   /**
-   * @authour Esben
+   * @author Esben (s172986)
    */
   @And("^the token has been used$")
   public void theTokenHasBeenUsed() {
@@ -227,7 +230,7 @@ public class PaymentStepDefs {
     assertTrue(token.isUsed());
   }
   /**
-   * @authour August
+   * @author August (s144461)
    */
   @And("^the token is unused$")
   public void theTokenIsUnused() throws Throwable {
@@ -239,7 +242,7 @@ public class PaymentStepDefs {
     assertFalse(token.isUsed());
   }
   /**
-   * @authour August
+   * @author August (s144461)
    */
   @And("^the customer has a used token$")
   public void theCustomerHasAUsedToken() throws InterruptedException {
@@ -271,7 +274,7 @@ public class PaymentStepDefs {
   }
 
   /**
-   * @author Emilie
+   * @author Emilie (s153762)
    */
   @And("^the customer has an unknown token$")
   public void theCustomerHasAnUnknownToken() {
@@ -280,7 +283,7 @@ public class PaymentStepDefs {
   }
 
   /**
-   * @authour Ebbe
+   * @author Ebbe (s125015)
    * @param negativeAmount
    */
   @And("^that the merchant wishes to register a payment of negative amount ([-]?\\d+)$")
@@ -289,7 +292,7 @@ public class PaymentStepDefs {
   }
 
   /**
-   * @author August
+   * @author August (s144461)
    */
   @Then("^the merchant receives a failure response$")
   public void theMerchantReceivesAFailureResponse() throws Throwable {
@@ -298,7 +301,7 @@ public class PaymentStepDefs {
   // --------------------------------------- Refund Scenario ----------------------------------- //
 
   /**
-   * @authour August
+   * @author August (s144461)
    */
   @And("^the customer has a used token with ID \"([^\"]*)\" and an amount of (\\d+)$")
   public void theCustomerHasAUsedTokenWithIDAndAnAmountOf(String tokenId, int paymentAmount) throws InterruptedException {
@@ -322,7 +325,7 @@ public class PaymentStepDefs {
   }
 
   /**
-   * @author Sebastian
+   * @author Sebastian (s144071)
    * @throws InterruptedException
    */
   @When("^the merchant submits a request for the refund$")
@@ -341,7 +344,7 @@ public class PaymentStepDefs {
 
   // --------------------------------------- token already used ----------------------------------- //
   /**
-   * @author Emilie
+   * @author Emilie (s153762)
    * @param paymentAmount
    */
   @And("^the customer has a used token with a transaction amount of (\\d+)$")
@@ -372,7 +375,7 @@ public class PaymentStepDefs {
   // --------------------------------------- Unregistered Merchant ----------------------------------- //
 
   /**
-   * @author August
+   * @author August (s144461)
    * @param merchantCVR
    * @param merchantFirstName
    * @param merchantLastName
@@ -401,7 +404,7 @@ public class PaymentStepDefs {
   }
 
   /**
-   * @author August
+   * @author August (s144461)
    * @param merchantFirstName
    * @param merchantLastName
    * @param merchantInitialBalance

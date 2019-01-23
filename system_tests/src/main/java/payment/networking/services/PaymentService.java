@@ -11,13 +11,16 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * @author Emilie (s153762), August (s144461)
+ */
 public class PaymentService {
   private Client client = ClientBuilder.newClient();
   private WebTarget r = client.target(WebEndpoints.BASEPAYMENT.url);
 
   /**
    * This method submits a request for payment.
-   * @author Emilie
+   * @author Emilie (s153762)
    * @param merchantId
    * @param paymentAmount
    * @param tokenId
@@ -38,7 +41,7 @@ public class PaymentService {
 
   /**
    * This method send a request for a refund.
-   * @author August
+   * @author August (s144461)
    * @param tokenId
    * @return response
    */

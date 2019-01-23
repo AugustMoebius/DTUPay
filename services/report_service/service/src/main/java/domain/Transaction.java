@@ -7,7 +7,7 @@ public class Transaction {
     private String merchantID;
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param timestamp
      * @param amount
      * @param customerID

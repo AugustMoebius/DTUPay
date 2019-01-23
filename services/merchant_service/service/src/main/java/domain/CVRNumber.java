@@ -3,7 +3,7 @@ package domain;
 import exceptions.InvalidCvrException;
 
 /**
- * @author Sarah
+ * @author Sarah (s153659)
  */
 public class CVRNumber {
     private String cvr;

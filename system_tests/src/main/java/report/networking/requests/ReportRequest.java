@@ -1,7 +1,7 @@
 package report.networking.requests;
 
 /**
- * @author Sarah
+ * @author Sarah (s153659)
  */
 public class ReportRequest {
     private String id;

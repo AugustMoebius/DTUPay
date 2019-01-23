@@ -11,6 +11,9 @@ import networking.adapters.message_queue.domain.TokenInfoVerified;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * @author Ebbe s125015
+ */
 public class NotificationRabbitMQ implements INotification {
 
     //private final static String QUEUE_NAME = "token";
@@ -18,7 +21,7 @@ public class NotificationRabbitMQ implements INotification {
     private final static String EXCHANGE_NAME = "payment_exchange";
 
     /**
-     * @author Ebbe Berthold (s125015)
+     * @author Ebbe (s125015)
      * @param message
      * @throws IOException
      * @throws TimeoutException

@@ -19,7 +19,7 @@ public class NotificationRabbitMQ implements INotification {
 
     /**
      * This method publishes that the merchant is verified to the message queue.
-     * @author Emilie
+     * @author Emilie (s153762)
      * @param merchantInfoVerified
      */
     @Override

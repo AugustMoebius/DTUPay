@@ -1,7 +1,7 @@
 package service.exceptions;
 
 /**
- * @author Emilie
+ * @author Emilie (s153762)
  */
 public class PaymentServiceException extends Exception {
   public PaymentServiceException(String message){

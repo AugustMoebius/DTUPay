@@ -10,7 +10,7 @@ public class TokenGetResponse {
     private boolean isUsed;
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @param id
      * @param cprNumber
      * @param barcode
@@ -25,7 +25,7 @@ public class TokenGetResponse {
     public TokenGetResponse() {}
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @return
      */
     public String getId() {
@@ -33,7 +33,7 @@ public class TokenGetResponse {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @return
      */
     public String getCprNumber() {
@@ -41,7 +41,7 @@ public class TokenGetResponse {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @return
      */
     public String getBarcode() {
@@ -49,7 +49,7 @@ public class TokenGetResponse {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      * @param used
      */
     public void setUsed(boolean used) {
@@ -57,7 +57,7 @@ public class TokenGetResponse {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      * @return isUsed
      */
     public boolean isUsed() {
@@ -65,7 +65,7 @@ public class TokenGetResponse {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      * @param id
      */
     public void setId(String id) {
@@ -73,7 +73,7 @@ public class TokenGetResponse {
     }
 
     /**
-     * @author Sebastian
+     * @author Sebastian (s144071)
      * @param cprNumber
      */
     public void setCprNumber(String cprNumber) {
@@ -81,7 +81,7 @@ public class TokenGetResponse {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      * @param barcode
      */
     public void setBarcode(String barcode) {

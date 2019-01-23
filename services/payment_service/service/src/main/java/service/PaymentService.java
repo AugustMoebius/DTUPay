@@ -10,16 +10,19 @@ import networking.notifications.exceptions.NotificationException;
 import networking.ws.fastmoney.BankServiceException_Exception;
 import service.exceptions.InvalidPaymentAmountException;
 
+/**
+ * @author Emilie (s153762), August (s144461), Sebastian (s144071), Ebbe (s125015)
+ */
 public class PaymentService {
     private IDataSource dataSource;
     private INotificationService notificationService;
     private IBankService bankService;
 
     /**
-     * @author Emilie
-     * @param dataSource
-     * @param notificationService
-     * @param bankService
+     * @author Emilie (s153762)
+     * @param dataSource the interface for the data source
+     * @param notificationService the interface for the notification service
+     * @param bankService the interface for the bank service
      */
     public PaymentService(IDataSource dataSource, INotificationService notificationService, IBankService bankService) {
         this.dataSource = dataSource;
@@ -28,8 +31,8 @@ public class PaymentService {
     }
 
     /**
-     * @author August
-     * @param req
+     * @author August (s144461)
+     * @param req the PaymentRequest instance
      */
     public void submitPaymentRequest(PaymentRequest req) throws InvalidPaymentAmountException {
         System.out.println("Paymentservice.submitPaymentRequest");
@@ -45,8 +48,8 @@ public class PaymentService {
 
 
     /**
-     * @author Sebastian
-     * @param req
+     * @author Sebastian (s144071)
+     * @param req the PaymentVerifiedRequest instance
      */
     public void handleVerifiedPayment(PaymentVerifiedRequest req) {
         try {
@@ -58,8 +61,8 @@ public class PaymentService {
     }
 
     /**
-     * @author Emilie
-     * @param tokenId
+     * @author Emilie (s153762)
+     * @param tokenId the identification of a token
      */
     public void refundPayment(String tokenId) {
         Transaction transaction = dataSource.getTransaction(tokenId);
@@ -73,7 +76,9 @@ public class PaymentService {
     }
 
     /**
-     * @author Ebbe
+     * @author Ebbe (s125015)
+     * @param req the PaymentRequest instance
+     * @throws InvalidPaymentAmountException
      */
     private void validatePaymentRequest(PaymentRequest req) throws InvalidPaymentAmountException {
         // Negative payment

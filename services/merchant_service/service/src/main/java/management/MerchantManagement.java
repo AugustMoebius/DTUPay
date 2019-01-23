@@ -26,7 +26,7 @@ public class MerchantManagement implements IMerchantManagement {
 
     /**
      * This method registers a merchant in the database after validating the input.
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param firstName
      * @param lastName
      * @param CVR
@@ -68,7 +68,7 @@ public class MerchantManagement implements IMerchantManagement {
     // Read a merchant
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param cvr
      * @return
      * @throws MerchantNotFoundException

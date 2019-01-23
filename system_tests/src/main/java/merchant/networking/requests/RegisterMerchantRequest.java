@@ -1,7 +1,7 @@
 package merchant.networking.requests;
 
 /**
- * @author Sebastian
+ * @author Sebastian (s144071)
  */
 public class RegisterMerchantRequest {
     private String firstName, lastName, cvr;

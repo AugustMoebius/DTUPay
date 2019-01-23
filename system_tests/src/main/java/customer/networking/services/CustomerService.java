@@ -10,17 +10,19 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * @author Sarah (s153659), Esben (s172986)
+ */
 public class CustomerService {
     private Client client = ClientBuilder.newClient();
     private WebTarget r = client.target(WebEndpoints.BASECUSTOMER.url);
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param firstName
      * @param lastName
      * @param cpr
      * @return response
-     * @author Sarah
      */
     public Response registerCustomer(String firstName, String lastName, String cpr) {
         // Build request body object
@@ -35,9 +37,9 @@ public class CustomerService {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @param cpr
-     * @return
+     * @return response
      */
     public Response verifyCustomer(String cpr) {
         // Get request

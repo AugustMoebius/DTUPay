@@ -3,7 +3,7 @@ package report.networking.response;
 import java.util.List;
 
 /**
- * @author Emilie
+ * @author Emilie (s153762)
  */
 public class ReportResponse {
     private String id;

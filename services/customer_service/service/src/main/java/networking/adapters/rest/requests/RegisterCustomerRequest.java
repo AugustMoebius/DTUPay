@@ -8,7 +8,7 @@ public class RegisterCustomerRequest {
      * @param firstName
      * @param lastName
      * @param cpr
-     * @author Emilie
+     * @author Emilie (s153762)
      */
     public RegisterCustomerRequest(String firstName, String lastName, String cpr) {
         this.firstName = firstName;
@@ -17,7 +17,7 @@ public class RegisterCustomerRequest {
     }
 
     /**
-     * @athor Emilie
+     * @author Emilie (s153762)
      * @return firstName
      */
     public String getFirstName() {
@@ -25,7 +25,7 @@ public class RegisterCustomerRequest {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @param firstName
      */
     public void setFirstName(String firstName) {
@@ -33,7 +33,7 @@ public class RegisterCustomerRequest {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @return lastName
      */
     public String getLastName() {
@@ -41,7 +41,7 @@ public class RegisterCustomerRequest {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @param lastName
      */
     public void setLastName(String lastName) {
@@ -49,7 +49,7 @@ public class RegisterCustomerRequest {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @return cpr
      */
     public String getCpr() {
@@ -57,7 +57,7 @@ public class RegisterCustomerRequest {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @param cpr
      */
     public void setCpr(String cpr) {

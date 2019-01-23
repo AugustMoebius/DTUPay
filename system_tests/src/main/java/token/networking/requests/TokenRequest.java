@@ -1,11 +1,14 @@
 package token.networking.requests;
 
+/**
+ * @author Esben (s172986)
+ */
 public class TokenRequest {
     private String cprNumber;
     private int numberOfTokens;
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @param cprNumber
      * @param numberOfTokens
      */
@@ -15,7 +18,7 @@ public class TokenRequest {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @return cpr number
      */
     public String getCprNumber() {
@@ -23,7 +26,7 @@ public class TokenRequest {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @return amount of tokens
      */
     public int getNumberOfTokens() {

@@ -7,7 +7,7 @@ import registation.exceptions.CustomerNotFoundException;
 public interface IDataSource {
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @param cprNumber
      * @return
      * @throws CustomerNotFoundException

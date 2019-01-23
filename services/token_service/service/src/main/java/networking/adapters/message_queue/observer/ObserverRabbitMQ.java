@@ -30,7 +30,7 @@ public final class ObserverRabbitMQ implements IObserver {
     private NotificationRabbitMQ notificationRabbitMQ;
 
     /**
-     * @author August
+     * @author August (s144461)
      */
     private ObserverRabbitMQ() {
         this.data = MockDatabase.getInstance();
@@ -43,7 +43,7 @@ public final class ObserverRabbitMQ implements IObserver {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @throws IOException
      * @throws TimeoutException
      */

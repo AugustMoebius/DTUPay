@@ -8,7 +8,7 @@ import exceptions.InvalidCvrException;
 import java.util.HashMap;
 
 /**
- * @author Sarah
+ * @author Sarah (s153659)
  */
 public class InMemoryDataSource implements IDataSource {
     private static InMemoryDataSource inMemoryDataSource = new InMemoryDataSource();

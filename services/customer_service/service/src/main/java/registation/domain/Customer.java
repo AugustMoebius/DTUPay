@@ -7,7 +7,7 @@ public class Customer {
     private CPRNumber cprNumber;
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @param firstName,
      * @param lastName,
      * @param cprNumber
@@ -19,7 +19,7 @@ public class Customer {
     }
 
     /**
-     * @author Ebbe Berthold (s125015)
+     * @author Ebbe (s125015)
      * @return firstName
      */
     public String getFirstName() {
@@ -27,7 +27,7 @@ public class Customer {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @return lastName
      */
     public String getLastName() {
@@ -35,7 +35,7 @@ public class Customer {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @return cprNumber
      */
     public CPRNumber getCprNumber() {

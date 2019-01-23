@@ -16,7 +16,7 @@ public class CustomerService {
     private ICustomerRegistration customerRegistration;
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @param dataSource
      * @param customerRegistration
      */
@@ -26,7 +26,7 @@ public class CustomerService {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param req
      */
     public void registerCustomer(RegisterCustomerRequest req){

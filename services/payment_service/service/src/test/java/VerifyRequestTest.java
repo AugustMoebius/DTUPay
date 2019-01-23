@@ -13,6 +13,9 @@ import java.math.BigDecimal;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * @author August (s144461), Sebastian (s144071), Emilie (s153762)
+ */
 public class VerifyRequestTest {
     private InMemoryDataSource data;
     private VerifyBankRequest verifyBankRequest;
@@ -21,7 +24,7 @@ public class VerifyRequestTest {
     String customerCPR, merchantCVR;
 
     /**
-     * @author August
+     * @author August (s144461)
      */
     public VerifyRequestTest(){
         data = InMemoryDataSource.getInstance();
@@ -29,7 +32,7 @@ public class VerifyRequestTest {
     }
 
     /**
-     * @auhtor Sebastian
+     * @author Sebastian (s144071)
      */
     @Before
     public void setup(){
@@ -61,7 +64,7 @@ public class VerifyRequestTest {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      */
     @After
     public void tearDown(){
@@ -74,7 +77,7 @@ public class VerifyRequestTest {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      */
     @Test
     public void verifyRequestSucceedingTest(){
@@ -85,7 +88,7 @@ public class VerifyRequestTest {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      */
     @Test
     public void verifyCPRFailingTest(){
@@ -98,7 +101,7 @@ public class VerifyRequestTest {
     }
 
     /**
-     * @author Sebastian
+     * @author Sebastian (s144071)
      */
     @Test
     public void verifyCVRFailingTest(){
@@ -110,7 +113,7 @@ public class VerifyRequestTest {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      */
     @Test
     public void verifyAmountFailingTest(){

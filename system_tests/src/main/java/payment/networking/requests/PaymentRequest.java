@@ -1,12 +1,15 @@
 package payment.networking.requests;
 
+/**
+ * @author Emilie (s153762), August (s144461), Sebastian (s144071)
+ */
 public class PaymentRequest {
   private String merchantId;
   private int paymentAmount;
   private String tokenId;
 
   /**
-   * @author Emilie
+   * @author Emilie (s153762)
    * @param merchantId
    * @param paymentAmount
    * @param tokenId
@@ -18,7 +21,7 @@ public class PaymentRequest {
   }
 
   /**
-   * @author August
+   * @author August (s144461)
    * @return
    */
   public String getMerchantId() {
@@ -26,7 +29,7 @@ public class PaymentRequest {
   }
 
   /**
-   * @author Sebastian
+   * @author Sebastian (s144071)
    * @return
    */
   public int getPaymentAmount() {
@@ -34,7 +37,7 @@ public class PaymentRequest {
   }
 
   /**
-   * @author August
+   * @author August (s144461)
    * @return
    */
   public String getTokenId() {

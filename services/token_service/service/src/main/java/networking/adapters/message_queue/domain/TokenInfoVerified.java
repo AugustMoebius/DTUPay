@@ -2,6 +2,9 @@ package networking.adapters.message_queue.domain;
 
 import domain.CPRNumber;
 
+/**
+ * @author Ebbe s125015
+ */
 public class TokenInfoVerified {
 
     private String merchantId;
@@ -10,7 +13,7 @@ public class TokenInfoVerified {
     private String cprNumber;
 
     /**
-     * @author Ebbe Berthold (s125015)
+     * @author Ebbe (s125015)
      * @param merchantId
      * @param paymentAmount
      * @param tokenId
@@ -24,7 +27,7 @@ public class TokenInfoVerified {
     }
 
     /**
-     * @author Ebbe Berthold (s125015)
+     * @author Ebbe (s125015)
      * @return merchantId
      */
     public String getMerchantId() {
@@ -32,7 +35,7 @@ public class TokenInfoVerified {
     }
 
     /**
-     * @author Ebbe Berthold (s125015)
+     * @author Ebbe (s125015)
      * @return payment amount
      */
     public int getPaymentAmount() {
@@ -40,7 +43,7 @@ public class TokenInfoVerified {
     }
 
     /**
-     * @author Ebbe Berthold (s125015)
+     * @author Ebbe (s125015)
      * @return tokenId
      */
     public String getTokenId() {
@@ -48,7 +51,7 @@ public class TokenInfoVerified {
     }
 
     /**
-     * @author Ebbe Berthold (s125015)
+     * @author Ebbe (s125015)
      * @return CPR Number
      */
     public String getCprNumber() {

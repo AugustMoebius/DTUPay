@@ -1,7 +1,7 @@
 package payment.networking.requests;
 
 /**
- * @author Emilie
+ * @author Emilie (s153762)
  */
 public class RefundRequest {
     private String tokenId;

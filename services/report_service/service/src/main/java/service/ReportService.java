@@ -3,7 +3,7 @@ package service;
 import data.IDataSource;
 
 /**
- * @author Sarah
+ * @author Sarah (s153659)
  */
 public class ReportService {
     private IDataSource data;

@@ -42,6 +42,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "description",
     "time"
 })
+/**
+ * @author August (s144461)
+ */
 public class Transaction {
 
     protected BigDecimal amount;
