@@ -270,8 +270,11 @@ public class PaymentStepDefs {
     assertTrue(token.isUsed());
   }
 
+  /**
+   * @author Emilie
+   */
   @And("^the customer has an unknown token$")
-  public void theCustomerHasAnUnknownToken() throws Throwable {
+  public void theCustomerHasAnUnknownToken() {
     // Set token ID to a token not known to token service.
     this.tokenId = "Invalid_TokenId";
   }
@@ -279,7 +282,6 @@ public class PaymentStepDefs {
   /**
    * @authour Ebbe
    * @param negativeAmount
-   * @throws Throwable
    */
   @And("^that the merchant wishes to register a payment of negative amount ([-]?\\d+)$")
   public void   thatTheMerchantWishesToRegisterAPaymentOfNegativeAmount(int negativeAmount) {
@@ -288,7 +290,6 @@ public class PaymentStepDefs {
 
   /**
    * @author August
-   * @throws Throwable
    */
   @Then("^the merchant receives a failure response$")
   public void theMerchantReceivesAFailureResponse() throws Throwable {
@@ -320,6 +321,10 @@ public class PaymentStepDefs {
 
   }
 
+  /**
+   * @author Sebastian
+   * @throws InterruptedException
+   */
   @When("^the merchant submits a request for the refund$")
   public void theMerchantSubmitsARequestForTheRefund() throws InterruptedException {
     // Steps:
@@ -366,7 +371,14 @@ public class PaymentStepDefs {
 
   // --------------------------------------- Unregistered Merchant ----------------------------------- //
 
-
+  /**
+   * @author August
+   * @param merchantCVR
+   * @param merchantFirstName
+   * @param merchantLastName
+   * @param merchantInitialBalance
+   * @throws Throwable
+   */
   @And("^a unregistered merchant with the CVR \"([^\"]*)\" has the name \"([^\"]*)\" \"([^\"]*)\" and a bank account with balance (\\d+)$")
   public void aUnregisteredMerchantWithTheCVRHasTheNameAndABankAccountWithBalance(String merchantCVR, String merchantFirstName, String merchantLastName, BigDecimal merchantInitialBalance) throws Throwable {
     // Create merchant
@@ -388,7 +400,13 @@ public class PaymentStepDefs {
     // Will not be registered
   }
 
-
+  /**
+   * @author August
+   * @param merchantFirstName
+   * @param merchantLastName
+   * @param merchantInitialBalance
+   * @throws Throwable
+   */
   @And("^a unregistered merchant has a CVR, the name \"([^\"]*)\" \"([^\"]*)\", and a bank account with balance (\\d+)$")
   public void aUnregisteredMerchantHasACVRTheNameAndABankAccountWithBalance(String merchantFirstName, String merchantLastName, BigDecimal merchantInitialBalance) throws Throwable {
     // Create merchant

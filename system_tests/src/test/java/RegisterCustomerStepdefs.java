@@ -1,4 +1,3 @@
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -16,10 +15,8 @@ public class RegisterCustomerStepdefs {
     private Response response;
 
     /**
-     *
      * @param firstName
      * @param lastName
-     * @param cpr
      * @author Emilie
      */
     @Given("^a name \"([^\"]*)\" \"([^\"]*)\"$")
@@ -40,13 +37,10 @@ public class RegisterCustomerStepdefs {
     }
 
     /**
-     *
-     * @throws Throwable
      * @author Emilie
      */
     @Then("^a new customer is added to DTUPay$")
     public void aNewCustomerIsAddedToDTUPay() {
-//        throw new PendingException();
         assertEquals(200, response.getStatus());
     }
 }

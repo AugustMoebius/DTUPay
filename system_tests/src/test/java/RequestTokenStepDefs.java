@@ -23,11 +23,16 @@ public class RequestTokenStepDefs {
 
   private Response tokenGeneratedResponse;
 
-
+  /**
+   * @author Esben Løvendal Kruse (s172986)
+   */
   public RequestTokenStepDefs() {
     this.tokenService = new TokenService();
   }
 
+  /**
+   * @author Sebastian
+   */
   @After("@tagToken")
   public void after() {
     // Extract tokens from response
@@ -35,6 +40,10 @@ public class RequestTokenStepDefs {
     this.deleteTokensFromResponse(this.existingTokens);
   }
 
+  /**
+   * @author Ebbe
+   * @param res
+   */
   private void deleteTokensFromResponse(TokenGeneratedResponse res) {
     if (res == null) {
       return;
@@ -84,6 +93,9 @@ public class RequestTokenStepDefs {
     assertEquals(numberOfTokens, this.generatedTokens.getTokenBarcodePairs().size());
   }
 
+  /**
+   * @author Sebastian
+   */
   @And("^customer can access the barcode via the URL$")
   public void customerCanAccessTheBarcodeViaTheURL() {
     for (TokenBarcodePair pair : this.generatedTokens.getTokenBarcodePairs()) {
@@ -91,6 +103,10 @@ public class RequestTokenStepDefs {
     }
   }
 
+  /**
+   * @author Ebbe
+   * @param numberOfTokens
+   */
   @And("^that customer has already been assigned (\\d+) unused token/s$")
   public void thatCustomerHasAlreadyBeenAssignedToken(int numberOfTokens) {
     // Request tokens to assign to user ahead of main request.
@@ -102,11 +118,18 @@ public class RequestTokenStepDefs {
 
   // ERROR SCENARIOS
 
+  /**
+   * @author Ebbe
+   */
   @Then("^the customer receives an error response$")
   public void theCustomerReceivesAnErrorResponse() {
     assertEquals(400, this.tokenGeneratedResponse.getStatus());
   }
 
+  /**
+   * @author Ebbe
+   * @param expErrorMsg
+   */
   @And("^the response contains the error message \"([^\"]*)\"$")
   public void theResponseContainsTheErrorMessage(String expErrorMsg) {
     String actErrorMsg = this.tokenGeneratedResponse.readEntity(String.class);
