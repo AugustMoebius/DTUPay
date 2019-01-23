@@ -5,9 +5,9 @@ import exceptions.MerchantInvalidInformation;
 import exceptions.MerchantInvalidName;
 import exceptions.MerchantNotFoundException;
 import management.MerchantManagement;
-import management.domain.CVRNumber;
-import management.domain.Merchant;
-import management.exceptions.InvalidCvrException;
+import domain.CVRNumber;
+import domain.Merchant;
+import exceptions.InvalidCvrException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -16,12 +16,22 @@ public class RegisterMerchantTest {
     private IDataSource data;
     private MerchantManagement merchantManagement;
 
-
+    /**
+     * @author Sarah
+     */
     public RegisterMerchantTest(){
         this.data = InMemoryDataSource.getInstance();
         this.merchantManagement = new MerchantManagement();
     }
 
+    /**
+     * @author Sarah
+     * @throws InvalidCvrException
+     * @throws MerchantInvalidInformation
+     * @throws MerchantInvalidName
+     * @throws MerchantNotFoundException
+     * @throws MerchantAlreadyExistException
+     */
     @Test
     public void registerMerchantSucceedingTest() throws InvalidCvrException, MerchantInvalidInformation, MerchantInvalidName, MerchantNotFoundException, MerchantAlreadyExistException {
         // Data
@@ -39,6 +49,13 @@ public class RegisterMerchantTest {
         assertEquals(cvrNumber, data.getMerchant(merchant.getCvr()).getCvr());
     }
 
+    /**
+     * @author Sarah
+     * @throws InvalidCvrException
+     * @throws MerchantInvalidInformation
+     * @throws MerchantInvalidName
+     * @throws MerchantAlreadyExistException
+     */
     @Test(expected = MerchantInvalidName.class)
     public void registerMerchantWithInvalidNameTest() throws InvalidCvrException, MerchantInvalidInformation, MerchantInvalidName, MerchantAlreadyExistException {
         // Data
@@ -61,6 +78,13 @@ public class RegisterMerchantTest {
         }
     }
 
+    /**
+     * @author Sarah
+     * @throws InvalidCvrException
+     * @throws MerchantInvalidName
+     * @throws MerchantInvalidInformation
+     * @throws MerchantAlreadyExistException
+     */
     @Test(expected = InvalidCvrException.class)
     public void registerMerchantWithInvalidCPRTest() throws InvalidCvrException, MerchantInvalidName, MerchantInvalidInformation, MerchantAlreadyExistException {
         // Data
@@ -84,6 +108,13 @@ public class RegisterMerchantTest {
         }
     }
 
+    /**
+     * @author Sarah
+     * @throws MerchantAlreadyExistException
+     * @throws MerchantInvalidInformation
+     * @throws MerchantInvalidName
+     * @throws InvalidCvrException
+     */
     @Test(expected = MerchantAlreadyExistException.class)
     public void registerMerchantAlreadyExistsTest() throws MerchantAlreadyExistException, MerchantInvalidInformation, MerchantInvalidName, InvalidCvrException {
         String firstName = "Clara";

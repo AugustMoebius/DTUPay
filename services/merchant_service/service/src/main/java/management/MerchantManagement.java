@@ -5,9 +5,8 @@ import exceptions.MerchantAlreadyExistException;
 import exceptions.MerchantInvalidInformation;
 import exceptions.MerchantInvalidName;
 import exceptions.MerchantNotFoundException;
-import management.domain.CVRNumber;
-import management.domain.Merchant;
-import management.exceptions.InvalidCvrException;
+import domain.CVRNumber;
+import domain.Merchant;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,6 +23,16 @@ public class MerchantManagement implements IMerchantManagement {
     // CRUD - operations
 
     // Create a merchant
+
+    /**
+     * @author Sarah
+     * @param firstName
+     * @param lastName
+     * @param CVR
+     * @throws MerchantInvalidName
+     * @throws MerchantInvalidInformation
+     * @throws MerchantAlreadyExistException
+     */
     @Override
     public void registerMerchant(String firstName, String lastName, CVRNumber CVR) throws MerchantInvalidName, MerchantInvalidInformation, MerchantAlreadyExistException {
         // validate first and last name
@@ -56,12 +65,19 @@ public class MerchantManagement implements IMerchantManagement {
     }
 
     // Read a merchant
+
+    /**
+     * @author Sarah
+     * @param cvr
+     * @return
+     * @throws MerchantNotFoundException
+     */
     @Override
     public Merchant getMerchant(CVRNumber cvr) throws MerchantNotFoundException {
         return data.getMerchant(cvr);
     }
 
-    // Update a merchant
+    /*// Update a merchant
     @Override
     public void updateMerchant(String companyName) {
 
@@ -71,6 +87,6 @@ public class MerchantManagement implements IMerchantManagement {
     @Override
     public void deleteMerchant(String cvr) {
 
-    }
+    }*/
 
 }

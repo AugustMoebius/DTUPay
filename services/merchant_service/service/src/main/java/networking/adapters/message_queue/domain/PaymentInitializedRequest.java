@@ -1,7 +1,7 @@
 package networking.adapters.message_queue.domain;
 
 /**
- * @author Ëmilie
+ * @author Emilie
  */
 public class PaymentInitializedRequest {
     private String merchantId;

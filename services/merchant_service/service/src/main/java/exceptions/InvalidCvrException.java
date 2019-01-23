@@ -1,4 +1,4 @@
-package management.exceptions;
+package exceptions;
 
 public class InvalidCvrException extends MerchantServiceException {
     public InvalidCvrException(String cvr) {
