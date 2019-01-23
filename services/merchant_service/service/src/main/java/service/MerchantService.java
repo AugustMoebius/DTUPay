@@ -32,6 +32,7 @@ public class MerchantService {
     }
 
     /**
+     * This method verifies the merchant, when receiving the request and then it publishes the verification.
      * @author Emilie
      * @param paymentInitializedRequest
      */
@@ -55,6 +56,7 @@ public class MerchantService {
     }
 
     /**
+     * This method calls merchant management and registers the merchant.
      * @author Sarah
      * @param req
      * @throws MerchantRegistrationException
@@ -68,6 +70,7 @@ public class MerchantService {
     }
 
     /**
+     * This method calls merchant management and gets the merchant with the given cvr.
      * @author Sarah
      * @param cvr
      * @return

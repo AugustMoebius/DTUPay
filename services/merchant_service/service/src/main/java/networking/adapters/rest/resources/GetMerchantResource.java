@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 @Path("merchant/{id}")
 public class GetMerchantResource {
     /**
+     * This method consumes a get request and returns an appropriate message and status code.
      * @author Sarah
      * @return Response
      */

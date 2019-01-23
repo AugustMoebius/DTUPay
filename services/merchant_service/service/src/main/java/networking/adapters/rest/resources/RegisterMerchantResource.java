@@ -20,6 +20,7 @@ public class RegisterMerchantResource {
     }
 
     /**
+     * This method consumes a post request to register the merchant and sends an appropriate message and status code back.
      * @author Sarah
      * @param req
      * @return Response

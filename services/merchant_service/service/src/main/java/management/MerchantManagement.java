@@ -25,6 +25,7 @@ public class MerchantManagement implements IMerchantManagement {
     // Create a merchant
 
     /**
+     * This method registers a merchant in the database after validating the input.
      * @author Sarah
      * @param firstName
      * @param lastName

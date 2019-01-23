@@ -18,6 +18,7 @@ public class NotificationRabbitMQ implements INotification {
     private final static String EXCHANGE_NAME = "payment_exchange";
 
     /**
+     * This method publishes that the merchant is verified to the message queue.
      * @author Emilie
      * @param merchantInfoVerified
      */
