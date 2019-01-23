@@ -1,7 +1,7 @@
 package service.exceptions;
 
 /**
- * @author August
+ * @author August (s144461)
  */
 public class InvalidTokenCountException extends TokenGenerationFailedException {
   public InvalidTokenCountException() {

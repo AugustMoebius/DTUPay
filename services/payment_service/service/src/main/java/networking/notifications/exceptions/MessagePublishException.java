@@ -1,7 +1,7 @@
 package networking.notifications.exceptions;
 
 /**
- * @author August
+ * @author August (s144461)
  */
 public class MessagePublishException extends NotificationException {
 

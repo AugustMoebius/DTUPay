@@ -1,7 +1,7 @@
 package token.networking.response;
 
 /**
- * @author August (s144461), Sebastian (s144071)
+ * @author Esben (s172986), Sebastian (s144071)
  */
 public class TokenBarcodePair {
 
@@ -9,7 +9,7 @@ public class TokenBarcodePair {
     private String barcodeRelativePath;
 
     /**
-     * @author August (s144461)
+     * @author Esben (s172986)
      * @param tokenId
      * @param barcodeRelativePath
      */
@@ -32,7 +32,7 @@ public class TokenBarcodePair {
     }
 
     /**
-     * @author August (s144461)
+     * @author Esben (s172986)
      * @param tokenId
      */
     public void setTokenId(String tokenId) {
@@ -48,7 +48,7 @@ public class TokenBarcodePair {
     }
 
     /**
-     * @author August (s144461)
+     * @author Esben (s172986)
      * @param barcodeRelativePath
      */
     public void setBarcodeRelativePath(String barcodeRelativePath) {

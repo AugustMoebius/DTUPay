@@ -12,14 +12,17 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * @author Esben (s172986)
+ */
 @Path("customer")
 public class VerifyCustomerResource {
 
     /**
      * This method verifies a customer with a get request.
-     * @author Esben
-     * @param cprNumber
-     * @return
+     * @author Esben (s172986)
+     * @param cprNumber the CPR number of the customer
+     * @return a REST response
      * @throws InvalidCprException
      * @throws CustomerNotFoundException
      */

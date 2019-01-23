@@ -21,7 +21,7 @@ public class MerchantService {
 
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param data
      * @param iNotification
      */
@@ -33,7 +33,7 @@ public class MerchantService {
 
     /**
      * This method verifies the merchant, when receiving the request and then it publishes the verification.
-     * @author Emilie
+     * @author Emilie (s153762)
      * @param paymentInitializedRequest
      */
     public void handlePaymentInitialized(PaymentInitializedRequest paymentInitializedRequest) {
@@ -57,7 +57,7 @@ public class MerchantService {
 
     /**
      * This method calls merchant management and registers the merchant.
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param req
      * @throws MerchantRegistrationException
      */
@@ -71,7 +71,7 @@ public class MerchantService {
 
     /**
      * This method calls merchant management and gets the merchant with the given cvr.
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param cvr
      * @return
      * @throws MerchantServiceException

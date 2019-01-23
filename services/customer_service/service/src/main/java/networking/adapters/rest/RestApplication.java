@@ -8,7 +8,7 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 /**
- * @author Sarah
+ * @author Sarah (s153659)
  */
 @ApplicationPath("/")
 public class RestApplication extends Application {

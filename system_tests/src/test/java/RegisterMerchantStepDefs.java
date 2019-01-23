@@ -94,7 +94,7 @@ public class RegisterMerchantStepDefs {
   }
 
   /**
-   * @author Sarah
+   * @author Sarah (s153659)
    */
   @Then("^the registration submission succeeds$")
   public void theRegistrationSubmissionSucceeds() {

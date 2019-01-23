@@ -1,7 +1,7 @@
 package domain;
 
 /**
- * @author Emilie
+ * @author Emilie (s153762)
  */
 public class Merchant {
     private String firstName, lastName;

@@ -1,7 +1,7 @@
 package networking.adapters.rest.requests;
 
 /**
- * @author Sarah
+ * @author Sarah (s153659)
  */
 public class GetMerchantRequest {
     private final String cvr;

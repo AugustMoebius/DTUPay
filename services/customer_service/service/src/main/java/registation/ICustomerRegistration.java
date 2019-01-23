@@ -7,7 +7,7 @@ import registation.exceptions.CustomerInvalidInformation;
 import registation.exceptions.CustomerInvalidName;
 
 /**
- * @author Sarah
+ * @author Sarah (s153659)
  */
 public interface ICustomerRegistration {
     void addCustomer(String firstName, String lastName, CPRNumber cprNumber) throws CustomerInvalidName, CustomerInvalidInformation, InvalidFormatException;

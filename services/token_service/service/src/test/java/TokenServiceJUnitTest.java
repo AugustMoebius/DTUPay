@@ -19,7 +19,7 @@ public class TokenServiceJUnitTest {
     private Gson gson;
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      */
     public TokenServiceJUnitTest() {
         this.data = MockDatabase.getInstance();
@@ -28,7 +28,7 @@ public class TokenServiceJUnitTest {
     }
 
     /**
-     * @author Ebbe Berthold (s125015)
+     * @author Ebbe (s125015)
      */
     @Test
     public void testSavedToken() throws TokenNotFoundException {
@@ -37,7 +37,7 @@ public class TokenServiceJUnitTest {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @throws InvalidCprException
      */
     @Test
@@ -59,7 +59,7 @@ public class TokenServiceJUnitTest {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @throws InvalidCprException
      */
     @Test

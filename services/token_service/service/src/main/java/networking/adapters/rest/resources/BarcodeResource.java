@@ -7,11 +7,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import java.io.File;
 
+/**
+ * @author Esben s172986, August s144461
+ */
 @Path("barcode")
 public class BarcodeResource {
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @return response
      */
     @GET
@@ -20,9 +23,9 @@ public class BarcodeResource {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      * @param barcodePath
-     * @return response
+     * @return
      */
     @GET
     @Path("/{barcodePath}")

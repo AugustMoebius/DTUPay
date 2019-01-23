@@ -9,6 +9,9 @@ import registation.exceptions.CustomerInvalidName;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author Sarah (s153659)
+ */
 public class CustomerRegistration implements ICustomerRegistration {
     private InMemoryDataSource data;
     private Customer customer;
@@ -19,10 +22,10 @@ public class CustomerRegistration implements ICustomerRegistration {
 
     /**
      * This method adds a customer to the database after verifying the input.
-     * @author Sarah
-     * @param firstName
-     * @param lastName
-     * @param cprNumber
+     * @author Sarah (s153659)
+     * @param firstName the first name of the customer
+     * @param lastName the last name of the customer
+     * @param cprNumber the CPR number of the customer
      * @throws CustomerInvalidName
      * @throws CustomerInvalidInformation
      */
@@ -50,10 +53,6 @@ public class CustomerRegistration implements ICustomerRegistration {
         data.addCustomer(customer);
     }
 
-    /**
-     * @author Sarah
-     * @return customer
-     */
     public Customer getCustomer(){
         return customer;
     }

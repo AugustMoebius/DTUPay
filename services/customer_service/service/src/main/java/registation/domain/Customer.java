@@ -1,5 +1,8 @@
 package registation.domain;
 
+/**
+ * @author Esben (s172986)
+ */
 public class Customer {
 
     private String firstName;
@@ -7,10 +10,10 @@ public class Customer {
     private CPRNumber cprNumber;
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
-     * @param firstName,
-     * @param lastName,
-     * @param cprNumber
+     * @author Esben (s172986)
+     * @param firstName the first name of a customer
+     * @param lastName the last name of a customer
+     * @param cprNumber the CPR number of the customer
      */
     public Customer(String firstName, String lastName, CPRNumber cprNumber) {
         this.firstName = firstName;
@@ -18,26 +21,16 @@ public class Customer {
         this.cprNumber = cprNumber;
     }
 
-    /**
-     * @author Ebbe Berthold (s125015)
-     * @return firstName
-     */
     public String getFirstName() {
         return firstName;
     }
 
-    /**
-     * @author Sarah
-     * @return lastName
-     */
+
     public String getLastName() {
         return lastName;
     }
 
-    /**
-     * @author Esben Løvendal Kruse (s172986)
-     * @return cprNumber
-     */
+
     public CPRNumber getCprNumber() {
         return cprNumber;
     }

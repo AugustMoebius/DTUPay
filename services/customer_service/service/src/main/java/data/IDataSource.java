@@ -4,11 +4,14 @@ import registation.domain.CPRNumber;
 import registation.domain.Customer;
 import registation.exceptions.CustomerNotFoundException;
 
+/**
+ * @author Esben (s172986)
+ */
 public interface IDataSource {
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
-     * @param cprNumber
+     * @author Esben (s172986)
+     * @param cprNumber the CPR number of the customer
      * @return
      * @throws CustomerNotFoundException
      */

@@ -6,13 +6,16 @@ import networking.ws.fastmoney.BankServiceService;
 
 import java.math.BigDecimal;
 
+/**
+ * @author Sarah (s153659),
+ */
 // TODO: Consider if this should be static
 public class AccessBank implements IBankService{
     BankService bank;
     VerifyBankRequest verifyBankRequest;
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659), Emilie (s153762)
      */
     public AccessBank(){
         // access module
@@ -21,7 +24,7 @@ public class AccessBank implements IBankService{
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      */
     public void sendPaymentRequest(String customerCPR, String merchantCVR, int amount) throws BankServiceException_Exception {
         //Verify CPR

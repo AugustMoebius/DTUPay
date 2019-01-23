@@ -10,12 +10,15 @@ import registation.exceptions.InvalidCprException;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * @author Emilie (s153762), Sarah (s153659)
+ */
 public class RegisterCustomerTest {
     private InMemoryDataSource data;
     private CustomerRegistration customerRegistration;
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      */
     public RegisterCustomerTest(){
         this.data = InMemoryDataSource.getInstance();
@@ -23,7 +26,7 @@ public class RegisterCustomerTest {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @throws InvalidCprException
      * @throws CustomerNotFoundException
      * @throws CustomerInvalidName
@@ -47,7 +50,7 @@ public class RegisterCustomerTest {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @throws InvalidCprException
      * @throws CustomerInvalidInformation
      * @throws CustomerInvalidName
@@ -75,7 +78,7 @@ public class RegisterCustomerTest {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @throws InvalidCprException
      * @throws CustomerInvalidName
      * @throws CustomerInvalidInformation

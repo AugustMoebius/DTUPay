@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 public class ReportResource {
     /**
      * This method is for testing purposes that you will be able to see if the request has gone through on localhost.
-     * @author Sarah
+     * @author Sarah (s153659)
      * @return Response
      */
     @GET
@@ -25,7 +25,7 @@ public class ReportResource {
 
     /**
      * This method consumes a post request and calls reportService to generate a report.
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param reportRequest
      * @return Response
      */
