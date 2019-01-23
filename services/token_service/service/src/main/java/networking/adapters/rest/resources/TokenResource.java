@@ -29,7 +29,6 @@ public class TokenResource {
    * @author Esben (s172986)
    * @param tokenRequest
    * @return response
-   * @throws InvalidCprException
    */
   @POST
   @Consumes(MediaType.APPLICATION_JSON)

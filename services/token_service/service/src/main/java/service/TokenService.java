@@ -135,7 +135,6 @@ public class TokenService {
      * @author Esben (s172986)
      * @param id
      * @return token get response
-     * @throws InvalidCprException
      */
     public TokenGetResponse handleTokenGetRequests(String id) throws TokenNotFoundException {
         Token token = data.getToken(id);
