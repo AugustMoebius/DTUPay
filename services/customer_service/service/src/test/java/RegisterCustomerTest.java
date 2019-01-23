@@ -14,12 +14,21 @@ public class RegisterCustomerTest {
     private InMemoryDataSource data;
     private CustomerRegistration customerRegistration;
 
-
+    /**
+     * @author Emilie
+     */
     public RegisterCustomerTest(){
         this.data = InMemoryDataSource.getInstance();
         this.customerRegistration = new CustomerRegistration();
     }
 
+    /**
+     * @author Sarah
+     * @throws InvalidCprException
+     * @throws CustomerNotFoundException
+     * @throws CustomerInvalidName
+     * @throws CustomerInvalidInformation
+     */
     @Test
     public void registerCustomerSucceedingTest() throws InvalidCprException, CustomerNotFoundException, CustomerInvalidName, CustomerInvalidInformation {
         // Data
@@ -37,6 +46,12 @@ public class RegisterCustomerTest {
         assertEquals(cprNumber, data.getCustomer(customer.getCprNumber()).getCprNumber());
     }
 
+    /**
+     * @author Sarah
+     * @throws InvalidCprException
+     * @throws CustomerInvalidInformation
+     * @throws CustomerInvalidName
+     */
     @Test(expected = CustomerInvalidName.class)
     public void registerCustomerWithInvalidNameTest() throws InvalidCprException, CustomerInvalidInformation, CustomerInvalidName {
         // Data
@@ -59,6 +74,12 @@ public class RegisterCustomerTest {
         }
     }
 
+    /**
+     * @author Emilie
+     * @throws InvalidCprException
+     * @throws CustomerInvalidName
+     * @throws CustomerInvalidInformation
+     */
     @Test(expected = InvalidCprException.class)
     public void registerCustomerWithInvalidCPRTest() throws InvalidCprException, CustomerInvalidName, CustomerInvalidInformation {
         // Data

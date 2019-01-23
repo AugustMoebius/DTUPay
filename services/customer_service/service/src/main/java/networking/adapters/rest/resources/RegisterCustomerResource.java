@@ -22,6 +22,7 @@ public class RegisterCustomerResource {
     }
 
     /**
+     * This method consumes a post request and registers the customer.
      * @author Sarah
      * @param req
      * @return Response

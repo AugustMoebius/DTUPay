@@ -1,12 +1,12 @@
 package data;
 
-import com.sun.media.sound.InvalidFormatException;
 import registation.domain.CPRNumber;
 import registation.domain.Customer;
 import registation.exceptions.CustomerNotFoundException;
 import registation.exceptions.InvalidCprException;
 
 import java.util.HashMap;
+
 
 public class InMemoryDataSource implements IDataSource {
     private static final InMemoryDataSource dataSource = new InMemoryDataSource();
@@ -16,6 +16,9 @@ public class InMemoryDataSource implements IDataSource {
         return dataSource;
     }
 
+    /**
+     * @author Sarah
+     */
     public InMemoryDataSource() {
         allCustomers = new HashMap<String, Customer>();
 
@@ -37,10 +40,20 @@ public class InMemoryDataSource implements IDataSource {
         }
     }
 
+    /**
+     * @author Emilie
+     * @param customer
+     */
     public void addCustomer(Customer customer) {
         allCustomers.put(customer.getCprNumber().toString(), customer);
     }
 
+    /**
+     * @author Emilie
+     * @param cprNumber
+     * @return customer
+     * @throws CustomerNotFoundException
+     */
     public Customer getCustomer(CPRNumber cprNumber) throws CustomerNotFoundException {
         Customer customer = allCustomers.get(cprNumber.toString());
         if (customer == null){
@@ -49,6 +62,10 @@ public class InMemoryDataSource implements IDataSource {
         return customer;
     }
 
+    /**
+     * @author Emilie
+     * @return amount of customers in the database.
+     */
     public int getAmountOfCustomers() {
         return allCustomers.size();
     }

@@ -15,11 +15,20 @@ public class CustomerService {
     private IDataSource dataSource;
     private ICustomerRegistration customerRegistration;
 
+    /**
+     * @author Emilie
+     * @param dataSource
+     * @param customerRegistration
+     */
     public CustomerService(IDataSource dataSource, ICustomerRegistration customerRegistration) {
         this.dataSource = dataSource;
         this.customerRegistration = customerRegistration;
     }
 
+    /**
+     * @author Sarah
+     * @param req
+     */
     public void registerCustomer(RegisterCustomerRequest req){
         try {
             customerRegistration.addCustomer(req.getFirstName(), req.getLastName(), new CPRNumber(req.getCpr()));
@@ -28,6 +37,12 @@ public class CustomerService {
         }
     }
 
+    /**
+     * @author Esben
+     * @param cprNumber
+     * @return customer
+     * @throws CustomerNotFoundException
+     */
     public Customer getCustomer(CPRNumber cprNumber) throws CustomerNotFoundException {
         return this.dataSource.getCustomer(cprNumber);
     }

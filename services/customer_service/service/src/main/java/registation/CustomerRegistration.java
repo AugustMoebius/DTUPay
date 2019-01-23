@@ -1,6 +1,5 @@
 package registation;
 
-import com.sun.media.sound.InvalidFormatException;
 import data.InMemoryDataSource;
 import registation.domain.CPRNumber;
 import registation.domain.Customer;
@@ -18,6 +17,15 @@ public class CustomerRegistration implements ICustomerRegistration {
 
     }
 
+    /**
+     * This method adds a customer to the database after verifying the input.
+     * @author Sarah
+     * @param firstName
+     * @param lastName
+     * @param cprNumber
+     * @throws CustomerInvalidName
+     * @throws CustomerInvalidInformation
+     */
     public void addCustomer(String firstName, String lastName, CPRNumber cprNumber) throws CustomerInvalidName, CustomerInvalidInformation {
         // Validate first and last name
         Pattern pattern = Pattern.compile("([a-zA-Z]+)(.*)");
@@ -42,6 +50,10 @@ public class CustomerRegistration implements ICustomerRegistration {
         data.addCustomer(customer);
     }
 
+    /**
+     * @author Sarah
+     * @return customer
+     */
     public Customer getCustomer(){
         return customer;
     }

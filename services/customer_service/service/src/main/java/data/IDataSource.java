@@ -14,4 +14,5 @@ public interface IDataSource {
      */
     Customer getCustomer(CPRNumber cprNumber) throws CustomerNotFoundException;
 
+    void addCustomer(Customer customer);
 }
