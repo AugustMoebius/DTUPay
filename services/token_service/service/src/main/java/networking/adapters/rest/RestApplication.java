@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 /**
- * @author Sebastian s144071
+ * @author Sebastian (s144071)
  */
 @ApplicationPath("/")
 public class RestApplication extends Application {

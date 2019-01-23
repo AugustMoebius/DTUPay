@@ -19,7 +19,7 @@ public class CustomerRegistration implements ICustomerRegistration {
 
     /**
      * This method adds a customer to the database after verifying the input.
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param firstName
      * @param lastName
      * @param cprNumber
@@ -51,7 +51,7 @@ public class CustomerRegistration implements ICustomerRegistration {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @return customer
      */
     public Customer getCustomer(){

@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * @author August s144461
+ * @author August (s144461)
  */
 public class TokenAlreadyUsedException extends TokenServiceException {
     public TokenAlreadyUsedException(String s) {

@@ -3,7 +3,7 @@ package networking.adapters.message_queue;
 import java.util.Properties;
 
 /**
- * @author Sarah
+ * @author Sarah (s153659)
  */
 public enum HostMessageQueue {
     BASE("rabbitmq-container");

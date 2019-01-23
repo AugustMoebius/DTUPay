@@ -21,7 +21,7 @@ public class NotificationRabbitMQ implements INotification {
     private final static String EXCHANGE_NAME = "payment_exchange";
 
     /**
-     * @author Ebbe s125015
+     * @author Ebbe (s125015)
      * @param message
      * @throws IOException
      * @throws TimeoutException

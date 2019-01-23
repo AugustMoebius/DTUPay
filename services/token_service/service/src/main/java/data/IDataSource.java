@@ -9,28 +9,28 @@ import java.util.List;
 public interface IDataSource {
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @param tokenID
      * @return token
      */
     Token getToken(String tokenID) throws TokenNotFoundException;
 
     /**
-     * @author Sebastian s144071
+     * @author Sebastian (s144071)
      * @param cprNumber
      * @return a list of tokens
      */
     List<Token> getTokensByCustomer(CPRNumber cprNumber);
 
     /**
-     * @author Esben s172986
+     * @author Esben (s172986)
      * @param token
      * @return one token
      */
     Token putToken(Token token);
 
     /**
-     * @author August s144461
+     * @author August (s144461)
      * @param tokenId
      */
     void deleteToken(String tokenId);

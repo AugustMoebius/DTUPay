@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 public class PaymentResource {
   /**
    * This method is for testing purposes, so you can see the response on local host.
-   * @author August
+   * @author August (s144461)
    * @return response
    */
   @GET
@@ -25,7 +25,7 @@ public class PaymentResource {
 
   /**
    * This method consumes a post request and sends the call to payment service.
-   * @author Sebastian
+   * @author Sebastian (s144071)
    * @param req
    * @return response
    */

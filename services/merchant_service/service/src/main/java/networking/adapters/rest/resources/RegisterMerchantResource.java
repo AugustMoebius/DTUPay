@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 @Path("merchant")
 public class RegisterMerchantResource {
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @return Response
      */
     @GET
@@ -21,7 +21,7 @@ public class RegisterMerchantResource {
 
     /**
      * This method consumes a post request to register the merchant and sends an appropriate message and status code back.
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param req
      * @return Response
      */

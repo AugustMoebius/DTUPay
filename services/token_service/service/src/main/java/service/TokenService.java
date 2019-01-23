@@ -38,7 +38,7 @@ public class TokenService {
     private INotification iNotification;
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @param data
      */
     public TokenService(IDataSource data, INotification iNotification) {
@@ -47,7 +47,7 @@ public class TokenService {
     }
 
     /**
-     * @author Ebbe Berthold (s125015)
+     * @author Ebbe (s125015)
      * @param tokenId
      * @return CPRNumber
      */
@@ -57,7 +57,7 @@ public class TokenService {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @param tokenInfo
      */
     public void handleTokenInfo(TokenInfo tokenInfo) throws TokenAlreadyUsedException, TokenNotFoundException {
@@ -92,7 +92,7 @@ public class TokenService {
 
     /**
      * This method handles the generation of tokens after verifying the request data.
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @param tokenRequest
      * @return token generation response
      * @throws TokenGenerationFailedException
@@ -132,7 +132,7 @@ public class TokenService {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @param id
      * @return token get response
      * @throws InvalidCprException
@@ -145,7 +145,7 @@ public class TokenService {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @param numberOfTokens
      * @param cprNumber
      * @return a list of tokens
@@ -161,7 +161,7 @@ public class TokenService {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @param cprNumber
      * @return token
      */
@@ -175,7 +175,7 @@ public class TokenService {
     }
 
     /**
-     * @suthor August
+     * @suthor August (s144461)
      * @param token
      * @return a barcode
      */
@@ -194,7 +194,7 @@ public class TokenService {
     }
 
     /**
-     * @author Sebastian
+     * @author Sebastian (s144071)
      * @param token
      * @return token
      */
@@ -213,7 +213,7 @@ public class TokenService {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      * @param tokenId
      * @return token
      */
@@ -222,17 +222,16 @@ public class TokenService {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      * @param tokenId
      */
     public void deleteToken(String tokenId) {
-        // TODO: Delete barcode img file
         // Deletes database reference
         data.deleteToken(tokenId);
     }
 
     /**
-     * @author Sebastian
+     * @author Sebastian (s144071)
      * @param cprNumber
      * @return a list of tokens
      */
@@ -241,7 +240,7 @@ public class TokenService {
     }
 
     /**
-     * @author Sebastian
+     * @author Sebastian (s144071)
      * @param tokens
      * @return amount of unused tokens
      */

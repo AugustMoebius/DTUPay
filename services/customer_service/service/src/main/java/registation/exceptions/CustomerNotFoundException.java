@@ -1,7 +1,7 @@
 package registation.exceptions;
 
 /**
- * @author Sarah
+ * @author Sarah (s153659)
  */
 public class CustomerNotFoundException extends CustomerServiceException {
     public CustomerNotFoundException(String cprNumber){

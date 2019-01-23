@@ -17,7 +17,7 @@ public class RegisterMerchantTest {
     private MerchantManagement merchantManagement;
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      */
     public RegisterMerchantTest(){
         this.data = InMemoryDataSource.getInstance();
@@ -25,7 +25,7 @@ public class RegisterMerchantTest {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @throws InvalidCvrException
      * @throws MerchantInvalidInformation
      * @throws MerchantInvalidName
@@ -50,7 +50,7 @@ public class RegisterMerchantTest {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @throws InvalidCvrException
      * @throws MerchantInvalidInformation
      * @throws MerchantInvalidName
@@ -79,7 +79,7 @@ public class RegisterMerchantTest {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @throws InvalidCvrException
      * @throws MerchantInvalidName
      * @throws MerchantInvalidInformation
@@ -109,7 +109,7 @@ public class RegisterMerchantTest {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @throws MerchantAlreadyExistException
      * @throws MerchantInvalidInformation
      * @throws MerchantInvalidName

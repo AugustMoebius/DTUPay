@@ -2,7 +2,7 @@ package networking.adapters.rest.requests;
 
 
 /**
- * @author August
+ * @author August (s144461)
  */
 public class RefundRequest {
     private String tokenId;

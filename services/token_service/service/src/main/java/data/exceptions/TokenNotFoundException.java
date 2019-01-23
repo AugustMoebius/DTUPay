@@ -1,7 +1,7 @@
 package data.exceptions;
 
 /**
- * @author Sebastian
+ * @author Sebastian (s144071)
  */
 public class TokenNotFoundException extends Exception{
   public TokenNotFoundException(String message) {

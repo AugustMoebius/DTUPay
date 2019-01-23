@@ -15,7 +15,7 @@ public class AccessBankTest {
     AccessBank accessBank;
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      */
     @Before
     public void setup(){
@@ -48,7 +48,7 @@ public class AccessBankTest {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      */
     @After
     public void tearDown(){
@@ -62,7 +62,7 @@ public class AccessBankTest {
 
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      */
     @Test
     public void transferMoneyTest(){

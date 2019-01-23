@@ -7,7 +7,7 @@ public class MerchantInfoVerified {
     private String cprNumber;
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @param merchantId
      * @param paymentAmount
      * @param tokenId
@@ -21,7 +21,7 @@ public class MerchantInfoVerified {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @return
      */
     public String getMerchantId() {
@@ -29,7 +29,7 @@ public class MerchantInfoVerified {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @return
      */
     public int getPaymentAmount() {
@@ -37,7 +37,7 @@ public class MerchantInfoVerified {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @return
      */
     public String getTokenId() {
@@ -45,7 +45,7 @@ public class MerchantInfoVerified {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @return
      */
     public String getCprNumber() {

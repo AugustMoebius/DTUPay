@@ -8,7 +8,7 @@ public class TokenRequest {
     private int numberOfTokens;
 
     /**
-     * @author Esben s172986
+     * @author Esben (s172986)
      * @param cprNumber
      * @param numberOfTokens
      */
@@ -20,16 +20,16 @@ public class TokenRequest {
     public TokenRequest() {}
 
     /**
-     * @author Esben s172986
-     * @return a string of the CPR number
+     * @author Esben (s172986)
+     * @return
      */
     public String getCprNumber() {
         return cprNumber;
     }
 
     /**
-     * @author Esben s172986
-     * @return an integer of the number of tokens
+     * @author Esben (s172986)
+     * @return
      */
     public int getNumberOfTokens() {
         return numberOfTokens;

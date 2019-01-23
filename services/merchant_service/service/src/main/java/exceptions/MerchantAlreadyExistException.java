@@ -3,7 +3,7 @@ package exceptions;
 import domain.CVRNumber;
 
 /**
- * @author Sarah
+ * @author Sarah (s153659)
  */
 public class MerchantAlreadyExistException extends MerchantServiceException {
     public MerchantAlreadyExistException(CVRNumber cvr) {

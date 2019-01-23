@@ -5,7 +5,7 @@ import networking.ws.fastmoney.BankServiceException_Exception;
 import networking.ws.fastmoney.BankServiceService;
 
 /**
- * @author August
+ * @author August (s144461)
  */
 public class VerifyBankRequest {
     BankService bank;

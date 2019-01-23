@@ -2,7 +2,7 @@ package domain;
 
 
 /**
- * @author August
+ * @author August (s144461)
  */
 public class Transaction {
     private String merchantId;
@@ -12,7 +12,7 @@ public class Transaction {
     private boolean isRefunded;
 
     /**
-     * @author Sebastian
+     * @author Sebastian (s144071)
      * @param merchantId
      * @param paymentAmount
      * @param tokenId
@@ -27,7 +27,7 @@ public class Transaction {
     }
 
     /**
-     * @author Sebastian
+     * @author Sebastian (s144071)
      * @return payment amount
      */
     public int getPaymentAmount() {
@@ -35,7 +35,7 @@ public class Transaction {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      * @return token id
      */
     public String getTokenId() {
@@ -43,7 +43,7 @@ public class Transaction {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      * @return isRefunded
      */
     public boolean isRefunded() {
@@ -51,7 +51,7 @@ public class Transaction {
     }
 
     /**
-     * @author Sebastian
+     * @author Sebastian (s144071)
      * @param refunded
      */
     public void setRefunded(boolean refunded) {
@@ -59,7 +59,7 @@ public class Transaction {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      * @return merchant id
      */
     public String getMerchantId() {
@@ -67,7 +67,7 @@ public class Transaction {
     }
 
     /**
-     * @author Sebastian
+     * @author Sebastian (s144071)
      * @return cpr number
      */
     public String getCprNumber() {

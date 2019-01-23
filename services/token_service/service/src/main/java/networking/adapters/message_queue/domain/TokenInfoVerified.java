@@ -13,7 +13,7 @@ public class TokenInfoVerified {
     private String cprNumber;
 
     /**
-     * @author Ebbe s125015
+     * @author Ebbe (s125015)
      * @param merchantId
      * @param paymentAmount
      * @param tokenId
@@ -27,7 +27,7 @@ public class TokenInfoVerified {
     }
 
     /**
-     * @author Ebbe s125015
+     * @author Ebbe (s125015)
      * @return merchantId
      */
     public String getMerchantId() {
@@ -35,7 +35,7 @@ public class TokenInfoVerified {
     }
 
     /**
-     * @author Ebbe s125015
+     * @author Ebbe (s125015)
      * @return payment amount
      */
     public int getPaymentAmount() {
@@ -43,7 +43,7 @@ public class TokenInfoVerified {
     }
 
     /**
-     * @author Ebbe s125015
+     * @author Ebbe (s125015)
      * @return tokenId
      */
     public String getTokenId() {
@@ -51,7 +51,7 @@ public class TokenInfoVerified {
     }
 
     /**
-     * @author Ebbe s125015
+     * @author Ebbe (s125015)
      * @return CPR Number
      */
     public String getCprNumber() {

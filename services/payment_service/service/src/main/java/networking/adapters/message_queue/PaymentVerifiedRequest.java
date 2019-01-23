@@ -1,7 +1,7 @@
 package networking.adapters.message_queue;
 
 /**
- * @author August
+ * @author August (s144461)
  */
 public class PaymentVerifiedRequest {
     private String merchantId;

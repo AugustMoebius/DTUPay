@@ -7,7 +7,7 @@ public class ReportRequest {
     private String endDate;
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param id
      * @param startDate
      * @param endDate
@@ -19,7 +19,7 @@ public class ReportRequest {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @return id
      */
     public String getId() {
@@ -27,7 +27,7 @@ public class ReportRequest {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @return startDate
      */
     public String getStartDate() {
@@ -35,7 +35,7 @@ public class ReportRequest {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @return endDate
      */
     public String getEndDate() {

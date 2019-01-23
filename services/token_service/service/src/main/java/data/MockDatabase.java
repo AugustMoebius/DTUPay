@@ -18,7 +18,7 @@ public final class MockDatabase implements IDataSource {
     private HashMap<String, Token> allTokens;
 
     /**
-     * @author Esben s172986
+     * @author Esben (s172986)
      */
     private MockDatabase() {
         allTokens = new HashMap<>();
@@ -38,7 +38,7 @@ public final class MockDatabase implements IDataSource {
     }
 
     /**
-     * @author Ebbe s125015
+     * @author Ebbe (s125015)
      * @return instance of mock database
      */
     public static MockDatabase getInstance() {
@@ -46,7 +46,7 @@ public final class MockDatabase implements IDataSource {
     }
 
     /**
-     * @author Esben s172986
+     * @author Esben (s172986)
      * @param tokenId
      * @return token
      */
@@ -59,7 +59,7 @@ public final class MockDatabase implements IDataSource {
     }
 
     /**
-     * @author Sebastian s144071
+     * @author Sebastian (s144071)
      * @param cprNumber
      * @return list of tokens
      */
@@ -77,7 +77,7 @@ public final class MockDatabase implements IDataSource {
     }
 
     /**
-     * @author Esben s172986
+     * @author Esben (s172986)
      * @param token
      * @return token
      */
@@ -88,7 +88,7 @@ public final class MockDatabase implements IDataSource {
     }
 
     /**
-     * @author August s144461
+     * @author August (s144461)
      * @param tokenId
      */
     @Override
