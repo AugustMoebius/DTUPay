@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 @Path("report")
 public class ReportResource {
     /**
+     * This method is for testing purposes that you will be able to see if the request has gone through on localhost.
      * @author Sarah
      * @return Response
      */
@@ -23,6 +24,7 @@ public class ReportResource {
     }
 
     /**
+     * This method consumes a post request and calls reportService to generate a report.
      * @author Sarah
      * @param reportRequest
      * @return Response
@@ -33,7 +35,7 @@ public class ReportResource {
         System.out.println("Printing report request contents");
 
         // Handle report request
-        RestApplication.reportService.generateReport(null, reportRequest.getId(), reportRequest.getPreviousDate(), reportRequest.getAfterDate());
+        RestApplication.reportService.generateReport(null, reportRequest.getId(), reportRequest.getStartDate(), reportRequest.getEndDate());
         return Response.ok().build();
     }
 }
