@@ -3,7 +3,7 @@ package token.networking.response;
 import java.util.List;
 
 /**
- * @author Esben (s172986), Sebastian (s144071), August (s144461)
+ * @author Esben (s172986), Sebastian (s144071)
  */
 public class TokenGeneratedResponse {
 
@@ -23,7 +23,7 @@ public class TokenGeneratedResponse {
     public TokenGeneratedResponse() {}
 
     /**
-     * @author August (s144461)
+     * @author Esben (s172986)
      * @return token barcode pair
      */
     public List<TokenBarcodePair> getTokenBarcodePairs() {

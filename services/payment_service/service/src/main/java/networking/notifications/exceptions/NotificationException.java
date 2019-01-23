@@ -1,7 +1,7 @@
 package networking.notifications.exceptions;
 
 /**
- * @author Sebastian
+ * @author Sebastian (s144071)
  */
 public class NotificationException extends Exception{
     public NotificationException(String message) {

@@ -10,7 +10,7 @@ public class Token {
     private String barcodeFileName;
 
     /**
-     * @author Ebbe Berthold (s125015)
+     * @author Ebbe (s125015)
      * @param id
      * @param cprNumber
      */
@@ -21,7 +21,7 @@ public class Token {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @param cprNumber
      */
     public Token(CPRNumber cprNumber) {
@@ -33,7 +33,7 @@ public class Token {
     public Token() {}
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @return
      */
     public String getId() {
@@ -41,7 +41,7 @@ public class Token {
     }
 
     /**
-     * @author Ebbe Berthold (s125015)
+     * @author Ebbe (s125015)
      * @return CPRNumber
      */
     public CPRNumber getCprNumber() {
@@ -49,7 +49,7 @@ public class Token {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      * @return
      */
     public String getBarcodeFileName() {
@@ -57,7 +57,7 @@ public class Token {
     }
 
     /**
-     * @author Sebastian
+     * @author Sebastian (s144071)
      * @param barcode
      */
     public void setBarcodeFileName(String barcode) {
@@ -65,13 +65,13 @@ public class Token {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      * @return
      */
     public boolean isUsed() { return isUsed; }
 
     /**
-     * @author Sebastian
+     * @author Sebastian (s144071)
      * @param used
      */
     public void setUsed(boolean used) {

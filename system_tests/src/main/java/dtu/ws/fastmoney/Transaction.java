@@ -43,7 +43,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "time"
 })
 /**
- * @author August
+ * @author August (s144461)
  */
 public class Transaction {
 

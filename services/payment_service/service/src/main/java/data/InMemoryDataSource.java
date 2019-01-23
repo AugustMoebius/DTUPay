@@ -12,7 +12,7 @@ public class InMemoryDataSource implements IDataSource {
     private HashMap<String, Transaction> transactions = new HashMap<>();
 
     /**
-     * @author August
+     * @author August (s144461)
      * @return
      */
     public static InMemoryDataSource getInstance(){
@@ -23,7 +23,7 @@ public class InMemoryDataSource implements IDataSource {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @param tokenId
      * @return transaction
      */
@@ -33,17 +33,17 @@ public class InMemoryDataSource implements IDataSource {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      * @param transaction
      */
-    // TODO: Consider add vs. update vs. put - Emilie  August
+    // TODO: Consider add vs. update vs. put - Emilie (s153762)  August (s144461)
     @Override
     public void updateTransaction(Transaction transaction) {
         transactions.put(transaction.getTokenId(), transaction);
     }
 
     /**
-     * @author Sebastian
+     * @author Sebastian (s144071)
      * @param req
      */
     @Override

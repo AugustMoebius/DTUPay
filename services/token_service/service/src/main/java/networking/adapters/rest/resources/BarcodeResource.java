@@ -11,7 +11,7 @@ import java.io.File;
 public class BarcodeResource {
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @return response
      */
     @GET
@@ -20,9 +20,9 @@ public class BarcodeResource {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      * @param barcodePath
-     * @return response
+     * @return
      */
     @GET
     @Path("/{barcodePath}")

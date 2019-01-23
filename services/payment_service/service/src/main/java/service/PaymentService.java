@@ -16,7 +16,7 @@ public class PaymentService {
     private IBankService bankService;
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @param dataSource
      * @param notificationService
      * @param bankService
@@ -28,7 +28,7 @@ public class PaymentService {
     }
 
     /**
-     * @author August
+     * @author August (s144461)
      * @param req
      */
     public void submitPaymentRequest(PaymentRequest req) throws InvalidPaymentAmountException {
@@ -45,7 +45,7 @@ public class PaymentService {
 
 
     /**
-     * @author Sebastian
+     * @author Sebastian (s144071)
      * @param req
      */
     public void handleVerifiedPayment(PaymentVerifiedRequest req) {
@@ -58,7 +58,7 @@ public class PaymentService {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @param tokenId
      */
     public void refundPayment(String tokenId) {
@@ -73,7 +73,7 @@ public class PaymentService {
     }
 
     /**
-     * @author Ebbe
+     * @author Ebbe (s125015)
      */
     private void validatePaymentRequest(PaymentRequest req) throws InvalidPaymentAmountException {
         // Negative payment

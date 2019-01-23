@@ -12,13 +12,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * @author August
+ * @author August (s144461)
  */
 @Path("refund")
 public class RefundResource {
     /**
      * This method is for test purposes, so you can see the response on localhost
-     * @author August
+     * @author August (s144461)
      * @return response
      */
     @GET
@@ -28,7 +28,7 @@ public class RefundResource {
 
     /**
      * This method consumes a post request and sends the call to payment service.
-     * @author August
+     * @author August (s144461)
      * @param req
      * @return response
      */

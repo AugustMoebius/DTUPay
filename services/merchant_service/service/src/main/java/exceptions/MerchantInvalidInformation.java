@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * @author Sarah
+ * @author Sarah (s153659)
  */
 public class MerchantInvalidInformation extends Throwable {
     public MerchantInvalidInformation(String s) {

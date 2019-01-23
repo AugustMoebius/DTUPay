@@ -7,7 +7,7 @@ import domain.CVRNumber;
 import domain.Merchant;
 
 /**
- * @author Emilie
+ * @author Emilie (s153762)
  */
 public interface IMerchantManagement {
 

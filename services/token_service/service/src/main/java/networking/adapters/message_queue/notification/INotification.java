@@ -8,7 +8,7 @@ import java.util.concurrent.TimeoutException;
 public interface INotification {
 
     /**
-     * @author Ebbe Berthold (s125015)
+     * @author Ebbe (s125015)
      * @param message
      * @throws IOException
      * @throws TimeoutException

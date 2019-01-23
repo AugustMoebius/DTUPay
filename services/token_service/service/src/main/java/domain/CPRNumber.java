@@ -11,7 +11,7 @@ public class CPRNumber {
     private String cprNumber;
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @param cprNumber
      * @throws InvalidCprException
      */
@@ -25,7 +25,7 @@ public class CPRNumber {
     }
 
     /**
-     * @author Ebbe Berthold (s125015)
+     * @author Ebbe (s125015)
      * @return cprNumber
      */
     public String toString() {

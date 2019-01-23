@@ -6,7 +6,7 @@ import java.util.concurrent.TimeoutException;
 public interface IObserver {
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @throws IOException
      * @throws TimeoutException
      */

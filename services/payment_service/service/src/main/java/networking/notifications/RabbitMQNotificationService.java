@@ -14,7 +14,7 @@ import java.util.concurrent.TimeoutException;
 
 
 /**
- * @author Sebastian, August
+ * @author Sebastian (s144071), August (s144461)
  */
 public class RabbitMQNotificationService implements INotificationService {
     private final static String QUEUE_NAME = "payment_initialized";
@@ -23,7 +23,7 @@ public class RabbitMQNotificationService implements INotificationService {
 
     /**
      * This method handles a payment request and publishes a payment initialised.
-     * @author August
+     * @author August (s144461)
      * @param req
      * @throws MessagePublishException
      */

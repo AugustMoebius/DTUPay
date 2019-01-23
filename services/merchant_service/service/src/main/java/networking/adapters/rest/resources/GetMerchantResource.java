@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 public class GetMerchantResource {
     /**
      * This method consumes a get request and returns an appropriate message and status code.
-     * @author Sarah
+     * @author Sarah (s153659)
      * @return Response
      */
     @GET

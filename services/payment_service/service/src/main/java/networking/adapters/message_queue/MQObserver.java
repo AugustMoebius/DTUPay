@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 /**
- * @author : August, Sebastian
+ * @author : August (s144461), Sebastian (s144071)
  */
 public class MQObserver {
   private static MQObserver instance;
@@ -26,7 +26,7 @@ public class MQObserver {
   private final static String EXCHANGE_NAME = "payment_exchange";
 
   /**
-   * @author Sebastian
+   * @author Sebastian (s144071)
    * @return MQObserver
    * @throws IOException
    * @throws TimeoutException
@@ -40,7 +40,7 @@ public class MQObserver {
   }
 
   /**
-   * @author Sebastian
+   * @author Sebastian (s144071)
    * @throws IOException
    * @throws TimeoutException
    */
@@ -49,7 +49,7 @@ public class MQObserver {
   }
 
   /**
-   * @author Sebastian
+   * @author Sebastian (s144071)
    * @throws IOException
    * @throws TimeoutException
    */

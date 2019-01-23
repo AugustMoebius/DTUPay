@@ -7,7 +7,7 @@ public class TokenInfo {
     private String tokenId;
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @param merchantId
      * @param paymentAmount
      * @param tokenId
@@ -19,7 +19,7 @@ public class TokenInfo {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @return merchantId
      */
     public String getMerchantId() {
@@ -27,7 +27,7 @@ public class TokenInfo {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @return payment amount
      */
     public int getPaymentAmount() {
@@ -35,7 +35,7 @@ public class TokenInfo {
     }
 
     /**
-     * @author Esben Løvendal Kruse (s172986)
+     * @author Esben (s172986)
      * @return tokenId
      */
     public String getTokenId() {

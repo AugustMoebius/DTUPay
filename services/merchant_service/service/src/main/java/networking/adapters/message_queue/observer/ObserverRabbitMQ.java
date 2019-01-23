@@ -28,7 +28,7 @@ public class ObserverRabbitMQ implements IObserver{
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      */
     private ObserverRabbitMQ() {
         this.merchantManagement = new MerchantManagement();
@@ -39,7 +39,7 @@ public class ObserverRabbitMQ implements IObserver{
 
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @throws IOException
      * @throws TimeoutException
      */

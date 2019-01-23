@@ -27,14 +27,14 @@ public class RefundPaymentTest {
     private String customerAccountId, merchantAccountId;
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      */
     public RefundPaymentTest(){
         paymentService = new PaymentService(InMemoryDataSource.getInstance(), new RabbitMQNotificationService(), new AccessBank());
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      */
     @Before
     public void setup(){
@@ -67,7 +67,7 @@ public class RefundPaymentTest {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      */
     @After
     public void tearDown(){
@@ -81,7 +81,7 @@ public class RefundPaymentTest {
 
 
     /**
-     * @author August
+     * @author August (s144461)
      */
     @Test
     public void RefundMoneyTest(){

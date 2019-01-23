@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * @author Sebastian
+ * @author Sebastian (s144071)
  */
 public class TooManyUnusedTokensException extends Exception {
     public TooManyUnusedTokensException() {

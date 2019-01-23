@@ -1,7 +1,7 @@
 package networking.adapters.rest.requests;
 
 /**
- * @author Sebastian
+ * @author Sebastian (s144071)
  */
 public class PaymentRequest {
   private String merchantId;

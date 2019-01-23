@@ -17,7 +17,7 @@ public class InMemoryDataSource implements IDataSource {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      */
     public InMemoryDataSource() {
         allCustomers = new HashMap<String, Customer>();
@@ -41,7 +41,7 @@ public class InMemoryDataSource implements IDataSource {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @param customer
      */
     public void addCustomer(Customer customer) {
@@ -49,7 +49,7 @@ public class InMemoryDataSource implements IDataSource {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @param cprNumber
      * @return customer
      * @throws CustomerNotFoundException
@@ -63,7 +63,7 @@ public class InMemoryDataSource implements IDataSource {
     }
 
     /**
-     * @author Emilie
+     * @author Emilie (s153762)
      * @return amount of customers in the database.
      */
     public int getAmountOfCustomers() {

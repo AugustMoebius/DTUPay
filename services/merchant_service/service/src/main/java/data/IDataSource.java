@@ -5,7 +5,7 @@ import domain.CVRNumber;
 import domain.Merchant;
 
 /**
- * @author August
+ * @author August (s144461)
  */
 public interface IDataSource {
     void registerMerchant(Merchant merchant);

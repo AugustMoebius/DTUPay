@@ -4,7 +4,7 @@ public class GetMerchantResponse {
     private String firstName, lastName, cvr;
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param firstName
      * @param lastName
      * @param cvr
@@ -16,7 +16,7 @@ public class GetMerchantResponse {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @return firstName
      */
     public String getFirstName() {
@@ -24,7 +24,7 @@ public class GetMerchantResponse {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param firstName
      */
     public void setFirstName(String firstName) {
@@ -32,7 +32,7 @@ public class GetMerchantResponse {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @return lastName
      */
     public String getLastName() {
@@ -40,7 +40,7 @@ public class GetMerchantResponse {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param lastName
      */
     public void setLastName(String lastName) {
@@ -48,7 +48,7 @@ public class GetMerchantResponse {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @return cvr
      */
     public String getCvr() {
@@ -56,7 +56,7 @@ public class GetMerchantResponse {
     }
 
     /**
-     * @author Sarah
+     * @author Sarah (s153659)
      * @param cvr
      */
     public void setCvr(String cvr) {
