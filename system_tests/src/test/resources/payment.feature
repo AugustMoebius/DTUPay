@@ -7,7 +7,7 @@ Feature: Customer gets token and Merchant scans and request payment
     And that the merchant wishes to register a payment of amount 10
     When the merchant submits a request for the payment
     Then the submission succeeds
-    And after the transaction, the merchant's account has balance 210
+    And after the transaction, the merchant's account has balance 215
     And the customer's account has balance 490
 
   Scenario: Failing payment because of already used token
